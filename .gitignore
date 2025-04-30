@@ -1,0 +1,4 @@
+.exec/
+.objs/
+massif.out*
+*.swp
