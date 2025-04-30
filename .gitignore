@@ -2,3 +2,4 @@
 .objs/
 massif.out*
 *.swp
+.vscode
