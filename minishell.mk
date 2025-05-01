@@ -1,11 +1,11 @@
 override SRCSDIR	:= srcs/
 override SRCS		= $(addprefix $(SRCSDIR), $(SRC))
 
-override PARSERDIR	:= src/parsing/
-override LEXERDIR	:= src/lexer/
-override EXECDIR	:= src/exec/
-override BUILTINDIR := src/builtin/
-override ENVDIR		:= src/env/
+override PARSERDIR	:= parsing/
+override LEXERDIR	:= lexer/
+override EXECDIR	:= exec/
+override BUILTINDIR := env/
+override SIGNALDIR	:= signal/
 
 
 SRC += $(addprefix $(MAINDIR), $(addsuffix .c, $(MAIN)))
@@ -20,12 +20,17 @@ override MAIN := \
 # 	parsing \
 
 
-# SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
+SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
 
-# override LEXERSRC := \
-# 	lexer \
+override LEXERSRC := \
+	lexer \
+	ft_strndup \
+	ft_isspace \
 
+SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 
+override SIGNALSRC := \
+	signal \
 
 # SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
