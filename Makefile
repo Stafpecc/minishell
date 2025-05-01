@@ -54,11 +54,10 @@ $(EXEC_DIR):
 clean:
 	$(RM_DIR) $(OBJS_DIR)
 	$(MAKE) -C $(DIR_LIBFT) clean
-	rm -f $(DIR_GNL)*.d $(DIR_PRINTF)*.d
 	echo "$(RED)Cleaning of .o and .d files completed successfully! ／人◕ ‿‿ ◕人＼$(RESET)"
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM_DIR) $(EXEC_DIR)
 	$(MAKE) -C $(DIR_LIBFT) fclean
 	echo "$(RED)"
 	echo "┌──────────────────────────────────────────────────────────┐"
