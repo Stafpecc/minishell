@@ -1,37 +1,22 @@
 .SILENT:
-.PHONY: all clean fclean re
-
-#==============================================================================#
-#                                VARIABLES                                     #
-#==============================================================================#
-
-NAME        := minishell
-EXEC        := exec/$(NAME)
-
-OBJS_DIR    := .objs/
-EXEC_DIR    := exec/
+.PHONY: all init clean fclean re FORCE
 
 include config.mk
+include minishell.mk
 
-include rules/main.mk
-include rules/parsing.mk
-include rules/lexer.mk
-include rules/exec.mk
-include rules/builtin.mk
-include rules/env.mk
-
-OBJS		= $(patsubst %.c, .objs/%.o, $(SRC))
-
-#==============================================================================#
-#                              BUILD RULES                                     #
-#==============================================================================#
+OBJS := $(patsubst $(SRCSDIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
+DEPS := $(OBJS:.o=.d)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(EXEC_DIR)
+$(NAME): libft/libft.a Makefile $(OBJS) | $(EXEC_DIR)
 	echo "$(PURPLE)Compiling $(NAME) in progress...$(RESET)"
-	$(CC) $(CFLAGS) -o $(EXEC) $(OBJS) $(LIBS)
-	echo "$(GREEN)$(EXEC) completed successfully!"
+
+		$(CC) $(CFLAGS) $(CPPFLAGS) -o $(EXEC) $(OBJS) -L libft -lft $(RLFLAGS)
+
+	echo "$(GREEN)$(EXEC) completed successfully!$(RESET)"
+
+	echo "$(GREEN)"
 	echo "┌───────────────────────────────────────────────────────────┐"
 	echo "│      Compilation finished successfully! ᕕ(⌐■_■)ᕗ ♪♬       │"
 	echo "└───────────────────────────────────────────────────────────┘"
@@ -45,44 +30,46 @@ $(NAME): $(OBJS) | $(EXEC_DIR)
 
 	echo "$(RESET)"
 
-$(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
-	echo "$(PURPLE)Compiling $<...$(RESET)"
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-	echo "$(GREEN)$< compiled successfully!$(RESET)"
+libft/libft.a: FORCE
+	$(MAKE) -C libft
 
-#==============================================================================#
-#                              DIRECTORY CREATION                              #
-#==============================================================================#
+$(OBJS_DIR)%.o: $(SRCSDIR)%.c | $(OBJS_DIR)
+	mkdir -p $(dir $@)
+	echo "$(PURPLE)Compiling $<...$(RESET)"
+
+		$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+	echo "$(GREEN)$< completed successfully!$(RESET)"
 
 $(OBJS_DIR):
-	echo "$(YELLOW)Creating $(OBJS_DIR)...$(RESET)"
-	mkdir -p $(OBJS_DIR)
+	echo "$(YELLOW)Creating directory $(OBJS_DIR)...$(RESET)"
+		
+		mkdir -p $(OBJS_DIR)
 
 $(EXEC_DIR):
-	echo "$(YELLOW)Creating $(EXEC_DIR)...$(RESET)"
-	mkdir -p $(EXEC_DIR)
+	echo "$(YELLOW)Creating $(EXEC_DIR) directory...$(RESET)"
 
-#==============================================================================#
-#                              CLEAN RULES                                     #
-#==============================================================================#
+		mkdir -p $(EXEC_DIR)
 
 clean:
-	echo "$(RED)Deleting object files...$(RESET)"
 	$(RM_DIR) $(OBJS_DIR)
-	$(RM) massif.out*
-	echo "$(GREEN)Object files deleted!$(RESET)"
+	$(MAKE) -C $(DIR_LIBFT) clean
+	rm -f $(DIR_GNL)*.d $(DIR_PRINTF)*.d
+	echo "$(RED)Cleaning of .o and .d files completed successfully! ／人◕ ‿‿ ◕人＼$(RESET)"
 
 fclean: clean
-	echo "$(RED)Deleting $(NAME)...$(RESET)"
-	$(RM_DIR) $(EXEC_DIR)
-	echo "$(GREEN)$(NAME) deleted!$(RESET)"
-	echo "$(RED)┌──────────────────────────────────────────────────────────┐"
-	echo "│      Deletion finished successfully! ( ◔ ω◔) ノシ        │"
+	$(RM) $(NAME)
+	$(MAKE) -C $(DIR_LIBFT) fclean
+	echo "$(RED)"
+	echo "┌──────────────────────────────────────────────────────────┐"
+	echo "│      Deletion finished successfully! ( ◔ ω ◔) ノシ         │"
 	echo "└──────────────────────────────────────────────────────────┘"
-	echo "                          ╱|、"
-	echo "                        (˚ˎ 。7"
-	echo "                         |、˜|"
-	echo "                        じしˍ,)ノ"
+	echo "                           ╱|、"
+	echo "                         (˚ˎ 。7"
+	echo "                          |、˜|"
+	echo "                         じしˍ,)ノ"
 	echo "$(RESET)"
 
 re: fclean all
+
+FORCE:
