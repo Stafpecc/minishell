@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/01 18:39:42 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/02 16:56:53 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static t_token *create_token(t_token_type type, const char *value)
 	token->type = type;
 	token->value = ft_strdup(value);
 	if (!token->value)
+	{
+		free(token);
 		return (NULL);
+	}
 	token->next = NULL;
 	return (token);
 }
@@ -43,11 +46,24 @@ static void add_token(t_token **head, t_token *new_token)
 	}
 }
 
+static int safe_add_token(t_token **head, t_token_type type, const char *value)
+{
+	t_token *new_token = create_token(type, value);
+	if (!new_token)
+	{
+		free_tokens(*head);
+		return (0);
+	}
+	add_token(head, new_token);
+	return (1);
+}
+
 void free_tokens(t_token *head)
 {
 	t_token *tmp;
 
-	while (head) {
+	while (head)
+	{
 		tmp = head;
 		head = head->next;
 		free(tmp->value);
@@ -57,32 +73,36 @@ void free_tokens(t_token *head)
 
 t_token *lexer(const char *input)
 {
-	t_token *head;
-	size_t i;
+	t_token *head = NULL;
+	size_t i = 0;
 	char quote;
 	size_t start;
 	char *str;
 	char *word;
 
-	i = 0;
-	head = NULL;
+	if (!input || !*input)
+		return (NULL);
 
-	while (input[i]) {
+	while (input[i])
+	{
 		if (ft_isspace(input[i]))
 			i++;
 		else if (input[i] == '|')
 		{
-			add_token(&head, create_token(TOK_PIPE, "|"));
+			if (!safe_add_token(&head, TOK_PIPE, "|"))
+				return (NULL);
 			i++;
 		}
 		else if (input[i] == '>')
 		{
-			add_token(&head, create_token(TOK_REDIRECT_OUT, ">"));
+			if (!safe_add_token(&head, TOK_REDIRECT_OUT, ">"))
+				return (NULL);
 			i++;
 		}
 		else if (input[i] == '<')
 		{
-			add_token(&head, create_token(TOK_REDIRECT_IN, "<"));
+			if (!safe_add_token(&head, TOK_REDIRECT_IN, "<"))
+				return (NULL);
 			i++;
 		}
 		else if (input[i] == '"' || input[i] == '\'')
@@ -92,7 +112,11 @@ t_token *lexer(const char *input)
 			while (input[i] && input[i] != quote)
 				i++;
 			str = ft_strndup(input + start, i - start);
-			add_token(&head, create_token(TOK_STRING, str));
+			if (!str || !safe_add_token(&head, TOK_STRING, str))
+			{
+				free(str);
+				return (NULL);
+			}
 			free(str);
 			if (input[i] == quote)
 				i++;
@@ -100,17 +124,24 @@ t_token *lexer(const char *input)
 		else
 		{
 			start = i;
-			while (input[i] && !ft_isspace(input[i]) && input[i] != '|'
-				&& input[i] != '>' && input[i] != '<')
+			while (input[i] && !ft_isspace(input[i]) && input[i] != '|' && input[i] != '>' && input[i] != '<')
 				i++;
 			word = ft_strndup(input + start, i - start);
-			add_token(&head, create_token(TOK_WORD, word));
+			if (!word || !safe_add_token(&head, TOK_WORD, word))
+			{
+				free(word);
+				return (NULL);
+			}
 			free(word);
 		}
 	}
-	add_token(&head, create_token(TOK_END, ""));
-	return (head);
+
+	if (!safe_add_token(&head, TOK_END, ""))
+		return (NULL);
+
+	return head;
 }
+
 
 void print_tokens(t_token *head) // DEBUG
 {
@@ -119,4 +150,15 @@ void print_tokens(t_token *head) // DEBUG
 		printf("token: type=%d, value='%s'\n", head->type, head->value);
 		head = head->next;
 	}
+}
+
+int has_word_token(t_token *head)
+{
+	while (head)
+	{
+		if (head->type == TOK_WORD || head->type == TOK_STRING)
+			return (1);
+		head = head->next;
+	}
+	return (0);
 }

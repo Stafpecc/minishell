@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/01 18:28:13 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/02 17:33:47 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
+void exit_minishell_proprely(char *input, t_token *token)
+{
+	rl_clear_history();
+	free(input);
+	free_tokens(token);
+	exit(0);
+}
 
 int main(void)
 {
@@ -23,13 +29,20 @@ int main(void)
 	while (1)
 	{
 		input = readline("minishell> ");
-		if (input && *input)
+		if (!input)
 		{
-			add_history(input);
-			printf("You entered the legendary command: '%s'\n", input);
-			token = lexer(input);
-			print_tokens(token);
+			write(1, "exit\n", 5);
+			exit(0);
 		}
+		token = lexer(input);
+		if (*input)
+			add_history(input);
+		if (!has_word_token(token))
+			continue;
+		if (ft_strcmp(input, "exit") == 0)
+			exit_minishell_proprely(input, token);
+		printf("You entered the legendary command: '%s'\n", input);
+		print_tokens(token);
 		free(input);
 		free_tokens(token);
 	}

@@ -7,6 +7,7 @@
 # include <readline/history.h> 
 
 #include "lexer.h"
-#include "signal.h"
+#include "signal_handler.h"
+#include "../libft/includes/libft.h"
 
 #endif
