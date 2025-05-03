@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/02 16:56:53 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/05/03 11:41:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,16 +140,6 @@ t_token *lexer(const char *input)
 		return (NULL);
 
 	return head;
-}
-
-
-void print_tokens(t_token *head) // DEBUG
-{
-	while (head)
-	{
-		printf("token: type=%d, value='%s'\n", head->type, head->value);
-		head = head->next;
-	}
 }
 
 int has_word_token(t_token *head)

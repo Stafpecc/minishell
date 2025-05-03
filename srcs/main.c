@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/02 17:33:47 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/05/03 11:43:17 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,39 @@ void exit_minishell_proprely(char *input, t_token *token)
 	free(input);
 	free_tokens(token);
 	exit(0);
+}
+
+static void print_commands(t_command *cmd) // DEBUG
+{
+	int i;
+
+	i = 0;
+    while (cmd)
+    {
+        printf("Command: %s\n", cmd->cmd);
+        if (cmd->args)
+        {
+            while (cmd->args[i])
+            {
+				printf("  Arg: %s\n", cmd->args[i]);
+				i++;
+			}
+        }
+        if (cmd->redirect_in)
+            printf("  Redirect In: %s\n", cmd->redirect_in);
+        if (cmd->redirect_out)
+            printf("  Redirect Out: %s\n", cmd->redirect_out);
+        cmd = cmd->next;
+    }
+}
+
+static void print_tokens(t_token *head) // DEBUG
+{
+	while (head)
+	{
+		printf("token: type=%d, value='%s'\n", head->type, head->value);
+		head = head->next;
+	}
 }
 
 int main(void)
@@ -43,6 +76,8 @@ int main(void)
 			exit_minishell_proprely(input, token);
 		printf("You entered the legendary command: '%s'\n", input);
 		print_tokens(token);
+		t_command *command = parse_tokens(token);
+		print_commands(command);
 		free(input);
 		free_tokens(token);
 	}

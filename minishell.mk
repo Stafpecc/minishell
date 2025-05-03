@@ -14,10 +14,10 @@ override MAIN := \
 	main \
 
 
-# SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
+SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
-# override PARSERSRC := \
-# 	parsing \
+override PARSERSRC := \
+	parser \
 
 
 SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))

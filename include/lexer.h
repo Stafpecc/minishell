@@ -25,7 +25,6 @@ int		ft_isspace(char c);
 
 void 	free_tokens(t_token *head);
 t_token	*lexer(const char *input);
-void	print_tokens(t_token *head);
 
 int has_word_token(t_token *head);
 
