@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/03 11:43:17 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/05/03 16:04:57 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ static void print_tokens(t_token *head) // DEBUG
 	}
 }
 
-int main(void)
+int main(int argc, char *argv[], char **env)
 {
 	char *input;
 	t_token *token;
 
+	if (argc > 1)
+		exit(1);
+	argv = NULL;
 	set_signals();
 	while (1)
 	{
@@ -78,6 +81,7 @@ int main(void)
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		print_commands(command);
+		exec(input, env);
 		free(input);
 		free_tokens(token);
 	}

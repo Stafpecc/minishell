@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/02 16:13:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/05/03 13:58:47 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static void ctrl_c(void)
 	rl_redisplay();
 }
 
-static void ctrl_backslash()
+//TOFIX?LDEV : is the function name right?
+// the subject tell us that ctrlbackslash shouldnt do anything
+static void ctrl_backslash() 
 {
 	write(1, "Quit (core dumped)", 18);
 	exit(0);

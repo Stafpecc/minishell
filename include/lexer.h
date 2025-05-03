@@ -3,7 +3,7 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
-
+//sigil + digit?)
 typedef enum e_token_type {
 	TOK_WORD,
     TOK_PIPE,

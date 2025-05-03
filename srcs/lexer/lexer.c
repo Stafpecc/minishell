@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/03 11:41:55 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/05/03 14:44:42 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ t_token *lexer(const char *input)
 	{
 		if (ft_isspace(input[i]))
 			i++;
+		else if (ft_strchr(">|<", input[i]))
+		{
+			
+		}
 		else if (input[i] == '|')
 		{
 			if (!safe_add_token(&head, TOK_PIPE, "|"))
