@@ -23,8 +23,7 @@ static void ctrl_c(void)
 
 static void ctrl_backslash()
 {
-	write(1, "Quit (core dumped)", 18);
-	exit(0);
+	(void)0;
 }
 
 void sig_handler(int sig)
