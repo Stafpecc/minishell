@@ -4,8 +4,7 @@
 #include "lexer.h"
 
 typedef struct s_command {
-	char *cmd;
-	char **args;
+	char **cmd;
 	char *redirect_in;
 	char *redirect_out;
 	struct s_command *next;

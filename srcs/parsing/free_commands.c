@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   free_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:39:31 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/01 16:53:03 by tarini           ###   ########.fr       */
+/*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/04 16:06:29 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "parsing.h"
 
-char	*ft_strndup(const char *s, size_t n)
+void free_commands(t_command *cmd)
 {
-	size_t len;
-	char *dup;
-	size_t i;
+	t_command *tmp;
+	int i;
 
 	i = 0;
-	len = 0;
-	if (!s)
-		return (NULL);
-	while (s[len] && len < n)
-		len++;
-	dup = malloc(len + 1);
-	if (!dup)
-		return (NULL);
-	while (i < len)
+	while (cmd)
 	{
-		dup[i] = s[i];
-		i++;
+		tmp = cmd;
+		cmd = cmd->next;
+		free(tmp->cmd);
+		while (cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(tmp->redirect_in);
+		free(tmp->redirect_out);
+		free(tmp);
 	}
-	dup[len] = '\0';
-	return (dup);
 }

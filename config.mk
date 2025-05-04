@@ -14,9 +14,6 @@ CFLAGS          := -Wall -Wextra -Werror
 CPPFLAGS		:= -MMD -MP -I include/ -I libft/include/
 INC             := -I./include
 
-OBJS := $(patsubst $(SRCSDIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
-DEPS := $(OBJS:.o=.d)
-
 PURPLE          := \033[1;35m
 GREEN           := \033[1;32m
 RED             := \033[1;31m

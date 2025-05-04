@@ -4,6 +4,9 @@
 include config.mk
 include minishell.mk
 
+OBJS := $(patsubst $(SRCSDIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
+DEPS := $(OBJS:.o=.d)
+
 all: $(NAME)
 
 $(NAME): libft/libft.a Makefile $(OBJS) | $(EXEC_DIR)
