@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/04 13:57:58 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/06 13:45:46 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ static void print_commands(t_command *cmd) // DEBUG
 	i = 0;
     while (cmd)
     {
-        printf("Command: %s\n", cmd->cmd);
-        if (cmd->args)
+        if (cmd->cmd)
         {
-            while (cmd->args[i])
+            while (cmd->cmd[i])
             {
-				printf("  Arg: %s\n", cmd->args[i]);
+				printf("  Arg: %s\n", cmd->cmd[i]);
 				i++;
 			}
         }

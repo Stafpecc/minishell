@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/04 16:10:41 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/06 13:26:18 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_command *parse_tokens(t_token *tokens)
 		return (NULL);
 	while (tokens && tokens->type != TOK_END)
 	{
-		if (!process_parsing(&tokens, &curr, &head))
+		if (!process_parsing(tokens, curr, head))
 			return (NULL);
 	}
 	return (head);
