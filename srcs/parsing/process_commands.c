@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:32:06 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:21:19 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 static int process_word_string(t_token **tokens, t_command *curr)
 {
 	if ((*tokens)->type == TOK_WORD || (*tokens)->type == TOK_STRING)
-	{
 		curr->cmd = add_argument(curr->cmd, (*tokens)->value);
-	}
 	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }

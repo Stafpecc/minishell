@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:56:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:50:26 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:07:15 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int process_string(const char *input, size_t *i, t_token **head)
 	while (input[*i] && input[*i] != quote)
 		(*i)++;
 	str = ft_strndup(input + start, *i - start);
-	if (!str || !add_token(head, TOK_STRING, str))
+	if (!str || add_token(head, TOK_STRING, str) == RETURN_FAILURE)
 	{
 		free(str);
 		return (RETURN_FAILURE);
@@ -45,7 +45,7 @@ int process_word(const char *input, size_t *i, t_token **head)
 		&& input[*i] != '>' && input[*i] != '<')
 		(*i)++;
 	str = ft_strndup(input + start, *i - start);
-	if (!str || !add_token(head, TOK_WORD, str))
+	if (!str || add_token(head, TOK_WORD, str) == RETURN_FAILURE)
 	{
 		free(str);
 		return (RETURN_FAILURE);
@@ -68,25 +68,25 @@ int process_token(const char *input, size_t *i, t_token **head)
 		(*i)++;
 	else if (input[*i] == '|')
 	{
-		if (!add_token(head, TOK_PIPE, "|"))
+		if (add_token(head, TOK_PIPE, "|") == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 		(*i)++;
 	}
 	else if (input[*i] == '>')
 	{
-		if (!add_token(head, TOK_REDIRECT_OUT, ">"))
+		if (add_token(head, TOK_REDIRECT_OUT, ">") == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 		(*i)++;
 	}
 	else if (input[*i] == '<')
 	{
-		if (!add_token(head, TOK_REDIRECT_IN, "<"))
+		if (add_token(head, TOK_REDIRECT_IN, "<") == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 		(*i)++;
 	}
 	else
 	{
-		if (!process_word_or_string(input, i, head))
+		if (process_word_or_string(input, i, head) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	return (RETURN_SUCCESS);

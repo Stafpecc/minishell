@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:18:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:33:10 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:06:17 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int add_token(t_token **head, t_token_type type, const char *value)
 		return (RETURN_FAILURE);
 	}
 	if (!*head)
-	*head = new_token;
+		*head = new_token;
 	else
 	{
 		curr = *head;
