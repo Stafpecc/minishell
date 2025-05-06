@@ -7,10 +7,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 //exec.c
-void exec(char *input, char **env);
-
-//simple_cmd.c
-
-void init_simple_cmd (char *input, char **env);
+void    exec(t_command *node);
 
 #endif

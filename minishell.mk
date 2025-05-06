@@ -37,8 +37,6 @@ SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 override EXECSRC := \
 	exec \
 	redirections \
-	simple_cmd \
-
 
 # SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
 
