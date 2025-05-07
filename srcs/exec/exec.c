@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:00:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/06 11:27:56 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/07 08:12:09 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 #include "../include/minishell.h"
 
-// check if it is a built in cmd
+// check if it is a built-in cmd
 
 bool	built_in_checker(char *cmd)
 {
@@ -68,10 +68,14 @@ void	exec(t_command *node)
 	number_nodes = count_commands(node, &is_alone);
 	if (is_alone == true)
 	{
-		if (built_in_checker(node->cmd[0]))
+		if (built_in_checker(&node->cmd[0]))
 		{
+			ft_printf("Parent: built_in_checker passed\n"); //TORMASAP
 			// TODObuilt_in redirect
 		}
+		else
+			printf("parent: not a single built-in\n"); //TORMASAP
 	}
+	
     //TODO child_maker
 }

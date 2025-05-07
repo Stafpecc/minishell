@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/03 16:04:57 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/07 08:06:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int main(int argc, char *argv[], char **env)
 {
 	char *input;
 	t_token *token;
-
+	
+	env = NULL; //TORMASAP
 	if (argc > 1)
 		exit(1);
 	argv = NULL;
@@ -81,7 +82,7 @@ int main(int argc, char *argv[], char **env)
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		print_commands(command);
-		exec(input, env);
+		exec(command);
 		free(input);
 		free_tokens(token);
 	}
