@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/07 08:06:29 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/07 08:20:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int main(int argc, char *argv[], char **env)
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		print_commands(command);
-		exec(command);
+		exec(command); //TODO struct with env, last return value
 		free(input);
 		free_tokens(token);
 	}

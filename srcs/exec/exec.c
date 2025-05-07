@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:00:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/07 08:12:09 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/07 08:22:21 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // ◦ env with no options or arguments
 // ◦ exit with no options
 
-#include "../include/minishell.h"
+#include "../include/exec.h"
 
 // check if it is a built-in cmd
 
