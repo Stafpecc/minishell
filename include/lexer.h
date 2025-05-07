@@ -4,7 +4,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
-# include "error.h"
+# include "return_error.h"
 
 typedef enum e_token_type {
 	TOK_WORD,
@@ -12,6 +12,10 @@ typedef enum e_token_type {
     TOK_REDIRECT_OUT,
     TOK_REDIRECT_IN,
     TOK_STRING,
+    TOK_HEREDOC,
+    TOK_SINGLE_QUOTES,
+    TOK_DOUBLE_QUOTES,
+    TOK_APPEND_REDIRECT,
     TOK_END
 } t_token_type;
 

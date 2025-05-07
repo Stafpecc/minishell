@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:45:46 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:18:32 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,21 @@ static void print_commands(t_command *cmd) // DEBUG
             printf("  Redirect In: %s\n", cmd->redirect_in);
         if (cmd->redirect_out)
             printf("  Redirect Out: %s\n", cmd->redirect_out);
+		if (cmd->heredoc)
+            printf("  Heredoc pass: %s\n", cmd->heredoc);
         cmd = cmd->next;
     }
 }
 
 static void print_tokens(t_token *head) // DEBUG
 {
-	while (head)
-	{
-		printf("token: type=%d, value='%s'\n", head->type, head->value);
-		head = head->next;
-	}
+    while (head)
+    {
+        printf("token: type=%d, value='%s'\n", head->type, head->value);
+        head = head->next;
+    }
 }
+
 
 int main(void)
 {

@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:56:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 14:07:15 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:37:29 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,32 @@ int process_token(const char *input, size_t *i, t_token **head)
 	}
 	else if (input[*i] == '>')
 	{
-		if (add_token(head, TOK_REDIRECT_OUT, ">") == RETURN_FAILURE)
-			return (RETURN_FAILURE);
+		if (input[(*i) + 1] == '>')
+		{
+			(*i)++;
+			if (add_token(head, TOK_APPEND_REDIRECT, ">>") == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		else
+		{
+			if (add_token(head, TOK_REDIRECT_OUT, ">") == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
 		(*i)++;
 	}
 	else if (input[*i] == '<')
 	{
-		if (add_token(head, TOK_REDIRECT_IN, "<") == RETURN_FAILURE)
-			return (RETURN_FAILURE);
+		if (input[(*i) + 1] == '<')
+		{
+			(*i)++;
+			if (add_token(head, TOK_HEREDOC, "<<") == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		else
+		{
+			if (add_token(head, TOK_REDIRECT_IN, "<") == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
 		(*i)++;
 	}
 	else

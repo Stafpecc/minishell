@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 15:20:24 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:35:04 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,40 @@ static int process_pipe(t_command **curr, t_command *head)
 	return (RETURN_SUCCESS);
 }
 
+static int process_heredoc(t_token **tokens, t_command *curr, t_command *head)
+{
+    (*tokens) = (*tokens)->next;
+    if (!(*tokens) || ((*tokens)->type != TOK_WORD && (*tokens)->type != TOK_STRING))
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    curr->heredoc = ft_strdup((*tokens)->value);
+    if (!curr->heredoc)
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    return (RETURN_SUCCESS);
+}
+
+static int process_append_redirect(t_token **tokens, t_command *curr, t_command *head)
+{
+    (*tokens) = (*tokens)->next;
+    if (!(*tokens) || ((*tokens)->type != TOK_WORD && (*tokens)->type != TOK_STRING))
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    curr->append_redirections = ft_strdup((*tokens)->value);
+    if (!curr->append_redirections)
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    return (RETURN_SUCCESS);
+}
+
 int process_parsing(t_token *tokens, t_command *curr, t_command *head)
 {
 	if (tokens->type == TOK_WORD || tokens->type == TOK_STRING)
@@ -77,6 +111,16 @@ int process_parsing(t_token *tokens, t_command *curr, t_command *head)
 	else if (tokens->type == TOK_PIPE)
 	{
 		if (process_pipe(&curr, head) == RETURN_FAILURE)
+			return (RETURN_FAILURE);
+	}
+	else if (tokens->type == TOK_HEREDOC)
+	{
+		if (process_heredoc(&tokens, curr, head) == RETURN_FAILURE)
+			return (RETURN_FAILURE);
+	}
+	else if (tokens->type == TOK_APPEND_REDIRECT)
+	{
+		if (process_append_redirect(&tokens, curr, head) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	return (RETURN_SUCCESS);

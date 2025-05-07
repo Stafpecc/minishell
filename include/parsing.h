@@ -7,6 +7,8 @@ typedef struct s_command {
 	char **cmd;
 	char *redirect_in;
 	char *redirect_out;
+	char *append_redirections;
+	char *heredoc;
 	struct s_command *next;
 } t_command;
 
