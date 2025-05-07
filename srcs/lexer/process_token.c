@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:56:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/07 16:37:29 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:44:45 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,40 @@
 
 int process_string(const char *input, size_t *i, t_token **head)
 {
-	char quote;
-	size_t start;
-	char *str;
+    char quote;
+    size_t start;
+    char *str;
 
-	quote = input[(*i)++];
-	start = *i;
-	while (input[*i] && input[*i] != quote)
-		(*i)++;
-	str = ft_strndup(input + start, *i - start);
-	if (!str || add_token(head, TOK_STRING, str) == RETURN_FAILURE)
-	{
-		free(str);
-		return (RETURN_FAILURE);
-	}
-	free(str);
-	if (input[*i] == quote)
-		(*i)++;
-	return (RETURN_SUCCESS);
+    quote = input[*i];
+    (*i)++;
+    start = *i;
+    while (input[*i] && input[*i] != quote)
+        (*i)++;
+    if (input[*i] != quote)
+        return (RETURN_FAILURE);
+    str = ft_strndup(input + start, *i - start);
+    if (!str)
+        return (RETURN_FAILURE);
+    if (quote == '"')
+    {
+        if (add_token(head, TOK_DOUBLE_QUOTES, str) == RETURN_FAILURE)
+        {
+            free(str);
+            return (RETURN_FAILURE);
+        }
+    }
+    else
+    {
+        if (add_token(head, TOK_SINGLE_QUOTES, str) == RETURN_FAILURE)
+        {
+            free(str);
+            return (RETURN_FAILURE);
+        }
+    }
+    free(str);
+    if (input[*i] == quote)
+        (*i)++;
+    return (RETURN_SUCCESS);
 }
 
 int process_word(const char *input, size_t *i, t_token **head)

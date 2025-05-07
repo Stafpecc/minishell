@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/07 16:18:32 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:42:59 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void print_commands(t_command *cmd) // DEBUG
             printf("  Redirect Out: %s\n", cmd->redirect_out);
 		if (cmd->heredoc)
             printf("  Heredoc pass: %s\n", cmd->heredoc);
+		if (cmd->append_redirections)
+            printf("  Append redirection out: %s\n", cmd->append_redirections);
         cmd = cmd->next;
     }
 }
