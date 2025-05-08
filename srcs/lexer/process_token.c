@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:56:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/07 16:44:45 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/08 14:17:59 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int process_string(const char *input, size_t *i, t_token **head)
             return (RETURN_FAILURE);
         }
     }
-    else
+    else if (quote == '\'')
     {
         if (add_token(head, TOK_SINGLE_QUOTES, str) == RETURN_FAILURE)
         {
@@ -45,6 +45,14 @@ int process_string(const char *input, size_t *i, t_token **head)
             return (RETURN_FAILURE);
         }
     }
+	else
+	{
+		if (add_token(head, TOK_STRING, str) == RETURN_FAILURE)
+		{
+			free(str);
+			return (RETURN_FAILURE);
+		}
+	}
     free(str);
     if (input[*i] == quote)
         (*i)++;

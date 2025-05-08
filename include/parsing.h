@@ -9,6 +9,8 @@ typedef struct s_command {
 	char *redirect_out;
 	char *append_redirections;
 	char *heredoc;
+	bool in_simple_quote;
+	bool in_double_quote;
 	struct s_command *next;
 } t_command;
 
