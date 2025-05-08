@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_word_string.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/08 15:37:21 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/08 17:13:11 by tarini           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
+#include "../../../libft/includes/libft.h"
+
+int is_word_like(t_token *token)
+{
+	return (token->type == TOK_WORD ||
+			token->type == TOK_STRING ||
+			token->type == TOK_SINGLE_QUOTES ||
+			token->type == TOK_DOUBLE_QUOTES);
+}
+
+int process_word_string(t_token **tokens, t_command *curr)
+{
+    t_cmd_part *new_part;
+    int i;
+	int j;
+	t_cmd_part **new_array;
+
+	i = 0;
+    while (curr->cmd_parts && curr->cmd_parts[i])
+        i++;
+    new_part = malloc(sizeof(t_cmd_part));
+    if (!new_part)
+        return (RETURN_FAILURE);
+    new_part->content = ft_strdup((*tokens)->value);
+    if (!new_part->content)
+    {
+        free(new_part);
+        return (RETURN_FAILURE);
+    }
+    process_quotes_cmd(*tokens, new_part);
+    new_array = malloc(sizeof(t_cmd_part *) * (i + 2));
+    if (!new_array)
+    {
+        free(new_part->content);
+        free(new_part);
+        return (RETURN_FAILURE);
+    }
+	j = 0;
+    while (j < i)
+	{
+        new_array[j] = curr->cmd_parts[j];
+		j++;
+	}
+    new_array[i] = new_part;
+    new_array[i + 1] = NULL;
+    free(curr->cmd_parts);
+    curr->cmd_parts = new_array;
+    return (RETURN_SUCCESS);
+}

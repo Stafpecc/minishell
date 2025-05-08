@@ -25,20 +25,31 @@ typedef struct s_token {
     struct s_token *next;
 } t_token;
 
-char	*ft_strndup(const char *s, size_t n);
-int		ft_isspace(char c);
 
-void 	free_tokens(t_token *head);
+
+/******************************************************************************/
+/*                                 LEXER                                      */
+/******************************************************************************/
+int launch_tokens(const char *input, size_t *i, t_token **head);
 t_token	*lexer(const char *input);
 
-int has_word_token(t_token *head);
 
+/******************************************************************************/
+/*                                 UTILS                                      */
+/******************************************************************************/
+char	*ft_strndup(const char *s, size_t n);
+int		ft_isspace(char c);
+void 	free_tokens(t_token *head);
+int has_word_token(t_token *head);
 t_token *create_token(t_token_type type, const char *value);
 int add_token(t_token **head, t_token_type type, const char *value);
 
+
+/******************************************************************************/
+/*                                PROCESS                                     */
+/******************************************************************************/
 int process_string(const char *input, size_t *i, t_token **head);
 int process_word(const char *input, size_t *i, t_token **head);
 int process_word_or_string(const char *input, size_t *i, t_token **head);
-int process_token(const char *input, size_t *i, t_token **head);
 
 #endif

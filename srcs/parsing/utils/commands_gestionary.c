@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   commands_gestionary.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 14:14:49 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/05/08 15:50:00 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../libft/includes/libft.h"
+#include "../../../libft/includes/libft.h"
 
 char **add_argument(char **args, const char *value)
 {
@@ -42,18 +42,16 @@ char **add_argument(char **args, const char *value)
 
 t_command *create_command()
 {
-	t_command *cmd;
-	
-	cmd = malloc(sizeof(t_command));
-	if (!cmd)
-		return NULL;
-	cmd->cmd = NULL;
-	cmd->redirect_in = NULL;
-	cmd->redirect_out = NULL;
-	cmd->append_redirections = NULL;
-	cmd->heredoc = NULL;
-	cmd->next = NULL;
-	cmd->in_double_quote = false;
-	cmd->in_simple_quote = false;
-	return (cmd);
+    t_command *cmd;
+
+    cmd = malloc(sizeof(t_command));
+    if (!cmd)
+        return NULL;
+    cmd->cmd_parts = NULL;
+    cmd->redirect_in = NULL;
+    cmd->redirect_out = NULL;
+    cmd->append_redirections = NULL;
+    cmd->heredoc = NULL;
+    cmd->next = NULL;
+    return (cmd);
 }

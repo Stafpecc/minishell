@@ -18,19 +18,27 @@ SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
 override PARSERSRC := \
 	parser \
-	process_commands \
-	commands_gestionary \
-	free_commands \
+	launcher \
+	utils/commands_gestionary \
+	utils/free_commands \
+	process/process_heredoc \
+	process/process_pipe \
+	process/process_quotes \
+	process/process_redirect \
+	process/process_word_string \
 
 
 SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
 
 override LEXERSRC := \
 	lexer \
-	process_token \
-	token_gestionary \
-	token_utils \
-	free_token \
+	launcher \
+	utils/token_gestionary \
+	utils/token_utils \
+	utils/free_token \
+	process/process_word_string \
+	process/process_word \
+	process/process_string \
 
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 

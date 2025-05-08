@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   process_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 15:51:28 by tarini           ###   ########.fr       */
+/*   Created: 2025/05/08 15:46:08 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/08 15:47:08 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "lexer.h"
-#include "return_error.h"
 
-t_token *lexer(const char *input)
+
+int process_word(const char *input, size_t *i, t_token **head)
 {
-	t_token *head;
-	size_t i;
+	size_t start;
+	char *str;
 
-	if (!input || !*input)
-		return (NULL);
-	i = 0;
-	head = NULL;
-	while (input[i])
+	start = *i;
+	while (input[*i] && !ft_isspace(input[*i]) && input[*i] != '|' 
+		&& input[*i] != '>' && input[*i] != '<')
+		(*i)++;
+	str = ft_strndup(input + start, *i - start);
+	if (!str || add_token(head, TOK_WORD, str) == RETURN_FAILURE)
 	{
-		if (launch_tokens(input, &i, &head) == RETURN_FAILURE)
-			return (NULL);
+		free(str);
+		return (RETURN_FAILURE);
 	}
-	if (add_token(&head, TOK_END, "") == RETURN_FAILURE)
-		return (NULL);
-	return (head);
+	free(str);
+	return (RETURN_SUCCESS);
 }

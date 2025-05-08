@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   process_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 15:51:28 by tarini           ###   ########.fr       */
+/*   Created: 2025/05/08 15:35:37 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/08 17:26:37 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "parsing.h"
 
-#include "lexer.h"
-#include "return_error.h"
-
-t_token *lexer(const char *input)
+int process_pipe(t_command **curr, t_command *head)
 {
-	t_token *head;
-	size_t i;
-
-	if (!input || !*input)
-		return (NULL);
-	i = 0;
-	head = NULL;
-	while (input[i])
-	{
-		if (launch_tokens(input, &i, &head) == RETURN_FAILURE)
-			return (NULL);
-	}
-	if (add_token(&head, TOK_END, "") == RETURN_FAILURE)
-		return (NULL);
-	return (head);
+    (*curr)->next = create_command();
+    if (!(*curr)->next)
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    (*curr) = (*curr)->next;
+    return (RETURN_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/07 16:42:59 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:07:20 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,61 @@ void exit_minishell_proprely(char *input, t_token *token)
 static void print_commands(t_command *cmd) // DEBUG
 {
 	int i;
+	int node = 1;
 
-	i = 0;
-    while (cmd)
-    {
-        if (cmd->cmd)
-        {
-            while (cmd->cmd[i])
-            {
-				printf("  Arg: %s\n", cmd->cmd[i]);
+	while (cmd)
+	{
+		printf("\n---- Command Node %d ----\n", node++);
+		if (cmd->cmd_parts)
+		{
+			i = 0;
+			while (cmd->cmd_parts[i])
+			{
+				printf("cmd_parts[%d]: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
+					   i,
+					   cmd->cmd_parts[i]->content,
+					   cmd->cmd_parts[i]->in_simple_quote ? "true" : "false",
+					   cmd->cmd_parts[i]->in_double_quote ? "true" : "false");
 				i++;
 			}
-        }
-        if (cmd->redirect_in)
-            printf("  Redirect In: %s\n", cmd->redirect_in);
-        if (cmd->redirect_out)
-            printf("  Redirect Out: %s\n", cmd->redirect_out);
-		if (cmd->heredoc)
-            printf("  Heredoc pass: %s\n", cmd->heredoc);
+		}
+		else
+			printf("No cmd_parts.\n");
+		printf("redirect_in: %s\n", cmd->redirect_in ? cmd->redirect_in : "NULL");
+		printf("redirect_out: %s\n", cmd->redirect_out ? cmd->redirect_out : "NULL");
+
 		if (cmd->append_redirections)
-            printf("  Append redirection out: %s\n", cmd->append_redirections);
-        cmd = cmd->next;
-    }
+		{
+			printf("append_redirections: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
+				   cmd->append_redirections->arg,
+				   cmd->append_redirections->in_simple_quote ? "true" : "false",
+				   cmd->append_redirections->in_double_quote ? "true" : "false");
+		}
+		else
+			printf("No append_redirections.\n");
+		if (cmd->heredoc)
+		{
+			printf("heredoc: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
+				   cmd->heredoc->arg,
+				   cmd->heredoc->in_simple_quote ? "true" : "false",
+				   cmd->heredoc->in_double_quote ? "true" : "false");
+		}
+		else
+			printf("No heredoc.\n");
+		printf("\n");
+		cmd = cmd->next;
+	}
 }
+
 
 static void print_tokens(t_token *head) // DEBUG
 {
-    while (head)
-    {
-        printf("token: type=%d, value='%s'\n", head->type, head->value);
-        head = head->next;
-    }
+	while (head)
+	{
+		printf("token: type=%d, value='%s'\n", head->type, head->value);
+		head = head->next;
+	}
 }
-
 
 int main(void)
 {
@@ -81,6 +103,7 @@ int main(void)
 		printf("You entered the legendary command: '%s'\n", input);
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
+		(void)command;
 		print_commands(command);
 		free(input);
 		free_tokens(token);
