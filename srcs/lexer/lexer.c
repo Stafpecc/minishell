@@ -1,4 +1,21 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/03 14:44:42 by ldevoude         ###   ########lyon.fr   */
+=======
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/04 16:06:13 by tarini           ###   ########.fr       */
+>>>>>>> origin/main
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 
@@ -15,6 +32,7 @@ t_token *lexer(const char *input)
 	head = NULL;
 	while (input[i])
 	{
+<<<<<<< HEAD
 		if (ft_isspace(input[i]))
 			i++;
 		else if (ft_strchr(">|<", input[i]))
@@ -68,6 +86,10 @@ t_token *lexer(const char *input)
 			}
 			free(word);
 		}
+=======
+		if (!process_token(input, &i, &head))
+			return (NULL);
+>>>>>>> origin/main
 	}
 	if (!add_token(&head, TOK_END, ""))
 		return (NULL);

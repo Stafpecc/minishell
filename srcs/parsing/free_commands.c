@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:17:04 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:06:29 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void free_commands(t_command *cmd)
 		tmp = cmd;
 		cmd = cmd->next;
 		free(tmp->cmd);
-		while (cmd->cmd[i])
+		while (cmd->args[i])
 		{
-			free(cmd->cmd[i]);
+			free(cmd->args[i]);
 			i++;
 		}
 		free(tmp->redirect_in);
