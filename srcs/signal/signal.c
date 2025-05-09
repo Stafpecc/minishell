@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/03 13:58:47 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "signal_handler.h"
 #include "minishell.h"
@@ -25,8 +15,7 @@ static void ctrl_c(void)
 // the subject tell us that ctrlbackslash shouldnt do anything
 static void ctrl_backslash() 
 {
-	write(1, "Quit (core dumped)", 18);
-	exit(0);
+	(void)0;
 }
 
 void sig_handler(int sig)

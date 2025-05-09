@@ -3,7 +3,11 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
-//sigil + digit?)
+
+
+# include "error.h"
+
+
 typedef enum e_token_type {
 	TOK_WORD,
     TOK_PIPE,
@@ -14,7 +18,6 @@ typedef enum e_token_type {
 } t_token_type;
 
 typedef struct s_token {
-	bool return_value;
     t_token_type type;
     char *value;
     struct s_token *next;
@@ -27,5 +30,13 @@ void 	free_tokens(t_token *head);
 t_token	*lexer(const char *input);
 
 int has_word_token(t_token *head);
+
+t_token *create_token(t_token_type type, const char *value);
+int add_token(t_token **head, t_token_type type, const char *value);
+
+int process_string(const char *input, size_t *i, t_token **head);
+int process_word(const char *input, size_t *i, t_token **head);
+int process_word_or_string(const char *input, size_t *i, t_token **head);
+int process_token(const char *input, size_t *i, t_token **head);
 
 #endif

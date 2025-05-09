@@ -1,17 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   free_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:51:44 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/01 16:51:58 by tarini           ###   ########.fr       */
+/*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/06 13:17:04 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c)
+#include "parsing.h"
+
+void free_commands(t_command *cmd)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
+	t_command *tmp;
+	int i;
+
+	i = 0;
+	while (cmd)
+	{
+		tmp = cmd;
+		cmd = cmd->next;
+		free(tmp->cmd);
+		while (cmd->cmd[i])
+		{
+			free(cmd->cmd[i]);
+			i++;
+		}
+		free(tmp->redirect_in);
+		free(tmp->redirect_out);
+		free(tmp);
+	}
 }

@@ -18,14 +18,19 @@ SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
 override PARSERSRC := \
 	parser \
+	process_commands \
+	commands_gestionary \
+	free_commands \
 
 
 SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
 
 override LEXERSRC := \
 	lexer \
-	ft_strndup \
-	ft_isspace \
+	process_token \
+	token_gestionary \
+	token_utils \
+	free_token \
 
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 
