@@ -18,6 +18,9 @@ SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
 override PARSERSRC := \
 	parser \
+	process_commands \
+	commands_gestionary \
+	free_commands \
 
 
 SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
@@ -39,6 +42,13 @@ SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 override EXECSRC := \
 	exec \
 	redirections \
+
+# SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
+
+# override EXECSRC := \
+# 	exec \
+# 	redirections \
+
 
 # SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
 

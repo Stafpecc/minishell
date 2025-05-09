@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/03 13:58:47 by ldevoude         ###   ########lyon.fr   */
-=======
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/04 13:50:39 by tarini           ###   ########.fr       */
->>>>>>> origin/main
+/*   Updated: 2025/05/09 13:57:43 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +21,7 @@ static void ctrl_c(void)
 	rl_redisplay();
 }
 
-//TOFIX?LDEV : is the function name right?
-// the subject tell us that ctrlbackslash shouldnt do anything
-static void ctrl_backslash() 
+static void ctrl_backslash()
 {
 	(void)0;
 }

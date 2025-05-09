@@ -3,20 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/07 08:20:29 by ldevoude         ###   ########lyon.fr   */
-=======
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/04 13:57:58 by tarini           ###   ########.fr       */
->>>>>>> origin/main
+/*   Updated: 2025/05/09 13:58:19 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
@@ -35,12 +27,11 @@ static void print_commands(t_command *cmd) // DEBUG
 	i = 0;
     while (cmd)
     {
-        printf("Command: %s\n", cmd->cmd);
-        if (cmd->args)
+        if (cmd->cmd)
         {
-            while (cmd->args[i])
+            while (cmd->cmd[i])
             {
-				printf("  Arg: %s\n", cmd->args[i]);
+				printf("  Arg: %s\n", cmd->cmd[i]);
 				i++;
 			}
         }
@@ -86,7 +77,7 @@ int main(void)
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		print_commands(command);
-		exec(command); //TODO struct with env, last return value
+		exec(command);
 		free(input);
 		free_tokens(token);
 	}

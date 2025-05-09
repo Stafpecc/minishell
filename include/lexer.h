@@ -3,13 +3,9 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
-<<<<<<< HEAD
-//sigil + digit?)
-=======
 
 # include "error.h"
 
->>>>>>> origin/main
 typedef enum e_token_type {
 	TOK_WORD,
     TOK_PIPE,
