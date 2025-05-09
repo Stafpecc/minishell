@@ -17,6 +17,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../include/minishell.h"
 
 void exit_minishell_proprely(char *input, t_token *token)
@@ -60,15 +61,11 @@ static void print_tokens(t_token *head) // DEBUG
 	}
 }
 
-int main(int argc, char *argv[], char **env)
+int main(void)
 {
 	char *input;
 	t_token *token;
-	
-	env = NULL; //TORMASAP
-	if (argc > 1)
-		exit(1);
-	argv = NULL;
+
 	set_signals();
 	while (1)
 	{
