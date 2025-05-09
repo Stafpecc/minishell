@@ -6,12 +6,11 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:29:38 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:08:56 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../libft/includes/libft.h"
 
 char **add_argument(char **args, const char *value)
 {
@@ -48,6 +47,7 @@ t_command *create_command()
 	if (!cmd)
 		return NULL;
 	cmd->cmd = NULL;
+	cmd->args = NULL;
 	cmd->redirect_in = NULL;
 	cmd->redirect_out = NULL;
 	cmd->next = NULL;

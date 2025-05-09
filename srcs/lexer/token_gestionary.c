@@ -6,13 +6,12 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:18:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:33:10 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/04 15:56:19 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "return_error.h"
-#include "../../libft/includes/libft.h"
 
 t_token *create_token(t_token_type type, const char *value)
 {
@@ -35,10 +34,10 @@ int add_token(t_token **head, t_token_type type, const char *value)
 	t_token *new_token;
 	t_token *curr;
 	
-	new_token = create_token(type, value);
+	new_token = token_create(type, value);
 	if (!new_token)
 	{
-		free_tokens(*head);
+		free_token(*head);
 		return (RETURN_FAILURE);
 	}
 	if (!*head)

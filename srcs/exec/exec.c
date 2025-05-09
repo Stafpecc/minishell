@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:00:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/08 11:36:19 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/08 16:35:34 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,30 @@
 
 #include "../include/exec.h"
 
+typedef struct s_arg {
+    char *arg;
+    bool in_simple_quote;
+    bool in_double_quote;
+} t_arg;
+
+typedef struct s_cmd_part {
+    char *content;
+    bool in_simple_quote;
+    bool in_double_quote;
+} t_cmd_part;
+
+typedef struct s_command {
+    t_cmd_part    **cmd_parts;
+    char        *redirect_in;
+    char        *redirect_out;
+    t_arg        *append_redirections;
+    t_arg        *heredoc;
+    struct s_command *next;
+} t_command;
 
 // check if it is a built-in cmd
 // TODO also need a struct with env + last return
 
-void	init_child(t_command *node, int *pipe_fd, int previous_pipe)
-{
-	if (node->redirect_in)
-		printf("Ok\n");// TODO FUNCTION FOR THAT CASE WHEN REDIRECTIN
-	else if (previous_pipe != -1)
-		{
-			dup2(previous_pipe, STDIN_FILENO);
-			close(previous_pipe);
-		}
-	if (previous_pipe == -1)
-		close(pipe_fd[0]);
-	// COMPLETE PATH+ARG+EXECVE
-	exit(1); // FAIL IF EXECVE DOESNT WORK
-}
 
 void	child_maker(t_command *node, int number_nodes)
 {

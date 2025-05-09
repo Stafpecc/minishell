@@ -1,4 +1,21 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/07 08:20:29 by ldevoude         ###   ########lyon.fr   */
+=======
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/04 13:57:58 by tarini           ###   ########.fr       */
+>>>>>>> origin/main
+/*                                                                            */
+/* ************************************************************************** */
 
 
 #include "../include/minishell.h"
@@ -18,11 +35,12 @@ static void print_commands(t_command *cmd) // DEBUG
 	i = 0;
     while (cmd)
     {
-        if (cmd->cmd)
+        printf("Command: %s\n", cmd->cmd);
+        if (cmd->args)
         {
-            while (cmd->cmd[i])
+            while (cmd->args[i])
             {
-				printf("  Arg: %s\n", cmd->cmd[i]);
+				printf("  Arg: %s\n", cmd->args[i]);
 				i++;
 			}
         }
