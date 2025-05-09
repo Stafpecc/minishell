@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:00:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/09 16:36:59 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 17:19:10 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	child_maker(t_command *node, int number_nodes)
 			pipe(pipe_fd); // TODO protect
 		child = fork();    // protect
 		if (child == 0)
-			child_init_pipes_dup(node, pipe_fd, previous_pipe);
+			child_init_pipes_dup(node, pipe_fd, previous_pipe, );
 		else
 		{
 			// parent close what we dont need anymore

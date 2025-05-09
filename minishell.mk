@@ -41,6 +41,9 @@ SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
 override EXECSRC := \
 	child_dup \
+	child_pathed \
+	child_utils \
+	child \
 	exec \
 	redirections \
 
