@@ -40,6 +40,7 @@ override SIGNALSRC := \
 SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
 override EXECSRC := \
+	child_dup \
 	exec \
 	redirections \
 

@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:00:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/09 13:55:43 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 16:36:59 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	child_maker(t_command *node, int number_nodes)
 			pipe(pipe_fd); // TODO protect
 		child = fork();    // protect
 		if (child == 0)
-			init_child(node, pipe_fd, previous_pipe);
+			child_init_pipes_dup(node, pipe_fd, previous_pipe);
 		else
 		{
 			// parent close what we dont need anymore
@@ -130,7 +130,11 @@ void	exec(t_command *node)
 			// TODObuilt_in redirect
 		}
 		else
+		{
 			printf("parent: not a single built-in\n"); //TORMASAP
+			child_maker(node, number_nodes);
+		}
+			
 	}
 	
     //TODO child_maker
