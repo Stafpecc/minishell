@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/04 13:50:39 by tarini           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "signal_handler.h"
 #include "minishell.h"
@@ -21,7 +11,9 @@ static void ctrl_c(void)
 	rl_redisplay();
 }
 
-static void ctrl_backslash()
+//TOFIX?LDEV : is the function name right?
+// the subject tell us that ctrlbackslash shouldnt do anything
+static void ctrl_backslash() 
 {
 	(void)0;
 }

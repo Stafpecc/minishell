@@ -37,12 +37,11 @@ SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 override SIGNALSRC := \
 	signal \
 
-# SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
+SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
-# override EXECSRC := \
-# 	exec \
-# 	redirections \
-
+override EXECSRC := \
+	exec \
+	redirections \
 
 # SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
 

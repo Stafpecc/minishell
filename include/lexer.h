@@ -4,7 +4,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
+
 # include "error.h"
+
 
 typedef enum e_token_type {
 	TOK_WORD,

@@ -6,6 +6,7 @@
 # include <readline/readline.h>
 # include <readline/history.h> 
 
+#include "exec.h"
 #include "lexer.h"
 #include "parsing.h"
 #include "signal_handler.h"

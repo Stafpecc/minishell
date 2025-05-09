@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 13:45:46 by tarini           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../include/minishell.h"
 
@@ -52,11 +42,15 @@ static void print_tokens(t_token *head) // DEBUG
 	}
 }
 
-int main(void)
+int main(int argc, char *argv[], char **env)
 {
 	char *input;
 	t_token *token;
-
+	
+	env = NULL; //TORMASAP
+	if (argc > 1)
+		exit(1);
+	argv = NULL;
 	set_signals();
 	while (1)
 	{
@@ -77,6 +71,7 @@ int main(void)
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		print_commands(command);
+		exec(command); //TODO struct with env, last return value
 		free(input);
 		free_tokens(token);
 	}
