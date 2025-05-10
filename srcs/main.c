@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/10 14:50:33 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/10 15:00:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int main(void)
 		t_command *command = parse_tokens(token);
 		(void)command;
 		print_commands(command);
+		exec(command);
 		free(input);
 		free_tokens(token);
 	}
