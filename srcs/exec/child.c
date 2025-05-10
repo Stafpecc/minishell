@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:57:50 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/09 17:26:47 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 17:32:35 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 // } t_command;
 
 #include "../include/exec.h"
+
+//TODO check my old pipex to see how to make it work in that case
 
 void child_redirect(t_command *node, char **env)
 {

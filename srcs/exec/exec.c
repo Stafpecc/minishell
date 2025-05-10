@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:00:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/09 17:19:10 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/10 12:07:12 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	child_maker(t_command *node, int number_nodes)
 			if (previous_pipe != -1)
 				close(previous_pipe);
 			previous_pipe = pipe_fd[0];
-			close(pipe_fd[0]);
+			//close(pipe_fd[0]); //I may did a mistake here bleh
 			node = node->next;
 			i++;
 		}
@@ -136,6 +136,5 @@ void	exec(t_command *node)
 		}
 			
 	}
-	
-    //TODO child_maker
+	exit(EXIT_FAILURE);
 }
