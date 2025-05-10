@@ -6,27 +6,13 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:36:53 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 17:32:17 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/10 16:30:20 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void process_quotes_arg(t_token *tokens, t_arg *arg)
-{
-	if ((tokens)->type == TOK_SINGLE_QUOTES || (tokens)->type == TOK_DOUBLE_QUOTES)
-    {
-        arg->in_simple_quote = true;
-        arg->in_double_quote = false;
-    }
-    else
-    {
-        arg->in_simple_quote = false;
-        arg->in_double_quote = true;
-    }
-}
-
-void process_quotes_cmd(t_token *token, t_arg *cmd_part)
+void process_quotes(t_token *token, t_arg *cmd_part)
 {
     if (token->type == TOK_SINGLE_QUOTES)
     {

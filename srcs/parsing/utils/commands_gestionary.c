@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 19:10:02 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/10 17:53:32 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ t_arg **add_argument(t_arg **args, const char *value)
     free(args);
     return new_args;
 }
-
-
 
 t_command *create_command()
 {

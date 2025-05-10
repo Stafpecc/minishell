@@ -6,33 +6,65 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 19:11:21 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/10 17:56:21 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-
 int process_redirect_in(t_token **tokens, t_command *curr, t_command *head) {
     (*tokens) = (*tokens)->next;
     if (!(*tokens) || !is_word_like(*tokens))
-	{
+    {
         free_commands(head);
         return (RETURN_FAILURE);
     }
-    curr->cmd_parts[0] = *add_argument(&curr->cmd_parts[0], (*tokens)->value);
+    if (!curr->redirect_in)
+    {
+        curr->redirect_in = malloc(sizeof(t_arg));
+        if (!curr->redirect_in)
+        {
+            free_commands(head);
+            return (RETURN_FAILURE);
+        }
+    }
+    curr->redirect_in->arg = ft_strdup((*tokens)->value);
+    if (!curr->redirect_in->arg)
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    process_quotes(*tokens, curr->redirect_in);
+    curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
     return (RETURN_SUCCESS);
 }
+
 
 int process_redirect_out(t_token **tokens, t_command *curr, t_command *head) {
     (*tokens) = (*tokens)->next;
     if (!(*tokens) || !is_word_like(*tokens))
-	{
+    {
         free_commands(head);
         return (RETURN_FAILURE);
     }
-    curr->cmd_parts[0] = *add_argument(&curr->cmd_parts[0], (*tokens)->value);
+    if (!curr->redirect_out)
+    {
+        curr->redirect_out = malloc(sizeof(t_arg));
+        if (!curr->redirect_out)
+        {
+            free_commands(head);
+            return (RETURN_FAILURE);
+        }
+    }
+    curr->redirect_out->arg = ft_strdup((*tokens)->value);
+    if (!curr->redirect_out->arg)
+    {
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    process_quotes(*tokens, curr->redirect_out);
+    curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
     return (RETURN_SUCCESS);
 }
 
@@ -60,7 +92,7 @@ int process_append_redirect(t_token **tokens, t_command *curr, t_command *head)
         free_commands(head);
         return (RETURN_FAILURE);
     }
-    process_quotes_arg(*tokens, curr->append_redirections);
-
+    process_quotes(*tokens, curr->append_redirections);
+    curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
     return (RETURN_SUCCESS);
 }

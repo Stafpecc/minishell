@@ -11,8 +11,8 @@ typedef struct s_arg {
 
 typedef struct s_command {
 	t_arg		**cmd_parts;
-	char		*redirect_in;
-	char		*redirect_out;
+	t_arg		*redirect_in;
+	t_arg		*redirect_out;
 	t_arg		*append_redirections;
 	t_arg		*heredoc;
 	struct s_command *next;
@@ -40,8 +40,7 @@ int			process_word_string(t_token **tokens, t_command *curr);
 int			process_redirect_in(t_token **tokens, t_command *curr, t_command *head);
 int			process_redirect_out(t_token **tokens, t_command *curr, t_command *head);
 int			process_append_redirect(t_token **tokens, t_command *curr, t_command *head);
-void		process_quotes_arg(t_token *tokens, t_arg *arg);
-void		process_quotes_cmd(t_token *token, t_arg *cmd_part);
+void		process_quotes(t_token *tokens, t_arg *arg);
 int			process_pipe(t_command **curr, t_command *head);
 int			process_heredoc(t_token **tokens, t_command *curr, t_command *head);
 

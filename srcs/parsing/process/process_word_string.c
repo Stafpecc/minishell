@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:37:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 17:33:11 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/10 16:31:15 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int process_word_string(t_token **tokens, t_command *curr)
         free(new_part);
         return (RETURN_FAILURE);
     }
-    process_quotes_cmd(*tokens, new_part);
+    process_quotes(*tokens, new_part);
     new_array = malloc(sizeof(t_arg *) * (i + 2));
     if (!new_array)
     {
