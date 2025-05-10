@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 17:07:20 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:33:32 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void print_commands(t_command *cmd) // DEBUG
 			{
 				printf("cmd_parts[%d]: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
 					   i,
-					   cmd->cmd_parts[i]->content,
+					   cmd->cmd_parts[i]->arg,
 					   cmd->cmd_parts[i]->in_simple_quote ? "true" : "false",
 					   cmd->cmd_parts[i]->in_double_quote ? "true" : "false");
 				i++;

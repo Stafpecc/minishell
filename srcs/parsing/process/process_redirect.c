@@ -6,35 +6,34 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 17:04:28 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/08 19:11:21 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-int process_redirect_in(t_token **tokens, t_command *curr, t_command *head)
-{
-	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens))
+
+int process_redirect_in(t_token **tokens, t_command *curr, t_command *head) {
+    (*tokens) = (*tokens)->next;
+    if (!(*tokens) || !is_word_like(*tokens))
 	{
-		free_commands(head);
-		return (RETURN_FAILURE);
-	}
-	curr->redirect_in = ft_strdup((*tokens)->value);
-	return (RETURN_SUCCESS);
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    curr->cmd_parts[0] = *add_argument(&curr->cmd_parts[0], (*tokens)->value);
+    return (RETURN_SUCCESS);
 }
 
-int process_redirect_out(t_token **tokens, t_command *curr, t_command *head)
-{
-	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens))
+int process_redirect_out(t_token **tokens, t_command *curr, t_command *head) {
+    (*tokens) = (*tokens)->next;
+    if (!(*tokens) || !is_word_like(*tokens))
 	{
-		free_commands(head);
-		return (RETURN_FAILURE);
-	}
-	curr->redirect_out = ft_strdup((*tokens)->value);
-	return (RETURN_SUCCESS);
+        free_commands(head);
+        return (RETURN_FAILURE);
+    }
+    curr->cmd_parts[0] = *add_argument(&curr->cmd_parts[0], (*tokens)->value);
+    return (RETURN_SUCCESS);
 }
 
 int process_append_redirect(t_token **tokens, t_command *curr, t_command *head)

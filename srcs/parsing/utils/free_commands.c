@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 15:21:06 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:33:21 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void free_commands(t_command *cmd)
             i = 0;
             while (tmp->cmd_parts[i])
             {
-                free(tmp->cmd_parts[i]->content);
+                free(tmp->cmd_parts[i]->arg);
                 free(tmp->cmd_parts[i]);
                 i++;
             }
