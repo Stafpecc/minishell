@@ -8,6 +8,7 @@
 
 #include "lexer.h"
 #include "parsing.h"
+#include "exec.h"
 #include "signal_handler.h"
 #include "../libft/includes/libft.h"
 

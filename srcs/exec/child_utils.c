@@ -38,12 +38,12 @@ cmd_name = NULL;
 path_dirs = ft_split(path, ':');
 if (!path_dirs)
     return (NULL);
-cmd_parts = ft_split(cmd, ' ');
+cmd_parts = ft_split(cmd, ' '); //MAY BE USELESS BCS OF OUR DOUBLE ARRAY
 if (!cmd_parts || !path_dirs)
     return (free_arrays(path_dirs, NULL, NULL, NULL));
-if (cmd_parts[0])
+if (cmd_parts[0]) //SAME
     cmd_name = ft_strdup(cmd_parts[0]);
-if (!cmd_name)
+if (!cmd_name) //SAME Lel
     return (free_arrays(path_dirs, cmd_parts, NULL, NULL));
 free_arrays(NULL, cmd_parts, NULL, NULL);
 return (search_executable_in_paths(path_dirs, NULL, cmd_name, NULL));
@@ -97,8 +97,9 @@ return (NULL);
 
 void	child_error(int infile, int *fd, int error, char *cmd)
 {
+cmd = NULL; //TEMPORARY
 if (error == 1)
-    ft_printfd("command not found: %s\n", cmd);
+    //ft_printfd("command not found: %s\n", cmd);
 if (infile >= 0)
     close(infile);
 if (fd[1])

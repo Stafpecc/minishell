@@ -3,7 +3,7 @@
 
 // dup the right fd for stdoutput and return 
 // an error code if it doesnt work properly
-int	outfile_dup(char *redirect, int *pipe_fd, int fd)
+int	write_dup(char *redirect, int *pipe_fd, int fd)
 {
 	if (redirect)
 	{
@@ -19,15 +19,18 @@ int	outfile_dup(char *redirect, int *pipe_fd, int fd)
 	}
 	else
 	{
-		if (dup2(pipe_fd[1], STDOUT_FILENO))
+		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+		{
 			return (2);
+		}
+			
 	}
 	return (0);
 }
 
 // dup the right fd for stdinput and return
 // an error code if it doesnt work properly
-int	infile_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
+int	read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
 {
 	if (redirect)
 	{
@@ -48,8 +51,11 @@ int	infile_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
 	}
 	else
 	{
-		if (dup2(pipe_fd[0], STDIN_FILENO))
+		if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+		{
+			perror("test1%\n");
 			return (2);
+		}
 	}
 	return (0);
 }
@@ -63,15 +69,17 @@ int	infile_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
 // next part of the process
 void	child_init_pipes_dup(t_command *node, int *pipe_fd, int previous_pipe)
 {
-	if (infile_dup(node->redirect_in, pipe_fd, previous_pipe, 0) != 0)
+
+	if (read_dup(node->redirect_in, pipe_fd, previous_pipe, 0) != 0)
 	{
+		//perror("test");
 		if (previous_pipe != -1)
 			close(previous_pipe);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
-	if (outfile_dup(node->redirect_out, pipe_fd, 0) != 0)
+	if (write_dup(node->redirect_out, pipe_fd, 0) != 0)
 	{
 		if (previous_pipe != -1)
 			close(previous_pipe);
@@ -83,6 +91,6 @@ void	child_init_pipes_dup(t_command *node, int *pipe_fd, int previous_pipe)
 		close(previous_pipe);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
-	// NEXT STEP COMPLETE PATH+ARG+EXECVE
+	child_redirect(node, NULL);
 	exit(EXIT_FAILURE); // FAIL IF EXECVE DOESNT WORK
 }
