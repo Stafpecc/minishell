@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/10 17:53:32 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:35:55 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 t_arg **add_argument(t_arg **args, const char *value)
 {
-    size_t i = 0;
-    size_t j = 0;
+    size_t i;
+    size_t j;
     t_arg **new_args;
 
+    i = 0;
+    j = 0;
     if (args)
     {
         while (args[i])

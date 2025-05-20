@@ -7,6 +7,11 @@ override EXECDIR	:= exec/
 override BUILTINDIR := env/
 override SIGNALDIR	:= signal/
 
+SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
+
+override DEBUG := \
+	debug \
+
 
 SRC += $(addprefix $(MAINDIR), $(addsuffix .c, $(MAIN)))
 
@@ -21,11 +26,13 @@ override PARSERSRC := \
 	launcher \
 	utils/commands_gestionary \
 	utils/free_commands \
+	utils/struct_to_char \
 	process/process_heredoc \
 	process/process_pipe \
 	process/process_quotes \
 	process/process_redirect \
 	process/process_word_string \
+	process/process_utils \
 
 
 SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
