@@ -35,13 +35,13 @@ if (!result)
 }
 if (access(split_result[0], F_OK) != 0)
 {
-    ft_printfd("no such file or directory: %s\n", split_result[0]);
+    //ft_printfd("no such file or directory: %s\n", split_result[0]);
 }
 fd_test_perms = open(split_result[0], O_RDONLY | __O_DIRECTORY);
 if (fd_test_perms >= 0)
 {
     close(fd_test_perms);
-    ft_printfd("permission denied : %s\n", split_result[0]);
+    //ft_printfd("permission denied : %s\n", split_result[0]);
 }
 execve(split_result[0], result, NULL);
 childs_pathed_exec_failed(split_args, split_result, path, result);

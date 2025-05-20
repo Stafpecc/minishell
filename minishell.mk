@@ -56,6 +56,7 @@ SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 override SIGNALSRC := \
 	signal \
 
+SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 override EXECSRC := \
 	child_dup \
 	child_pathed \

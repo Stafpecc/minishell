@@ -39,7 +39,6 @@
 // check if it is a built-in cmd
 // TODO also need a struct with env + last return
 
-
 void	child_maker(t_command *node, int number_nodes)
 {
 	int		i;
@@ -47,25 +46,29 @@ void	child_maker(t_command *node, int number_nodes)
 	int		previous_pipe;
 	pid_t	child;
 
+	// printf("test");
 	i = 0;
-	previous_pipe = -1; //TODO #define NO_PREV_PIPE
+	previous_pipe = -42; // TODO #define NO_PREV_PIPE
+	// printf("NOMBRE NODES: %d\n", number_nodes);
+	pipe(pipe_fd);
 	while (node)
 	{
-		if (i < number_nodes - 1)
+		if (previous_pipe != -1 || i < number_nodes - 1)
+		{
 			pipe(pipe_fd); // TODO protect
-		child = fork();    // protect
+		}
+		child = fork(); // protect
 		if (child == 0)
-			child_init_pipes_dup(node, pipe_fd, previous_pipe, );
+			child_init_pipes_dup(node, pipe_fd, previous_pipe);
 		else
 		{
 			// parent close what we dont need anymore
-			
 			if (i < number_nodes - 1)
 				close(pipe_fd[1]);
 			if (previous_pipe != -1)
 				close(previous_pipe);
 			previous_pipe = pipe_fd[0];
-			//close(pipe_fd[0]); //I may did a mistake here bleh
+			// close(pipe_fd[0]); //TODL I may did a mistake here bleh
 			node = node->next;
 			i++;
 		}
@@ -92,37 +95,36 @@ int	count_commands(t_command *cmds, bool *is_alone)
 	count = 0;
 	while (cmds)
 	{
-        count++;
-        cmds = cmds->next;
+		count++;
+		cmds = cmds->next;
 	}
-    *is_alone = (count == 1);
+	*is_alone = (count == 1);
 	return (count);
 }
 
-// exec that does receive a *node 
-//TODO also the struct that contain the env and last return
+// exec that does receive a *node
+// TODO also the struct that contain the env and last return
 // can remove is_alone if not enough
 // space they exist for lisibility purpose
 
 void	exec(t_command *node)
 {
-	int		number_nodes;
-	bool	is_alone;
+	int number_nodes;
+	bool is_alone;
 
 	number_nodes = count_commands(node, &is_alone);
 	if (is_alone == true)
 	{
-		if (built_in_checker(&node->cmd[0]))
+		if (built_in_checker(node->cmd_parts[0]->arg))
 		{
-			ft_printf("Parent: built_in_checker passed\n"); //TORMASAP
-			// TODObuilt_in redirect
+			ft_printf("Parent: built_in_checker passed\n"); // TORMASAP
+															// TODObuilt_in redirect
 		}
 		else
 		{
-			printf("parent: not a single built-in\n"); //TORMASAP
+			printf("parent: not a single built-in\n"); // TORMASAP
 			child_maker(node, number_nodes);
 		}
-			
 	}
 	exit(EXIT_FAILURE);
 }
