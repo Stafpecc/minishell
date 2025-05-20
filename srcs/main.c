@@ -1,16 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 18:16:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/12 14:35:07 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../include/minishell.h"
+
+#include "minishell.h"
+#include "../libft/includes/libft.h"
 
 void exit_minishell_proprely(char *input, t_token *token)
 {
@@ -41,12 +32,10 @@ int main(void)
 			continue;
 		if (ft_strcmp(input, "exit") == 0)
 			exit_minishell_proprely(input, token);
-		printf("You entered the legendary command: '%s'\n", input);
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		(void)command;
 		print_commands(command);
-		exec(command);
 		free(input);
 		free_tokens(token);
 	}

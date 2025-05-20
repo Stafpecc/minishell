@@ -60,7 +60,8 @@ SRCS = \
 	ft_strcmp.c						  \
 	ft_pass.c 					      \
 	ft_atof.c						  \
-	ft_atod.c						  
+	ft_atod.c						  \
+	ft_realloc.c
 
 SRCS:= $(SRCS:%=$(SRCS_DIR)/%)
 

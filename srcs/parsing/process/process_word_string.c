@@ -6,20 +6,12 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:37:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 17:33:11 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:27:26 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
-
-int is_word_like(t_token *token)
-{
-	return (token->type == TOK_WORD ||
-			token->type == TOK_STRING ||
-			token->type == TOK_SINGLE_QUOTES ||
-			token->type == TOK_DOUBLE_QUOTES);
-}
 
 int process_word_string(t_token **tokens, t_command *curr)
 {
@@ -40,7 +32,7 @@ int process_word_string(t_token **tokens, t_command *curr)
         free(new_part);
         return (RETURN_FAILURE);
     }
-    process_quotes_cmd(*tokens, new_part);
+    process_quotes(*tokens, new_part);
     new_array = malloc(sizeof(t_arg *) * (i + 2));
     if (!new_array)
     {
