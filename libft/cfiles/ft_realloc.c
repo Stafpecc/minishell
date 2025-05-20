@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/14 16:09:21 by tarini           ###   ########.fr       */
+/*   Created: 2025/05/20 14:36:44 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/20 14:36:56 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "lexer.h"
-#include "return_error.h"
+#include "libft.h"
 
-#include "../../libft/includes/libft.h"
-
-
-t_command *parse_tokens(t_token *tokens)
+void	*ft_realloc(void *ptr, size_t new_size)
 {
-	t_command *head;
-	t_command *curr;
+	void	*new_ptr;
 
-	head = create_command();
-	curr = head;
-	if (!head)
-		return (NULL);
-	while (tokens && tokens->type != TOK_END)
+	if (new_size == 0)
 	{
-		if (launch_commands(&tokens, &curr, head) == RETURN_FAILURE)
-			return (NULL);
+		free(ptr);
+		return (NULL);
 	}
-	return (head);
+	if (!ptr)
+		return (malloc(new_size));
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (NULL);
+	ft_memcpy(new_ptr, ptr, new_size);
+	free(ptr);
+	return (new_ptr);
 }
