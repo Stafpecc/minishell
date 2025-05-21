@@ -18,7 +18,7 @@
 //child_dup.c
 int		write_dup(char *redirect, int *pipe_fd, int fd);
 int		read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd);
-void	child_init_pipes_dup(t_command *node, int *pipe_fd, int previous_pipe);
+void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, int previous_pipe, char **envp);
 
 //child_pathed.c
 void	childs_pathed_exec_failed(char **split_args, char **split_result,
@@ -35,12 +35,12 @@ char	*free_arrays(char **one, char **two, char *three, char *four);
 void	child_error(int infile, int *fd, int error, char *cmd);
 
 //child.c
-void child_redirect(t_command *node, char **env);
+void child_redirect(t_command_exec *node, char **env);
 
 //exec.c
-void	child_maker(t_command *node, int number_nodes);
+void	child_maker(t_command_exec *node, int number_nodes, char **envp);
 bool	built_in_checker(char *cmd);
-int	count_commands(t_command *cmds, bool *is_alone);
-void	exec(t_command *node);
+int	    count_commands(t_command_exec *cmds, bool *is_alone);
+void	exec(t_command_exec *node, char **envp);
 
 #endif

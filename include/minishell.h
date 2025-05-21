@@ -13,3 +13,7 @@
 #include "../libft/includes/libft.h"
 
 #endif
+
+void print_tokens(t_token *head); // DEBUG
+void print_commands(t_command *cmd);
+void print_command_exec(t_command_exec *cmd);

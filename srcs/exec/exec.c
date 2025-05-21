@@ -13,40 +13,22 @@
 // ◦ env with no options or arguments
 // ◦ exit with no options
 
-#include "../include/exec.h"
+// #include "../include/exec.h"
+#include "../../include/exec.h"
 
-// typedef struct s_arg {
-//     char *arg;
-//     bool in_simple_quote;
-//     bool in_double_quote;
-// } t_arg;
 
-// typedef struct s_cmd_part {
-//     char *content;
-//     bool in_simple_quote;
-//     bool in_double_quote;
-// } t_cmd_part;
-
-// typedef struct s_command {
-//     t_cmd_part    **cmd_parts;
-//     char        *redirect_in;
-//     char        *redirect_out;
-//     t_arg        *append_redirections;
-//     t_arg        *heredoc;
-//     struct s_command *next;
-// } t_command;
 
 // check if it is a built-in cmd
 // TODO also need a struct with env + last return
 
-void	child_maker(t_command *node, int number_nodes)
+void	child_maker(t_command_exec *node, int number_nodes, char **envp)
 {
 	int		i;
 	int		pipe_fd[2];
 	int		previous_pipe;
 	pid_t	child;
 
-	// printf("test");
+
 	i = 0;
 	previous_pipe = -42; // TODO #define NO_PREV_PIPE
 	// printf("NOMBRE NODES: %d\n", number_nodes);
@@ -59,7 +41,7 @@ void	child_maker(t_command *node, int number_nodes)
 		}
 		child = fork(); // protect
 		if (child == 0)
-			child_init_pipes_dup(node, pipe_fd, previous_pipe);
+			child_init_pipes_dup(node, pipe_fd, previous_pipe, envp);
 		else
 		{
 			// parent close what we dont need anymore
@@ -88,7 +70,7 @@ bool	built_in_checker(char *cmd)
 
 // To count how much commands has been sent
 // INFO : I am unsure about the parameter name
-int	count_commands(t_command *cmds, bool *is_alone)
+int	count_commands(t_command_exec *cmds, bool *is_alone)
 {
 	int	count;
 
@@ -107,24 +89,28 @@ int	count_commands(t_command *cmds, bool *is_alone)
 // can remove is_alone if not enough
 // space they exist for lisibility purpose
 
-void	exec(t_command *node)
+void	exec(t_command_exec *node, char **envp)
 {
 	int number_nodes;
 	bool is_alone;
 
 	number_nodes = count_commands(node, &is_alone);
+	printf("NUMBER_NODES: %d\n", number_nodes);
 	if (is_alone == true)
 	{
-		if (built_in_checker(node->cmd_parts[0]->arg))
+		if (built_in_checker(node->cmd_parts[0]))
 		{
 			ft_printf("Parent: built_in_checker passed\n"); // TORMASAP
 															// TODObuilt_in redirect
 		}
-		else
+		else //TORM (probably useless bcs else bellow does the exact samething.)
 		{
 			printf("parent: not a single built-in\n"); // TORMASAP
-			child_maker(node, number_nodes);
+			child_maker(node, number_nodes, envp);
 		}
 	}
-	exit(EXIT_FAILURE);
+	else
+		child_maker(node, number_nodes, envp); //TODO ASK TARINI IF THE PARSING TREAT SOME KIND OF CASES LIKE NOTHING IS SENT FOR EX
+	//printf("FAILURE\n");
+	return;
 }

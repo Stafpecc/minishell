@@ -36,6 +36,7 @@ int main(void)
 		t_command *command = parse_tokens(token);
 		(void)command;
 		print_commands(command);
+		exec(command);
 		free(input);
 		free_tokens(token);
 	}
