@@ -2,11 +2,11 @@
 
 // to check if we got a right parameters
 //+ if we need a new line or not
-int	is_newline(t_command *node, int *i, bool *newline)
+int	is_newline(t_command_exec *node, int *i, bool *newline)
 {
-	if (!node->cmd || !node->cmd[0])
+	if (!node->cmd_parts || !node->cmd_parts[0])
 		return (1);
-	if (node->cmd[1] && ft_strcmp(node->cmd[1], "-n") == 0)
+	if (node->cmd_parts[1] && ft_strcmp(node->cmd_parts[1], "-n") == 0)
 	{
 		*newline = false;
 		*i = 2;
@@ -26,22 +26,22 @@ int	is_newline(t_command *node, int *i, bool *newline)
 
 //TODO change t_command *node into simple a char **cmd
 //if we do not need the whole struct
-int	echo_builtin(t_command *node, bool newline, int i)
+int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
 	if (is_newline(node, &i, &newline) == 1)
 		return (1);
-	if (!node->cmd[1])
+	if (!node->cmd_parts[1])
 	{
 		if (write(STDOUT_FILENO, "\n", 1) < 0)
 			return (1);
 		return (0);
 	}
-	while (node->cmd[i])
+	while (node->cmd_parts[i])
 	{
-		if (ft_printf("%s", node->cmd[i]) < 0)
+		if (ft_printf("%s", node->cmd_parts[i]) < 0)
 			return (1);
 		i++;
-		if (node->cmd[i])
+		if (node->cmd_parts[i])
 		{
 			if (ft_printf(" ") < 0)
 				return (1);

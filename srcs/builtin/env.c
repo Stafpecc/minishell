@@ -11,7 +11,7 @@
 
 //TODO check for the return values
 
-int env_builtin(t_command *node, char **env, int i, int j)
+int env_builtin(t_command_exec *node, t_utils *utils, int i, int j)
 {
     i = 0;
 
@@ -25,9 +25,9 @@ int env_builtin(t_command *node, char **env, int i, int j)
         perror("No arguments or options required for env\n");
         return (EXIT_FAILURE);
     }
-    while(env[i])
+    while(utils->env[i])
     {
-        ft_printf("%s\n",env[i]);
+        ft_printf("%s\n", utils->env[i]);
         i++;
     }
     return (EXIT_SUCCESS);

@@ -1,14 +1,15 @@
 //Write what is at the env PWD=
 //todo see if pwd | pwd works.
 
-#include "../include/builtin.h"
+#include "builtin.h"
+#include "minishell.h"
 
-int pwd_builtin(t_command *node, char **env, int i, int j)
+int pwd_builtin(t_command_exec *node, char **env, int i, int j)
 {
     j = 4;
-    if(!node->cmd || !node->cmd[0]) //TODO update when I'll get Tarini updated struct
+    if(!node->cmd_parts || !node->cmd_parts[0]) //TODO update when I'll get Tarini updated struct
         return(EXIT_FAILURE);
-    if(node->cmd[1])
+    if(node->cmd_parts[1])
     {
         perror("pwd: too many arguments");
         return (EXIT_FAILURE);
