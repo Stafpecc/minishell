@@ -3,13 +3,22 @@
 #include "minishell.h"
 #include "../libft/includes/libft.h"
 
-void exit_minishell_proprely(char *input, t_token *token)
+#include <stdarg.h>
+
+static void exit_proprely(int count, ...)
 {
-	rl_clear_history();
-	free(input);
-	free_tokens(token);
-	exit(0);
+    va_list args;
+    void *ptr;
+    rl_clear_history();
+    va_start(args, count);
+    while (count-- > 0) {
+        ptr = va_arg(args, void *);
+        free(ptr);
+    }
+    va_end(args);
+    exit(0);
 }
+
 
 int main(void)
 {
@@ -31,13 +40,17 @@ int main(void)
 		if (!has_word_token(token))
 			continue;
 		if (ft_strcmp(input, "exit") == 0)
-			exit_minishell_proprely(input, token);
+			exit_proprely(2, input, token);
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		(void)command;
 		print_commands(command);
+		t_command_exec *command_exec = struct_to_char(command);
+		print_command_exec(command_exec);
 		free(input);
 		free_tokens(token);
+		free_commands(command);
+		free_commands_exec(command_exec);
 	}
 	return (0);
 }

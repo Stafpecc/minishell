@@ -38,7 +38,9 @@ int				launch_commands(t_token **tokens, t_command **curr, t_command *head);
 /*                                 UTILS                                      */
 /******************************************************************************/
 void			free_commands(t_command *cmd);
+void 			free_commands_exec(t_command_exec *cmd);
 t_command		*create_command();
+t_command_exec	*create_command_exec();
 t_arg			**add_argument(t_arg **args, const char *value);
 t_command_exec	*struct_to_char(t_command *cmd);
 
