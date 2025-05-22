@@ -2,6 +2,35 @@
 #include "minishell.h"
 #include "../libft/includes/libft.h"
 
+
+void print_utils_struct(t_utils *utils) // DEBUG
+{
+	int i;
+    
+    ft_printf("\n-----------------------------------------------------------\n");
+    ft_printf("\n---- UTILS ----\n");
+	if (!utils)
+	{
+		ft_printf("utils: (null)\n");
+		return;
+	}
+	ft_printf("t_utils content:\n");
+	ft_printf("  last_return    : %d\n", utils->last_return);
+	ft_printf("  num_nodes      : %d\n", utils->num_nodes);
+	ft_printf("  previous_pipes : %d\n", utils->previous_pipes);
+	ft_printf("  env:\n");
+	if (!utils->env)
+	{
+		ft_printf("    (null)\n");
+		return;
+	}
+	for (i = 0; utils->env[i]; i++)
+	{
+		ft_printf("    [%d] %s\n", i, utils->env[i]);
+	}
+    ft_printf("\n-----------------------------------------------------------\n");
+}
+
 void print_commands(t_command *cmd) // DEBUG
 {
     int i;

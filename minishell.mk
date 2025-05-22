@@ -4,7 +4,8 @@ override SRCS		= $(addprefix $(SRCSDIR), $(SRC))
 override PARSERDIR	:= parsing/
 override LEXERDIR	:= lexer/
 override EXECDIR	:= exec/
-override BUILTINDIR := env/
+override BUILTINDIR := builtin/
+override ENVDIR 	:= env/
 override SIGNALDIR	:= signal/
 
 SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
@@ -47,10 +48,17 @@ override LEXERSRC := \
 	process/process_word \
 	process/process_string \
 
+
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 
 override SIGNALSRC := \
 	signal \
+
+
+SRC += $(addprefix $(ENVDIR), $(addsuffix .c, $(ENVSRC)))
+
+override ENVSRC := \
+	env \
 
 # SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
@@ -70,8 +78,3 @@ override SIGNALSRC := \
 # 	pwd \
 # 	unset \
 
-
-# SRC += $(addprefix $(ENVDIR), $(addsuffix .c, $(ENVSRC)))
-
-# override ENVSRC := \
-# 	env \

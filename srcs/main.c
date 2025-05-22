@@ -19,12 +19,36 @@ static void exit_proprely(int count, ...)
     exit(0);
 }
 
+static t_utils *init_utils_struct(char **envp)
+{
+	t_utils *utils = malloc(sizeof(t_utils));
 
-int main(void)
+	if (!utils)
+		return (NULL);
+
+	utils->env = copy_env(envp);
+	if (!utils->env)
+	{
+		free(utils);
+		return (NULL);
+	}
+	utils->last_return = 0;
+	utils->num_nodes = 0;
+	utils->previous_pipes = -42;
+
+	return (utils);
+}
+
+int main(int ac, char **av, char **env)
 {
 	char *input;
 	t_token *token;
+	t_utils *utils;
 
+	utils = init_utils_struct(env);
+	print_utils_struct(utils);
+	(void)ac;
+	(void)av;
 	set_signals();
 	while (1)
 	{
