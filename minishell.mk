@@ -4,7 +4,8 @@ override SRCS		= $(addprefix $(SRCSDIR), $(SRC))
 override PARSERDIR	:= parsing/
 override LEXERDIR	:= lexer/
 override EXECDIR	:= exec/
-override BUILTINDIR := env/
+override BUILTINDIR := builtin/
+override ENVDIR 	:= env/
 override SIGNALDIR	:= signal/
 
 SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
@@ -18,10 +19,6 @@ SRC += $(addprefix $(MAINDIR), $(addsuffix .c, $(MAIN)))
 override MAIN := \
 	main \
 
-SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
-
-override DEBUG := \
-	debug \
 
 SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
@@ -51,12 +48,20 @@ override LEXERSRC := \
 	process/process_word \
 	process/process_string \
 
+
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 
 override SIGNALSRC := \
 	signal \
 
+
+SRC += $(addprefix $(ENVDIR), $(addsuffix .c, $(ENVSRC)))
+
+override ENVSRC := \
+	env \
+
 SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
+
 override EXECSRC := \
 	child_dup \
 	child_pathed \
@@ -65,26 +70,15 @@ override EXECSRC := \
 	exec \
 	redirections \
 
-# SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
-# override EXECSRC := \
-# 	exec \
-# 	redirections \
+SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
 
+override BUILTINSRC := \
+	cd \
+	echo \
+	env \
+	exit \
+	# export \
+	# pwd \
+	# unset \
 
-# SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
-
-# override BUILTINSRC := \
-# 	cd \
-# 	echo \
-# 	env \
-# 	exit \
-# 	export \
-# 	pwd \
-# 	unset \
-
-
-# SRC += $(addprefix $(ENVDIR), $(addsuffix .c, $(ENVSRC)))
-
-# override ENVSRC := \
-# 	env \

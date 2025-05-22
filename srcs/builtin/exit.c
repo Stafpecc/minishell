@@ -1,4 +1,5 @@
-#include "../include/builtin.h"
+#include "builtin.h"
+#include "minishell.h"
 // typedef struct s_command_exec {
 //     char        **env;
 //     char        **cmd_parts;
@@ -9,10 +10,9 @@
 //     struct s_command_exec *next;
 // } t_command_exec;
 
-unsigned int exit_builtin(t_command *node, char **env, int i, int j)
+unsigned int exit_builtin(t_command *node, char **env, int i, int j, t_utils *utils)
 {
     unsigned int return_value;
-
     //Exit = dernier retour TODO en parler a theo
     
     return_value = 0;
@@ -22,7 +22,7 @@ unsigned int exit_builtin(t_command *node, char **env, int i, int j)
         exit(EXIT_FAILURE);
     }
     if(!node->cmd_parts[1])
-        exit(node->$?);
+        exit(utils->last_return);
     if (node->cmd_parts[1] == '0')
         exit(0);
     return_value = ft_atoi(node->cmd_parts[1]); //TODO ask theo about that way 

@@ -3,19 +3,52 @@
 #include "minishell.h"
 #include "../libft/includes/libft.h"
 
-void exit_minishell_proprely(char *input, t_token *token)
+#include <stdarg.h>
+
+static void exit_proprely(int count, ...)
 {
-	rl_clear_history();
-	free(input);
-	free_tokens(token);
-	exit(0);
+    va_list args;
+    void *ptr;
+    rl_clear_history();
+    va_start(args, count);
+    while (count-- > 0) {
+        ptr = va_arg(args, void *);
+        free(ptr);
+    }
+    va_end(args);
+    exit(0);
 }
 
-int main(void)
+static t_utils *init_utils_struct(char **envp)
+{
+	t_utils *utils = malloc(sizeof(t_utils));
+
+	if (!utils)
+		return (NULL);
+
+	utils->env = copy_env(envp);
+	if (!utils->env)
+	{
+		free(utils);
+		return (NULL);
+	}
+	utils->last_return = 0;
+	utils->num_nodes = 0;
+	utils->previous_pipes = -42;
+
+	return (utils);
+}
+
+int main(int ac, char **av, char **env)
 {
 	char *input;
 	t_token *token;
+	t_utils *utils;
 
+	utils = init_utils_struct(env);
+	print_utils_struct(utils);
+	(void)ac;
+	(void)av;
 	set_signals();
 	while (1)
 	{
@@ -31,14 +64,17 @@ int main(void)
 		if (!has_word_token(token))
 			continue;
 		if (ft_strcmp(input, "exit") == 0)
-			exit_minishell_proprely(input, token);
+			exit_proprely(2, input, token);
 		print_tokens(token);
 		t_command *command = parse_tokens(token);
 		(void)command;
 		print_commands(command);
-		exec(command);
+		t_command_exec *command_exec = struct_to_char(command);
+		print_command_exec(command_exec);
 		free(input);
 		free_tokens(token);
+		free_commands(command);
+		free_commands_exec(command_exec);
 	}
 	return (0);
 }

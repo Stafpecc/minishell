@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/20 10:35:55 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/22 12:52:52 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,20 @@ t_command *create_command()
     cmd->next = NULL;
     return (cmd);
 }
+
+t_command_exec *create_command_exec()
+{
+    t_command_exec *cmd;
+
+    cmd = malloc(sizeof(t_command_exec));
+    if (!cmd)
+        return NULL;
+    cmd->cmd_parts = NULL;
+    cmd->redirect_in = NULL;
+    cmd->redirect_out = NULL;
+    cmd->append_redirections = NULL;
+    cmd->heredoc = NULL;
+    cmd->next = NULL;
+    return (cmd);
+}
+

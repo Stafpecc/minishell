@@ -19,7 +19,6 @@ typedef struct s_command {
 } t_command;
 
 typedef struct s_command_exec {
-	char			**env;
 	char			**cmd_parts;
 	char			*redirect_in;
 	char			*redirect_out;
@@ -27,6 +26,13 @@ typedef struct s_command_exec {
 	char			*heredoc;
 	struct 			s_command_exec *next;
 } t_command_exec;
+
+typedef struct s_utils {
+	char			**env;
+	int         	last_return;
+	int         	num_nodes;
+	int         	previous_pipes;
+} t_utils;
 
 /******************************************************************************/
 /*                                PARSING                                     */
@@ -38,7 +44,9 @@ int				launch_commands(t_token **tokens, t_command **curr, t_command *head);
 /*                                 UTILS                                      */
 /******************************************************************************/
 void			free_commands(t_command *cmd);
+void 			free_commands_exec(t_command_exec *cmd);
 t_command		*create_command();
+t_command_exec	*create_command_exec();
 t_arg			**add_argument(t_arg **args, const char *value);
 t_command_exec	*struct_to_char(t_command *cmd);
 
