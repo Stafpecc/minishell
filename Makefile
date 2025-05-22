@@ -1,5 +1,5 @@
 .SILENT:
-.PHONY: all init clean fclean re FORCE
+.PHONY: all init clean fclean re test FORCE
 
 include config.mk
 include minishell.mk
