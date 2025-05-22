@@ -18,7 +18,7 @@
 //child_dup.c
 int		write_dup(char *redirect, int *pipe_fd, int fd);
 int		read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd);
-void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, int previous_pipe, char **envp);
+void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, int previous_pipe, char **envp, int number_node);
 
 //child_pathed.c
 void	childs_pathed_exec_failed(char **split_args, char **split_result,

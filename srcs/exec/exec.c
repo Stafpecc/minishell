@@ -35,19 +35,24 @@ void	child_maker(t_command_exec *node, int number_nodes, char **envp)
 	pipe(pipe_fd);
 	while (node)
 	{
-		if (previous_pipe != -1 || i < number_nodes - 1)
+		if (previous_pipe != -42 && i < number_nodes - 1)
 		{
 			pipe(pipe_fd); // TODO protect
 		}
+		else if (i == number_nodes - 1) //Necessary for the very last node
+			pipe_fd[1] = -42; //FIND A BETTER WAY TO HANDLE THAT CASE
 		child = fork(); // protect
 		if (child == 0)
-			child_init_pipes_dup(node, pipe_fd, previous_pipe, envp);
+			child_init_pipes_dup(node, pipe_fd, previous_pipe, envp, number_nodes);
 		else
 		{
 			// parent close what we dont need anymore
-			if (i < number_nodes - 1)
+			if (i < number_nodes - 1)// close it wathever happen?
+			{
 				close(pipe_fd[1]);
-			if (previous_pipe != -1)
+			} 
+				
+			if (previous_pipe != -42)
 				close(previous_pipe);
 			previous_pipe = pipe_fd[0];
 			// close(pipe_fd[0]); //TODL I may did a mistake here bleh
@@ -55,6 +60,8 @@ void	child_maker(t_command_exec *node, int number_nodes, char **envp)
 			i++;
 		}
 	}
+	close(previous_pipe);
+	close(pipe_fd[1]);
 	// TODO WAIT CHILDS WAITPID
 }
 

@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	/* Build: ls -l | grep ".c" > out.txt */
 	n1 = new_node("ls -l", NULL, NULL, envp);
-	n2 = new_node("grep .c", NULL, "out.txt", envp);
+	n2 = new_node("grep .c", NULL, NULL, envp); //n2 = new_node("grep .c", NULL, "out.txt", envp);
 	// if (!n1 || !n2)
 	// 	return (perror("malloc"), 1);
 
