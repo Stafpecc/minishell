@@ -1,5 +1,6 @@
 
-#include "../include/exec.h"
+//#include "../include/exec.h"
+#include "../../include/exec.h"
 
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
     char *cmd_name, char *full_path)
@@ -62,7 +63,9 @@ while (env[i] || !path)
     {
         path = ft_strdup(env[i]);
         if (path == NULL)
+        {
             return (NULL);
+        }
         executable_in_paths = prepare_path_resolution(path, cmd);
         free(path);
         break ;

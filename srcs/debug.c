@@ -1,4 +1,5 @@
 
+
 #include "minishell.h"
 #include "../libft/includes/libft.h"
 
@@ -150,4 +151,3 @@ void print_tokens(t_token *head) // DEBUG
 		printf("token: type=%d, value='%s'\n", head->type, head->value);
 		head = head->next;
 	}
-}

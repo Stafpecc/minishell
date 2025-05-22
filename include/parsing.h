@@ -24,7 +24,7 @@ typedef struct s_command_exec {
 	char			*redirect_out;
 	char			*append_redirections;
 	char			*heredoc;
-	struct s_command_exec *next;
+	struct 			s_command_exec *next;
 } t_command_exec;
 
 typedef struct s_utils {

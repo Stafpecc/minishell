@@ -1,4 +1,5 @@
-#include "../include/exec.h"
+//#include "../include/exec.h"
+#include "../../include/exec.h"
 
 void	childs_pathed_exec_failed(char **split_args, char **split_result,
     char *path, char **result)
