@@ -60,21 +60,25 @@ SRC += $(addprefix $(ENVDIR), $(addsuffix .c, $(ENVSRC)))
 override ENVSRC := \
 	env \
 
-# SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
+SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
-# override EXECSRC := \
-# 	exec \
-# 	redirections \
+override EXECSRC := \
+	child_dup \
+	child_pathed \
+	child_utils \
+	child \
+	exec \
+	redirections \
 
 
-# SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
+SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
 
-# override BUILTINSRC := \
-# 	cd \
-# 	echo \
-# 	env \
-# 	exit \
-# 	export \
-# 	pwd \
-# 	unset \
+override BUILTINSRC := \
+	cd \
+	echo \
+	env \
+	exit \
+	# export \
+	# pwd \
+	# unset \
 
