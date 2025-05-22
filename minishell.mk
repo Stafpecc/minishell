@@ -18,10 +18,6 @@ SRC += $(addprefix $(MAINDIR), $(addsuffix .c, $(MAIN)))
 override MAIN := \
 	main \
 
-SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
-
-override DEBUG := \
-	debug \
 
 SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
@@ -55,15 +51,6 @@ SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
 
 override SIGNALSRC := \
 	signal \
-
-SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
-override EXECSRC := \
-	child_dup \
-	child_pathed \
-	child_utils \
-	child \
-	exec \
-	redirections \
 
 # SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
