@@ -46,7 +46,7 @@ int main(int ac, char **av, char **env)
 	t_utils *utils;
 
 	utils = init_utils_struct(env);
-	print_utils_struct(utils);
+	//print_utils_struct(utils);
 	(void)ac;
 	(void)av;
 	set_signals();
@@ -65,12 +65,13 @@ int main(int ac, char **av, char **env)
 			continue;
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
-		print_tokens(token);
+		//print_tokens(token);
 		t_command *command = parse_tokens(token);
 		(void)command;
-		print_commands(command);
+		//print_commands(command);
 		t_command_exec *command_exec = struct_to_char(command);
-		print_command_exec(command_exec);
+		//print_command_exec(command_exec);
+		exec(command_exec, utils);
 		free(input);
 		free_tokens(token);
 		free_commands(command);

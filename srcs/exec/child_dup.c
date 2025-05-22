@@ -55,7 +55,7 @@ int	read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
 	{
 		if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		{
-			perror("test1%\n");
+			//perror("test1%\n");
 			return (2);
 		}
 	}
@@ -63,10 +63,10 @@ int	read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
 }
 // Used if we do only have one cmd
 //TODO complete doc about that function
-void only_child(t_command_exec *node, int *pipe_fd, int previous_pipe, char **envp)
+void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if(node->redirect_in)
-		if(read_dup(node->redirect_in, pipe_fd, previous_pipe, 0))
+		if(read_dup(node->redirect_in, pipe_fd, utils->previous_pipes, 0))
 			{
 				close(pipe_fd[0]);
 				close(pipe_fd[1]);
@@ -75,7 +75,7 @@ void only_child(t_command_exec *node, int *pipe_fd, int previous_pipe, char **en
 
 	if(node->redirect_out)
 	{
-		if(read_dup(node->redirect_out, pipe_fd, previous_pipe, 0))
+		if(read_dup(node->redirect_out, pipe_fd, utils->previous_pipes, 0))
 		{
 			close(pipe_fd[0]);
 			close(pipe_fd[1]);
@@ -84,7 +84,7 @@ void only_child(t_command_exec *node, int *pipe_fd, int previous_pipe, char **en
 	}
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
-	child_redirect(node, envp);
+	child_redirect(node, utils);
 	exit(EXIT_FAILURE); // FAIL IF EXECVE DOESNT WORK
 }
 
@@ -96,32 +96,33 @@ void only_child(t_command_exec *node, int *pipe_fd, int previous_pipe, char **en
 // it will close our fds then we go to the
 // next part of the process
 //TODO when new struct created, update all of it :> (previous pipe, num_nodes)
-void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, int previous_pipe, char **envp, int number_nodes)
+void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-	if(number_nodes == 1)
-		only_child(node, pipe_fd, previous_pipe, envp);
+	ft_printf("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
+	if(utils->num_nodes == 1)
+		only_child(node, pipe_fd, utils);
 
-	if (read_dup(node->redirect_in, pipe_fd, previous_pipe, 0) != 0)
+	if (read_dup(node->redirect_in, pipe_fd, utils->previous_pipes, 0) != 0)
 	{
 		//perror("test");
-		if (previous_pipe != -42)
-			close(previous_pipe);
+		if (utils->previous_pipes != -42)
+			close(utils->previous_pipes);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
 	if (write_dup(node->redirect_out, pipe_fd, 0) != 0)
 	{
-		if (previous_pipe != -42)
-			close(previous_pipe);
+		if (utils->previous_pipes != -42)
+			close(utils->previous_pipes);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
-	if (previous_pipe != -42)
-		close(previous_pipe);
+	if (utils->previous_pipes != -42)
+		close(utils->previous_pipes);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
-	child_redirect(node, envp);
+	child_redirect(node, utils);
 	exit(EXIT_FAILURE); // FAIL IF EXECVE DOESNT WORK
 }
