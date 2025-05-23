@@ -38,6 +38,7 @@ void	child_error(int infile, int *fd, int error, char *cmd);
 //child.c
 void    child_redirect(t_command_exec *node, t_utils *utils);
 
+
 //exec.c
 void	child_maker(t_command_exec *node, t_utils *utils);
 bool	built_in_checker(char *cmd);
