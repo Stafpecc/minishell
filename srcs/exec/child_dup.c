@@ -98,7 +98,7 @@ void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 //TODO when new struct created, update all of it :> (previous pipe, num_nodes)
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-	ft_printf("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
+	//ft_printf("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
 	if(utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
 

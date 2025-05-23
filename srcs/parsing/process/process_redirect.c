@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:56:09 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/23 15:16:03 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../../../libft/includes/libft.h"
 
 int process_redirect_in(t_token **tokens, t_command *curr, t_command *head) {
-	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens)) {
 		print_syntax_error("<");
@@ -40,7 +39,6 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head) {
 
 
 int process_redirect_out(t_token **tokens, t_command *curr, t_command *head) {
-	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens)) {
 		print_syntax_error(">");
@@ -67,7 +65,6 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head) {
 
 int process_append_redirect(t_token **tokens, t_command *curr, t_command *head)
 {
-	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
 		return (process_free_exit(head));
