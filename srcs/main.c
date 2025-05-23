@@ -35,6 +35,7 @@ static t_utils *init_utils_struct(char **envp)
 	utils->last_return = 0;
 	utils->num_nodes = 0;
 	utils->previous_pipes = -42;
+	utils->status = 0;
 
 	return (utils);
 }

@@ -100,7 +100,6 @@ int	count_commands(t_command_exec *cmds, bool *is_alone)
 
 void	exec(t_command_exec *node, t_utils *utils)
 {
-	//int number_nodes; //TORM
 	bool is_alone; //TODO utils?
 
 	utils->num_nodes = count_commands(node, &is_alone);
