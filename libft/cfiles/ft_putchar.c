@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:10:05 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/21 16:36:38 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/23 14:51:58 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putchar(char s)
 {
-	if (write(2, &s, 1) == -1)
+	if (write(1, &s, 1) == -1)
 		return (-1);
 	return (1);
 }
