@@ -60,8 +60,9 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	}
 	close(utils->previous_pipes);
 	close(pipe_fd[1]);
-	//ft_printfd("ICI?\n");
+	//ft_printfd("ICI\n");
  	waitpid(-1, &status, 0); //while (waitpid(-1, &status, 0) > 0)
+	printf("last error_return = %u\n",status >> 8);
 		//printf("Test\n");
 	// TODO WAIT CHILDS WAITPID
 }

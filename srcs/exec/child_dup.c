@@ -68,19 +68,19 @@ int	read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
 void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if(node->redirect_in)
+	{
 		if(read_dup(node->redirect_in, pipe_fd, utils->previous_pipes, 0))
 			{
 				close(pipe_fd[0]);
 				close(pipe_fd[1]);
 				exit(EXIT_FAILURE);
 			}
-
+	}
 	if(node->redirect_out)
 	{
-		ft_printfd("ICI\n");
+		//ft_printfd("ICI\n");
 		if(write_dup(node->redirect_out, pipe_fd, 0))
 		{
-			ft_printfd("ICI\n");
 			close(pipe_fd[0]);
 			close(pipe_fd[1]);
 			exit(EXIT_FAILURE);
@@ -102,7 +102,7 @@ void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 //TODO when new struct created, update all of it :> (previous pipe, num_nodes)
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-	ft_printfd("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
+	//ft_printfd("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
 
 	if(utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);

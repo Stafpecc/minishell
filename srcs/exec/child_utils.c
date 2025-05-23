@@ -100,16 +100,25 @@ return (NULL);
 
 void	child_error(int infile, int *fd, int error, char *cmd)
 {
-cmd = NULL; //TEMPORARY
+//cmd = NULL; //TORM
 if (error == 1)
-    //ft_printfd("command not found: %s\n", cmd);
+{
+    ft_printfd("minishell: command not found %s \n", cmd);
+    exit(127);
+}
 if (infile >= 0)
     close(infile);
 if (fd[1])
     close(fd[1]);
 if (fd[0])
     close(fd[0]);
+ft_printfd("test\n");
 if (infile == -42)
-    exit(-129);
+{
+    ft_printfd("test\n");
+    exit(0);
+}
+ft_printfd("test\n");
+
 exit(-255);
 }
