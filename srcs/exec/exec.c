@@ -60,6 +60,7 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	}
 	close(utils->previous_pipes);
 	close(pipe_fd[1]);
+	//ft_printfd("ICI?\n");
  	waitpid(-1, &status, 0); //while (waitpid(-1, &status, 0) > 0)
 		//printf("Test\n");
 	// TODO WAIT CHILDS WAITPID
@@ -108,7 +109,7 @@ void	exec(t_command_exec *node, t_utils *utils)
 	{
 		if (built_in_checker(node->cmd_parts[0]))
 		{
-			ft_printf("Parent: built_in_checker passed\n"); // TORMASAP
+			ft_printfd("Parent: built_in_checker passed\n"); // TORMASAP
 															// TODObuilt_in redirect
 		}
 		else //TORM (probably useless bcs else bellow does the exact samething.)
