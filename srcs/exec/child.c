@@ -7,7 +7,7 @@ void child_redirect(t_command_exec *node, t_utils *utils)
 
     char    *path;
     if (built_in_checker(node->cmd_parts[0]))
-        printf("test");//TODO redirect to the right built_in followed by the right way to execute the child
+        ft_printfd("test");//TODO redirect to the right built_in followed by the right way to execute the child
     if(!ft_strchr(node->cmd_parts[0], '/'))
     {
         //TODO CHILD DED IN PATHFINDER FIND THE REASON
