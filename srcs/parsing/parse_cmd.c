@@ -1,0 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/23 13:42:29 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/23 14:35:27 by tarini           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+#include <stdbool.h>
+#include <stdio.h>
+
+static int	is_empty_command(t_command *cmd)
+{
+	return (!cmd || !cmd->cmd_parts || !cmd->cmd_parts[0]);
+}
+
+static bool has_conflicting_redirections(t_command *cmd)
+{
+	return ((cmd->redirect_in && cmd->heredoc) ||
+			(cmd->redirect_out && cmd->append_redirections));
+}
+
+void print_syntax_error(const char *token)
+{
+	fprintf(stderr, "minishell: syntax error near unexpected token `%s'\n", token);
+}
+
+int	parse_cmd(t_command *cmd)
+{
+	t_command *prev = NULL;
+	t_command *curr = cmd;
+
+	if (!curr)
+		return (RETURN_FAILURE);
+
+	while (curr)
+	{
+		if (is_empty_command(curr))
+		{
+			print_syntax_error("|");
+			return (RETURN_FAILURE);
+		}
+
+		if (has_conflicting_redirections(curr))
+		{
+			print_syntax_error(">");
+			return (RETURN_FAILURE);		
+		}
+
+		if ((curr->redirect_in || curr->redirect_out || curr->append_redirections || curr->heredoc)
+			&& is_empty_command(curr))
+		{
+			print_syntax_error(">");
+			return (RETURN_FAILURE);
+		}
+
+		if (prev && is_empty_command(prev) && is_empty_command(curr))
+		{
+			print_syntax_error("|");
+			return (RETURN_FAILURE);
+		}
+
+		prev = curr;
+		curr = curr->next;
+	}
+	return (RETURN_SUCCESS);
+}

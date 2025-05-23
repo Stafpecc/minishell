@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 #include "../libft/includes/libft.h"
 
@@ -67,16 +65,15 @@ int main(int ac, char **av, char **env)
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
 		//print_tokens(token);
-		t_command *command = parse_tokens(token);
-		(void)command;
-		//print_commands(command);
-		t_command_exec *command_exec = struct_to_char(command);
-		//print_command_exec(command_exec);
-		exec(command_exec, utils);
+		t_command_exec *command = parse_tokens(token);
+		if (command != NULL)
+		{
+			print_command_exec(command);
+			exec(command, utils);
+		}
 		free(input);
 		free_tokens(token);
-		free_commands(command);
-		free_commands_exec(command_exec);
+		free_commands_exec(command);
 	}
 	return (0);
 }
