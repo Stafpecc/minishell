@@ -21,47 +21,47 @@
 // check if it is a built-in cmd
 // TODO also need a struct with env + last return
 
-void	child_maker(t_command_exec *node, int number_nodes, char **envp)
+void	child_maker(t_command_exec *node, t_utils *utils)
 {
 	int		i;
-	int		pipe_fd[2];
-	int		previous_pipe;
+	int		pipe_fd[2]; //TODO add to utils
+	//int		previous_pipe; //TORM
 	pid_t	child;
+	int     status; //TODO add to utils?
 
 
 	i = 0;
-	previous_pipe = -42; // TODO #define NO_PREV_PIPE
-	// printf("NOMBRE NODES: %d\n", number_nodes);
+	utils->previous_pipes = -42; // TODO ask/check if it is init to -42 + make a define for clarity
+	// printf("NOMBRE NODES: %d\n", number_nodes); //TODL
 	pipe(pipe_fd);
 	while (node)
 	{
-		if (previous_pipe != -42 && i < number_nodes - 1)
+		if (utils->previous_pipes != -42 && i < utils->num_nodes - 1)
 		{
 			pipe(pipe_fd); // TODO protect
 		}
-		else if (i == number_nodes - 1) //Necessary for the very last node
+		else if (i == utils->num_nodes - 1) //Necessary for the very last node
 			pipe_fd[1] = -42; //FIND A BETTER WAY TO HANDLE THAT CASE
 		child = fork(); // protect
 		if (child == 0)
-			child_init_pipes_dup(node, pipe_fd, previous_pipe, envp, number_nodes);
+			child_init_pipes_dup(node, pipe_fd, utils);
 		else
 		{
-			// parent close what we dont need anymore
-			if (i < number_nodes - 1)// close it wathever happen?
+			if (i < utils->num_nodes - 1)
 			{
 				close(pipe_fd[1]);
 			} 
-				
-			if (previous_pipe != -42)
-				close(previous_pipe);
-			previous_pipe = pipe_fd[0];
-			// close(pipe_fd[0]); //TODL I may did a mistake here bleh
+			if (utils->previous_pipes != -42)
+				close(utils->num_nodes);
+			utils->previous_pipes = pipe_fd[0];
 			node = node->next;
 			i++;
 		}
 	}
-	close(previous_pipe);
+	close(utils->previous_pipes);
 	close(pipe_fd[1]);
+ 	waitpid(-1, &status, 0); //while (waitpid(-1, &status, 0) > 0)
+		//printf("Test\n");
 	// TODO WAIT CHILDS WAITPID
 }
 
@@ -91,18 +91,19 @@ int	count_commands(t_command_exec *cmds, bool *is_alone)
 	return (count);
 }
 
-// exec that does receive a *node
+// exec that does receive two struct, command_exec(nameWIP)
+// and also a struct utils that hold every tools the exec need
 // TODO also the struct that contain the env and last return
 // can remove is_alone if not enough
 // space they exist for lisibility purpose
+//TODO LATER include printfd + remove changes done on tarini's printf
 
-void	exec(t_command_exec *node, char **envp)
+void	exec(t_command_exec *node, t_utils *utils)
 {
-	int number_nodes;
-	bool is_alone;
+	bool is_alone; //TODO utils?
 
-	number_nodes = count_commands(node, &is_alone);
-	printf("NUMBER_NODES: %d\n", number_nodes);
+	utils->num_nodes = count_commands(node, &is_alone);
+	//printf("num_nodes: %d\n", utils->num_nodes);
 	if (is_alone == true)
 	{
 		if (built_in_checker(node->cmd_parts[0]))
@@ -112,12 +113,12 @@ void	exec(t_command_exec *node, char **envp)
 		}
 		else //TORM (probably useless bcs else bellow does the exact samething.)
 		{
-			printf("parent: not a single built-in\n"); // TORMASAP
-			child_maker(node, number_nodes, envp);
+			//printf("parent: not a single built-in\n"); // TORMASAP
+			child_maker(node,utils);
 		}
 	}
 	else
-		child_maker(node, number_nodes, envp); //TODO ASK TARINI IF THE PARSING TREAT SOME KIND OF CASES LIKE NOTHING IS SENT FOR EX
+		child_maker(node,utils); //TODO ASK TARINI IF THE PARSING TREAT SOME KIND OF CASES LIKE NOTHING IS SENT FOR EX
 	//printf("FAILURE\n");
 	return;
 }

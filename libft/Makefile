@@ -43,6 +43,11 @@ SRCS = \
 	ft_strmapi.c                      \
 	ft_striteri.c                     \
 	ft_printf.c 		              \
+	ft_printfd.c 				      \
+	ft_printfd_cases.c                \
+	ft_utoa.c						  \
+	ft_itoa_hexx.c 					  \
+	ft_strtoupper.c 				  \
 	ft_putchar.c 			          \
 	ft_putstr.c 			          \
 	ft_putnbrbase.c 		          \

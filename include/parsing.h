@@ -32,6 +32,7 @@ typedef struct s_utils {
 	int         	last_return;
 	int         	num_nodes;
 	int         	previous_pipes;
+	int 			status;
 } t_utils;
 
 /******************************************************************************/
