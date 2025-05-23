@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:42:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:35:27 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/23 14:52:42 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-static int	is_empty_command(t_command *cmd)
+static bool	is_empty_command(t_command *cmd)
 {
 	return (!cmd || !cmd->cmd_parts || !cmd->cmd_parts[0]);
 }
@@ -26,9 +26,15 @@ static bool has_conflicting_redirections(t_command *cmd)
 			(cmd->redirect_out && cmd->append_redirections));
 }
 
+static int	return_failure(const char *token)
+{
+	print_syntax_error(token);
+	return (RETURN_FAILURE);	
+}
+
 void print_syntax_error(const char *token)
 {
-	fprintf(stderr, "minishell: syntax error near unexpected token `%s'\n", token);
+	ft_printfd("minishell: syntax error near unexpected token `%s'\n", token);
 }
 
 int	parse_cmd(t_command *cmd)
@@ -42,30 +48,15 @@ int	parse_cmd(t_command *cmd)
 	while (curr)
 	{
 		if (is_empty_command(curr))
-		{
-			print_syntax_error("|");
-			return (RETURN_FAILURE);
-		}
-
+			return (return_failure("|"));
 		if (has_conflicting_redirections(curr))
-		{
-			print_syntax_error(">");
-			return (RETURN_FAILURE);		
-		}
-
-		if ((curr->redirect_in || curr->redirect_out || curr->append_redirections || curr->heredoc)
+			return (return_failure(">"));		
+		if ((curr->redirect_in || curr->redirect_out 
+			|| curr->append_redirections || curr->heredoc) 
 			&& is_empty_command(curr))
-		{
-			print_syntax_error(">");
-			return (RETURN_FAILURE);
-		}
-
+			return (return_failure(">"));
 		if (prev && is_empty_command(prev) && is_empty_command(curr))
-		{
-			print_syntax_error("|");
-			return (RETURN_FAILURE);
-		}
-
+			return (return_failure("|"));
 		prev = curr;
 		curr = curr->next;
 	}
