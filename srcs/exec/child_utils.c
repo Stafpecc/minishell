@@ -52,27 +52,27 @@ return (search_executable_in_paths(path_dirs, NULL, cmd_name, NULL));
 
 char	*path_finder(char **env, char *cmd, char *path)
 {
-int		i;
-char	*executable_in_paths;
+    int		i;
+    char	*executable_in_paths;
 
-executable_in_paths = NULL;
-i = 0;
-while (env[i] || !path)
-{
-    if (!ft_strncmp(env[i], "PATH=", 5))
+    executable_in_paths = NULL;
+    i = 0;
+    while (env[i] || !path)
     {
-        path = ft_strdup(env[i]);
-        if (path == NULL)
+        if (!ft_strncmp(env[i], "PATH=", 5))
         {
-            return (NULL);
+            path = ft_strdup(env[i]);
+            if (path == NULL)
+            {
+                return (NULL);
+            }
+            executable_in_paths = prepare_path_resolution(path, cmd);
+            free(path);
+            break ;
         }
-        executable_in_paths = prepare_path_resolution(path, cmd);
-        free(path);
-        break ;
+        i++;
     }
-    i++;
-}
-return (executable_in_paths);
+    return (executable_in_paths);
 }
 
 char	*free_arrays(char **one, char **two, char *three, char *four)

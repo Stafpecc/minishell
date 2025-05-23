@@ -68,7 +68,7 @@ int main(int ac, char **av, char **env)
 		t_command_exec *command = parse_tokens(token);
 		if (command != NULL)
 		{
-			print_command_exec(command);
+			//print_command_exec(command);
 			exec(command, utils);
 		}
 		free(input);

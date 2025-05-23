@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:28:40 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/23 14:56:13 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int process_free_exit(t_command *head)
 {
-    free_commands(head);
-    return (RETURN_FAILURE);
+	free_commands(head);
+	return (RETURN_FAILURE);
 }
 
 bool is_word_like(t_token *token)
