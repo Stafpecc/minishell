@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/14 16:09:21 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/23 14:09:06 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 #include "../../libft/includes/libft.h"
 
-
-t_command *parse_tokens(t_token *tokens)
+t_command_exec *parse_tokens(t_token *tokens)
 {
 	t_command *head;
 	t_command *curr;
+	t_command_exec *final;
 
 	head = create_command();
 	curr = head;
@@ -31,5 +31,9 @@ t_command *parse_tokens(t_token *tokens)
 		if (launch_commands(&tokens, &curr, head) == RETURN_FAILURE)
 			return (NULL);
 	}
-	return (head);
+	if (parse_cmd(head) == RETURN_FAILURE)
+		return (NULL);
+	final = struct_to_char(head);
+	free_commands(head);
+	return (final);
 }

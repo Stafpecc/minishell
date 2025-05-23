@@ -37,7 +37,8 @@ typedef struct s_utils {
 /******************************************************************************/
 /*                                PARSING                                     */
 /******************************************************************************/
-t_command		*parse_tokens(t_token *tokens);
+t_command_exec	*parse_tokens(t_token *tokens);
+int				parse_cmd(t_command *cmd);
 int				launch_commands(t_token **tokens, t_command **curr, t_command *head);
 
 /******************************************************************************/
@@ -46,14 +47,14 @@ int				launch_commands(t_token **tokens, t_command **curr, t_command *head);
 void			free_commands(t_command *cmd);
 void 			free_commands_exec(t_command_exec *cmd);
 t_command		*create_command();
-t_command_exec	*create_command_exec();
 t_arg			**add_argument(t_arg **args, const char *value);
 t_command_exec	*struct_to_char(t_command *cmd);
+void			print_syntax_error(const char *token);
 
 /******************************************************************************/
 /*                                PROCESS                                     */
 /******************************************************************************/
-int				is_word_like(t_token *token);
+bool			is_word_like(t_token *token);
 int				process_word_string(t_token **tokens, t_command *curr);
 int				process_redirect_in(t_token **tokens, t_command *curr, t_command *head);
 int				process_redirect_out(t_token **tokens, t_command *curr, t_command *head);
