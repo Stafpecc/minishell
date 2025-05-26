@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/22 14:24:43 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/26 15:10:46 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 //need chdir  opendir  readdir closedir
 //TODO OPTION : use env to handle that case, not asked in subject BUT can still do it quite easily
 //same for OLD PWD (env | grep OLDPWD)
-int cd_builtin(t_command_exec *node, char **env)
+int cd_builtin(t_command_exec *node)
 {
-
     if(!node->cmd_parts || !node->cmd_parts[0] || node->cmd_parts[2]) //TODO update when I'll get Tarini updated struct
         return(EXIT_FAILURE);
-    if(!node->cmd_parts[1])
-        return(no_args_case(env));
+    // if(!node->cmd_parts[1]) //OPTIONAL
+    //     return(no_args_case(utils->env));
     if (chdir(node->cmd_parts[1]))
     {
         perror("no such file or directory\n");

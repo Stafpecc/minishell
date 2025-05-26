@@ -71,6 +71,7 @@ int main(int ac, char **av, char **env)
 			//ft_printfd("TEST\n");
 			print_command_exec(command);
 			exec(command, utils);
+			ft_printfd("$? : %d\n\n", utils->status);
 		}
 		free(input);
 		free_tokens(token);

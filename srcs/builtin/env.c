@@ -11,7 +11,7 @@
 
 //TODO check for the return values
 
-int env_builtin(t_command_exec *node, t_utils *utils, int i, int j)
+int env_builtin(t_command_exec *node, t_utils *utils, int i)
 {
     i = 0;
 

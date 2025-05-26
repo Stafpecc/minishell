@@ -93,6 +93,28 @@ int	count_commands(t_command_exec *cmds, bool *is_alone)
 	return (count);
 }
 
+//function that will determine which built-in
+//we are dealing with then return its return
+//that would be the $?
+//TODO Ask theo if there is a way to make it better
+
+int single_built_in(t_command_exec *node, t_utils *utils)
+{
+	if (!ft_strcmp(node->cmd_parts[0], "cd"))
+		return (cd_builtin(node));
+	else if (!ft_strcmp(node->cmd_parts[0], "pwd"))
+		return (pwd_builtin(node, utils, 0, 4));
+	//else if (!ft_strcmp(node->cmd_parts[0], "export"))
+		//return (export_builtin(node, utils));
+	// else if (!ft_strcmp(node->cmd_parts[0], "unset"))
+	// 	return (unset_builtin(node, utils));
+	else if (!ft_strcmp(node->cmd_parts[0], "env"))
+		return (env_builtin(node, utils, 0));
+	else if (!ft_strcmp(node->cmd_parts[0], "exit"))
+		return (exit_builtin(node, utils));
+	return(42); //shouldnt even get there at this point
+}
+
 // exec that does receive two struct, command_exec(nameWIP)
 // and also a struct utils that hold every tools the exec need
 // TODO also the struct that contain the env and last return
@@ -110,6 +132,7 @@ void	exec(t_command_exec *node, t_utils *utils)
 	{
 		if (built_in_checker(node->cmd_parts[0]))
 		{
+			utils->status = single_built_in(node, utils);
 			ft_printfd("Parent: built_in_checker passed\n"); // TORMASAP
 															// TODObuilt_in redirect
 		}
