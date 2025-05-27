@@ -34,6 +34,7 @@ static t_utils *init_utils_struct(char **envp)
 	utils->num_nodes = 0;
 	utils->previous_pipes = -42;
 	utils->status = 0;
+	utils->type_of_first_arg = TOK_END;
 
 	return (utils);
 }
@@ -45,7 +46,7 @@ int main(int ac, char **av, char **env)
 	t_utils *utils;
 
 	utils = init_utils_struct(env);
-	//print_utils_struct(utils);
+	print_utils_struct(utils);
 	(void)ac;
 	(void)av;
 	set_signals();
@@ -64,14 +65,15 @@ int main(int ac, char **av, char **env)
 			continue;
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
+		utils->type_of_first_arg = token->type;
 		//print_tokens(token);
 		t_command_exec *command = parse_tokens(token);
 		if (command != NULL)
 		{
 			//ft_printfd("TEST\n");
-			print_command_exec(command);
+			//print_command_exec(command);
 			exec(command, utils);
-			ft_printfd("$? : %d\n\n", utils->status);
+			//ft_printfd("$? : %d\n\n", utils->status);
 		}
 		free(input);
 		free_tokens(token);

@@ -19,6 +19,7 @@ typedef struct s_command {
 } t_command;
 
 typedef struct s_command_exec {
+	
 	char			**cmd_parts;
 	char			*redirect_in;
 	char			*redirect_out;
@@ -28,11 +29,12 @@ typedef struct s_command_exec {
 } t_command_exec;
 
 typedef struct s_utils {
-	char			**env;
-	int         	last_return;
-	int         	num_nodes;
-	int         	previous_pipes;
-	int 			status;
+	char				**env;
+	int         		last_return;
+	int         		num_nodes;
+	int         		previous_pipes;
+	int 				status;
+	enum e_token_type	type_of_first_arg;
 } t_utils;
 
 /******************************************************************************/

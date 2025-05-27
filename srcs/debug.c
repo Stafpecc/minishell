@@ -16,9 +16,10 @@ void print_utils_struct(t_utils *utils) // DEBUG
 		return;
 	}
 	ft_printf("t_utils content:\n");
-	ft_printf("  last_return    : %d\n", utils->last_return);
-	ft_printf("  num_nodes      : %d\n", utils->num_nodes);
-	ft_printf("  previous_pipes : %d\n", utils->previous_pipes);
+	ft_printf("  last_return       : %d\n", utils->last_return);
+	ft_printf("  num_nodes         : %d\n", utils->num_nodes);
+	ft_printf("  previous_pipes    : %d\n", utils->previous_pipes);
+	ft_printf("  type of first cmd : %d\n", utils->type_of_first_arg);
 	ft_printf("  env:\n");
 	if (!utils->env)
 	{
