@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:42:29 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:52:42 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:01:18 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ static bool has_conflicting_redirections(t_command *cmd)
 			(cmd->redirect_out && cmd->append_redirections));
 }
 
-static int	return_failure(const char *token)
+static int	return_failure(const char *token, t_utils *utils)
 {
-	print_syntax_error(token);
+	print_syntax_error(token, utils);
 	return (RETURN_FAILURE);	
 }
 
-void print_syntax_error(const char *token)
+void print_syntax_error(const char *token, t_utils *utils)
 {
+	utils->last_return = CMD_INVALID_ARGUMENT;
 	ft_printfd("minishell: syntax error near unexpected token `%s'\n", token);
 }
 
-int	parse_cmd(t_command *cmd)
+int	parse_cmd(t_command *cmd, t_utils *utils)
 {
 	t_command *prev = NULL;
 	t_command *curr = cmd;
@@ -48,15 +49,15 @@ int	parse_cmd(t_command *cmd)
 	while (curr)
 	{
 		if (is_empty_command(curr))
-			return (return_failure("|"));
+			return (return_failure("|", utils));
 		if (has_conflicting_redirections(curr))
-			return (return_failure(">"));		
+			return (return_failure(">", utils));		
 		if ((curr->redirect_in || curr->redirect_out 
 			|| curr->append_redirections || curr->heredoc) 
 			&& is_empty_command(curr))
-			return (return_failure(">"));
+			return (return_failure(">", utils));
 		if (prev && is_empty_command(prev) && is_empty_command(curr))
-			return (return_failure("|"));
+			return (return_failure("|", utils));
 		prev = curr;
 		curr = curr->next;
 	}

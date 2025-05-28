@@ -6,30 +6,33 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 15:16:03 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:00:54 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-int process_redirect_in(t_token **tokens, t_command *curr, t_command *head) {
+int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_utils *utils) {
 	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens)) {
-		print_syntax_error("<");
+	if (!(*tokens) || !is_word_like(*tokens))
+	{
+		print_syntax_error("<", utils);
 		return (process_free_exit(head));
 	}
 	if (!curr->redirect_in)
 	{
 		curr->redirect_in = malloc(sizeof(t_arg));
-		if (!curr->redirect_in) {
-			print_syntax_error("<");
+		if (!curr->redirect_in)
+		{
+			print_syntax_error("<", utils);
 			return (process_free_exit(head));
 		}
 	}
 	curr->redirect_in->arg = ft_strdup((*tokens)->value);
-	if (!curr->redirect_in->arg) {
-		print_syntax_error("<");
+	if (!curr->redirect_in->arg)
+	{
+		print_syntax_error("<", utils);
 		return (process_free_exit(head));
 	}
 	process_quotes(*tokens, curr->redirect_in);
@@ -38,23 +41,26 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head) {
 }
 
 
-int process_redirect_out(t_token **tokens, t_command *curr, t_command *head) {
+int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_utils *utils) {
 	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens)) {
-		print_syntax_error(">");
+	if (!(*tokens) || !is_word_like(*tokens))
+	{
+		print_syntax_error(">", utils);
 		return (process_free_exit(head));
 	}
 	if (!curr->redirect_out)
 	{
 		curr->redirect_out = malloc(sizeof(t_arg));
-		if (!curr->redirect_out) {
-			print_syntax_error(">");
+		if (!curr->redirect_out)
+		{
+			print_syntax_error(">", utils);
 			return (process_free_exit(head));
 		}
 	}
 	curr->redirect_out->arg = ft_strdup((*tokens)->value);
-	if (!curr->redirect_out->arg) {
-		print_syntax_error(">");
+	if (!curr->redirect_out->arg)
+	{
+		print_syntax_error(">", utils);
 		return (process_free_exit(head));
 	}
 	process_quotes(*tokens, curr->redirect_out);

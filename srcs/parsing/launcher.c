@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:56:42 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:01:56 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-int launch_commands(t_token **tokens, t_command **curr, t_command *head)
+int launch_commands(t_token **tokens, t_command **curr, t_command *head, t_utils *utils)
 {
 	if (is_word_like(*tokens))
 	{
@@ -25,12 +25,12 @@ int launch_commands(t_token **tokens, t_command **curr, t_command *head)
 	}
 	else if ((*tokens)->type == TOK_REDIRECT_IN)
 	{
-		if (process_redirect_in(tokens, *curr, head) == RETURN_FAILURE)
+		if (process_redirect_in(tokens, *curr, head, utils) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	else if ((*tokens)->type == TOK_REDIRECT_OUT)
 	{
-		if (process_redirect_out(tokens, *curr, head) == RETURN_FAILURE)
+		if (process_redirect_out(tokens, *curr, head, utils) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	else if ((*tokens)->type == TOK_PIPE)
