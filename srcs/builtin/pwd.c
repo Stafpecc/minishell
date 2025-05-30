@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:35:24 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/26 17:03:23 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/30 13:35:18 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j)
 		{
 			while (utils->env[i][j])
 			{
-				ft_printf("%c", utils->env[i][j]);
+				ft_printfd("%c", utils->env[i][j]);
 				j++;
 			}
 			ft_printf("\n");
