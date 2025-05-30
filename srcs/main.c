@@ -60,8 +60,16 @@ int main(int ac, char **av, char **env)
 		token = lexer(input);
 		if (*input)
 			add_history(input);
-		if (!has_word_token(token))
-			continue;
+		if (token->type != TOK_END)
+		{
+			if (has_only_redirections(token))
+			{
+				print_syntax_error("newline", utils);
+				free_tokens(token);
+				continue;
+			}
+		}
+		if (has)
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
 		utils->type_of_first_arg = token->type;

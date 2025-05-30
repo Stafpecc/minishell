@@ -6,12 +6,23 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:40:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/06 14:05:42 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/30 15:31:54 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "return_error.h"
+
+int has_only_redirections(t_token *head)
+{
+	while (head)
+	{
+		if (head->type == TOK_WORD || head->type == TOK_STRING)
+			return (RETURN_SUCCESS);
+		head = head->next;
+	}
+	return (RETURN_FAILURE);
+}
 
 int has_word_token(t_token *head)
 {
