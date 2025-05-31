@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/26 15:16:33 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/05/29 16:23:56 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 #include "exec.h"
 
 //cd.c
-int cd_builtin(t_command_exec *node);
+int cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement, int pwd_old_emplacement);
+
+//pwd.c
 int pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j);
 
 //echo.c

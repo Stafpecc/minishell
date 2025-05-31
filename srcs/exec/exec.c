@@ -29,7 +29,7 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	pid_t	child;
 	int     status; //TODO add to utils?
 
-
+	status = 0;
 	i = 0;
 	utils->previous_pipes = -42; // TODO ask/check if it is init to -42 + make a define for clarity
 	// printf("NOMBRE NODES: %d\n", number_nodes); //TODL
@@ -60,8 +60,8 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	}
 	close(utils->previous_pipes);
 	close(pipe_fd[1]);
-	//ft_printfd("ICI\n");
- 	waitpid(-1, &status, 0); //while (waitpid(-1, &status, 0) > 0)
+	while (waitpid(child, &status, 0) > 0)
+		utils->last_return = status >> 8;
 	printf("last error_return = %u\n",status >> 8);
 		//printf("Test\n");
 	// TODO WAIT CHILDS WAITPID
@@ -101,7 +101,7 @@ int	count_commands(t_command_exec *cmds, bool *is_alone)
 int single_built_in(t_command_exec *node, t_utils *utils)
 {
 	if (!ft_strcmp(node->cmd_parts[0], "cd"))
-		return (cd_builtin(node));
+		return (cd_builtin(node, utils, 0, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "pwd"))
 		return (pwd_builtin(node, utils, 0, 4));
 	//else if (!ft_strcmp(node->cmd_parts[0], "export"))
