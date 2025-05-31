@@ -1,7 +1,7 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "lexer.h"
+# include "lexer.h"
 
 typedef enum e_last_return {
     CMD_SUCCESS,
@@ -54,6 +54,17 @@ int				parse_cmd(t_command *cmd, t_utils *utils);
 int				launch_commands(t_token **tokens, t_command **curr, t_command *head, t_utils *utils);
 
 /******************************************************************************/
+/*                                 PARSE                                      */
+/******************************************************************************/
+bool			is_empty_command(t_command *cmd);
+int				return_failure(const char *token, t_utils *utils);
+void 			print_syntax_error(const char *token, t_utils *utils);
+int 			redirect_parsing(t_command *curr, t_utils *utils);
+bool 			has_conflicting_redirections(t_command *cmd);
+bool 			is_directory(const char *path);
+int 			check_file(const char *path, t_utils *utils);
+
+/******************************************************************************/
 /*                                 UTILS                                      */
 /******************************************************************************/
 void			free_commands(t_command *cmd);
@@ -61,7 +72,8 @@ void 			free_commands_exec(t_command_exec *cmd);
 t_command		*create_command();
 t_arg			**add_argument(t_arg **args, const char *value);
 t_command_exec	*struct_to_char(t_command *cmd);
-void				print_syntax_error(const char *token, t_utils *utils);
+void			print_syntax_error(const char *token, t_utils *utils);
+int 			is_redirect_or_pipe(t_token *token);
 
 /******************************************************************************/
 /*                                PROCESS                                     */
@@ -70,10 +82,10 @@ bool			is_word_like(t_token *token);
 int				process_word_string(t_token **tokens, t_command *curr);
 int				process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_utils  *utils);
 int				process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
-int				process_append_redirect(t_token **tokens, t_command *curr, t_command *head);
+int				process_append_redirect(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
 void			process_quotes(t_token *tokens, t_arg *arg);
 int				process_pipe(t_command **curr, t_command *head);
-int				process_heredoc(t_token **tokens, t_command *curr, t_command *head);
+int				process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
 int				process_free_exit(t_command *head);
 
 #endif

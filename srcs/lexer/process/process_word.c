@@ -6,12 +6,11 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:46:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 18:14:12 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/31 13:25:45 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
 
 int process_word(const char *input, size_t *i, t_token **head)
 {

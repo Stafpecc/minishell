@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/28 14:01:56 by tarini           ###   ########.fr       */
+/*   Updated: 2025/05/31 13:55:13 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int launch_commands(t_token **tokens, t_command **curr, t_command *head, t_utils
 	}
 	else if ((*tokens)->type == TOK_HEREDOC)
 	{
-		if (process_heredoc(tokens, *curr, head) == RETURN_FAILURE)
+		if (process_heredoc(tokens, *curr, head, utils) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	else if ((*tokens)->type == TOK_APPEND_REDIRECT)
 	{
-		if (process_append_redirect(tokens, *curr, head) == RETURN_FAILURE)
+		if (process_append_redirect(tokens, *curr, head, utils) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	*tokens = (*tokens)->next;
