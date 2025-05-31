@@ -39,6 +39,17 @@ static t_utils *init_utils_struct(char **envp)
 	return (utils);
 }
 
+static int is_all_spaces(const char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t')
+			return 0;
+		str++;
+	}
+	return 1;
+}
+
 int main(int ac, char **av, char **env)
 {
 	char *input;
@@ -57,19 +68,20 @@ int main(int ac, char **av, char **env)
 			write(1, "exit\n", 5);
 			exit(0);
 		}
+		if (!input || *input == '\0' || is_all_spaces(input))
+			continue;
 		token = lexer(input);
 		if (*input)
 			add_history(input);
 		if (token->type != TOK_END)
 		{
-			if (has_only_redirections(token))
+			if (has_only_one_redirection(token))
 			{
 				print_syntax_error("newline", utils);
 				free_tokens(token);
 				continue;
 			}
 		}
-		if (has)
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
 		utils->type_of_first_arg = token->type;

@@ -40,8 +40,7 @@ t_token		*lexer(const char *input);
 char		*ft_strndup(const char *s, size_t n);
 int			ft_isspace(char c);
 void		free_tokens(t_token *head);
-int			has_word_token(t_token *head);
-int			has_only_redirections(t_token *head);
+int			has_only_one_redirection(t_token *head);
 t_token		*create_token(t_token_type type, const char *value);
 int			add_token(t_token **head, t_token_type type, const char *value);
 

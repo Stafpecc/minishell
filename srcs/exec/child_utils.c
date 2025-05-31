@@ -103,7 +103,7 @@ void	child_error(int infile, int *fd, int error, char *cmd)
 //cmd = NULL; //TORM
 if (error == 1)
 {
-    ft_printfd("minishell: command not found %s \n", cmd);
+    ft_printfd("%s: command not found\n", cmd);
     exit(127);
 }
 if (infile >= 0)

@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/31 13:51:50 by tarini           ###   ########.fr       */
+/*   Created: 2025/05/31 17:31:59 by tarini            #+#    #+#             */
+/*   Updated: 2025/05/31 17:33:52 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "parsing.h"
 
-#include "lexer.h"
+#include "stdbool.h"
+#include "dirent.h"
 
-t_token *lexer(const char *input)
+bool is_directory(const char *path)
 {
-	t_token *head;
-	size_t i;
-
-	if (!input || !*input)
-		return (NULL);
-	i = 0;
-	head = NULL;
-	while (input[i])
+	DIR *dir;
+	
+	dir = opendir(path);
+	if (dir)
 	{
-		if (launch_tokens(input, &i, &head) == RETURN_FAILURE)
-			return (NULL);
+		closedir(dir);
+		return true;
 	}
-	if (add_token(&head, TOK_END, "") == RETURN_FAILURE)
-		return (NULL);
-	return (head);
+	return false;
 }
