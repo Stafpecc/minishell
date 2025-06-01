@@ -44,10 +44,10 @@ static int is_all_spaces(const char *str)
 	while (*str)
 	{
 		if (*str != ' ' && *str != '\t')
-			return 0;
+			return (RETURN_FAILURE);
 		str++;
 	}
-	return 1;
+	return (RETURN_SUCCESS);
 }
 
 int main(int ac, char **av, char **env)
@@ -68,7 +68,7 @@ int main(int ac, char **av, char **env)
 			write(1, "exit\n", 5);
 			exit(0);
 		}
-		if (!input || *input == '\0' || is_all_spaces(input))
+		if (!input || *input == '\0' || !is_all_spaces(input))
 			continue;
 		token = lexer(input);
 		if (*input)

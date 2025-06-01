@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:35:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/31 17:06:35 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/01 14:07:09 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils 
 	if (!curr->heredoc->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->heredoc);
-	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	//curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
 	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
