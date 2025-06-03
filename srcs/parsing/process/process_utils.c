@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/31 16:53:12 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/01 16:55:17 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,4 @@ int is_redirect_or_pipe(t_token *token)
 		return (RETURN_SUCCESS);
 	return (RETURN_FAILURE);
 }
+

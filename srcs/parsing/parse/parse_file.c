@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:36 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/01 16:17:09 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/01 16:52:31 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int check_file(const char *path, t_utils *utils)
 		utils->last_return = CMD_INVALID_ARGUMENT;
 		return (RETURN_FAILURE);
 	}
-	if (access(path, X_OK) != 0)
+	if (access(path, R_OK) != 0)
 	{
 		ft_printfd("minishell: %s: Permission denied\n", path);
 		utils->last_return = CMD_INVALID_ARGUMENT;
