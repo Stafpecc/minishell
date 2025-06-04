@@ -114,6 +114,7 @@ void print_command_exec(t_command_exec *cmd)
 	while (cmd)
 	{
 		ft_printf("\n---- Command Exec Node %d ----\n", node++);
+
 		if (cmd->cmd_parts)
 		{
 			i = 0;
@@ -127,14 +128,31 @@ void print_command_exec(t_command_exec *cmd)
 			ft_printf("No cmd_parts.\n");
 
 		if (cmd->redirect_in)
-			ft_printf("redirect_in: \"%s\"\n", cmd->redirect_in);
+		{
+			i = 0;
+			while (cmd->redirect_in[i])
+			{
+				ft_printf("redirect_in[%d]: \"%s\"\n", i, cmd->redirect_in[i]);
+				i++;
+			}
+		}
 		else
 			ft_printf("redirect_in: NULL\n");
 
 		if (cmd->redirect_out)
-			ft_printf("redirect_out: \"%s\"\n", cmd->redirect_out);
+		{
+			i = 0;
+			while (cmd->redirect_out[i])
+			{
+				ft_printf("redirect_out[%d]: \"%s\"\n", i, cmd->redirect_out[i]);
+				i++;
+			}
+			if (i == 0)
+				ft_printf("redirect_out: (empty)\n");
+		}
 		else
 			ft_printf("redirect_out: NULL\n");
+
 
 		if (cmd->append_redirections)
 			ft_printf("append_redirections: \"%s\"\n", cmd->append_redirections);
@@ -150,6 +168,7 @@ void print_command_exec(t_command_exec *cmd)
 		cmd = cmd->next;
 	}
 }
+
 
 void print_tokens(t_token *head) // DEBUG
 {

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 13:42:25 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:37:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,19 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 			}
 		}
 		last_redirect_in = get_size_of_redirect(curr->redirect_in);
-		if (curr->redirect_in && curr->redirect_in[last_redirect_in]->arg)
+		if (curr->redirect_in && last_redirect_in > 0
+			&& curr->redirect_in[last_redirect_in - 1]
+			&& curr->redirect_in[last_redirect_in - 1]->arg)
 		{
-			if (check_file(curr->redirect_in[last_redirect_in]->arg, utils, FILE_READ) == RETURN_FAILURE)
+			if (check_file(curr->redirect_in[last_redirect_in - 1]->arg, utils, FILE_READ) == RETURN_FAILURE)
 				return (RETURN_FAILURE);
 		}
 		last_redirect_out = get_size_of_redirect(curr->redirect_out);
-		if (curr->redirect_out && curr->redirect_out[last_redirect_out]->arg)
+		if (curr->redirect_out && last_redirect_out > 0
+			&& curr->redirect_out[last_redirect_out - 1]
+			&& curr->redirect_out[last_redirect_out - 1]->arg)
 		{
-			if (check_file(curr->redirect_out[last_redirect_out]->arg, utils, FILE_WRITE) == RETURN_FAILURE)
+			if (check_file(curr->redirect_out[last_redirect_out - 1]->arg, utils, FILE_WRITE) == RETURN_FAILURE)
 				return (RETURN_FAILURE);
 		}
 		if (curr->append_redirections && curr->append_redirections->arg)

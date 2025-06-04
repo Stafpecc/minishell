@@ -16,7 +16,6 @@ typedef struct s_arg {
 	char			*arg;
 	bool			in_simple_quote;
 	bool			in_double_quote;
-	bool			final;
 } t_arg;
 
 typedef struct s_command {

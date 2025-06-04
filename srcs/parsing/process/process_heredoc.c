@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:35:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:53:28 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:55:26 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ Fonction qui :
 */
 int process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils *utils)
 {
-	int i;
-
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
 	{
@@ -45,11 +43,6 @@ int process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils 
 	if (!curr->heredoc->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->heredoc);
-	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
-	i = 0;
-	while (curr->cmd_parts[i] != NULL)
-		i++;
-	curr->cmd_parts[i - 1]->final = true;
 	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
