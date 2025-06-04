@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/01 16:55:17 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:54:56 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
+/*
+fonction qui :
+- libère toute la liste de commandes passée en argument ;
+- retourne toujours RETURN_FAILURE pour indiquer une erreur ou un arrêt.
+*/
 int process_free_exit(t_command *head)
 {
 	free_commands(head);
 	return (RETURN_FAILURE);
 }
 
+/*
+fonction qui :
+- vérifie si un token est considéré comme un mot ou une chaîne valide dans le parsing ;
+- retourne true si le type du token est un mot simple ou une chaîne entre quotes, false sinon.
+*/
 bool is_word_like(t_token *token)
 {
 	return (token->type == TOK_WORD ||
@@ -29,6 +39,11 @@ bool is_word_like(t_token *token)
 			token->type == TOK_DOUBLE_QUOTES);
 }
 
+/*
+fonction qui :
+- vérifie si un token correspond à une redirection (<<, >>, <, >) ou à un pipe (|) ;
+- retourne RETURN_SUCCESS si c’est le cas, sinon RETURN_FAILURE.
+*/
 int is_redirect_or_pipe(t_token *token)
 {
 	if (!token)

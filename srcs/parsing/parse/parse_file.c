@@ -3,27 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:36 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/01 16:52:31 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:39:59 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing.h"
 
 #include <errno.h>
 
-int check_file(const char *path, t_utils *utils)
+/*
+	Vérifie l'existence et les droits d'accès à un fichier selon le mode spécifié.
+	Affiche un message d'erreur en cas d'échec et met à jour le code de retour.
+	Retourne RETURN_SUCCESS si tout est OK, sinon RETURN_FAILURE.
+*/
+int	check_file(const char *path, t_utils *utils, t_file_mode mode)
 {
+	int	access_mode;
+
+	if (!path)
+		return (RETURN_FAILURE);
+
+	if (mode == FILE_READ)
+		access_mode = R_OK;
+	else if (mode == FILE_WRITE)
+		access_mode = W_OK;
+	else if (mode == FILE_EXEC)
+		access_mode = X_OK;
+	else
+		return (RETURN_FAILURE);
+
 	if (access(path, F_OK) != 0)
 	{
 		if (errno == ENOENT)
-		{
 			ft_printfd("minishell: %s: No such file or directory\n", path);
-			utils->last_return = CMD_INVALID_ARGUMENT;
-			return (RETURN_FAILURE);
-		}
 		else
 		{
 			ft_printfd("minishell: ");
@@ -32,11 +48,13 @@ int check_file(const char *path, t_utils *utils)
 		utils->last_return = CMD_INVALID_ARGUMENT;
 		return (RETURN_FAILURE);
 	}
-	if (access(path, R_OK) != 0)
+
+	if (access(path, access_mode) != 0)
 	{
 		ft_printfd("minishell: %s: Permission denied\n", path);
 		utils->last_return = CMD_INVALID_ARGUMENT;
 		return (RETURN_FAILURE);
 	}
+
 	return (RETURN_SUCCESS);
 }
