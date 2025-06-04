@@ -18,8 +18,8 @@
 #include "../libft/includes/libft.h"
 
 //child_dup.c
-int		write_dup(char *redirect, int *pipe_fd, int fd);
-int		read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd);
+int		write_dup(char **redirect, int *pipe_fd, int fd);
+int		read_dup(char **redirect, int *pipe_fd, int previous_pipe, int fd);
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils);
 void    only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 
@@ -40,11 +40,11 @@ void	child_error(int infile, int *fd, int error, char *cmd);
 //child.c
 void    child_redirect(t_command_exec *node, t_utils *utils);
 
-
-//exec.c
-void	child_maker(t_command_exec *node, t_utils *utils);
+//exec_utils.c
 bool	built_in_checker(char *cmd);
 int	    count_commands(t_command_exec *cmds, bool *is_alone);
+//exec.c
+void	child_maker(t_command_exec *node, t_utils *utils);
 void	exec(t_command_exec *node, t_utils *utils);
 
 #endif
