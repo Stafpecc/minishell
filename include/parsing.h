@@ -21,8 +21,8 @@ typedef struct s_arg {
 
 typedef struct s_command {
 	t_arg			**cmd_parts;
-	t_arg			*redirect_in;
-	t_arg			*redirect_out;
+	t_arg			**redirect_in;
+	t_arg			**redirect_out;
 	t_arg			*append_redirections;
 	t_arg			*heredoc;
 	struct s_command *next;
@@ -31,8 +31,8 @@ typedef struct s_command {
 typedef struct s_command_exec {
 	
 	char			**cmd_parts;
-	char			*redirect_in;
-	char			*redirect_out;
+	char			**redirect_in;
+	char			**redirect_out;
 	char			*append_redirections;
 	char			*heredoc;
 	struct 			s_command_exec *next;
@@ -46,6 +46,12 @@ typedef struct s_utils {
 	int 				status;
 	enum e_token_type	type_of_first_arg;
 } t_utils;
+
+typedef enum e_file_mode {
+	FILE_READ,
+	FILE_WRITE,
+	FILE_EXEC
+}	t_file_mode;
 
 /******************************************************************************/
 /*                                PARSING                                     */
@@ -63,7 +69,7 @@ void 			print_syntax_error(const char *token, t_utils *utils);
 int 			redirect_parsing(t_command *curr, t_utils *utils);
 bool 			has_conflicting_redirections(t_command *cmd);
 bool 			is_directory(const char *path);
-int 			check_file(const char *path, t_utils *utils);
+int 			check_file(const char *path, t_utils *utils, t_file_mode mode);
 
 /******************************************************************************/
 /*                                 UTILS                                      */
@@ -75,6 +81,7 @@ t_arg			**add_argument(t_arg **args, const char *value);
 t_command_exec	*struct_to_char(t_command *cmd);
 void			print_syntax_error(const char *token, t_utils *utils);
 int 			is_redirect_or_pipe(t_token *token);
+int				get_size_of_redirect(t_arg **redirect);
 
 /******************************************************************************/
 /*                                PROCESS                                     */
