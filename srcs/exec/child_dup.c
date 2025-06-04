@@ -44,6 +44,7 @@ int	read_dup(char **redirect, int *pipe_fd, int previous_pipe, int fd)
 	i = 0;
 	while (redirect[i])
 	{
+		ft_printfd("TEST>>W<WKDK\n\n\n");
 		fd = open(redirect[i], O_RDONLY); //TODO PROTECT
 		if (fd < 0)
 			return (1);
@@ -110,8 +111,6 @@ void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 //TODO when new struct created, update all of it :> (previous pipe, num_nodes)
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-	//ft_printfd("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
-
 	if(utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
 
@@ -132,6 +131,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
+	ft_printfd("TEST\n\n\n\n");
 	if (utils->previous_pipes != -42)
 		close(utils->previous_pipes);
 	close(pipe_fd[0]);

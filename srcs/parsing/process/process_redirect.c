@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:53:41 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 15:38:28 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 	}
 	if (!curr->redirect_out)
 	{
-		curr->redirect_out = malloc(sizeof(t_arg));
+		ft_printfd("ici?????\n\n\n");
+		//curr->redirect_out = malloc(sizeof(t_arg));
 		if (!curr->redirect_out)
 			return (process_free_exit(head));
 	}

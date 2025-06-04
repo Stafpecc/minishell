@@ -36,6 +36,8 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	pipe(pipe_fd);
 	while (node)
 	{
+		ft_printfd("TEST\n\n\n\n");
+
 		if (utils->previous_pipes != -42 && i < utils->num_nodes - 1)
 		{
 			pipe(pipe_fd); // TODO protect
@@ -123,6 +125,7 @@ int single_built_in(t_command_exec *node, t_utils *utils)
 void	exec(t_command_exec *node, t_utils *utils)
 {
 	bool is_alone; //TODO utils?
+	//ft_printfd("TEST>>W<WKDK\n\n\n %s",node->redirect_in[0]);
 
 	utils->num_nodes = count_commands(node, &is_alone);
 	//printf("num_nodes: %d\n", utils->num_nodes);

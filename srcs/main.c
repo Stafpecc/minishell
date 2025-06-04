@@ -86,10 +86,13 @@ int main(int ac, char **av, char **env)
 			exit_proprely(2, input, token);
 		utils->type_of_first_arg = token->type;
 		t_command_exec *command = parse_tokens(token, utils);
-		//print_command_exec(command);
+		print_command_exec(command);
 		ft_printfd("PROUT\n");
-		if (command != NULL)
+		//if (command != NULL)
+		//{
+			//ft_printfd("TEST>>W<WKDK\n\n\n %s",command->redirect_in[0]);
 			exec(command, utils);
+		//}
 		free(input);
 		free_tokens(token);
 		free_commands_exec(command);

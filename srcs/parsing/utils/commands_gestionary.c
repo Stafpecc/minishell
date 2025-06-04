@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_gestionary.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 13:02:24 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 15:23:33 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ int get_size_of_redirect(t_arg **redirect)
 	int i;
 
 	i = 0;
-	while (redirect[i])
-		i++;
+	if (redirect)
+	{
+		while (redirect[i])
+			i++;
+	}
+
 	return (i);
 }
 
