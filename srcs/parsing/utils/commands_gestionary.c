@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_gestionary.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:56:25 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:02:24 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,21 @@ t_command *create_command(void)
 	cmd->next = NULL;
 	return cmd;
 }
+
+int get_size_of_redirect(t_arg **redirect)
+{
+	int i;
+
+	i = 0;
+	while (redirect[i])
+		i++;
+	return (i);
+}
+
+/*
+	int last_redirect_in;
+	int last_redirect_out;
+
+	last_redirect_in = get_size_of_redirect(cmd->redirect_in);
+	last_redirect_out = get_size_of_redirect(cmd->redirect_out);
+*/

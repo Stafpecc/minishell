@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:36 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/01 16:52:31 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:39:15 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 #include <errno.h>
 
+/*
+Fonction qui :
+- vérifie si un fichier donné existe et si le shell a le droit de le lire ;
+- affiche un message d’erreur adapté si le fichier est introuvable ou inaccessible ;
+- met à jour le code de retour dans utils et retourne RETURN_FAILURE en cas de problème, 
+	sinon RETURN_SUCCESS.
+*/
 int check_file(const char *path, t_utils *utils)
 {
 	if (access(path, F_OK) != 0)
@@ -40,3 +47,6 @@ int check_file(const char *path, t_utils *utils)
 	}
 	return (RETURN_SUCCESS);
 }
+
+/*{a fix} : modifier la fonction pour qu’elle vérifie différents types de droits (lecture, écriture, exécution)
+en fonction du type de redirection et de la demande.*/

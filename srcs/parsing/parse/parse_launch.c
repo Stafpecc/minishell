@@ -3,20 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parse_launch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/01 16:48:03 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:36:27 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
+/*
+Fonction qui :
+- parcourt une liste chaînée de commandes (t_command) pour valider leur syntaxe 
+	et leurs redirections ;
+- effectue plusieurs vérifications : commande vide, redirections conflictuelles, 
+	redondantes, ou vers des fichiers/dossiers invalides ;
+- retourne RETURN_FAILURE dès qu’un problème est détecté, sinon RETURN_SUCCESS 
+	si tout est correct.
+*/
 int parse_cmd(t_command *cmd, t_utils *utils)
 {
 	t_command *prev = NULL;
 	t_command *curr = cmd;
+	int last_redirect_in;
 	const char *arg;
 
 	if (!curr)
@@ -53,9 +63,10 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 				}
 			}
 		}
-		if (curr->redirect_in && curr->redirect_in->arg)
+		last_redirect_in = get_size_of_redirect(cmd->redirect_in);
+		if (curr->redirect_in && curr->redirect_in[last_redirect_in]->arg)
         {
-            if (check_file(curr->redirect_in->arg, utils) == RETURN_FAILURE)
+            if (check_file(curr->redirect_in[last_redirect_in]->arg, utils) == RETURN_FAILURE)
                 return RETURN_FAILURE;
         }
 		prev = curr;

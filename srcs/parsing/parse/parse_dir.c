@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:59 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/31 17:33:52 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:40:10 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-#include "stdbool.h"
-#include "dirent.h"
+#include <stdbool.h>
+#include <dirent.h>
 
+/*
+Fonction qui :
+- tente d’ouvrir le chemin donné en tant que répertoire ;
+- si l’ouverture réussit, ferme le répertoire et retourne true ;
+- sinon retourne false, indiquant que ce n’est pas un répertoire.
+*/
 bool is_directory(const char *path)
 {
 	DIR *dir;
