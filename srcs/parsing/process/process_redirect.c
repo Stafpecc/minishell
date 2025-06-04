@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 15:38:28 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/04 16:28:16 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_ut
 {
 	int i;
 	static int location_of_the_table = 0;
+	size_t new_size;
 
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
@@ -38,10 +39,23 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_ut
 	}
 	if (!curr->redirect_in)
 	{
-		curr->redirect_in = malloc(sizeof(t_arg));
+		curr->redirect_in = malloc(sizeof(t_arg *) * 2);
 		if (!curr->redirect_in)
 			return (process_free_exit(head));
+		curr->redirect_in[0] = NULL;
+		curr->redirect_in[1] = NULL;
 	}
+	else
+	{
+		new_size = sizeof(t_arg *) * (location_of_the_table + 2);
+		curr->redirect_in = ft_realloc(curr->redirect_in, new_size);
+		if (!curr->redirect_in)
+			return (process_free_exit(head));
+		curr->redirect_in[location_of_the_table + 1] = NULL;
+	}
+	curr->redirect_in[location_of_the_table] = malloc(sizeof(t_arg));
+	if (!curr->redirect_in[location_of_the_table])
+		return (process_free_exit(head));
 	curr->redirect_in[location_of_the_table]->arg = ft_strdup((*tokens)->value);
 	if (!curr->redirect_in[location_of_the_table]->arg)
 		return (process_free_exit(head));
@@ -56,7 +70,6 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_ut
 	return (RETURN_SUCCESS);
 }
 
-
 /*
 Fonction qui :
 - avance au token suivant après une redirection de sortie (>) ;
@@ -69,7 +82,8 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 {
 	int i;
 	static int location_of_the_table = 0;
-	
+	size_t new_size;
+
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
 	{
@@ -81,11 +95,23 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 	}
 	if (!curr->redirect_out)
 	{
-		ft_printfd("ici?????\n\n\n");
-		//curr->redirect_out = malloc(sizeof(t_arg));
+		curr->redirect_out = malloc(sizeof(t_arg *) * 2);
 		if (!curr->redirect_out)
 			return (process_free_exit(head));
+		curr->redirect_out[0] = NULL;
+		curr->redirect_out[1] = NULL;
 	}
+	else
+	{
+		new_size = sizeof(t_arg *) * (location_of_the_table + 2);
+		curr->redirect_out = ft_realloc(curr->redirect_out, new_size);
+		if (!curr->redirect_out)
+			return (process_free_exit(head));
+		curr->redirect_out[location_of_the_table + 1] = NULL;
+	}
+	curr->redirect_out[location_of_the_table] = malloc(sizeof(t_arg));
+	if (!curr->redirect_out[location_of_the_table])
+		return (process_free_exit(head));
 	curr->redirect_out[location_of_the_table]->arg = ft_strdup((*tokens)->value);
 	if (!curr->redirect_out[location_of_the_table]->arg)
 		return (process_free_exit(head));
@@ -95,6 +121,7 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 	while (curr->cmd_parts[i] != NULL)
 		i++;
 	curr->cmd_parts[i - 1]->final = true;
+	(*tokens) = (*tokens)->next;
 	location_of_the_table++;
 	return (RETURN_SUCCESS);
 }

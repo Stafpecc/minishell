@@ -3,37 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   free_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:56:31 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/04 16:29:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+#include "parsing.h"
+
+static void	free_arg_table(t_arg **args)
+{
+	int	i;
+
+	if (!args)
+		return;
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]->arg);
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
 void free_commands(t_command *cmd)
 {
 	t_command *tmp;
-	int i;
 
 	while (cmd)
 	{
 		tmp = cmd;
 		cmd = cmd->next;
-		if (tmp->cmd_parts)
-		{
-			i = 0;
-			while (tmp->cmd_parts[i])
-			{
-				free(tmp->cmd_parts[i]->arg);
-				free(tmp->cmd_parts[i]);
-				i++;
-			}
-			free(tmp->cmd_parts);
-		}
-		free(tmp->redirect_in);
-		free(tmp->redirect_out);
+		free_arg_table(tmp->cmd_parts);
+		free_arg_table(tmp->redirect_in);
+		free_arg_table(tmp->redirect_out);
 		free(tmp->append_redirections);
 		if (tmp->heredoc)
 		{
@@ -44,32 +51,35 @@ void free_commands(t_command *cmd)
 	}
 }
 
+static void free_string_array(char **array)
+{
+	int i;
+
+	if (!array)
+		return;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
 void free_commands_exec(t_command_exec *cmd)
 {
 	t_command_exec *tmp;
-	int i;
 
 	while (cmd)
 	{
 		tmp = cmd;
 		cmd = cmd->next;
-		if (tmp->cmd_parts)
-		{
-			i = 0;
-			while (tmp->cmd_parts[i])
-			{
-				free(tmp->cmd_parts[i]);
-				i++;
-			}
-			free(tmp->cmd_parts);
-		}
-		free(tmp->redirect_in);
-		free(tmp->redirect_out);
+		free_string_array(tmp->cmd_parts);
+		free_string_array(tmp->redirect_in);
+		free_string_array(tmp->redirect_out);
 		free(tmp->append_redirections);
-		if (tmp->heredoc)
-		{
-			free(tmp->heredoc);
-		}
+		free(tmp->heredoc);
 		free(tmp);
 	}
 }
+
