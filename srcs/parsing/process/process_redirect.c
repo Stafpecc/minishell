@@ -6,14 +6,16 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/01 14:07:10 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/01 16:58:36 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_utils *utils) {
+int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_utils *utils)
+{
+	int i;
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
 	{
@@ -33,12 +35,19 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_ut
 	if (!curr->redirect_in->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->redirect_in);
-	//curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	i = 0;
+	while (curr->cmd_parts[i] != NULL)
+		i++;
+	curr->cmd_parts[i - 1]->final = true;
 	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
 
-int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_utils *utils) {
+int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_utils *utils)
+{
+	int i;
+	
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
 	{
@@ -58,12 +67,17 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 	if (!curr->redirect_out->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->redirect_out);
-	//curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	i = 0;
+	while (curr->cmd_parts[i] != NULL)
+		i++;
+	curr->cmd_parts[i - 1]->final = true;
 	return (RETURN_SUCCESS);
 }
 
 int process_append_redirect(t_token **tokens, t_command *curr, t_command *head, t_utils *utils)
 {
+	int i;
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || !is_word_like(*tokens))
 	{
@@ -83,8 +97,11 @@ int process_append_redirect(t_token **tokens, t_command *curr, t_command *head, 
 	if (!curr->append_redirections->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->append_redirections);
-	//curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
-	//curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	curr->cmd_parts = add_argument(curr->cmd_parts, (*tokens)->value);
+	i = 0;
+	while (curr->cmd_parts[i] != NULL)
+		i++;
+	curr->cmd_parts[i - 1]->final = true;
 	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
