@@ -11,7 +11,7 @@ int	write_dup(char **redirect, int *pipe_fd, int fd)
 	i = 0;
 	while (redirect[i])
 	{
-		fd = open(redirect, O_CREAT | O_WRONLY | O_TRUNC, 0644); //secure
+		fd = open(redirect[i], O_CREAT | O_WRONLY | O_TRUNC, 0644); //secure
 		if (fd < 0)
 		{
 			return (1);
@@ -44,7 +44,7 @@ int	read_dup(char **redirect, int *pipe_fd, int previous_pipe, int fd)
 	i = 0;
 	while (redirect[i])
 	{
-		fd = open(redirect, O_RDONLY); //TODO PROTECT
+		fd = open(redirect[i], O_RDONLY); //TODO PROTECT
 		if (fd < 0)
 			return (1);
 		if (dup2(fd, STDIN_FILENO) < 0)

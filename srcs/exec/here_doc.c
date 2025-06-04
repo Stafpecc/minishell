@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 09:23:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/03 09:39:03 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/04 15:11:07 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ static int readline_heredoc (int fd, char *delimiter)
 			ft_printfd("Error\n"); //check if I can find a better error msg
 		    return(EXIT_FAILURE);
 		}
-        if(!strcmp(fd, delimiter))
+        if(!strcmp(input, delimiter))
         {
             break;
         } //salut == 0 1 2 3 4 5
         write(fd, input, ft_strlen(input));
         write(fd, "\n", 1);
         free(input);
-        input == NULL;
+        input = NULL;
     }
     free(input);
-    input == NULL;
+    input = NULL;
     return(0);
 }
 
@@ -54,7 +54,6 @@ static int readline_heredoc (int fd, char *delimiter)
 //should be used in dup to get the content as the read content!
 int here_doc (char *delimiter)
 {
-    char *input;
     int  fd;
 
     fd = open(".heredoc.tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);

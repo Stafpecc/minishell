@@ -87,6 +87,7 @@ int main(int ac, char **av, char **env)
 		utils->type_of_first_arg = token->type;
 		t_command_exec *command = parse_tokens(token, utils);
 		//print_command_exec(command);
+		ft_printfd("PROUT\n");
 		if (command != NULL)
 			exec(command, utils);
 		free(input);
