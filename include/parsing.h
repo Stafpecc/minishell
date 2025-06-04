@@ -47,6 +47,12 @@ typedef struct s_utils {
 	enum e_token_type	type_of_first_arg;
 } t_utils;
 
+typedef enum e_file_mode {
+	FILE_READ,
+	FILE_WRITE,
+	FILE_EXEC
+}	t_file_mode;
+
 /******************************************************************************/
 /*                                PARSING                                     */
 /******************************************************************************/
@@ -63,7 +69,7 @@ void 			print_syntax_error(const char *token, t_utils *utils);
 int 			redirect_parsing(t_command *curr, t_utils *utils);
 bool 			has_conflicting_redirections(t_command *cmd);
 bool 			is_directory(const char *path);
-int 			check_file(const char *path, t_utils *utils);
+int 			check_file(const char *path, t_utils *utils, t_file_mode mode);
 
 /******************************************************************************/
 /*                                 UTILS                                      */

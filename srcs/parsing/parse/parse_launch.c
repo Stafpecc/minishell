@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:36:27 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 13:42:25 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 	t_command *prev = NULL;
 	t_command *curr = cmd;
 	int last_redirect_in;
+	int last_redirect_out;
 	const char *arg;
 
 	if (!curr)
@@ -36,7 +37,7 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 		if (is_empty_command(curr))
 			return (return_failure("|", utils));
 		if (has_conflicting_redirections(curr))
-			return (return_failure(">", utils));		
+			return (return_failure(">", utils));
 		if ((curr->redirect_in || curr->redirect_out 
 			|| curr->append_redirections || curr->heredoc) 
 			&& is_empty_command(curr))
@@ -47,28 +48,37 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 			return (return_failure("|", utils));
 		if (curr->cmd_parts && curr->cmd_parts[0] && curr->cmd_parts[0]->arg)
 		{
-			if (curr->cmd_parts && curr->cmd_parts[0] && curr->cmd_parts[0]->arg)
+			arg = curr->cmd_parts[0]->arg;
+			if (is_directory(arg))
 			{
-				arg = curr->cmd_parts[0]->arg;
-				if (is_directory(arg))
-				{
-					ft_printfd("minishell: %s: Is a directory\n", arg);
-					utils->last_return = CMD_INVALID_ARGUMENT;
+				ft_printfd("minishell: %s: Is a directory\n", arg);
+				utils->last_return = CMD_INVALID_ARGUMENT;
+				return (RETURN_FAILURE);
+			}
+			if (ft_strchr(arg, '/'))
+			{
+				if (check_file(arg, utils, FILE_EXEC) == RETURN_FAILURE)
 					return (RETURN_FAILURE);
-				}
-				if (ft_strchr(arg, '/'))
-				{
-					if (check_file(arg, utils) == RETURN_FAILURE)
-						return (RETURN_FAILURE);
-				}
 			}
 		}
-		last_redirect_in = get_size_of_redirect(cmd->redirect_in);
+		last_redirect_in = get_size_of_redirect(curr->redirect_in);
 		if (curr->redirect_in && curr->redirect_in[last_redirect_in]->arg)
-        {
-            if (check_file(curr->redirect_in[last_redirect_in]->arg, utils) == RETURN_FAILURE)
-                return RETURN_FAILURE;
-        }
+		{
+			if (check_file(curr->redirect_in[last_redirect_in]->arg, utils, FILE_READ) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		last_redirect_out = get_size_of_redirect(curr->redirect_out);
+		if (curr->redirect_out && curr->redirect_out[last_redirect_out]->arg)
+		{
+			if (check_file(curr->redirect_out[last_redirect_out]->arg, utils, FILE_WRITE) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		if (curr->append_redirections && curr->append_redirections->arg)
+		{
+			if (check_file(curr->append_redirections->arg, utils, FILE_WRITE) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+
 		prev = curr;
 		curr = curr->next;
 	}
