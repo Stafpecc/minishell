@@ -95,7 +95,7 @@ static int only_child_built_in(t_command_exec *node, t_utils *utils)
 
 int single_built_in(t_command_exec *node, t_utils *utils)
 {
-	if(node->redirect_in[0] || node->redirect_out[0])
+	if(node->redirect_in || node->redirect_out)
 	{
 		if(only_child_built_in(node, utils))
 			return(-42); //TODO handle error cases, free everything blabla
