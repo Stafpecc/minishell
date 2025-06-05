@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 16:55:37 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/05 13:52:34 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_ut
 	if (!curr->redirect_in[i]->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->redirect_in[i]);
-	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
 
@@ -93,7 +92,6 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 	if (!curr->redirect_out[i]->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->redirect_out[i]);
-	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
 
@@ -127,7 +125,6 @@ int process_append_redirect(t_token **tokens, t_command *curr, t_command *head, 
 	if (!curr->append_redirections->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->append_redirections);
-	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
 
