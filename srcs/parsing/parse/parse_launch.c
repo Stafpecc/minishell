@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 16:37:58 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/06 16:05:57 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 {
 	t_command *prev = NULL;
 	t_command *curr = cmd;
-	int last_redirect_in;
-	int last_redirect_out;
+	//int last_redirect_in;
+	//int last_redirect_out;
 	const char *arg;
 
 	if (!curr)
@@ -61,27 +61,27 @@ int parse_cmd(t_command *cmd, t_utils *utils)
 					return (RETURN_FAILURE);
 			}
 		}
-		last_redirect_in = get_size_of_redirect(curr->redirect_in);
-		if (curr->redirect_in && last_redirect_in > 0
-			&& curr->redirect_in[last_redirect_in - 1]
-			&& curr->redirect_in[last_redirect_in - 1]->arg)
-		{
-			if (check_file(curr->redirect_in[last_redirect_in - 1]->arg, utils, FILE_READ) == RETURN_FAILURE)
-				return (RETURN_FAILURE);
-		}
-		last_redirect_out = get_size_of_redirect(curr->redirect_out);
-		if (curr->redirect_out && last_redirect_out > 0
-			&& curr->redirect_out[last_redirect_out - 1]
-			&& curr->redirect_out[last_redirect_out - 1]->arg)
-		{
-			if (check_file(curr->redirect_out[last_redirect_out - 1]->arg, utils, FILE_WRITE) == RETURN_FAILURE)
-				return (RETURN_FAILURE);
-		}
-		if (curr->append_redirections && curr->append_redirections->arg)
-		{
-			if (check_file(curr->append_redirections->arg, utils, FILE_WRITE) == RETURN_FAILURE)
-				return (RETURN_FAILURE);
-		}
+		// last_redirect_in = get_size_of_redirect(curr->redirect_in);
+		// // if (curr->redirect_in && last_redirect_in > 0
+		// // 	&& curr->redirect_in[last_redirect_in - 1]
+		// // 	&& curr->redirect_in[last_redirect_in - 1]->arg)
+		// // {
+		// // 	if (check_file(curr->redirect_in[last_redirect_in - 1]->arg, utils, FILE_READ) == RETURN_FAILURE)
+		// // 		return (RETURN_FAILURE);
+		// // }
+		// last_redirect_out = get_size_of_redirect(curr->redirect_out);
+		// if (curr->redirect_out && last_redirect_out > 0
+		// 	&& curr->redirect_out[last_redirect_out - 1]
+		// 	&& curr->redirect_out[last_redirect_out - 1]->arg)
+		// {
+		// 	if (check_file(curr->redirect_out[last_redirect_out - 1]->arg, utils, FILE_WRITE) == RETURN_FAILURE)
+		// 		return (RETURN_FAILURE);
+		// }
+		// if (curr->append_redirections && curr->append_redirections->arg)
+		// {
+		// 	if (check_file(curr->append_redirections->arg, utils, FILE_WRITE) == RETURN_FAILURE)
+		// 		return (RETURN_FAILURE);
+		// }
 
 		prev = curr;
 		curr = curr->next;
