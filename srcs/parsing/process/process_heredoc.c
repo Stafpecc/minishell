@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:35:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 16:55:26 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/05 13:53:27 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils 
 	if (!curr->heredoc->arg)
 		return (process_free_exit(head));
 	process_quotes(*tokens, curr->heredoc);
-	(*tokens) = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
 
