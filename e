@@ -1,2 +1,0 @@
--rw-rw-r-- 1 stafpec stafpec  563 juin   4 12:00 config.mk
--rw-rw-r-- 1 stafpec stafpec 1663 juin   4 16:33 minishell.mk
