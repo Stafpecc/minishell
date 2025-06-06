@@ -135,7 +135,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	ft_printfd("TEST\n\n\n\n");
 	if (utils->previous_pipes != -42)
 		close(utils->previous_pipes);
-	close(pipe_fd[0]);
+	//close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	child_redirect(node, utils);
 	exit(EXIT_FAILURE); // FAIL IF EXECVE DOESNT WORK

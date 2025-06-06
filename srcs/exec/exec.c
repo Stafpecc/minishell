@@ -33,7 +33,7 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	i = 0;
 	utils->previous_pipes = -42; // TODO ask/check if it is init to -42 + make a define for clarity
 	// printf("NOMBRE NODES: %d\n", number_nodes); //TODL
-	pipe(pipe_fd);
+	pipe(pipe_fd); //TODO PROTECT
 	while (node)
 	{
 		ft_printfd("TEST\n\n\n\n");
@@ -61,7 +61,9 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 		}
 	}
 	close(utils->previous_pipes);
-	close(pipe_fd[1]);
+	if (pipe_fd[1] != -42)
+		close(pipe_fd[1]);
+	close(pipe_fd[0]);
 	while (waitpid(child, &status, 0) > 0)
 		utils->last_return = status >> 8;
 	printf("last error_return = %u\n",status >> 8);
