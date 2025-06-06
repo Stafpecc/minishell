@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/06 13:35:11 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/06 13:51:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,36 @@ Fonction qui :
 */
 int process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_utils *utils)
 {
-	int i = 0;
-	size_t new_size;
+    int i = 0;
+    size_t new_size;
 
-	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens))
-	{
-		if (*tokens && !is_redirect_or_pipe(*tokens))
-			print_syntax_error((*tokens)->value, utils);
-		else
-			print_syntax_error("newline", utils);
-		return (process_free_exit(head));
-	}
-	if (curr->redirect_in)
-		while (curr->redirect_in[i])
-			i++;
-	new_size = sizeof(t_arg *) * (i + 2);
-	curr->redirect_in = ft_realloc(curr->redirect_in, new_size);
-	if (!curr->redirect_in)
-		return (process_free_exit(head));
-	curr->redirect_in[i] = malloc(sizeof(t_arg));
-	if (!curr->redirect_in[i])
-		return (process_free_exit(head));
-
-	curr->redirect_in[i + 1] = NULL;
-	curr->redirect_in[i]->arg = ft_strdup((*tokens)->value);
-	if (!curr->redirect_in[i]->arg)
-		return (process_free_exit(head));
-	process_quotes(*tokens, curr->redirect_in[i]);
-	*tokens = (*tokens)->next;
-	return (RETURN_SUCCESS);
+    (*tokens) = (*tokens)->next;
+    if (!(*tokens) || !is_word_like(*tokens))
+    {
+        if (*tokens && !is_redirect_or_pipe(*tokens))
+            print_syntax_error((*tokens)->value, utils);
+        else
+            print_syntax_error("newline", utils);
+        return (process_free_exit(head));
+    }
+    while (curr->redirect_in && curr->redirect_in[i])
+        i++;
+    new_size = sizeof(t_arg *) * (i + 2);
+    t_arg **new_redirect_in = realloc(curr->redirect_in, new_size);
+    if (!new_redirect_in)
+        return (process_free_exit(head));
+    curr->redirect_in = new_redirect_in;
+    curr->redirect_in[i] = malloc(sizeof(t_arg));
+    if (!curr->redirect_in[i])
+        return (process_free_exit(head));
+    curr->redirect_in[i + 1] = NULL;
+    curr->redirect_in[i]->arg = ft_strdup((*tokens)->value);
+    if (!curr->redirect_in[i]->arg)
+        return (process_free_exit(head));
+    process_quotes(*tokens, curr->redirect_in[i]);
+    ft_printf("REDIRECT_IN == %s\n", (*tokens)->value);
+    *tokens = (*tokens)->next;
+    return (RETURN_SUCCESS);
 }
 
 /*
@@ -78,13 +78,13 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 			print_syntax_error("newline", utils);
 		return (process_free_exit(head));
 	}
-	if (curr->redirect_out)
-		while (curr->redirect_out[i])
-			i++;
+	while (curr->redirect_out && curr->redirect_out[i])
+		i++;
 	new_size = sizeof(t_arg *) * (i + 2);
-	curr->redirect_out = ft_realloc(curr->redirect_out, new_size);
-	if (!curr->redirect_out)
+	t_arg **new_redirect_out = realloc(curr->redirect_out, new_size);
+	if (!new_redirect_out)
 		return (process_free_exit(head));
+	curr->redirect_out = new_redirect_out;
 	curr->redirect_out[i] = malloc(sizeof(t_arg));
 	if (!curr->redirect_out[i])
 		return (process_free_exit(head));
@@ -97,7 +97,6 @@ int process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_u
 	*tokens = (*tokens)->next;
 	return (RETURN_SUCCESS);
 }
-
 
 /*
 Fonction qui :

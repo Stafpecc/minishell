@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/06 13:34:17 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/06 13:44:48 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "../../libft/includes/libft.h"
 
 #include <stdio.h>
-
 
 int launch_commands(t_token **tokens, t_command **curr, t_command *head, t_utils *utils)
 {
