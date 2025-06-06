@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:54:56 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/06 13:26:44 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,10 @@ int is_redirect_or_pipe(t_token *token)
 	return (RETURN_FAILURE);
 }
 
+int is_redirect(t_token *token)
+{
+	return (token->type == TOK_REDIRECT_OUT
+		|| token->type == TOK_REDIRECT_IN
+		|| token->type == TOK_HEREDOC
+		|| token->type == TOK_APPEND_REDIRECT);
+}

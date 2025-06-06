@@ -17,6 +17,7 @@ void print_commands(t_command *cmd); // DEBUG
 void print_tokens(t_token *head); // DEBUG
 void print_command_exec(t_command_exec *cmd); // DEBUG
 void print_utils_struct(t_utils *utils); // DEBUG
+const char *get_token_type_str(t_token_type type); //DEBUG
 
 #endif
 
