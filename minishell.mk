@@ -72,7 +72,9 @@ override EXECSRC := \
 	child_pathed \
 	child_utils \
 	child \
+	exec_utils\
 	exec \
+	here_doc\
 	redirections \
 
 

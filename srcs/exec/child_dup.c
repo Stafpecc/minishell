@@ -4,26 +4,37 @@
 
 // dup the right fd for stdoutput and return 
 // an error code if it doesnt work properly
-int	write_dup(char *redirect, int *pipe_fd, int fd)
+int	write_dup(char **redirect, int *pipe_fd, int fd)
 {
-	if (redirect)
+	int i;
+
+	i = 0;
+	if(redirect)
 	{
-		fd = open(redirect, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (fd < 0)
+		while (redirect[i])
 		{
-			return (1);
-		}
-		if (dup2(fd, STDOUT_FILENO) < 0)
-		{
+			//ft_printfd("JEPASSEICIWOWOWIWUW\n");
+			fd = open(redirect[i], O_CREAT | O_WRONLY | O_TRUNC, 0644); //secure
+			if (fd < 0)
+			{
+				return (1);
+			}
+			if (dup2(fd, STDOUT_FILENO) < 0)
+			{
+				close(fd);
+				return (2);
+			}
 			close(fd);
-			return (2);
+			i++;
 		}
-		close(fd);
 	}
-	else if (pipe_fd[1] != -42)
+	//ft_printfd("pipe_fd[1] == %d\n",pipe_fd[1]);
+	if (pipe_fd[1] != -42 && !redirect)
 	{
+		ft_printfd("JEPASSEICIWOWOWIWUW\n");
 		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
 		{
+			//ft_printfd("TEST??W??W\n");
 			return (2);
 		}
 			
@@ -33,36 +44,43 @@ int	write_dup(char *redirect, int *pipe_fd, int fd)
 
 // dup the right fd for stdinput and return
 // an error code if it doesnt work properly
-int	read_dup(char *redirect, int *pipe_fd, int previous_pipe, int fd)
+int	read_dup(char **redirect, int *pipe_fd, int previous_pipe, int fd)
 {
-
-	if (redirect)
+	int i;
+	i = 0;
+	if(redirect)
 	{
-		fd = open(redirect, O_RDONLY);
-		if (fd < 0)
-			return (1);
-		if (dup2(fd, STDIN_FILENO) < 0)
+		while (redirect[i])
 		{
+			ft_printfd("TEST>>W<WKDK\n\n\n");
+			fd = open(redirect[i], O_RDONLY); //TODO PROTECT
+			if (fd < 0)
+				return (1);
+			if (dup2(fd, STDIN_FILENO) < 0)
+			{
+				close(fd);
+				return (2);
+			}
 			close(fd);
-			return (2);
+			i++;
 		}
-		close(fd);
-	}
-	else if (previous_pipe != -42)
+	}	
+	if (previous_pipe != -42 && !redirect)
 	{
+		ft_printfd("AAAAAAAAAAAAAAAAAAAAAAAAA\n\n");
 		if (dup2(previous_pipe, STDIN_FILENO))
 			return (2);
 	}
-	else
+	else if (!redirect)
 	{
 		if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		{
-			//perror("test1%\n");
 			return (2);
 		}
 	}
 	return (0);
 }
+
 // Used if we do only have one cmd
 //TODO complete doc about that function
 void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
@@ -102,11 +120,10 @@ void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 //TODO when new struct created, update all of it :> (previous pipe, num_nodes)
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-	//ft_printfd("redirect_in = %s, redirect_out = %s \n", node->redirect_in, node->redirect_out);
+	//ft_printfd("JUSTE AVANT EXECVE\n");
 
 	if(utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
-
 	if (read_dup(node->redirect_in, pipe_fd, utils->previous_pipes, 0) != 0)
 	{
 		//perror("test");
@@ -124,9 +141,10 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
+	ft_printfd("TEST\n\n\n\n");
 	if (utils->previous_pipes != -42)
 		close(utils->previous_pipes);
-	close(pipe_fd[0]);
+	//close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	child_redirect(node, utils);
 	exit(EXIT_FAILURE); // FAIL IF EXECVE DOESNT WORK

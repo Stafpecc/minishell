@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:09:50 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 13:06:58 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 17:00:46 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,48 +50,53 @@ static char **dup_targ_array(t_arg **arr)
 	return new_arr;
 }
 
+/*
+fonction qui :
+- transforme une liste chaînée de t_command en une liste chaînée de t_command_exec ;
+- duplique les chaînes présentes dans les champs cmd_parts, redirect_in, redirect_out, heredoc et append_redirections ;
+- ne filtre plus les cmd_parts selon le champ final (supprimé) ;
+- retourne un pointeur vers la tête de la nouvelle structure allouée dynamiquement, ou NULL en cas d’échec.
+*/
+
 t_command_exec *struct_to_char(t_command *cmd)
 {
 	t_command_exec *head = NULL;
 	t_command_exec *current = NULL;
 	t_command_exec *new_node;
-	int i, j;
-	int count;
+	int i, count;
 
 	while (cmd)
 	{
 		new_node = malloc(sizeof(t_command_exec));
-		if (new_node == NULL)
+		if (!new_node)
 			return (NULL);
 
 		count = 0;
 		while (cmd->cmd_parts && cmd->cmd_parts[count])
 			count++;
 
-		int filtered_count = 0;
-		for (i = 0; i < count; i++)
-			if (!cmd->cmd_parts[i]->final)
-				filtered_count++;
-
-		new_node->cmd_parts = malloc(sizeof(char *) * (filtered_count + 1));
-		if (new_node->cmd_parts == NULL)
+		new_node->cmd_parts = malloc(sizeof(char *) * (count + 1));
+		if (!new_node->cmd_parts)
 		{
 			free(new_node);
 			return (NULL);
 		}
 
 		i = 0;
-		j = 0;
-		while (cmd->cmd_parts && cmd->cmd_parts[i])
+		while (i < count)
 		{
-			if (cmd->cmd_parts[i]->arg && !cmd->cmd_parts[i]->final)
+			new_node->cmd_parts[i] = ft_strdup(cmd->cmd_parts[i]->arg);
+			if (!new_node->cmd_parts[i])
 			{
-				new_node->cmd_parts[j] = ft_strdup(cmd->cmd_parts[i]->arg);
-				j++;
+				while (--i >= 0)
+					free(new_node->cmd_parts[i]);
+				free(new_node->cmd_parts);
+				free(new_node);
+				return (NULL);
 			}
 			i++;
 		}
-		new_node->cmd_parts[j] = NULL;
+		new_node->cmd_parts[i] = NULL;
 
 		new_node->redirect_in = dup_targ_array(cmd->redirect_in);
 		new_node->redirect_out = dup_targ_array(cmd->redirect_out);
@@ -107,7 +112,7 @@ t_command_exec *struct_to_char(t_command *cmd)
 			new_node->heredoc = NULL;
 
 		new_node->next = NULL;
-		if (head == NULL)
+		if (!head)
 			head = new_node;
 		else
 			current->next = new_node;

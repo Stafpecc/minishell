@@ -6,18 +6,11 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:17:42 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/04 12:32:54 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:36:13 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-/*
- Fonction qui :
- - prend en entrée un tableau de chaînes représentant les redirections ;
- - compte combien d'éléments il y a dedans (jusqu'à NULL) ;
- - retourne ce nombre.
-*/
 
 /*
  Fonction qui :

@@ -16,7 +16,6 @@ typedef struct s_arg {
 	char			*arg;
 	bool			in_simple_quote;
 	bool			in_double_quote;
-	bool			final;
 } t_arg;
 
 typedef struct s_command {
@@ -82,6 +81,7 @@ t_command_exec	*struct_to_char(t_command *cmd);
 void			print_syntax_error(const char *token, t_utils *utils);
 int 			is_redirect_or_pipe(t_token *token);
 int				get_size_of_redirect(t_arg **redirect);
+int				is_redirect(t_token *token);
 
 /******************************************************************************/
 /*                                PROCESS                                     */
