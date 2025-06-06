@@ -18,7 +18,6 @@ void child_redirect(t_command_exec *node, t_utils *utils)
             //ft_printfd("TEST\n"); //ICI soucis avec Hola
             child_error(-42, NULL, 1, node->cmd_parts[0]);
         }
-        //ft_printf("path = %s\n node->cmd_parts: %s\n, ", path, node->cmd_parts[0]);
         execve(path, node->cmd_parts, utils->env); //Theo gonna give the right stuff later on
         perror("ERREUR:\n");
         free(path);

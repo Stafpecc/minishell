@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:36 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 13:39:59 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/06 14:26:59 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 int	check_file(const char *path, t_utils *utils, t_file_mode mode)
 {
 	int	access_mode;
-
+	
+	if(utils) //TORM
+		ft_printfd("proutdansparse_file.c\n"); //TORM
 	if (!path)
 		return (RETURN_FAILURE);
 
@@ -36,25 +38,25 @@ int	check_file(const char *path, t_utils *utils, t_file_mode mode)
 	else
 		return (RETURN_FAILURE);
 
-	if (access(path, F_OK) != 0)
-	{
-		if (errno == ENOENT)
-			ft_printfd("minishell: %s: No such file or directory\n", path);
-		else
-		{
-			ft_printfd("minishell: ");
-			perror(path);
-		}
-		utils->last_return = CMD_INVALID_ARGUMENT;
-		return (RETURN_FAILURE);
-	}
+	// if (access(path, F_OK) != 0)
+	// {
+	// 	if (errno == ENOENT)
+	// 		ft_printfd("minishell: %s: No such file or directory\n", path);
+	// 	else
+	// 	{
+	// 		ft_printfd("minishell: ");
+	// 		perror(path);
+	// 	}
+	// 	utils->last_return = CMD_INVALID_ARGUMENT;
+	// 	return (RETURN_FAILURE);
+	// }
 
-	if (access(path, access_mode) != 0)
-	{
-		ft_printfd("minishell: %s: Permission denied\n", path);
-		utils->last_return = CMD_INVALID_ARGUMENT;
-		return (RETURN_FAILURE);
-	}
+	// if (access(path, access_mode) != 0)
+	// {
+	// 	ft_printfd("minishell: %s: Permission denied\n", path);
+	// 	utils->last_return = CMD_INVALID_ARGUMENT;
+	// 	return (RETURN_FAILURE);
+	// }
 
 	return (RETURN_SUCCESS);
 }

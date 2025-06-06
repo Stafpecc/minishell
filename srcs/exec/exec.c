@@ -36,17 +36,21 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	pipe(pipe_fd); //TODO PROTECT
 	while (node)
 	{
-		ft_printfd("TEST\n\n\n\n");
-
+		ft_printfd("pipe_fd[1] == %d\n",pipe_fd[1]);
+		// ft_printfd("TEST\n\n\n\n"); //TORM
 		if (utils->previous_pipes != -42 && i < utils->num_nodes - 1)
 		{
 			pipe(pipe_fd); // TODO protect
 		}
 		else if (i == utils->num_nodes - 1) //Necessary for the very last node
+		{
 			pipe_fd[1] = -42; //FIND A BETTER WAY TO HANDLE THAT CASE
+		} 
 		child = fork(); // protect
 		if (child == 0)
+		{
 			child_init_pipes_dup(node, pipe_fd, utils);
+		}
 		else
 		{
 			if (i < utils->num_nodes - 1)
@@ -54,16 +58,16 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 				close(pipe_fd[1]);
 			} 
 			if (utils->previous_pipes != -42)
-				close(utils->num_nodes);
+				close(utils->previous_pipes);
 			utils->previous_pipes = pipe_fd[0];
 			node = node->next;
 			i++;
 		}
 	}
 	close(utils->previous_pipes);
-	if (pipe_fd[1] != -42)
-		close(pipe_fd[1]);
-	close(pipe_fd[0]);
+	//if (pipe_fd[1] != -42)
+	close(pipe_fd[1]);
+	//close(pipe_fd[0]);
 	while (waitpid(child, &status, 0) > 0)
 		utils->last_return = status >> 8;
 	printf("last error_return = %u\n",status >> 8);
