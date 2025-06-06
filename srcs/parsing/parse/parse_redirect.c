@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:17:42 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/04 16:36:13 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/06 16:16:35 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,30 @@ bool has_conflicting_redirections(t_command *cmd)
  - si c’est le cas, on affiche une erreur et on retourne RETURN_FAILURE ;
  - sinon, tout va bien, on retourne RETURN_SUCCESS.
 */
-int redirect_parsing(t_command *curr, t_utils *utils)
+int redirect_parsing(t_command *cmd, t_utils *utils)
 {
-	if (curr->redirect_out != NULL &&
-		curr->next && curr->next->redirect_out != NULL)
+	int out_count = 0;
+	int in_count = 0;
+	int append_count = 0;
+	int heredoc_count = 0;
+
+	if (cmd->redirect_out)
+		out_count++;
+	if (cmd->append_redirections)
+		append_count++;
+	if (cmd->redirect_in)
+		in_count++;
+	if (cmd->heredoc)
+		heredoc_count++;
+
+	if (out_count > 1)
 		return (return_failure(">", utils));
-	if (curr->redirect_in != NULL &&
-		curr->next && curr->next->redirect_in != NULL)
-		return (return_failure("<", utils));
-	if (curr->append_redirections != NULL &&
-		curr->next && curr->next->append_redirections != NULL)
+	if (append_count > 1)
 		return (return_failure(">>", utils));
-	if (curr->heredoc != NULL &&
-		curr->next && curr->next->heredoc != NULL)
+	if (in_count > 1)
+		return (return_failure("<", utils));
+	if (heredoc_count > 1)
 		return (return_failure("<<", utils));
 	return (RETURN_SUCCESS);
 }
+
