@@ -44,6 +44,7 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 		}
 		else if (i == utils->num_nodes - 1) //Necessary for the very last node
 		{
+			close (pipe_fd[1]);
 			pipe_fd[1] = -42; //FIND A BETTER WAY TO HANDLE THAT CASE
 		} 
 		child = fork(); // protect
@@ -65,9 +66,9 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 		}
 	}
 	close(utils->previous_pipes);
-	//if (pipe_fd[1] != -42)
-	close(pipe_fd[1]);
-	//close(pipe_fd[0]);
+	if (pipe_fd[1] != -42)
+		close(pipe_fd[1]);
+	close(pipe_fd[0]);
 	while (waitpid(child, &status, 0) > 0)
 		utils->last_return = status >> 8;
 	printf("last error_return = %u\n",status >> 8);

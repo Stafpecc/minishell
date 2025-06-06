@@ -1,0 +1,37 @@
+.PHONY: all init clean fclean re test FORCE
+include config.mk
+include minishell.mk
+OBJS := $(patsubst $(SRCSDIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
+	echo "$(PURPLE)Compiling $(NAME) in progress...$(RESET)"
+	echo "$(GREEN)$(EXEC) completed successfully!$(RESET)"
+	echo "$(GREEN)"
+	echo "┌───────────────────────────────────────────────────────────┐"
+	echo "│      Compilation finished successfully! ᕕ(⌐■_■)ᕗ ♪♬       │"
+	echo "└───────────────────────────────────────────────────────────┘"
+	echo "                      ☆  *    .      ☆"
+	echo "                        ∧＿∧   ∩    * ☆"
+	echo "                 *  ☆ ( ・∀・)/ ."
+	echo "                  .  ⊂      ノ* ☆"
+	echo "                ☆ * (つ   ノ  .☆"
+	echo "                      (ノ"
+	echo "$(RESET)"
+$(OBJS_DIR)%.o: $(SRCSDIR)%.c | $(OBJS_DIR)
+	echo "$(PURPLE)Compiling $<...$(RESET)"
+		$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	echo "$(GREEN)$< completed successfully!$(RESET)"
+	echo "$(YELLOW)Creating directory $(OBJS_DIR)...$(RESET)"
+	echo "$(YELLOW)Creating $(EXEC_DIR) directory...$(RESET)"
+	$(MAKE) -C $(DIR_LIBFT) clean
+	echo "$(RED)Cleaning of .o and .d files completed successfully! ／人◕ ‿‿ ◕人＼$(RESET)"
+fclean: clean
+	$(MAKE) -C $(DIR_LIBFT) fclean
+	echo "$(RED)"
+	echo "┌──────────────────────────────────────────────────────────┐"
+	echo "│      Deletion finished successfully! ( ◔ ω ◔) ノシ         │"
+	echo "└──────────────────────────────────────────────────────────┘"
+	echo "                           ╱|、"
+	echo "                         (˚ˎ 。7"
+	echo "                          |、˜|"
+	echo "                         じしˍ,)ノ"
+	echo "$(RESET)"
+re: fclean all
