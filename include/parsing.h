@@ -91,7 +91,8 @@ int				is_redirect(t_token *token);
 void			free_str_array(char **arr, int size);
 char			**dup_targ_array(t_arg **arr);
 t_heredoc		*dup_heredoc_from_arg(t_arg *src);
-
+int				cmd_part_to_char(t_command *cmd, t_command_exec *new_node);
+int				redirect_to_char(t_command *cmd, t_command_exec *new_node);
 
 /******************************************************************************/
 /*                                PROCESS                                     */

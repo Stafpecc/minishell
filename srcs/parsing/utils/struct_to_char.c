@@ -6,15 +6,80 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:09:50 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 05:54:06 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 16:51:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../../libft/includes/libft.h"
 
-#include <stdlib.h>
-#include <stdbool.h>
+static void	free_command_exec_list(t_command_exec *node)
+{
+	t_command_exec	*tmp;
+
+	while (node)
+	{
+		tmp = node->next;
+		free_commands_exec(node);
+		node = tmp;
+	}
+}
+
+static void	free_tab(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+static void	*ret_free_command_exec(t_command_exec *node)
+{
+	if (!node)
+		return (NULL);
+	free_tab(node->cmd_parts);
+	free_tab(node->redirect_in);
+	free_tab(node->redirect_out);
+	if (node->append_redirections)
+		free(node->append_redirections);
+	if (node->heredoc)
+		free(node->heredoc);
+	free(node);
+	return (NULL);
+}
+
+static t_command_exec	*struct_to_char_node(t_command *cmd)
+{
+	t_command_exec	*new_node;
+
+	new_node = malloc(sizeof(t_command_exec));
+	if (!new_node)
+		return (NULL);
+	new_node->cmd_parts = NULL;
+	new_node->redirect_in = NULL;
+	new_node->redirect_out = NULL;
+	new_node->append_redirections = NULL;
+	new_node->heredoc = NULL;
+	new_node->next = NULL;
+	if (cmd_part_to_char(cmd, new_node) == RETURN_FAILURE)
+		return (ret_free_command_exec(new_node));
+	new_node->redirect_in = dup_targ_array(cmd->redirect_in);
+	if (cmd->redirect_in && !new_node->redirect_in)
+		return (ret_free_command_exec(new_node));
+	new_node->redirect_out = dup_targ_array(cmd->redirect_out);
+	if (cmd->redirect_out && !new_node->redirect_out)
+		return (ret_free_command_exec(new_node));
+	if (redirect_to_char(cmd, new_node) == RETURN_FAILURE)
+		return (ret_free_command_exec(new_node));
+	new_node->next = NULL;
+	return (new_node);
+}
 
 /*
 fonction qui :
@@ -26,61 +91,22 @@ fonction qui :
 - retourne un pointeur vers la tête de la nouvelle structure allouée
 	dynamiquement, ou NULL en cas d’échec.
 */
-t_command_exec *struct_to_char(t_command *cmd)
+t_command_exec	*struct_to_char(t_command *cmd)
 {
-	t_command_exec *head;
-	t_command_exec *current;
-	t_command_exec *new_node;
-	int i;
-	int count;
+	t_command_exec	*head;
+	t_command_exec	*current;
+	t_command_exec	*new_node;
 
-	current = NULL;
 	head = NULL;
+	current = NULL;
 	while (cmd)
 	{
-		new_node = malloc(sizeof(t_command_exec));
+		new_node = struct_to_char_node(cmd);
 		if (!new_node)
-			return (NULL);
-		count = 0;
-		while (cmd->cmd_parts && cmd->cmd_parts[count])
-			count++;
-		new_node->cmd_parts = malloc(sizeof(char *) * (count + 1));
-		if (!new_node->cmd_parts)
 		{
-			free(new_node);
+			free_command_exec_list(head);
 			return (NULL);
 		}
-		i = 0;
-		while (i < count)
-		{
-			new_node->cmd_parts[i] = ft_strdup(cmd->cmd_parts[i]->arg);
-			if (!new_node->cmd_parts[i])
-			{
-				while (--i >= 0)
-					free(new_node->cmd_parts[i]);
-				free(new_node->cmd_parts);
-				free(new_node);
-				return (NULL);
-			}
-			i++;
-		}
-		new_node->cmd_parts[i] = NULL;
-		new_node->redirect_in = dup_targ_array(cmd->redirect_in);
-		new_node->redirect_out = dup_targ_array(cmd->redirect_out);
-		if (cmd->append_redirections && cmd->append_redirections->arg)
-			new_node->append_redirections = ft_strdup(cmd->append_redirections->arg);
-		else
-			new_node->append_redirections = NULL;
-		if (cmd->heredoc)
-		{
-			new_node->heredoc = dup_heredoc_from_arg(cmd->heredoc);
-			if (!new_node->heredoc)
-				return (NULL);
-		}
-		else
-			new_node->heredoc = NULL;
-
-		new_node->next = NULL;
 		if (!head)
 			head = new_node;
 		else

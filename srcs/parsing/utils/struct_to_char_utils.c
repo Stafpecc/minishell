@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 05:51:33 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/08 05:52:58 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 16:51:02 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,54 @@ t_heredoc	*dup_heredoc_from_arg(t_arg *src)
 	}
 	copy->fd = src->fd;
 	return (copy);
+}
+
+int	cmd_part_to_char(t_command *cmd, t_command_exec *new_node)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	while (cmd->cmd_parts && cmd->cmd_parts[count])
+		count++;
+	new_node->cmd_parts = malloc(sizeof(char *) * (count + 1));
+	if (!new_node->cmd_parts)
+		return (RETURN_FAILURE);
+	i = 0;
+	while (i < count)
+	{
+		new_node->cmd_parts[i] = ft_strdup(cmd->cmd_parts[i]->arg);
+		if (!new_node->cmd_parts[i])
+		{
+			while (--i >= 0)
+				free(new_node->cmd_parts[i]);
+			free(new_node->cmd_parts);
+			return (RETURN_FAILURE);
+		}
+		i++;
+	}
+	new_node->cmd_parts[i] = NULL;
+	return (RETURN_SUCCESS);
+}
+
+int	redirect_to_char(t_command *cmd, t_command_exec *new_node)
+{
+	if (cmd->append_redirections && cmd->append_redirections->arg)
+	{
+		new_node->append_redirections
+			= ft_strdup(cmd->append_redirections->arg);
+		if (!new_node->append_redirections)
+			return (RETURN_FAILURE);
+	}
+	else
+		new_node->append_redirections = NULL;
+	if (cmd->heredoc)
+	{
+		new_node->heredoc = dup_heredoc_from_arg(cmd->heredoc);
+		if (!new_node->heredoc)
+			return (RETURN_FAILURE);
+	}
+	else
+		new_node->heredoc = NULL;
+	return (RETURN_SUCCESS);
 }
