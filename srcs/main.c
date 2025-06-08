@@ -1,20 +1,21 @@
 #include "minishell.h"
+#include "exec.h"
 #include "../libft/includes/libft.h"
 
 #include <stdarg.h>
 
 static void exit_proprely(int count, ...)
-{
-    va_list args;
-    void *ptr;
-    rl_clear_history();
-    va_start(args, count);
-    while (count-- > 0) {
-        ptr = va_arg(args, void *);
-        free(ptr);
-    }
-    va_end(args);
-    exit(0);
+	{
+	va_list args;
+	void *ptr;
+	rl_clear_history();
+	va_start(args, count);
+	while (count-- > 0) {
+		ptr = va_arg(args, void *);
+		free(ptr);
+	}
+	va_end(args);
+	exit(0);
 }
 
 static t_utils *init_utils_struct(char **envp)

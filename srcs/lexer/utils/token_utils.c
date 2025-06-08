@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:40:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/31 16:39:38 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/08 04:19:06 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "return_error.h"
 
-int has_only_one_redirection(t_token *head)
+int	has_only_one_redirection(t_token *head)
 {
 	if (((head->type == TOK_APPEND_REDIRECT || head->type == TOK_REDIRECT_IN
-		|| head->type == TOK_HEREDOC || head->type == TOK_REDIRECT_OUT)
-		&& head->next->type == TOK_END))
+				|| head->type == TOK_HEREDOC || head->type == TOK_REDIRECT_OUT)
+			&& head->next->type == TOK_END))
 		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }
@@ -30,9 +30,9 @@ int	ft_isspace(char c)
 
 char	*ft_strndup(const char *s, size_t n)
 {
-	size_t len;
-	char *dup;
-	size_t i;
+	size_t	len;
+	char	*dup;
+	size_t	i;
 
 	i = 0;
 	len = 0;

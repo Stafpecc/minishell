@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:34:09 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:27:08 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 05:11:56 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,21 @@ bool	is_empty_command(t_command *cmd)
 }
 
 /*Fonction qui :
-- s’utilise quand une erreur de syntaxe est rencontrée dans les redirections ou les tokens ;
+- s’utilise quand une erreur de syntaxe est rencontrée dans les redirections
+ou les tokens ;
 - affiche un message d’erreur clair à l’utilisateur ;
 - retourne une valeur d’échec standard pour stopper ou ignorer la commande.*/
 int	return_failure(const char *token, t_utils *utils)
 {
 	print_syntax_error(token, utils);
-	return (RETURN_FAILURE);	
+	return (RETURN_FAILURE);
 }
 
 /*Fonction qui :
 - affiche un message d’erreur avec le token problématique (>, <, etc.) ;
 - met à jour le code de retour global avec une erreur de syntaxe ;
 - sert à indiquer qu’un token inattendu a été trouvé pendant le parsing.*/
-void print_syntax_error(const char *token, t_utils *utils)
+void	print_syntax_error(const char *token, t_utils *utils)
 {
 	utils->last_return = CMD_INVALID_ARGUMENT;
 	ft_printfd("minishell: syntax error near unexpected token `%s'\n", token);

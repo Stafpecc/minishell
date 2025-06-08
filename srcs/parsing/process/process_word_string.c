@@ -6,58 +6,93 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:37:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:56:17 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 05:34:28 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-/*
-fonction qui :
-- ajoute un nouveau token de type mot ou chaîne à la liste cmd_parts d’une commande ;
-- alloue une nouvelle structure t_arg et y copie la valeur du token après duplication ;
-- traite les quotes présentes dans le token pour marquer correctement la nouvelle partie ;
-- crée un nouveau tableau t_arg* plus grand, copie l’ancien contenu, ajoute la nouvelle partie, termine par NULL ;
-- libère l’ancien tableau cmd_parts et met à jour la commande avec le nouveau tableau ;
-- retourne RETURN_SUCCESS si tout s’est bien passé, sinon RETURN_FAILURE en cas d’erreur d’allocation.
-*/
-int process_word_string(t_token **tokens, t_command *curr)
+static int	get_cmd_parts_count(t_command *curr)
 {
-	t_arg *new_part;
-	int i;
-	int j;
-	t_arg **new_array;
+	int	i;
 
 	i = 0;
 	while (curr->cmd_parts && curr->cmd_parts[i])
 		i++;
+	return (i);
+}
+
+static t_arg	*create_new_part(t_token *token)
+{
+	t_arg	*new_part;
+
 	new_part = malloc(sizeof(t_arg));
 	if (!new_part)
-		return (RETURN_FAILURE);
-	new_part->arg = ft_strdup((*tokens)->value);
+		return (NULL);
+	new_part->arg = ft_strdup(token->value);
 	if (!new_part->arg)
 	{
 		free(new_part);
-		return (RETURN_FAILURE);
+		return (NULL);
 	}
-	process_quotes(*tokens, new_part);
-	new_array = malloc(sizeof(t_arg *) * (i + 2));
+	process_quotes(token, new_part);
+	return (new_part);
+}
+
+static t_arg	**extend_cmd_parts(t_arg **old_array, int old_size,
+		t_arg *new_part)
+{
+	t_arg	**new_array;
+	int		j;
+
+	new_array = malloc(sizeof(t_arg *) * (old_size + 2));
+	if (!new_array)
+		return (NULL);
+	j = 0;
+	while (j < old_size)
+	{
+		new_array[j] = old_array[j];
+		j++;
+	}
+	new_array[old_size] = new_part;
+	new_array[old_size + 1] = NULL;
+	free(old_array);
+	return (new_array);
+}
+
+/*
+fonction qui :
+- ajoute un nouveau token de type mot ou chaîne à la liste cmd_parts
+	d’une commande ;
+- alloue une nouvelle structure t_arg et y copie la valeur du token après
+	duplication ;
+- traite les quotes présentes dans le token pour marquer correctement la
+	nouvelle partie ;
+- crée un nouveau tableau t_arg* plus grand, copie l’ancien contenu, ajoute
+	la nouvelle partie, termine par NULL ;
+- libère l’ancien tableau cmd_parts et met à jour la commande avec le nouveau
+	tableau ;
+- retourne RETURN_SUCCESS si tout s’est bien passé, sinon RETURN_FAILURE en
+	cas d’erreur d’allocation.
+*/
+int	process_word_string(t_token **tokens, t_command *curr)
+{
+	int		count;
+	t_arg	*new_part;
+	t_arg	**new_array;
+
+	count = get_cmd_parts_count(curr);
+	new_part = create_new_part(*tokens);
+	if (!new_part)
+		return (RETURN_FAILURE);
+	new_array = extend_cmd_parts(curr->cmd_parts, count, new_part);
 	if (!new_array)
 	{
 		free(new_part->arg);
 		free(new_part);
 		return (RETURN_FAILURE);
 	}
-	j = 0;
-	while (j < i)
-	{
-		new_array[j] = curr->cmd_parts[j];
-		j++;
-	}
-	new_array[i] = new_part;
-	new_array[i + 1] = NULL;
-	free(curr->cmd_parts);
 	curr->cmd_parts = new_array;
 	return (RETURN_SUCCESS);
 }

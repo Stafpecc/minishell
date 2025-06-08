@@ -6,20 +6,20 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 16:29:51 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 05:45:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-#include "parsing.h"
+#include <unistd.h>
 
 static void	free_arg_table(t_arg **args)
 {
 	int	i;
 
 	if (!args)
-		return;
+		return ;
 	i = 0;
 	while (args[i])
 	{
@@ -30,9 +30,9 @@ static void	free_arg_table(t_arg **args)
 	free(args);
 }
 
-void free_commands(t_command *cmd)
+void	free_commands(t_command *cmd)
 {
-	t_command *tmp;
+	t_command	*tmp;
 
 	while (cmd)
 	{
@@ -44,6 +44,8 @@ void free_commands(t_command *cmd)
 		free(tmp->append_redirections);
 		if (tmp->heredoc)
 		{
+			if (tmp->heredoc->fd != -1)
+				close(tmp->heredoc->fd);
 			free(tmp->heredoc->arg);
 			free(tmp->heredoc);
 		}
@@ -51,12 +53,12 @@ void free_commands(t_command *cmd)
 	}
 }
 
-static void free_string_array(char **array)
+static void	free_string_array(char **array)
 {
-	int i;
+	int	i;
 
 	if (!array)
-		return;
+		return ;
 	i = 0;
 	while (array[i])
 	{
@@ -66,9 +68,9 @@ static void free_string_array(char **array)
 	free(array);
 }
 
-void free_commands_exec(t_command_exec *cmd)
+void	free_commands_exec(t_command_exec *cmd)
 {
-	t_command_exec *tmp;
+	t_command_exec	*tmp;
 
 	while (cmd)
 	{
@@ -78,8 +80,13 @@ void free_commands_exec(t_command_exec *cmd)
 		free_string_array(tmp->redirect_in);
 		free_string_array(tmp->redirect_out);
 		free(tmp->append_redirections);
-		free(tmp->heredoc);
+		if (tmp->heredoc)
+		{
+			if (tmp->heredoc->fd != -1)
+				close(tmp->heredoc->fd);
+			free(tmp->heredoc->arg);
+			free(tmp->heredoc);
+		}
 		free(tmp);
 	}
 }
-

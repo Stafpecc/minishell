@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:59 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:40:10 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 04:28:05 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ Fonction qui :
 - si l’ouverture réussit, ferme le répertoire et retourne true ;
 - sinon retourne false, indiquant que ce n’est pas un répertoire.
 */
-bool is_directory(const char *path)
+bool	is_directory(const char *path)
 {
-	DIR *dir;
-	
+	DIR	*dir;
+
 	dir = opendir(path);
 	if (dir)
 	{
 		closedir(dir);
-		return true;
+		return (true);
 	}
-	return false;
+	return (false);
 }

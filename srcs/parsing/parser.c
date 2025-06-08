@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/05 14:13:50 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 04:27:02 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 #include "../../libft/includes/libft.h"
 
-t_command_exec *parse_tokens(t_token *tokens, t_utils *utils)
+t_command_exec	*parse_tokens(t_token *tokens, t_utils *utils)
 {
-	t_command *head;
-	t_command *curr;
-	t_command_exec *final;
+	t_command		*head;
+	t_command		*curr;
+	t_command_exec	*final;
 
 	head = create_command();
 	curr = head;

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:36:53 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/04 12:42:18 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/08 05:19:10 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 /*
 Fonction qui :
 - analyse le type de quotes du token donné ;
-- met à jour les drapeaux dans cmd_part pour indiquer si le contenu est entre simples ou doubles quotes ;
+- met à jour les drapeaux dans cmd_part pour indiquer si le contenu est
+	entre simples ou doubles quotes ;
 - si aucune quote n’est présente, réinitialise les drapeaux à false.
 */
-void process_quotes(t_token *token, t_arg *cmd_part)
+void	process_quotes(t_token *token, t_arg *cmd_part)
 {
 	if (token->type == TOK_SINGLE_QUOTES)
 	{

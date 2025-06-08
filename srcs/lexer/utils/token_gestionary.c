@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_gestionary.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:18:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/08 15:50:42 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/08 04:18:06 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include "return_error.h"
 #include "../../../libft/includes/libft.h"
 
-t_token *create_token(t_token_type type, const char *value)
+t_token	*create_token(t_token_type type, const char *value)
 {
-	t_token *token = malloc(sizeof(t_token));
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
 	token->type = type;
@@ -30,11 +32,11 @@ t_token *create_token(t_token_type type, const char *value)
 	return (token);
 }
 
-int add_token(t_token **head, t_token_type type, const char *value)
+int	add_token(t_token **head, t_token_type type, const char *value)
 {
-	t_token *new_token;
-	t_token *curr;
-	
+	t_token	*new_token;
+	t_token	*curr;
+
 	new_token = create_token(type, value);
 	if (!new_token)
 	{

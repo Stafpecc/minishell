@@ -175,11 +175,11 @@ void print_command_exec(t_command_exec *cmd)
 			ft_printf("append_redirections: \"%s\"\n", cmd->append_redirections);
 		else
 			ft_printf("append_redirections: NULL\n");
-
 		if (cmd->heredoc)
-			ft_printf("heredoc: \"%s\"\n", cmd->heredoc);
+			ft_printf("heredoc: delim=\"%s\", fd=%d\n", cmd->heredoc->arg, cmd->heredoc->fd);
 		else
 			ft_printf("heredoc: NULL\n");
+
 
 		ft_printf("\n");
 		cmd = cmd->next;

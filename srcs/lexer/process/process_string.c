@@ -3,31 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   process_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:46:20 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/23 14:55:27 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/08 04:15:26 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int process_string(const char *input, size_t *i, t_token **head)
+static int	process_quotes(char quote, char *str, t_token **head)
 {
-	char quote;
-	size_t start;
-	char *str;
-
-	quote = input[*i];
-	(*i)++;
-	start = *i;
-	while (input[*i] && input[*i] != quote)
-		(*i)++;
-	if (input[*i] != quote)
-		return (RETURN_FAILURE);
-	str = ft_strndup(input + start, *i - start);
-	if (!str)
-		return (RETURN_FAILURE);
 	if (quote == '"')
 	{
 		if (add_token(head, TOK_DOUBLE_QUOTES, str) == RETURN_FAILURE)
@@ -52,6 +38,27 @@ int process_string(const char *input, size_t *i, t_token **head)
 			return (RETURN_FAILURE);
 		}
 	}
+	return (RETURN_SUCCESS);
+}
+
+int	process_string(const char *input, size_t *i, t_token **head)
+{
+	char	quote;
+	size_t	start;
+	char	*str;
+
+	quote = input[*i];
+	(*i)++;
+	start = *i;
+	while (input[*i] && input[*i] != quote)
+		(*i)++;
+	if (input[*i] != quote)
+		return (RETURN_FAILURE);
+	str = ft_strndup(input + start, *i - start);
+	if (!str)
+		return (RETURN_FAILURE);
+	if (process_quotes(quote, str, head) == RETURN_FAILURE)
+		return (RETURN_FAILURE);
 	free(str);
 	if (input[*i] == quote)
 		(*i)++;
