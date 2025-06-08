@@ -12,8 +12,14 @@ typedef enum e_last_return {
     CMD_EXEC_FAILURE = 255
 } t_last_return;
 
+typedef struct s_heredoc {
+	char	*arg;
+	int		fd;
+} t_heredoc;
+
 typedef struct s_arg {
 	char			*arg;
+	int				fd;
 	bool			in_simple_quote;
 	bool			in_double_quote;
 } t_arg;
@@ -33,7 +39,7 @@ typedef struct s_command_exec {
 	char			**redirect_in;
 	char			**redirect_out;
 	char			*append_redirections;
-	char			*heredoc;
+	t_heredoc		*heredoc;
 	struct 			s_command_exec *next;
 } t_command_exec;
 
@@ -82,6 +88,10 @@ void			print_syntax_error(const char *token, t_utils *utils);
 int 			is_redirect_or_pipe(t_token *token);
 int				get_size_of_redirect(t_arg **redirect);
 int				is_redirect(t_token *token);
+void			free_str_array(char **arr, int size);
+char			**dup_targ_array(t_arg **arr);
+t_heredoc		*dup_heredoc_from_arg(t_arg *src);
+
 
 /******************************************************************************/
 /*                                PROCESS                                     */

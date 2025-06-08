@@ -47,4 +47,7 @@ int	    count_commands(t_command_exec *cmds, bool *is_alone);
 void	child_maker(t_command_exec *node, t_utils *utils);
 void	exec(t_command_exec *node, t_utils *utils);
 
+//here_doc.c
+int here_doc (char *delimiter);
+
 #endif
