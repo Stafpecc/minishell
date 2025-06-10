@@ -21,7 +21,7 @@
 // check if it is a built-in cmd
 // TODO also need a struct with env + last return
 
-void	child_maker(t_command_exec *node, t_utils *utils)
+int	child_maker(t_command_exec *node, t_utils *utils)
 {
 	int		i;
 	int		pipe_fd[2]; //TODO add to utils
@@ -74,6 +74,7 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 	printf("last error_return = %u\n",status >> 8);
 		//printf("Test\n");
 	// TODO WAIT CHILDS WAITPID
+	return(EXIT_SUCCESS);
 }
 
 //function that will determine which built-in
@@ -81,7 +82,7 @@ void	child_maker(t_command_exec *node, t_utils *utils)
 //that would be the $?
 //TODO Ask theo if there is a way to make it better
 
-static int only_child_built_in(t_command_exec *node, t_utils *utils)
+static int single_built_in_redirections(t_command_exec *node, t_utils *utils)
 {
 	if(node->redirect_in)
 	{
@@ -97,15 +98,15 @@ static int only_child_built_in(t_command_exec *node, t_utils *utils)
 			return(EXIT_FAILURE);
 		}
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int single_built_in(t_command_exec *node, t_utils *utils)
 {
 	if(node->redirect_in || node->redirect_out)
 	{
-		if(only_child_built_in(node, utils))
-			return(-42); //TODO handle error cases, free everything blabla
+		if(single_built_in_redirections(node, utils))
+			return(MALLOC_ERROR); //TODO handle error cases, free everything blabla
 	}
 	if (!ft_strcmp(node->cmd_parts[0], "cd"))
 		return (cd_builtin(node, utils, 0, 0));
@@ -119,39 +120,27 @@ int single_built_in(t_command_exec *node, t_utils *utils)
 		return (env_builtin(node, utils, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))
 		return (exit_builtin(node, utils));
-	return(-42); //shouldnt even get there at this point
+	return(MALLOC_ERROR); //shouldnt even get there at this point
 }
 
-// exec that does receive two struct, command_exec(nameWIP)
-// and also a struct utils that hold every tools the exec need
-// TODO also the struct that contain the env and last return
-// can remove is_alone if not enough
-// space they exist for lisibility purpose
-//TODO LATER include printfd + remove changes done on tarini's printf
+//EXEC does lead to two possibilities
+//if the cmd is single AND also a built_in
+//then go to path A(single_built_in)
+//else go to child_maker to make right nbr of childs
 
-void	exec(t_command_exec *node, t_utils *utils)
+int	exec(t_command_exec *node, t_utils *utils)
 {
-	bool is_alone; //TODO utils?
-	//ft_printfd("TEST>>W<WKDK\n\n\n %s",node->redirect_in[0]);
-
-	utils->num_nodes = count_commands(node, &is_alone);
-	//printf("num_nodes: %d\n", utils->num_nodes);
-	if (is_alone == true)
+	utils->num_nodes = count_commands(node);
+	if (utils->num_nodes == 1 && built_in_checker(node->cmd_parts[0]))
 	{
-		if (built_in_checker(node->cmd_parts[0]))
-		{
-			utils->status = single_built_in(node, utils); //TODO check error
-			ft_printfd("Parent: built_in_checker passed\n"); // TORMASAP
-															// TODObuilt_in redirect
-		}
-		else //TORM (probably useless bcs else bellow does the exact samething.)
-		{
-			//printf("parent: not a single built-in\n"); // TORMASAP
-			child_maker(node,utils);
-		}
+		utils->status = single_built_in(node, utils);
+		if (utils->status == MALLOC_ERROR)
+			return(EXIT_FAILURE);//TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
 	}
 	else
-		child_maker(node,utils); //TODO ASK TARINI IF THE PARSING TREAT SOME KIND OF CASES LIKE NOTHING IS SENT FOR EX
-	//printf("FAILURE\n");
-	return;
+	{
+		if(child_maker(node,utils) == MALLOC_ERROR)
+			return(EXIT_FAILURE); //TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
+	}
+	return(EXIT_SUCCESS);
 }

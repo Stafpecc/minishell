@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_gestionary.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 05:43:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/10 14:55:12 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static size_t	size_of_args(t_arg **args)
 {
 	size_t	i;
 
+	i = 0; //FORTHEO added
 	if (args)
 	{
 		while (args[i])

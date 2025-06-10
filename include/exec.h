@@ -1,6 +1,6 @@
 #ifndef EXEC_H
 # define EXEC_H
-
+# define MALLOC_ERROR -42
 # include <stdlib.h>
 # include <stdio.h> //TODELETE
 # include <stdbool.h>
@@ -42,10 +42,10 @@ void    child_redirect(t_command_exec *node, t_utils *utils);
 
 //exec_utils.c
 bool	built_in_checker(char *cmd);
-int	    count_commands(t_command_exec *cmds, bool *is_alone);
+int	    count_commands(t_command_exec *cmds);
 //exec.c
-void	child_maker(t_command_exec *node, t_utils *utils);
-void	exec(t_command_exec *node, t_utils *utils);
+int	child_maker(t_command_exec *node, t_utils *utils);
+int	exec(t_command_exec *node, t_utils *utils);
 
 //here_doc.c
 int here_doc (char *delimiter);
