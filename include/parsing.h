@@ -107,4 +107,11 @@ int				process_pipe(t_command **curr, t_command *head);
 int				process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
 int				process_free_exit(t_command *head);
 
+/******************************************************************************/
+/*                                 EXPAND                                     */
+/******************************************************************************/
+char			*append_exit_code(char *result, t_utils *utils);
+char			*append_env_var(char *result, char *input, int *i, char **env);
+char			*append_char(char *result, char c);
+
 #endif
