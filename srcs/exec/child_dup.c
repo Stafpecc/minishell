@@ -52,7 +52,6 @@ int	read_dup(char **redirect, int *pipe_fd, int previous_pipe, int fd)
 	{
 		while (redirect[i])
 		{
-			ft_printfd("TEST>>W<WKDK\n\n\n");
 			fd = open(redirect[i], O_RDONLY); //TODO PROTECT
 			if (fd < 0)
 				return (1);

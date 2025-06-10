@@ -44,10 +44,12 @@ void    child_redirect(t_command_exec *node, t_utils *utils);
 bool	built_in_checker(char *cmd);
 int	    count_commands(t_command_exec *cmds);
 //exec.c
-int	child_maker(t_command_exec *node, t_utils *utils);
+int	child_maker(t_command_exec *node, t_utils *utils, int i);
 int	exec(t_command_exec *node, t_utils *utils);
 
 //here_doc.c
 int here_doc (char *delimiter);
+//single_builtin.c
+int single_built_in(t_command_exec *node, t_utils *utils);
 
 #endif

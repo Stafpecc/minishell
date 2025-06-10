@@ -77,6 +77,7 @@ override EXECSRC := \
 	exec \
 	here_doc\
 	redirections \
+	single_builtin \
 
 
 SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
