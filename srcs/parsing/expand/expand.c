@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/11 13:22:55 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:08:21 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,9 @@ static char	*append_char(char *result, char c)
 	return (tmp);
 }
 
-char	*expand_variables(char *input, t_utils *utils)
+static char	*expand_variables_utils(int i, char *result, t_utils *utils,
+	char *input)
 {
-	int		i;
-	char	*result;
-	
-	result = ft_strdup("");
-	i = 0;
 	while (input[i])
 	{
 		if (input[i] == '$')
@@ -84,3 +80,13 @@ char	*expand_variables(char *input, t_utils *utils)
 	return (result);
 }
 
+char	*expand_variables(char *input, t_utils *utils)
+{
+	int		i;
+	char	*result;
+
+	i = 0;
+	result = ft_strdup("");
+	result = expand_variables_utils(i, result, utils, input);
+	return (result);
+}

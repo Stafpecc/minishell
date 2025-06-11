@@ -6,11 +6,12 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:46:20 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/11 13:19:35 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:23:22 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "../../../libft/includes/libft.h"
 
 static int	process_quotes(char quote, char *str, t_token **head)
 {

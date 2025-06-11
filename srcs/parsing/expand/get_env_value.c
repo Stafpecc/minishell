@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:56:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/11 13:00:25 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:09:11 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_env_value(char **env, const char *var_name)
 {
 	size_t	len;
 	int		i;
-	
+
 	len = ft_strlen(var_name);
 	i = 0;
 	while (env[i])
