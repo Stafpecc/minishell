@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:56:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/10 17:59:35 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/11 13:00:25 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../../../libft/includes/libft.h"
 
 char	*get_env_value(char **env, const char *var_name)
 {

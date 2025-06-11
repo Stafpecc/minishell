@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/10 18:08:39 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/11 13:22:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../../../libft/includes/libft.h"
 
-char	*append_exit_code(char *result, t_utils *utils)
+static char	*append_exit_code(char *result, t_utils *utils)
 {
 	char	*exit_code;
 	char	*tmp;
@@ -23,7 +24,7 @@ char	*append_exit_code(char *result, t_utils *utils)
 	return (tmp);
 }
 
-char	*append_env_var(char *result, char *input, int *i, char **env)
+static char	*append_env_var(char *result, char *input, int *i, char **env)
 {
 	int		start;
 	char	*var_name;
@@ -40,7 +41,7 @@ char	*append_env_var(char *result, char *input, int *i, char **env)
 	return (tmp);
 }
 
-char	*append_char(char *result, char c)
+static char	*append_char(char *result, char c)
 {
 	char	buf[2];
 	char	*tmp;
@@ -50,3 +51,36 @@ char	*append_char(char *result, char c)
 	tmp = strjoin_and_free(result, buf);
 	return (tmp);
 }
+
+char	*expand_variables(char *input, t_utils *utils)
+{
+	int		i;
+	char	*result;
+	
+	result = ft_strdup("");
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '$')
+		{
+			i++;
+			if (input[i] == '?')
+			{
+				i++;
+				result = append_exit_code(result, utils);
+			}
+			else if (ft_isalnum(input[i]) || input[i] == '_')
+				result = append_env_var(result, input, &i, utils->env);
+			else
+			{
+				result = append_char(result, '$');
+				if (input[i])
+					result = append_char(result, input[i++]);
+			}
+		}
+		else
+			result = append_char(result, input[i++]);
+	}
+	return (result);
+}
+

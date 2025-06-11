@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 04:27:02 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/11 13:13:16 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_command_exec	*parse_tokens(t_token *tokens, t_utils *utils)
 	}
 	if (parse_cmd(head, utils) == RETURN_FAILURE)
 		return (NULL);
+	print_commands(head);
 	final = struct_to_char(head);
 	free_commands(head);
 	return (final);

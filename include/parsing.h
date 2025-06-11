@@ -98,7 +98,7 @@ int				redirect_to_char(t_command *cmd, t_command_exec *new_node);
 /*                                PROCESS                                     */
 /******************************************************************************/
 bool			is_word_like(t_token *token);
-int				process_word_string(t_token **tokens, t_command *curr);
+int				process_word_string(t_token **tokens, t_command *curr, t_utils *utils);
 int				process_redirect_in(t_token **tokens, t_command *curr, t_command *head, t_utils  *utils);
 int				process_redirect_out(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
 int				process_append_redirect(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
@@ -110,8 +110,8 @@ int				process_free_exit(t_command *head);
 /******************************************************************************/
 /*                                 EXPAND                                     */
 /******************************************************************************/
-char			*append_exit_code(char *result, t_utils *utils);
-char			*append_env_var(char *result, char *input, int *i, char **env);
-char			*append_char(char *result, char c);
+char			*expand_variables(char *input, t_utils *utils);
+char			*get_env_value(char **env, const char *var_name);
+char			*strjoin_and_free(char *s1, char *s2);
 
 #endif
