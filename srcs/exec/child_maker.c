@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/11 09:29:10 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/12 08:55:01 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,23 @@
 // to hold the last return value of the last child
 // then return 0 on success
 
-static int	wait_for_children_and_cleanup(t_utils *utils, int status,
-		pid_t child, int *pipe_fd)
+static int	wait_for_children_and_cleanup(t_utils *utils, int status, int *pipe_fd, pid_t child)
 {
-	if (close(utils->previous_pipes) == -1)
-		return (EXIT_FAILURE);
-	if (pipe_fd[1] != -42)
-	{
-		if (close(pipe_fd[1]) == -1)
-			return (EXIT_FAILURE);
-	}
-	if (close(pipe_fd[0]) == -1)
-		return (EXIT_FAILURE);
+
+	// if (utils->previous_pipes >= 0)
+	// {
+	// 	if (close(utils->previous_pipes) == -1)
+	// 		return (EXIT_FAILURE);
+	// }
+	// if (pipe_fd[1] != -42)
+	// {
+	// 	if (close(pipe_fd[1]) == -1)
+	// 		return (EXIT_FAILURE);
+	// }
+	//close (pipe_fd[0]);
 	while (waitpid(child, &status, 0) > 0)
-		utils->last_return = status >> 8;
+		utils->last_return = WEXITSTATUS(status);
+	close (pipe_fd[0]);
 	return (EXIT_SUCCESS);
 }
 // is previous pipe exist if yes is it not the last cmd?
@@ -49,27 +52,30 @@ static int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 		if (pipe(pipe_fd) == -1)
 			return (EXIT_FAILURE);
 	}
-	else if (i == utils->num_nodes - 1)
+	else if (i == utils->num_nodes - 1 && pipe_fd[1] != -42)
 	{
 		if (close(pipe_fd[1]) == -1)
 			return (EXIT_FAILURE);
 		pipe_fd[1] = -42;
 	}
+	
 	return (EXIT_SUCCESS);
 }
 // we fork the child, then child go to
 // child_init_pipes_dup, if failed
 // exit_failure else parent get out with return 0
 
-static int	child_secure_fork(t_command_exec *node, t_utils *utils,
-		int *pipe_fd, pid_t child)
+static pid_t child_secure_fork(t_command_exec *node, t_utils *utils,
+		int *pipe_fd)
 {
+	pid_t child;
+	
 	child = fork();
 	if (child == 0)
 		child_init_pipes_dup(node, pipe_fd, utils);
 	else if (child == -1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (-1);
+	return (child);
 }
 
 // if we are not dealing with the last cmd
@@ -83,10 +89,11 @@ static int	child_secure_fork(t_command_exec *node, t_utils *utils,
 
 static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 {
-	if (i < utils->num_nodes - 1)
+	if (i < utils->num_nodes - 1 && pipe_fd[1] != -42)
 	{
 		if (close(pipe_fd[1]) == -1)
 			return (EXIT_FAILURE);
+		pipe_fd[1] = -42;
 	}
 	if (utils->previous_pipes != -42)
 	{
@@ -106,19 +113,20 @@ int	child_maker(t_command_exec *node, t_utils *utils, int i)
 	int		pipe_fd[2];
 	pid_t	child;
 
-    child = 0; //TODO check if I can init it like that
+	utils->previous_pipes = -42;
 	if (pipe(pipe_fd) == -1)
 		return (EXIT_FAILURE);
 	while (node)
 	{
 		if (setup_coming_child_pipes(utils, pipe_fd, i))
 			return (EXIT_FAILURE);
-		if (child_secure_fork(node, utils, pipe_fd, child))
+		child = child_secure_fork(node, utils, pipe_fd);
+		if (child == -1)
 			return (EXIT_FAILURE);
 		if (setup_next_child(utils, pipe_fd, i))
 			return (EXIT_FAILURE);
 		node = node->next;
 		i++;
 	}
-	return (wait_for_children_and_cleanup(utils, 0, child, pipe_fd));
+	return (wait_for_children_and_cleanup(utils, 0, pipe_fd, child));
 }
