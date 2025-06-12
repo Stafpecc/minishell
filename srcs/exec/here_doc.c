@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 09:23:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/04 15:11:07 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../../include/exec.h"
 //we init input to NULL, then we get into an infinite while loop
@@ -18,31 +8,28 @@
 // if no we write the content of input with a \n free input set it to null
 // then we go back to the start of the loop UNTIL we find the EOF delimiter
 
-static int readline_heredoc (int fd, char *delimiter)
+static int readline_heredoc(int fd, char *delimiter)
 {
     char *input;
 
-    input = NULL;
-    while(1)
+    while (1)
     {
         input = readline("> ");
-		if (!input)
-		{
-			ft_printfd("Error\n"); //check if I can find a better error msg
-		    return(EXIT_FAILURE);
-		}
-        if(!strcmp(input, delimiter))
+        if (!input)
         {
+            write(1, "\n", 1);
             break;
-        } //salut == 0 1 2 3 4 5
+        }
+        if (ft_strcmp(input, delimiter) == 0)
+        {
+            free(input);
+            break;
+        }
         write(fd, input, ft_strlen(input));
         write(fd, "\n", 1);
         free(input);
-        input = NULL;
     }
-    free(input);
-    input = NULL;
-    return(0);
+    return (0);
 }
 
 //I create .heredoc.tmp with open and associate its fd into fd, I secure it

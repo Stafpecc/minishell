@@ -25,6 +25,9 @@ SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 override PARSERSRC := \
 	parser \
 	launcher \
+	expand/expand \
+	expand/expand_utils \
+	expand/get_env_value \
 	parse/parse_launch \
 	parse/parse_dir \
 	parse/parse_file \
@@ -70,6 +73,7 @@ SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
 override EXECSRC := \
 	child_dup \
+	child_maker \
 	child_pathed \
 	child_utils \
 	child \
@@ -77,6 +81,7 @@ override EXECSRC := \
 	exec \
 	here_doc\
 	redirections \
+	single_builtin \
 
 
 SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))

@@ -53,27 +53,30 @@ void print_utils_struct(t_utils *utils) // DEBUG
 void print_commands(t_command *cmd) // DEBUG
 {
     int i;
-    int node;
+    int node = 1;
 
-    node = 1;
     while (cmd)
     {
         ft_printf("\n---- Command Node %d ----\n", node++);
+
+        // cmd_parts
         if (cmd->cmd_parts)
         {
             i = 0;
             while (cmd->cmd_parts[i])
             {
                 ft_printf("cmd_parts[%d]: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
-                       i,
-                       cmd->cmd_parts[i]->arg,
-                       cmd->cmd_parts[i]->in_simple_quote ? "true" : "false",
-                       cmd->cmd_parts[i]->in_double_quote ? "true" : "false");
+                          i,
+                          cmd->cmd_parts[i]->arg,
+                          cmd->cmd_parts[i]->in_simple_quote ? "true" : "false",
+                          cmd->cmd_parts[i]->in_double_quote ? "true" : "false");
                 i++;
             }
         }
         else
             ft_printf("No cmd_parts.\n");
+
+        // redirect_in
         if (cmd->redirect_in)
         {
             i = 0;
@@ -85,6 +88,8 @@ void print_commands(t_command *cmd) // DEBUG
         }
         else
             ft_printf("redirect_in: NULL\n");
+
+        // redirect_out
         if (cmd->redirect_out)
         {
             i = 0;
@@ -96,22 +101,25 @@ void print_commands(t_command *cmd) // DEBUG
         }
         else
             ft_printf("redirect_out: NULL\n");
+
+        // append_redirections
         if (cmd->append_redirections && cmd->append_redirections->arg)
         {
             ft_printf("append_redirections: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
-                   cmd->append_redirections->arg,
-                   cmd->append_redirections->in_simple_quote ? "true" : "false",
-                   cmd->append_redirections->in_double_quote ? "true" : "false");
+                      cmd->append_redirections->arg,
+                      cmd->append_redirections->in_simple_quote ? "true" : "false",
+                      cmd->append_redirections->in_double_quote ? "true" : "false");
         }
         else
             ft_printf("No append_redirections.\n");
 
+        // heredoc
         if (cmd->heredoc && cmd->heredoc->arg)
         {
             ft_printf("heredoc: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
-                   cmd->heredoc->arg,
-                   cmd->heredoc->in_simple_quote ? "true" : "false",
-                   cmd->heredoc->in_double_quote ? "true" : "false");
+                      cmd->heredoc->arg,
+                      cmd->heredoc->in_simple_quote ? "true" : "false",
+                      cmd->heredoc->in_double_quote ? "true" : "false");
         }
         else
             ft_printf("No heredoc.\n");

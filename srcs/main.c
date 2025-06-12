@@ -51,11 +51,59 @@ static int is_all_spaces(const char *str)
 	return (RETURN_SUCCESS);
 }
 
-int main(int ac, char **av, char **env)
+static char	quote_not_closed(const char *str)
 {
-	char *input;
-	t_token *token;
-	t_utils *utils;
+	char	quote = 0;
+	int		i = 0;
+
+	while (str[i])
+	{
+		if ((str[i] == '"' || str[i] == '\'') && quote == 0)
+			quote = str[i];
+		else if (str[i] == quote)
+			quote = 0;
+		i++;
+	}
+	return (quote);
+}
+
+static char	*strjoin_free(char *s1, const char *s2)
+{
+	char	*joined;
+	
+	if (!s1)
+		return (ft_strdup(s2));
+	joined = ft_strjoin(s1, s2);
+	free(s1);
+	return (joined);
+}
+
+static char	*read_input_with_quotes(void)
+{
+	char	*line;
+	char	*tmp;
+	char	quote;
+
+	line = readline("minishell> ");
+	if (!line)
+		return (NULL);
+	while ((quote = quote_not_closed(line)))
+	{
+		tmp = readline("> ");
+		if (!tmp)
+			break;
+		line = strjoin_free(line, "\n");
+		line = strjoin_free(line, tmp);
+	}
+	return (line);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	char			*input;
+	t_token			*token;
+	t_utils			*utils;
+	t_command_exec	*command;
 
 	utils = init_utils_struct(env);
 	(void)ac;
@@ -63,37 +111,39 @@ int main(int ac, char **av, char **env)
 	set_signals();
 	while (1)
 	{
-		input = readline("minishell> ");
+		input = read_input_with_quotes();
 		if (!input)
 		{
 			write(1, "exit\n", 5);
-			exit(0);
+			exit_proprely(0, NULL, NULL);
 		}
-		if (!input || *input == '\0' || !is_all_spaces(input))
-			continue;
-		token = lexer(input);
 		if (*input)
 			add_history(input);
-		if (token->type != TOK_END)
+		if (!*input || !is_all_spaces(input))
 		{
-			if (has_only_one_redirection(token))
-			{
-				print_syntax_error("newline", utils);
-				free_tokens(token);
-				continue;
-			}
+			free(input);
+			continue;
+		}
+		token = lexer(input);
+		if (!token)
+		{
+			free(input);
+			continue;
+		}
+		if (token->type != TOK_END && has_only_one_redirection(token))
+		{
+			print_syntax_error("newline", utils);
+			free_tokens(token);
+			free(input);
+			continue;
 		}
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
 		utils->type_of_first_arg = token->type;
-		t_command_exec *command = parse_tokens(token, utils);
-		print_command_exec(command);
-		ft_printfd("PROUT\n");
-		//if (command != NULL)
-		//{
-			//ft_printfd("TEST>>W<WKDK\n\n\n %s",command->redirect_in[0]);
+
+		command = parse_tokens(token, utils);
+		if (command)
 			exec(command, utils);
-		//}
 		free(input);
 		free_tokens(token);
 		free_commands_exec(command);
