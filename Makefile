@@ -61,7 +61,7 @@ fclean: clean
 	$(MAKE) -C $(DIR_LIBFT) fclean
 	echo "$(RED)"
 	echo "┌──────────────────────────────────────────────────────────┐"
-	echo "│      Deletion finished successfully! ( ◔ ω ◔) ノシ         │"
+	echo "│      Deletion finished successfully! ( ◔ ω ◔) ノシ       │"
 	echo "└──────────────────────────────────────────────────────────┘"
 	echo "                           ╱|、"
 	echo "                         (˚ˎ 。7"
