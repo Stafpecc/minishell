@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 04:52:29 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:19:24 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static int	parse_cmd_helper(t_command *prev, t_command *curr, t_utils *utils)
 		return (return_failure("|", utils));
 	if (has_conflicting_redirections(curr))
 		return (return_failure(">", utils));
-	if ((curr->redirect_in || curr->redirect_out
-			|| curr->append_redirections || curr->heredoc)
+	if ((curr->redirect_in || curr->redirect_out)
 		&& is_empty_command(curr))
 		return (return_failure(">", utils));
 	if (redirect_parsing(curr, utils) == RETURN_FAILURE)

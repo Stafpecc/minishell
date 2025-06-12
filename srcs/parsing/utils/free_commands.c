@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 05:45:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:28:42 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,6 @@ void	free_commands(t_command *cmd)
 		free_arg_table(tmp->cmd_parts);
 		free_arg_table(tmp->redirect_in);
 		free_arg_table(tmp->redirect_out);
-		free(tmp->append_redirections);
-		if (tmp->heredoc)
-		{
-			if (tmp->heredoc->fd != -1)
-				close(tmp->heredoc->fd);
-			free(tmp->heredoc->arg);
-			free(tmp->heredoc);
-		}
 		free(tmp);
 	}
 }
@@ -77,16 +69,8 @@ void	free_commands_exec(t_command_exec *cmd)
 		tmp = cmd;
 		cmd = cmd->next;
 		free_string_array(tmp->cmd_parts);
-		free_string_array(tmp->redirect_in);
-		free_string_array(tmp->redirect_out);
-		free(tmp->append_redirections);
-		if (tmp->heredoc)
-		{
-			if (tmp->heredoc->fd != -1)
-				close(tmp->heredoc->fd);
-			free(tmp->heredoc->arg);
-			free(tmp->heredoc);
-		}
+		free_redirect_array(tmp->redirect_in);
+		free_redirect_array(tmp->redirect_out);
 		free(tmp);
 	}
 }

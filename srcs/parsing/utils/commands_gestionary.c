@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_gestionary.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:08:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/10 16:24:52 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/12 10:26:50 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ t_command	*create_command(void)
 	cmd->cmd_parts = NULL;
 	cmd->redirect_in = NULL;
 	cmd->redirect_out = NULL;
-	cmd->append_redirections = NULL;
-	cmd->heredoc = NULL;
 	cmd->next = NULL;
 	return (cmd);
 }

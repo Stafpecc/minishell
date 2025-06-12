@@ -12,12 +12,6 @@ typedef enum e_last_return {
     CMD_EXEC_FAILURE = 255
 } t_last_return;
 
-typedef struct s_redirect {
-	char	*arg;
-	int		fd;
-	bool	append_redirect;
-	bool	heredoc;
-} t_redirect;
 
 typedef struct s_arg {
 	char			*arg;
@@ -34,6 +28,13 @@ typedef struct s_command {
 	t_arg				**redirect_out;
 	struct s_command	*next;
 } t_command;
+
+typedef struct s_redirect {
+	char	*arg;
+	int		fd;
+	bool	append_redirect;
+	bool	heredoc;
+} t_redirect;
 
 typedef struct s_command_exec {
 	
