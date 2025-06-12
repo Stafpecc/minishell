@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/12 11:22:37 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/12 15:39:30 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int single_built_in_redirections(t_command_exec *node, t_utils *utils)
 	}
 	if(node->redirect_out)
 	{
-		if(write_dup(node->redirect_out, 0, 0))			
+		if(write_dup(node->redirect_out, 0))			
 			return(EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

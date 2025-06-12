@@ -1,6 +1,7 @@
 #ifndef EXEC_H
 # define EXEC_H
 # define MALLOC_ERROR -42
+# define NONE -42
 # include <stdlib.h>
 # include <stdio.h> //TODELETE
 # include <stdbool.h>
@@ -18,7 +19,7 @@
 #include "../libft/includes/libft.h"
 
 //child_dup.c
-int	    write_dup(t_redirect **redirect, int *pipe_fd, int i);
+int 	write_dup(t_redirect **redirect, int *pipe_fd);
 int	    read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe, int i);
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils);
 void    only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
