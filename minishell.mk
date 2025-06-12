@@ -25,6 +25,9 @@ SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 override PARSERSRC := \
 	parser \
 	launcher \
+	expand/expand \
+	expand/expand_utils \
+	expand/get_env_value \
 	parse/parse_launch \
 	parse/parse_dir \
 	parse/parse_file \

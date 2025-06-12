@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 11:36:53 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/10 14:51:08 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../../include/exec.h"
 
@@ -19,7 +9,7 @@ bool	built_in_checker(char *cmd)
 {
 	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd,
 			"export") || !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "env")
-		|| !ft_strcmp(cmd, "exit"))
+		|| !ft_strcmp(cmd, "exit") || !ft_strcmp(cmd, "echo"))
 		return (true);
 	else
 		return (false);
@@ -40,3 +30,4 @@ int	count_commands(t_command_exec *cmds)
 	}
 	return (counter_cmd);
 }
+
