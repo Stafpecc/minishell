@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:17:42 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/08 05:10:44 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:26:30 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 */
 bool	has_conflicting_redirections(t_command *cmd)
 {
-	return ((cmd->redirect_in && cmd->heredoc)
-		|| (cmd->redirect_out && cmd->append_redirections));
+	return ((cmd->redirect_in || (cmd->redirect_out)));
 }
 
 static int	count_strings(t_arg **arr)
@@ -59,9 +58,5 @@ int	redirect_parsing(t_command *curr, t_utils *utils)
 		return (return_failure("<", utils));
 	if (out_count > 1)
 		return (return_failure(">", utils));
-	if (curr->append_redirections && out_count > 0)
-		return (return_failure(">", utils));
-	if (curr->heredoc && in_count > 0)
-		return (return_failure("<", utils));
 	return (RETURN_SUCCESS);
 }

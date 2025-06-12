@@ -12,43 +12,44 @@ typedef enum e_last_return {
     CMD_EXEC_FAILURE = 255
 } t_last_return;
 
-typedef struct s_heredoc {
-	char	*arg;
-	int		fd;
-} t_heredoc;
 
 typedef struct s_arg {
 	char			*arg;
 	int				fd;
+	bool			heredoc;
+	bool			append_redirect;
 	bool			in_simple_quote;
 	bool			in_double_quote;
 } t_arg;
 
 typedef struct s_command {
-	t_arg			**cmd_parts;
-	t_arg			**redirect_in;
-	t_arg			**redirect_out;
-	t_arg			*append_redirections;
-	t_arg			*heredoc;
-	struct s_command *next;
+	t_arg				**cmd_parts;
+	t_arg				**redirect_in;
+	t_arg				**redirect_out;
+	struct s_command	*next;
 } t_command;
+
+typedef struct s_redirect {
+	char	*arg;
+	int		fd;
+	bool	append_redirect;
+	bool	heredoc;
+} t_redirect;
 
 typedef struct s_command_exec {
 	
-	char			**cmd_parts;
-	char			**redirect_in;
-	char			**redirect_out;
-	char			*append_redirections;
-	t_heredoc		*heredoc;
-	struct 			s_command_exec *next;
+	char					**cmd_parts;
+	t_redirect				**redirect_in;
+	t_redirect				**redirect_out;
+	struct s_command_exec	*next;
 } t_command_exec;
 
 typedef struct s_utils {
 	char				**env;
-	int         		last_return;
-	int         		num_nodes;
-	int         		previous_pipes;
-	int 				status;
+	int					last_return;
+	int					num_nodes;
+	int					previous_pipes;
+	int					status;
 	enum e_token_type	type_of_first_arg;
 } t_utils;
 
@@ -89,10 +90,11 @@ int 			is_redirect_or_pipe(t_token *token);
 int				get_size_of_redirect(t_arg **redirect);
 int				is_redirect(t_token *token);
 void			free_str_array(char **arr, int size);
-char			**dup_targ_array(t_arg **arr);
-t_heredoc		*dup_heredoc_from_arg(t_arg *src);
+t_redirect		**dup_targ_to_tredirect_array(t_arg **arr);
+t_redirect		*dup_heredoc_from_arg(t_arg *src);
 int				cmd_part_to_char(t_command *cmd, t_command_exec *new_node);
 int				redirect_to_char(t_command *cmd, t_command_exec *new_node);
+void			free_redirect_array(t_redirect **redirects);
 
 /******************************************************************************/
 /*                                PROCESS                                     */

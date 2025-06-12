@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 05:51:33 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/08 16:51:02 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:08:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,62 @@ void	free_str_array(char **arr, int size)
 	free(arr);
 }
 
-char	**dup_targ_array(t_arg **arr)
+t_redirect	**dup_targ_to_tredirect_array(t_arg **arr)
 {
-	int		count;
-	char	**new_arr;
-	int		i;
+	int			count;
+	int			i;
+	t_redirect	**new_arr;
 
 	if (!arr)
 		return (NULL);
 	count = 0;
 	while (arr[count])
 		count++;
-	new_arr = malloc(sizeof(char *) * (count + 1));
+	new_arr = malloc(sizeof(t_redirect *) * (count + 1));
 	if (!new_arr)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
-		new_arr[i] = ft_strdup(arr[i]->arg);
+		new_arr[i] = malloc(sizeof(t_redirect));
 		if (!new_arr[i])
 		{
-			free_str_array(new_arr, i);
+			while (--i >= 0)
+			{
+				free(new_arr[i]->arg);
+				free(new_arr[i]);
+			}
+			free(new_arr);
 			return (NULL);
 		}
+		new_arr[i]->arg = ft_strdup(arr[i]->arg);
+		if (!new_arr[i]->arg)
+		{
+			while (--i >= 0)
+			{
+				free(new_arr[i]->arg);
+				free(new_arr[i]);
+			}
+			free(new_arr);
+			return (NULL);
+		}
+		new_arr[i]->fd = arr[i]->fd;
+		new_arr[i]->heredoc = arr[i]->heredoc;
+		new_arr[i]->append_redirect = arr[i]->append_redirect;
 		i++;
 	}
-	new_arr[count] = NULL;
+	new_arr[i] = NULL;
 	return (new_arr);
 }
 
-t_heredoc	*dup_heredoc_from_arg(t_arg *src)
+
+t_redirect	*dup_heredoc_from_arg(t_arg *src)
 {
-	t_heredoc	*copy;
+	t_redirect	*copy;
 
 	if (!src)
 		return (NULL);
-	copy = malloc(sizeof(t_heredoc));
+	copy = malloc(sizeof(t_redirect));
 	if (!copy)
 		return (NULL);
 	copy->arg = ft_strdup(src->arg);
@@ -72,6 +92,21 @@ t_heredoc	*dup_heredoc_from_arg(t_arg *src)
 	}
 	copy->fd = src->fd;
 	return (copy);
+}
+
+void	free_redirect_array(t_redirect **redirects)
+{
+	int	i = 0;
+
+	if (!redirects)
+		return;
+	while (redirects[i])
+	{
+		free(redirects[i]->arg);
+		free(redirects[i]);
+		i++;
+	}
+	free(redirects);
 }
 
 int	cmd_part_to_char(t_command *cmd, t_command_exec *new_node)
@@ -102,24 +137,3 @@ int	cmd_part_to_char(t_command *cmd, t_command_exec *new_node)
 	return (RETURN_SUCCESS);
 }
 
-int	redirect_to_char(t_command *cmd, t_command_exec *new_node)
-{
-	if (cmd->append_redirections && cmd->append_redirections->arg)
-	{
-		new_node->append_redirections
-			= ft_strdup(cmd->append_redirections->arg);
-		if (!new_node->append_redirections)
-			return (RETURN_FAILURE);
-	}
-	else
-		new_node->append_redirections = NULL;
-	if (cmd->heredoc)
-	{
-		new_node->heredoc = dup_heredoc_from_arg(cmd->heredoc);
-		if (!new_node->heredoc)
-			return (RETURN_FAILURE);
-	}
-	else
-		new_node->heredoc = NULL;
-	return (RETURN_SUCCESS);
-}

@@ -59,8 +59,6 @@ t_command	*create_command(void)
 	cmd->cmd_parts = NULL;
 	cmd->redirect_in = NULL;
 	cmd->redirect_out = NULL;
-	cmd->append_redirections = NULL;
-	cmd->heredoc = NULL;
 	cmd->next = NULL;
 	return (cmd);
 }

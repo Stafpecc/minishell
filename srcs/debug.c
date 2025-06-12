@@ -101,29 +101,6 @@ void print_commands(t_command *cmd) // DEBUG
         }
         else
             ft_printf("redirect_out: NULL\n");
-
-        // append_redirections
-        if (cmd->append_redirections && cmd->append_redirections->arg)
-        {
-            ft_printf("append_redirections: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
-                      cmd->append_redirections->arg,
-                      cmd->append_redirections->in_simple_quote ? "true" : "false",
-                      cmd->append_redirections->in_double_quote ? "true" : "false");
-        }
-        else
-            ft_printf("No append_redirections.\n");
-
-        // heredoc
-        if (cmd->heredoc && cmd->heredoc->arg)
-        {
-            ft_printf("heredoc: \"%s\" (in_simple_quote: %s, in_double_quote: %s)\n",
-                      cmd->heredoc->arg,
-                      cmd->heredoc->in_simple_quote ? "true" : "false",
-                      cmd->heredoc->in_double_quote ? "true" : "false");
-        }
-        else
-            ft_printf("No heredoc.\n");
-
         ft_printf("\n");
         cmd = cmd->next;
     }
@@ -177,16 +154,6 @@ void print_command_exec(t_command_exec *cmd)
 		}
 		else
 			ft_printf("redirect_out: NULL\n");
-
-
-		if (cmd->append_redirections)
-			ft_printf("append_redirections: \"%s\"\n", cmd->append_redirections);
-		else
-			ft_printf("append_redirections: NULL\n");
-		if (cmd->heredoc)
-			ft_printf("heredoc: delim=\"%s\", fd=%d\n", cmd->heredoc->arg, cmd->heredoc->fd);
-		else
-			ft_printf("heredoc: NULL\n");
 
 
 		ft_printf("\n");

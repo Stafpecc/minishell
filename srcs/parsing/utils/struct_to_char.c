@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:09:50 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 16:51:19 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:07:26 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,8 @@ static void	*ret_free_command_exec(t_command_exec *node)
 	if (!node)
 		return (NULL);
 	free_tab(node->cmd_parts);
-	free_tab(node->redirect_in);
-	free_tab(node->redirect_out);
-	if (node->append_redirections)
-		free(node->append_redirections);
-	if (node->heredoc)
-		free(node->heredoc);
+	free_redirect_array(node->redirect_in);
+	free_redirect_array(node->redirect_out);
 	free(node);
 	return (NULL);
 }
@@ -64,15 +60,13 @@ static t_command_exec	*struct_to_char_node(t_command *cmd)
 	new_node->cmd_parts = NULL;
 	new_node->redirect_in = NULL;
 	new_node->redirect_out = NULL;
-	new_node->append_redirections = NULL;
-	new_node->heredoc = NULL;
 	new_node->next = NULL;
 	if (cmd_part_to_char(cmd, new_node) == RETURN_FAILURE)
 		return (ret_free_command_exec(new_node));
-	new_node->redirect_in = dup_targ_array(cmd->redirect_in);
+	new_node->redirect_in = dup_targ_to_tredirect_array(cmd->redirect_in);
 	if (cmd->redirect_in && !new_node->redirect_in)
 		return (ret_free_command_exec(new_node));
-	new_node->redirect_out = dup_targ_array(cmd->redirect_out);
+	new_node->redirect_out = dup_targ_to_tredirect_array(cmd->redirect_out);
 	if (cmd->redirect_out && !new_node->redirect_out)
 		return (ret_free_command_exec(new_node));
 	if (redirect_to_char(cmd, new_node) == RETURN_FAILURE)
