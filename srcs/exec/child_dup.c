@@ -11,7 +11,7 @@ int	write_dup(t_redirect **redirect, int *pipe_fd, int i)
 			if(redirect[i]->append_redirect == FALSE)
 				redirect[i]->fd = open(redirect[i]->arg, O_CREAT | O_WRONLY | O_TRUNC, 0644); //secure
 			else
-				redirect[i]->fd = open(redirect[i]->arg, O_CREAT | O_WRONLY, 0644); //secure
+				redirect[i]->fd = open(redirect[i]->arg, O_CREAT | O_WRONLY | O_APPEND, 0644); //secure
 			if (redirect[i]->fd < 0)
 				return (1);
 			if (dup2(redirect[i]->fd, STDOUT_FILENO) < 0)
