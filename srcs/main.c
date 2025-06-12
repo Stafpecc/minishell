@@ -140,6 +140,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strcmp(input, "exit") == 0)
 			exit_proprely(2, input, token);
 		utils->type_of_first_arg = token->type;
+
 		command = parse_tokens(token, utils);
 		if (command)
 			exec(command, utils);

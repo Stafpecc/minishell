@@ -1,16 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 11:36:53 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/11 13:57:51 by stafpec          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../../include/exec.h"
+
+// Just check if the cmd we are dealing with are a built-in cmd or not
+// if yes return TRUE if no return FALSE
 
 bool	built_in_checker(char *cmd)
 {
@@ -23,17 +16,18 @@ bool	built_in_checker(char *cmd)
 }
 
 // To count how much commands has been sent
-// INFO : I am unsure about the parameter name
-int	count_commands(t_command_exec *cmds, bool *is_alone)
+// return the value of how much cmd
+// in the user's input
+int	count_commands(t_command_exec *cmds)
 {
-	int	count;
+	int counter_cmd;
 
-	count = 0;
+	counter_cmd = 0;
 	while (cmds)
 	{
-		count++;
+		counter_cmd++;
 		cmds = cmds->next;
 	}
-	*is_alone = (count == 1);
-	return (count);
+	return (counter_cmd);
 }
+

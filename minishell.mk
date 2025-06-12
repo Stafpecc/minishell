@@ -74,6 +74,7 @@ SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
 override EXECSRC := \
 	child_dup \
+	child_maker \
 	child_pathed \
 	child_utils \
 	child \
@@ -81,6 +82,7 @@ override EXECSRC := \
 	exec \
 	here_doc\
 	redirections \
+	single_builtin \
 
 
 SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
