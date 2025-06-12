@@ -106,7 +106,7 @@ void print_commands(t_command *cmd) // DEBUG
     }
 }
 
-void print_command_exec(t_command_exec *cmd)
+void	print_command_exec(t_command_exec *cmd)
 {
 	int node;
 	int i;
@@ -134,7 +134,7 @@ void print_command_exec(t_command_exec *cmd)
 			i = 0;
 			while (cmd->redirect_in[i])
 			{
-				ft_printf("redirect_in[%d]: \"%s\"\n", i, cmd->redirect_in[i]);
+				ft_printf("redirect_in[%d]: \"%s\"\n", i, cmd->redirect_in[i]->arg);
 				i++;
 			}
 		}
@@ -146,7 +146,7 @@ void print_command_exec(t_command_exec *cmd)
 			i = 0;
 			while (cmd->redirect_out[i])
 			{
-				ft_printf("redirect_out[%d]: \"%s\"\n", i, cmd->redirect_out[i]);
+				ft_printf("redirect_out[%d]: \"%s\"\n", i, cmd->redirect_out[i]->arg);
 				i++;
 			}
 			if (i == 0)
@@ -155,12 +155,10 @@ void print_command_exec(t_command_exec *cmd)
 		else
 			ft_printf("redirect_out: NULL\n");
 
-
 		ft_printf("\n");
 		cmd = cmd->next;
 	}
 }
-
 
 void print_tokens(t_token *head) // DEBUG
 {

@@ -6,11 +6,12 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:17:42 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/12 10:26:30 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 14:18:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "stdio.h"
 
 /*
  Fonction qui :
@@ -23,19 +24,37 @@
 */
 bool	has_conflicting_redirections(t_command *cmd)
 {
-	return ((cmd->redirect_in || (cmd->redirect_out)));
-}
+	bool	has_in;
+	bool	has_heredoc;
+	bool	has_out;
+	bool	has_append;
+	int		i;
 
-static int	count_strings(t_arg **arr)
-{
-	int	count;
-
-	count = 0;
-	if (!arr)
-		return (0);
-	while (arr[count])
-		count++;
-	return (count);
+	has_in = false;
+	has_heredoc = false;
+	has_out = false;
+	has_append = false;
+	i = 0;
+	while (cmd->redirect_in && cmd->redirect_in[i])
+	{
+		if (cmd->redirect_in[i]->heredoc)
+			has_heredoc = true;
+		else
+			has_in = true;
+		i++;
+	}
+	i = 0;
+	while (cmd->redirect_out && cmd->redirect_out[i])
+	{
+		if (cmd->redirect_out[i]->append_redirect)
+			has_append = true;
+		else
+			has_out = true;
+		i++;
+	}
+	if ((has_in && has_heredoc) || (has_out && has_append))
+		return (true);
+	return (false);
 }
 
 /*
@@ -49,14 +68,9 @@ Fonction qui :
 */
 int	redirect_parsing(t_command *curr, t_utils *utils)
 {
-	int	in_count;
-	int	out_count;
-
-	in_count = count_strings(curr->redirect_in);
-	out_count = count_strings(curr->redirect_out);
-	if (in_count > 1)
-		return (return_failure("<", utils));
-	if (out_count > 1)
-		return (return_failure(">", utils));
+	if (has_conflicting_redirections(curr))
+		return (return_failure("ambiguous redirection", utils));
 	return (RETURN_SUCCESS);
 }
+
+// TODO FIX USELESS FUNCTION THX BRO
