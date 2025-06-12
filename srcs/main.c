@@ -143,7 +143,7 @@ int	main(int ac, char **av, char **env)
 		command = parse_tokens(token, utils);
 		if (command)
 			exec(command, utils);
-		//print_command_exec(command);
+		print_command_exec(command);
 		free(input);
 		free_tokens(token);
 		free_commands_exec(command);
