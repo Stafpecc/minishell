@@ -36,6 +36,8 @@ static t_utils *init_utils_struct(char **envp)
 	utils->previous_pipes = -42;
 	utils->status = 0;
 	utils->type_of_first_arg = TOK_END;
+	utils->old_stdin = dup(STDIN_FILENO); //TODO PROTECT?
+	utils->old_stdout = dup(STDOUT_FILENO); //TODO PROTECT?
 
 	return (utils);
 }

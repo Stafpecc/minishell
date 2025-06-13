@@ -50,6 +50,8 @@ typedef struct s_utils {
 	int					num_nodes;
 	int					previous_pipes;
 	int					status;
+	int 				old_stdin;
+	int 				old_stdout;
 	enum e_token_type	type_of_first_arg;
 } t_utils;
 
