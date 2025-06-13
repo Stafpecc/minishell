@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/13 12:06:22 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/13 12:51:00 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-
 
 //if redirection will redirect 
 //to dup properly, if fail return 1 else 0
@@ -20,7 +19,6 @@ static int single_built_in_redirections(t_command_exec *node)
 
 	if(node->redirect_in)
 	{
-
 		if(read_dup(node->redirect_in, 0, NONE))
 			return(RETURN_FAILURE);
 	}
@@ -33,18 +31,19 @@ static int single_built_in_redirections(t_command_exec *node)
 	}
 	return (RETURN_SUCCESS);
 }
-
+//reinitialize by default any change that was done to 
+//the stdin(0) and (stdout) then return the last return
 static int reinit_fd_return_main(t_command_exec *node, t_utils *utils)
 {
 	if(node->redirect_in)
 	{
 		if (dup2(utils->old_stdin, STDIN_FILENO))
-			return (RETURN_FAILURE);
+			return (MALLOC_ERROR);
 	}
 	if(node->redirect_out)
 	{
 		if (dup2(utils->old_stdout, STDOUT_FILENO))
-			return (RETURN_FAILURE);
+			return (MALLOC_ERROR);
 	}
 	return(utils->last_return);
 }
@@ -74,6 +73,5 @@ int single_built_in(t_command_exec *node, t_utils *utils)
 		utils->last_return = (env_builtin(node, utils, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))
 		utils->last_return = (exit_builtin(node, utils));
-
 	return(reinit_fd_return_main(node,utils));
 }

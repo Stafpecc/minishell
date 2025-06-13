@@ -145,7 +145,7 @@ int	main(int ac, char **av, char **env)
 		command = parse_tokens(token, utils);
 		if (command)
 		{
-			if(exec(command, utils))
+			if(exec(command, utils) == MALLOC_ERROR) //TODO different treatments depending of the error, there is two kind of errors possible the one that wont stop program the one that does.
 			{
 				perror("EXEC ERROR\n");
 				exit(EXIT_FAILURE);
@@ -153,7 +153,7 @@ int	main(int ac, char **av, char **env)
 
 		}
 		print_command_exec(command);
-		free(input);
+		free(input); //TODO CLOSE les dups OLDSTDIN OLDSTDOUT DANS UTILS
 		free_tokens(token);
 		free_commands_exec(command);
 	}
