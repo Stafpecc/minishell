@@ -2,10 +2,14 @@
 
 int redirect_write_browser(t_redirect **redirect, int i)
 {
+
 	while (redirect[i])
 		{
+
 			if(redirect[i]->append_redirect == FALSE)
+			{
 				redirect[i]->fd = open(redirect[i]->arg, O_CREAT | O_WRONLY | O_TRUNC, 0644); //secure
+			}
 			else
 				redirect[i]->fd = open(redirect[i]->arg, O_CREAT | O_WRONLY | O_APPEND, 0644); //secure
 			if (redirect[i]->fd < 0)
@@ -17,6 +21,7 @@ int redirect_write_browser(t_redirect **redirect, int i)
 			}
 			if(close(redirect[i]->fd) == -1) //TORM IF WORKING
 				return(RETURN_FAILURE); 
+			ft_printfd("redirect[i] = %d",redirect[i]->fd);
 			i++;
 		}
 	return (RETURN_SUCCESS);
@@ -49,7 +54,7 @@ int	write_dup(t_redirect **redirect, int *pipe_fd)
 		if(redirect_write_browser(redirect, 0))
 			return(RETURN_FAILURE);
 	}
-	if (pipe_fd[1] != -42 && !redirect)
+	else if (pipe_fd[1] != -42 && !redirect)
 	{
 		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
 			return (2);
