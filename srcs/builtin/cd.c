@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/13 16:20:34 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/13 16:28:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
 	return (NONE);
 }
 
-// static int create_pwd_if_none(t_utils)
+// static int create_pwd_if_none(t_utils *utils)
 // {
 	
 // }

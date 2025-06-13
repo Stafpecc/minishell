@@ -31,3 +31,28 @@ int	count_commands(t_command_exec *cmds)
 	return (counter_cmd);
 }
 
+size_t	ft_env_len(char **env)
+{
+	size_t	len = 0;
+
+	while (env && env[len])
+		len++;
+	return (len);
+}
+
+int	expand_env(t_utils *utils)
+{
+	size_t	old_size = ft_env_len(utils->env);
+	size_t	new_size = old_size + 2; // +1 pour nouveau slot, +1 pour NULL final
+	char	**new_env;
+
+	new_env = ft_realloc(utils->env, sizeof(char *) * new_size);
+	if (!new_env)
+		return (RETURN_FAILURE);
+
+	new_env[old_size] = NULL; // nouvelle entrée vide
+	new_env[old_size + 1] = NULL; // fin
+	utils->env = new_env;
+	return (RETURN_SUCCESS);
+}
+

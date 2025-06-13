@@ -15,8 +15,10 @@
 #include "minishell.h"
 #include "lexer.h"
 #include "parsing.h"
+#include "return_error.h"
 #include "signal_handler.h"
 #include "../libft/includes/libft.h"
+
 
 //child_dup.c
 int 	write_dup(t_redirect **redirect, int *pipe_fd);
