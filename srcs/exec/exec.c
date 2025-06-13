@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:34 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/12 15:34:38 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/13 09:36:39 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	exec(t_command_exec *node, t_utils *utils)
 	{
 		utils->status = single_built_in(node, utils);
 		if (utils->status == MALLOC_ERROR)
-			return(EXIT_FAILURE);//TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
+			return(RETURN_FAILURE);//TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
 	}
 	else
 	{
 		if(child_maker(node, utils, 0))
-			return(EXIT_FAILURE); //TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
+			return(RETURN_FAILURE); //TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
 	}
-	return(EXIT_SUCCESS);
+	return(RETURN_SUCCESS);
 }

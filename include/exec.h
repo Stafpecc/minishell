@@ -20,7 +20,7 @@
 
 //child_dup.c
 int 	write_dup(t_redirect **redirect, int *pipe_fd);
-int	    read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe, int i);
+int	    read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe);
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils);
 void    only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 

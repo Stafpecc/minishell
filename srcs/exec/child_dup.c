@@ -59,9 +59,8 @@ int	write_dup(t_redirect **redirect, int *pipe_fd)
 
 // dup the right fd for stdinput and return
 // an error code if it doesnt work properly
-int	read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe, int i)
+int	read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe)
 {
-	i = 0; //TORM
 	if(redirect)
 	{
 		if(redirect_read_browser(redirect, 0))
@@ -86,7 +85,7 @@ void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 
 	if(node->redirect_in
-		&& read_dup(node->redirect_in, pipe_fd, utils->previous_pipes, 0))
+		&& read_dup(node->redirect_in, pipe_fd, utils->previous_pipes))
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
@@ -115,7 +114,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if(utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
-	if (read_dup(node->redirect_in, pipe_fd, utils->previous_pipes, 0))
+	if (read_dup(node->redirect_in, pipe_fd, utils->previous_pipes))
 	{
 		if (utils->previous_pipes != NONE)
 			close(utils->previous_pipes);

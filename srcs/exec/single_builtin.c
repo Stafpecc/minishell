@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/12 15:39:30 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/13 09:49:59 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 //if redirection will redirect 
 //to dup properly, if fail return 1 else 0
-static int single_built_in_redirections(t_command_exec *node, t_utils *utils)
+static int single_built_in_redirections(t_command_exec *node)
 {
 	if(node->redirect_in)
 	{
-		if(read_dup(node->redirect_in, 0, utils->previous_pipes, 0))
-			return(EXIT_FAILURE);
+		if(read_dup(node->redirect_in, 0, NONE))
+			return(RETURN_FAILURE);
 	}
 	if(node->redirect_out)
 	{
 		if(write_dup(node->redirect_out, 0))			
-			return(EXIT_FAILURE);
+			return(RETURN_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (RETURN_SUCCESS);
 }
 
 //function that will do the right redirect if needed
@@ -38,11 +38,13 @@ int single_built_in(t_command_exec *node, t_utils *utils)
 {
 	if(node->redirect_in || node->redirect_out)
 	{
-		if(single_built_in_redirections(node, utils))
+		if(single_built_in_redirections(node))
 			return(MALLOC_ERROR);
 	}
 	if (!ft_strcmp(node->cmd_parts[0], "cd"))
 		return (cd_builtin(node, utils, 0, 0));
+	if (!ft_strcmp(node->cmd_parts[0], "echo"))
+		return (echo_builtin(node,TRUE, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "pwd"))
 		return (pwd_builtin(node, utils, 0, 4));
 	//else if (!ft_strcmp(node->cmd_parts[0], "export"))
