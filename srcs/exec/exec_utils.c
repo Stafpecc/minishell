@@ -45,19 +45,22 @@ size_t	ft_env_len(char **env)
 //we copy the content in ft_realloc then we assign the
 //NULL pointers for the new entry and its end
 //assign env then return success
-int	expand_env(t_utils *utils)
+int	expand_env(t_utils *utils, bool test)
 {
-	size_t	old_size = ft_env_len(utils->env);
-	size_t	new_size = old_size + 2; // +1 pour nouveau slot, +1 pour NULL final
+	size_t	old_env_size = ft_env_len(utils->env);
+	if (test)
+		old_env_size++;
+	size_t	new_env_size = old_env_size + 1; // +1 pour nouveau slot, +1 pour NULL final
 	char	**new_env;
 
-	new_env = ft_realloc(utils->env, sizeof(char *) * new_size);
+	new_env = ft_realloc(utils->env, sizeof(char *) * new_env_size);
+	// new_env = ft_realloc(utils->env, sizeof(char *) * new_env_size);
 	if (!new_env)
 		return (RETURN_FAILURE);
 
-	new_env[old_size] = NULL; // nouvelle entrée vide
-	new_env[old_size + 1] = NULL; // fin
-	utils->size_env++;
+	new_env[old_env_size] = NULL; // nouvelle entrée vide
+	//new_env[old_env_size + 1] = NULL; // fin
+	utils->size_env += 1;
 	utils->env = new_env;
 	return (RETURN_SUCCESS);
 }
