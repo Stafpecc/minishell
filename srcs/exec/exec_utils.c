@@ -30,7 +30,7 @@ int	count_commands(t_command_exec *cmds)
 	}
 	return (counter_cmd);
 }
-
+//return the total size of len
 size_t	ft_env_len(char **env)
 {
 	size_t	len = 0;
@@ -39,7 +39,12 @@ size_t	ft_env_len(char **env)
 		len++;
 	return (len);
 }
-
+//we catch the actual len of env store it in old_size
+//we add + 2 (one for the new slot and another one for the NULL)
+//bcs ft_env_len stop at NULL and we need space for NULL
+//we copy the content in ft_realloc then we assign the
+//NULL pointers for the new entry and its end
+//assign env then return success
 int	expand_env(t_utils *utils)
 {
 	size_t	old_size = ft_env_len(utils->env);
@@ -52,6 +57,7 @@ int	expand_env(t_utils *utils)
 
 	new_env[old_size] = NULL; // nouvelle entrée vide
 	new_env[old_size + 1] = NULL; // fin
+	utils->size_env++;
 	utils->env = new_env;
 	return (RETURN_SUCCESS);
 }

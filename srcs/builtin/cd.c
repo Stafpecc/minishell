@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/13 16:28:20 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/14 09:27:41 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
 	return (NONE);
 }
 
-// static int create_pwd_if_none(t_utils *utils)
+// static int create_pwd_if_none(t_utils *utils, int *pwd_emplacement, int pwd_old_emplacement)
 // {
+// 	if(pwd_emplacement == NONE)
+
+// 	if(pwd_old_emplacement == NONE)
 	
 // }
 //we init what would be usefull to us during cd as 
@@ -62,7 +65,7 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 	*pwd_old_emplacement = cd_builtin_pwd_finder(utils, OLD, 0);
 	if (*pwd_emplacement == NONE || *pwd_old_emplacement == NONE)
 	{
-		// TODO build PWD if missing ask theo about creating new line
+		//create_pwd_if_none(utils, pwd_emplacement, pwd_old_emplacement);
 	}
 	utils->env[*pwd_old_emplacement] = getcwd(NULL, 0);
 	if (!utils->env[*pwd_old_emplacement])
