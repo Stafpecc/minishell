@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:35:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/12 14:50:31 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:32:27 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ Fonction qui :
 - retourne RETURN_SUCCESS si tout s’est bien passé, sinon libère la mémoire
 	et retourne une erreur.
 */
-int	process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils *utils)
+int	process_heredoc(t_token **tokens, t_command *curr, t_command *head,
+	t_utils *utils)
 {
 	int		i;
 	size_t	new_size;
@@ -78,7 +79,6 @@ int	process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils 
 	curr->redirect_in[i]->fd = fd;
 	return (RETURN_SUCCESS);
 }
-
 
 /*{a fix} : se renseigner sur la gestion des here-doc (<<) et envisager 
 de stocker les here_doc dans un tableau, comme redirect_in et redirect_out, 

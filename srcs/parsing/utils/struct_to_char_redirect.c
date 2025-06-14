@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:01:13 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/12 10:07:49 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:47:23 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,8 @@ int	redirect_to_char(t_command *cmd, t_command_exec *new_node)
 	new_node->redirect_in = copy_redirect_array(cmd->redirect_in);
 	if (cmd->redirect_in && !new_node->redirect_in)
 		return (RETURN_FAILURE);
-
 	new_node->redirect_out = copy_redirect_array(cmd->redirect_out);
 	if (cmd->redirect_out && !new_node->redirect_out)
 		return (RETURN_FAILURE);
-
 	return (RETURN_SUCCESS);
 }
-
-

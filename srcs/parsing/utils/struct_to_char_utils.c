@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 05:51:33 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/12 10:08:58 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:36:29 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_redirect	**dup_targ_to_tredirect_array(t_arg **arr)
 	return (new_arr);
 }
 
-
 t_redirect	*dup_heredoc_from_arg(t_arg *src)
 {
 	t_redirect	*copy;
@@ -96,10 +95,11 @@ t_redirect	*dup_heredoc_from_arg(t_arg *src)
 
 void	free_redirect_array(t_redirect **redirects)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (!redirects)
-		return;
+		return ;
 	while (redirects[i])
 	{
 		free(redirects[i]->arg);
@@ -136,4 +136,3 @@ int	cmd_part_to_char(t_command *cmd, t_command_exec *new_node)
 	new_node->cmd_parts[i] = NULL;
 	return (RETURN_SUCCESS);
 }
-

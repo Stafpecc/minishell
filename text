@@ -1,9 +1,0 @@
--rw-rw-r-- 1 stafpec stafpec  563 juin   4 12:00 config.mk
--rw-r--r-- 1 stafpec stafpec    0 juin  12 14:02 e
-drwxrwxr-x 2 stafpec stafpec 4096 juin  12 14:02 exec
-drwxrwxr-x 2 stafpec stafpec 4096 juin  12 13:46 include
-drwxrwxr-x 5 stafpec stafpec 4096 juin  12 13:47 libft
--rw-rw-r-- 1 stafpec stafpec 2588 juin  12 10:48 Makefile
--rw-rw-r-- 1 stafpec stafpec 1823 juin  12 13:45 minishell.mk
-drwxrwxr-x 8 stafpec stafpec 4096 juin  12 13:46 srcs
--rw-r--r-- 1 stafpec stafpec    0 juin  12 14:02 text
