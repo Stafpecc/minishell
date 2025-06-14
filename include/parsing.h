@@ -12,6 +12,10 @@ typedef enum e_last_return {
     CMD_EXEC_FAILURE = 255
 } t_last_return;
 
+typedef struct s_redirect_flags {
+	bool	is_heredoc;
+	bool	is_append;
+}	t_redirect_flags;
 
 typedef struct s_arg {
 	char			*arg;
@@ -52,6 +56,18 @@ typedef struct s_utils {
 	int					status;
 	enum e_token_type	type_of_first_arg;
 } t_utils;
+
+typedef struct s_context {
+	t_command *head;
+	t_utils *utils;
+}	t_context;
+
+typedef struct s_redir_params
+{
+	t_arg ***redirect_array;
+	int i;
+	t_redirect_flags flags;
+} t_redir_params;
 
 typedef enum e_file_mode {
 	FILE_READ,
@@ -108,6 +124,12 @@ void			process_quotes(t_token *tokens, t_arg *arg);
 int				process_pipe(t_command **curr, t_command *head);
 int				process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
 int				process_free_exit(t_command *head);
+
+/******************************************************************************/
+/*                              ADD_REDIRECT                                  */
+/******************************************************************************/
+int add_redirect(t_token **tokens, t_arg ***redirect_array,
+						t_context *ctx, t_redirect_flags flags);
 
 /******************************************************************************/
 /*                                 EXPAND                                     */
