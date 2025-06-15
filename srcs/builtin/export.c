@@ -39,13 +39,18 @@ static int error_finder(t_command_exec *node)
         return(RETURN_SUCCESS);
     }
 }
-
+// static int equal_sign_case(t_command_exec *node, t_utils *utils)
+// {  
+    
+// }
 
 int export_builtin(t_command_exec *node, t_utils *utils)
 {
     utils->env = NULL;
-    error_finder(node);
-    if (ft_strcmp (&node->cmd_parts[2][0], "="))
-        equal_sign_case(node, utils);
+    if (error_finder(node))
+        return (RETURN_FAILURE);
+    // if (ft_strcmp (&node->cmd_parts[2][0], "="))
+    //     equal_sign_case(node, utils);
+    //else case that doesnt hold an = sign
     return(RETURN_SUCCESS);
 }
