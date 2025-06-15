@@ -48,7 +48,7 @@ bool	built_in_checker(char *cmd);
 int	    count_commands(t_command_exec *cmds);
 size_t	ft_env_len(char **env);
 int	    count_commands(t_command_exec *cmds);
-int	    expand_env(t_utils *utils, bool test);
+int	    expand_env(t_utils *utils);
 
 //exec.c
 int	child_maker(t_command_exec *node, t_utils *utils, int i);

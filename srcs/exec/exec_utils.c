@@ -20,7 +20,7 @@ bool	built_in_checker(char *cmd)
 // in the user's input
 int	count_commands(t_command_exec *cmds)
 {
-	int counter_cmd;
+	int	counter_cmd;
 
 	counter_cmd = 0;
 	while (cmds)
@@ -30,38 +30,37 @@ int	count_commands(t_command_exec *cmds)
 	}
 	return (counter_cmd);
 }
-//return the total size of len
+// return the total size of len
 size_t	ft_env_len(char **env)
 {
-	size_t	len = 0;
+	size_t	len;
 
+	len = 0;
 	while (env && env[len])
 		len++;
 	return (len);
 }
-//we catch the actual len of env store it in old_size
-//we add + 2 (one for the new slot and another one for the NULL)
-//bcs ft_env_len stop at NULL and we need space for NULL
-//we copy the content in ft_realloc then we assign the
-//NULL pointers for the new entry and its end
-//assign env then return success
-int	expand_env(t_utils *utils, bool test)
+// we catch the actual len of env store it in old_size
+// we add + 2 (one for the new slot and another one for the NULL)
+// bcs ft_env_len stop at NULL and we need space for NULL
+// we copy the content in ft_realloc then we assign the
+// NULL pointers for the new entry and its end
+// assign env then return success
+int	expand_env(t_utils *utils)
 {
-	size_t	old_env_size = ft_env_len(utils->env);
-	if (test)
-		old_env_size++;
-	size_t	new_env_size = old_env_size + 1; // +1 pour nouveau slot, +1 pour NULL final
+	size_t	old_env_size;
+	size_t	new_env_size;
 	char	**new_env;
 
-	new_env = ft_realloc(utils->env, sizeof(char *) * new_env_size);
-	// new_env = ft_realloc(utils->env, sizeof(char *) * new_env_size);
+	old_env_size = utils->size_env;
+	new_env_size = old_env_size + 2;
+	new_env = ft_realloc(utils->env, sizeof(char *) * old_env_size,
+			sizeof(char *) * new_env_size);
 	if (!new_env)
 		return (RETURN_FAILURE);
-
-	new_env[old_env_size] = NULL; // nouvelle entrée vide
-	//new_env[old_env_size + 1] = NULL; // fin
+	new_env[old_env_size] = NULL;
+	new_env[old_env_size + 1] = NULL;
 	utils->size_env += 1;
 	utils->env = new_env;
 	return (RETURN_SUCCESS);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:21:52 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/14 15:27:11 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/15 11:15:36 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ t_bool			ft_atoi_only_num(const char *str, int *result);
 double			ft_atod(const char *str);
 int				ft_pass(int i, const char *str, int *s);
 double			ft_atof(const char *str);
-void			*ft_realloc(void *ptr,size_t new_size);
+void			*ft_realloc(void *ptr,size_t old_size, size_t new_size);
 
 #endif

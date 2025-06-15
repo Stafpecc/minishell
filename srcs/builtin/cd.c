@@ -6,20 +6,19 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/15 10:36:33 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/15 11:55:18 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
 #include <limits.h> //TORM
 
-#define OLD 0 //TOMV in built.h
-#define NEW 1 //TOMV in built.h
+#define OLD 0 // TOMV in built.h
+#define NEW 1 // TOMV in built.h
 
-
-//function that depending of its parameters will find 
-//or the line of PWD or OLD_PWD depending of the
-//old_or_new parameter
+// function that depending of its parameters will find
+// or the line of PWD or OLD_PWD depending of the
+// old_or_new parameter
 static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
 {
 	if (old_or_new == NEW)
@@ -42,35 +41,33 @@ static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
 	}
 	return (NONE);
 }
-//create space for PWD_OLD and NEW and assign it
-//to pwd_emplacement and old emplacement
-static int create_pwd_if_none(t_utils *utils, int *pwd_emplacement, int *pwd_old_emplacement)
+// create space for PWD_OLD and NEW and assign it
+// to pwd_emplacement and old emplacement
+static int	create_pwd_if_none(t_utils *utils, int *pwd_emplacement,
+		int *pwd_old_emplacement)
 {
-	if(*pwd_emplacement == NONE)
+	if (*pwd_old_emplacement == NONE)
 	{
-		ft_printfd("TEST>???\n");
-		if(expand_env(utils, TRUE))
-			return(RETURN_FAILURE);
-		*pwd_emplacement = utils->size_env - 1;
-	}
-
-	if(*pwd_old_emplacement == NONE)
-	{
-		ft_printfd("TEST>???\n");
-		if(expand_env(utils, FALSE))
-			return(RETURN_FAILURE);
+		if (expand_env(utils))
+			return (RETURN_FAILURE);
 		*pwd_old_emplacement = utils->size_env - 1;
 	}
-	return(RETURN_SUCCESS);
+	if (*pwd_emplacement == NONE)
+	{
+		if (expand_env(utils))
+			return (RETURN_FAILURE);
+		*pwd_emplacement = utils->size_env - 1;
+	}
+	return (RETURN_SUCCESS);
 }
-//we init what would be usefull to us during cd as 
-//the emplacementof pwd in the env, 
-//and the old pwd emplacement as well.
-//if pwd and/or old pwd doesnt exist we
-//create them in another function (WIP)
-//then we replace old pwd with the actual path we are in
-//by getting the actual cwd then join with OLDPWD: 
-//if everything went well we return 0 (SUCCESS)
+// we init what would be usefull to us during cd as
+// the emplacementof pwd in the env,
+// and the old pwd emplacement as well.
+// if pwd and/or old pwd doesnt exist we
+// create them in another function (WIP)
+// then we replace old pwd with the actual path we are in
+// by getting the actual cwd then join with OLDPWD:
+// if everything went well we return 0 (SUCCESS)
 static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 		int *pwd_old_emplacement)
 {
@@ -78,8 +75,8 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 	*pwd_old_emplacement = cd_builtin_pwd_finder(utils, OLD, 0);
 	if (*pwd_emplacement == NONE || *pwd_old_emplacement == NONE)
 	{
-		if(create_pwd_if_none(utils, pwd_emplacement,pwd_old_emplacement))
-			return(RETURN_FAILURE);
+		if (create_pwd_if_none(utils, pwd_emplacement, pwd_old_emplacement))
+			return (RETURN_FAILURE);
 	}
 	utils->env[*pwd_old_emplacement] = getcwd(NULL, 0);
 	if (!utils->env[*pwd_old_emplacement])
@@ -90,8 +87,8 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 	else if (utils->env[*pwd_old_emplacement])
 	{
 		utils->env[*pwd_old_emplacement] = ft_strjoin("OLDPWD=",
-				utils->env[*pwd_old_emplacement]); // SECURE
-		if(!utils->env[*pwd_old_emplacement])
+				utils->env[*pwd_old_emplacement]);
+		if (!utils->env[*pwd_old_emplacement])
 		{
 			perror("Malloc error");
 			return (MALLOC_ERROR);
@@ -100,8 +97,8 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 	return (RETURN_SUCCESS);
 }
 
-//Check if we got at least one argument 
-//check if didnt get more than one argument
+// Check if we got at least one argument
+// check if didnt get more than one argument
 static int	cd_error_checker(t_command_exec *node)
 {
 	if (!node->cmd_parts || !node->cmd_parts[0] || !node->cmd_parts[1])
@@ -116,11 +113,11 @@ static int	cd_error_checker(t_command_exec *node)
 	}
 	return (EXIT_SUCCESS);
 }
-//we start by checking if the args are valids for our cd
-//then init what we need during CD
-//then we search if the dir does indeed exist and 
-//change our emplacement
-//if it does we update pwd emplacement into the new emplacement path
+// we start by checking if the args are valids for our cd
+// then init what we need during CD
+// then we search if the dir does indeed exist and
+// change our emplacement
+// if it does we update pwd emplacement into the new emplacement path
 int	cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement,
 		int pwd_old_emplacement)
 {
