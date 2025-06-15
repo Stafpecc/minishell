@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:36:44 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/14 16:41:26 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/15 10:41:48 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*ft_realloc(void *ptr, size_t new_size)
 	}
 	if (!ptr)
 		return (malloc(new_size));
-	new_ptr = malloc(new_size);
+	new_ptr = malloc(new_size + 1);
 	if (!new_ptr)
 		return (NULL);
 	ft_memcpy(new_ptr, ptr, new_size);
