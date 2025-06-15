@@ -15,8 +15,10 @@
 #include "minishell.h"
 #include "lexer.h"
 #include "parsing.h"
+#include "return_error.h"
 #include "signal_handler.h"
 #include "../libft/includes/libft.h"
+
 
 //child_dup.c
 int 	write_dup(t_redirect **redirect, int *pipe_fd);
@@ -44,6 +46,10 @@ void    child_redirect(t_command_exec *node, t_utils *utils);
 //exec_utils.c
 bool	built_in_checker(char *cmd);
 int	    count_commands(t_command_exec *cmds);
+size_t	ft_env_len(char **env);
+int	    count_commands(t_command_exec *cmds);
+int	    expand_env(t_utils *utils);
+
 //exec.c
 int	child_maker(t_command_exec *node, t_utils *utils, int i);
 int	exec(t_command_exec *node, t_utils *utils);

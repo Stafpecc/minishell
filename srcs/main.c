@@ -38,6 +38,7 @@ static t_utils *init_utils_struct(char **envp)
 	utils->type_of_first_arg = TOK_END;
 	utils->old_stdin = dup(STDIN_FILENO); //TODO PROTECT?
 	utils->old_stdout = dup(STDOUT_FILENO); //TODO PROTECT?
+	utils->size_env = ft_env_len(utils->env);
 
 	return (utils);
 }

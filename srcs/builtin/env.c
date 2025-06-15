@@ -11,7 +11,7 @@
 
 //TODO check for the return values
 
-int env_builtin(t_command_exec *node, t_utils *utils, int i)
+int env_builtin(t_command_exec *node, t_utils *utils, size_t i)
 {
     i = 0;
 
@@ -25,7 +25,7 @@ int env_builtin(t_command_exec *node, t_utils *utils, int i)
         perror("No arguments or options required for env\n");
         return (EXIT_FAILURE);
     }
-    while(utils->env[i])
+    while(i != utils->size_env)
     {
         ft_printf("%s\n", utils->env[i]);
         i++;
