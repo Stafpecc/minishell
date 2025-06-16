@@ -48,8 +48,6 @@ int			add_token(t_token **head, t_token_type type, const char *value);
 /******************************************************************************/
 /*                                PROCESS                                     */
 /******************************************************************************/
-int			process_string(const char *input, size_t *i, t_token **head);
-int			process_word(const char *input, size_t *i, t_token **head);
-int			process_word_or_string(const char *input, size_t *i, t_token **head);
+int			process_combined_token(const char *input, size_t *i, t_token **head);
 
 #endif
