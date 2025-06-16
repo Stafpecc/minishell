@@ -1,56 +1,76 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
+/*   Updated: 2025/06/16 15:06:27 by ldevoude         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/builtin.h"
-// typedef struct s_command_exec {
-//     char        **env;
-//     char        **cmd_parts;
-//     char        *redirect_in;
-//     char        *redirect_out;
-//     char        *append_redirections;
-//     char        *heredoc;
-//     struct s_command_exec *next;
-// } t_command_exec;
 
-//need tarini for that case!!!
-
-static int error_finder(t_command_exec *node)
+// need tarini for that case!!!
+// TODO? if just export do like bash or follow manual? aka ask for arguments
+static int	error_finder(t_command_exec *node)
 {
-    //TODO? if just export do like bash or follow manual? aka ask for arguments
-    if (!node->cmd_parts || !node->cmd_parts[0] || !node->cmd_parts[1])
-    {
-        if(!node->cmd_parts[1])
-        {
-            ft_printfd("minishell: export: require an argument: \n");
-            return(RETURN_FAILURE);
-        }
-    }
-    if (ft_strcmp (&node->cmd_parts[1][0], "-"))
-    {
-        ft_printfd("minishell: export: '%s': export does not handle flags\n",node->cmd_parts[1]);
-    }
-    if (ft_strcmp (&node->cmd_parts[1][0], "_") && !ft_isalpha(node->cmd_parts[1][0]))
-    { 
-        ft_printfd("minishell: export: '%s': not a valid identifier\n", node->cmd_parts[1]);
-        return(RETURN_FAILURE);
-    }
-    else
-    {
-        ft_printfd("C VALIDE\n"); //TODL
-        return(RETURN_SUCCESS);
-    }
+	if (!node->cmd_parts[1])
+	{
+			ft_printfd("minishell: export: require an argument: \n");
+			return (RETURN_FAILURE);
+	}
+	return (RETURN_SUCCESS);
 }
-// static int equal_sign_case(t_command_exec *node, t_utils *utils)
-// {  
-    
-// }
-
-int export_builtin(t_command_exec *node, t_utils *utils)
+static int	equal_sign_case(t_utils *utils, char *cmd)
 {
-    utils->env = NULL;
-    if (error_finder(node))
-        return (RETURN_FAILURE);
-    // if (ft_strcmp (&node->cmd_parts[2][0], "="))
-    //     equal_sign_case(node, utils);
-    //else case that doesnt hold an = sign
-    return(RETURN_SUCCESS);
+	if (expand_env(utils))
+		return (MALLOC_ERROR);
+	utils->env[utils->size_env - 1] = ft_strdup(cmd);
+	if (!utils->env[utils->size_env - 1])
+		return (MALLOC_ERROR);
+	return (RETURN_SUCCESS);
+}
+
+static int	no_equal_sign_case(t_utils *utils, char *cmd)
+{
+	if (expand_env(utils))
+		return (MALLOC_ERROR);
+	utils->env[utils->size_env - 1] = ft_strjoin(cmd, "=");
+	if (!utils->env[utils->size_env - 1])
+		return (MALLOC_ERROR);
+	return (RETURN_SUCCESS);
+}
+
+static int	cmd_browser(t_command_exec *node, t_utils *utils, size_t i)
+{
+	while (node->cmd_parts[i])
+	{ 
+		if (node->cmd_parts[i][0] == '=' || !ft_isalpha(node->cmd_parts[i][0])
+        || !ft_strcmp(&node->cmd_parts[1][0], "_"))
+		    ft_printfd("minishell: export: '%s': not a valid identifier\n",
+                node->cmd_parts[i]);
+		else if (ft_strchr(node->cmd_parts[i], '='))
+		{
+			if (equal_sign_case(utils, node->cmd_parts[i]))
+				return (MALLOC_ERROR);
+		}
+		else
+		{
+			if (no_equal_sign_case(utils, node->cmd_parts[i]))
+				return (MALLOC_ERROR);
+		}
+		i++;
+	}
+	return (RETURN_SUCCESS);
+}
+
+int	export_builtin(t_command_exec *node, t_utils *utils)
+{
+	if (error_finder(node))
+		return (RETURN_FAILURE);
+	if (cmd_browser(node, utils, 1))
+		return (RETURN_FAILURE);
+	return (RETURN_SUCCESS);
 }
