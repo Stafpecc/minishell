@@ -57,7 +57,7 @@ int	expand_env(t_utils *utils)
 	new_env = ft_realloc(utils->env, sizeof(char *) * old_env_size,
 			sizeof(char *) * new_env_size);
 	if (!new_env)
-		return (RETURN_FAILURE);
+		return (MALLOC_ERROR);
 	new_env[old_env_size] = NULL;
 	new_env[old_env_size + 1] = NULL;
 	utils->size_env += 1;
