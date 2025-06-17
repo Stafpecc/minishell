@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/17 11:05:01 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/17 11:19:45 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 {
 	while (utils->env[i])
 	{
-		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name)))
+		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name) + 1))
 		{
 			if (is_equal)
 				free(variable_name);
