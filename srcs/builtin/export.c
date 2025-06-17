@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/17 11:19:45 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/17 15:31:18 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 static int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 		size_t i, bool is_equal)
 {
+	ft_printfd("variable_name = %s\n",variable_name);
 	while (utils->env[i])
 	{
-		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name) + 1))
+		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name)))
 		{
+			ft_printfd("je passe ici?\n");
 			if (is_equal)
 				free(variable_name);
 			return (i);
@@ -48,7 +50,7 @@ static char	*assign_variable_name(char *cmd, char *variable_name, size_t i,
 	variable_name = malloc(i + 1 * sizeof(char));
 	if (!variable_name)
 		return (NULL);
-	while (j != i - 1)
+	while (j != i)
 	{
 		variable_name[j] = cmd[j];
 		j++;
@@ -143,6 +145,7 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 		}
 		else
 		{
+			ft_printfd("ICI?\n\n");
 			if (no_equal_sign_case(utils, node->cmd_parts[i], 0))
 				return (MALLOC_ERROR);
 		}
