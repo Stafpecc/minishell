@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:56:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/10 18:05:00 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/16 15:42:09 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	launch_tokens(const char *input, size_t *i, t_token **head)
 	}
 	else
 	{
-		if (process_word_or_string(input, i, head) == RETURN_FAILURE)
+		if (process_combined_token(input, i, head) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	return (RETURN_SUCCESS);
