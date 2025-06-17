@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/17 10:48:55 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/17 12:00:00 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j);
 //unset.c
 //static int env_len(char **env);
 int var_name_cmp(const char *env_var, const char *name);
-char **unset_builtin(char **envp, const char *name);
+int unset_builtin(t_command_exec *node, t_utils *utils);
 
 
