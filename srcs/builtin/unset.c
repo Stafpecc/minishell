@@ -37,7 +37,7 @@ int unset_builtin(t_command_exec *node, t_utils *utils)
     {
         while(node->cmd_parts[i])
         {
-            ft_printfd("TEST AVANT SEGFAULT\n");
+            //ft_printfd("TEST AVANT SEGFAULT\n");
             if(!ft_strncmp(node->cmd_parts[i], tmp_cp_env[j], ft_strlen(node->cmd_parts[i]))) //attention cas test!=tests
             {
                 condense_env(utils);//secure
@@ -50,7 +50,8 @@ int unset_builtin(t_command_exec *node, t_utils *utils)
         ///utils->env[k] = NULL;
         ft_printfd("k= %d \n l= %d \n", k, l);
         //ft_printfd("env[k] = %s\n tmp_cp[l] = %s\n", utils->env[k], tmp_cp_env[l]);
-        utils->env[k] = tmp_cp_env[l];
+        if((size_t)l < utils->size_env)
+            utils->env[k] = tmp_cp_env[l];
         k++;
         l++;
         j++;

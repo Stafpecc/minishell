@@ -77,7 +77,7 @@ int condense_env(t_utils *utils)
 			sizeof(char *) * old_env_size);
 	if (!new_env)
 		return (MALLOC_ERROR);
-	new_env[new_env_size] = NULL;
+	new_env[new_env_size + 1] = NULL;
 	utils->size_env -= 1;
 	utils->env = new_env;
 	return (RETURN_SUCCESS);
