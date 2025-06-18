@@ -3,7 +3,9 @@
 
 static char **cpy_env(t_utils *utils, char **cp_env, int index_overwrite)
 {
-    cp_env = malloc((utils->size_env + 1) * sizeof(char *)); //protect
+    cp_env = malloc((utils->size_env + 1) * sizeof(char *));
+    if(!cp_env)
+        return(NULL);
     while(utils->env[index_overwrite])
     {
         cp_env[index_overwrite] = utils->env[index_overwrite];
@@ -13,49 +15,67 @@ static char **cpy_env(t_utils *utils, char **cp_env, int index_overwrite)
     return(cp_env);
 }
 
-static bool check_if_pass_or_write(t_command_exec *node,t_utils *utils, char **tmp_cp_env, size_t index_cp_env)
+static int check_if_match(t_command_exec *node,t_utils *utils, char **tmp_cp_env, size_t index_cp_env)
 {
-    int index_WIP = 1;
+    int index_args_checker = 1;
 
-    while(node->cmd_parts[index_WIP])
+    while(node->cmd_parts[index_args_checker])
     {
-        if(!ft_strncmp(node->cmd_parts[index_WIP], tmp_cp_env[index_cp_env], ft_strlen(node->cmd_parts[index_WIP])))
+        if(!ft_strncmp(node->cmd_parts[index_args_checker], tmp_cp_env[index_cp_env], ft_strlen(node->cmd_parts[index_args_checker])))
         {
-            condense_env(utils); //secure
+            if (condense_env(utils))
+                return(MALLOC_ERROR);
             return(TRUE);
         }
-        index_WIP++;
+        index_args_checker++;
     }
     return(FALSE);
 }
-//TODO A LA FIN FREE TMP_CP_ENV
+static void write_case(t_utils *utils, char **tmp_cp_env, size_t *index_overwrite, size_t index_cp_env)
+{
+    utils->env[*index_overwrite] = tmp_cp_env[index_cp_env];
+    *index_overwrite += 1;
+}
+
+static int free_exit(char **tmp_cp_env, int return_value)
+{
+    int index_to_clean;
+
+    index_to_clean = 0;
+    while(tmp_cp_env[index_to_clean])
+    {
+        free(tmp_cp_env[index_to_clean]);
+        //tmp_cp_env[index_to_clean] = NULL;
+        index_to_clean++;
+    }
+    return(return_value);
+}
+
 int unset_builtin(t_command_exec *node, t_utils *utils)
 {
     char **tmp_cp_env;
-    bool pass_or_write;
+    int match;
     size_t index_cp_env;
     size_t index_overwrite;
 
     index_overwrite = 0;
     index_cp_env = 0;
-    pass_or_write = FALSE;
+    match = FALSE;
     tmp_cp_env = NULL;
     if(!node->cmd_parts[1])
         return(RETURN_SUCCESS);
-    tmp_cp_env = cpy_env(utils, tmp_cp_env, 0); //TODO PROTECT //nous avons bien copié l'env yeepee
+    tmp_cp_env = cpy_env(utils, tmp_cp_env, 0);
+    if(!tmp_cp_env)
+        return(MALLOC_ERROR);
     while(tmp_cp_env[index_cp_env])
     {
-        ft_printfd("TEST\n");
-        pass_or_write = check_if_pass_or_write(node, utils, tmp_cp_env, index_cp_env);
-        if(pass_or_write == FALSE)
-        {
-            ft_printfd("TEST\n");
-            utils->env[index_overwrite] = tmp_cp_env[index_cp_env];
-            //ft_printfd("utils->env[%s]\n", index_overwrite, utils->env[index_overwrite]);
-            ft_printfd("tmp_cp_prout[%d] = %s\n", index_cp_env, tmp_cp_env[index_cp_env]);
-            index_overwrite++;
-        }
+        match = check_if_match(node, utils, tmp_cp_env, index_cp_env);
+        if(match == MALLOC_ERROR)
+            return(free_exit(tmp_cp_env, MALLOC_ERROR));
+        if(match == FALSE)
+            write_case(utils, tmp_cp_env, &index_overwrite, index_cp_env);
         index_cp_env++;
     }
-    return(0);    
+    return(free_exit(tmp_cp_env, RETURN_SUCCESS)); //CAUSE LEAKS WHEN CALL ENV AGAIN CHECK WHY
+    //return(RETURN_SUCCESS);
 }
