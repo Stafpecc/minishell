@@ -72,12 +72,12 @@ int condense_env(t_utils *utils)
 	char	**new_env;
 
 	old_env_size = utils->size_env;
-	new_env_size = old_env_size - 2;
+	new_env_size = old_env_size - 1;
 	new_env = ft_realloc(utils->env, sizeof(char *) * new_env_size,
 			sizeof(char *) * old_env_size);
 	if (!new_env)
 		return (MALLOC_ERROR);
-	new_env[new_env_size + 1] = NULL;
+	new_env[new_env_size] = NULL;
 	utils->size_env -= 1;
 	utils->env = new_env;
 	return (RETURN_SUCCESS);

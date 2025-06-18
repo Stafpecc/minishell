@@ -1,102 +1,61 @@
 #include "minishell.h"
+#include "builtin.h"
 
-int var_name_cmp(const char *env_var, const char *name)
+static char **cpy_env(t_utils *utils, char **cp_env, int index_overwrite)
 {
-    while (*env_var && *name && *env_var != '=')
+    cp_env = malloc((utils->size_env + 1) * sizeof(char *)); //protect
+    while(utils->env[index_overwrite])
     {
-        if (*env_var != *name)
-            return (*env_var - *name);
-        env_var++;
-        name++;
+        cp_env[index_overwrite] = utils->env[index_overwrite];
+        index_overwrite++;
     }
-    if (*name == '\0' && (*env_var == '=' || *env_var == '\0'))
-        return (RETURN_SUCCESS);
-    else
-        return (RETURN_FAILURE);
+    cp_env[index_overwrite] = NULL;
+    return(cp_env);
 }
 
+static bool check_if_pass_or_write(t_command_exec *node,t_utils *utils, char **tmp_cp_env, size_t index_cp_env)
+{
+    int index_WIP = 1;
 
+    while(node->cmd_parts[index_WIP])
+    {
+        if(!ft_strncmp(node->cmd_parts[index_WIP], tmp_cp_env[index_cp_env], ft_strlen(node->cmd_parts[index_WIP])))
+        {
+            condense_env(utils); //secure
+            return(TRUE);
+        }
+        index_WIP++;
+    }
+    return(FALSE);
+}
+//TODO A LA FIN FREE TMP_CP_ENV
 int unset_builtin(t_command_exec *node, t_utils *utils)
 {
-    ft_printfd("%s\n",node->cmd_parts[0]);
-    int i;
-    int k;
-    i = 1;
-	int j;
-    int l;
-    j = 0;
-    k = 0;
-    l = 0;
-
     char **tmp_cp_env;
+    bool pass_or_write;
+    size_t index_cp_env;
+    size_t index_overwrite;
 
+    index_overwrite = 0;
+    index_cp_env = 0;
+    pass_or_write = FALSE;
+    tmp_cp_env = NULL;
     if(!node->cmd_parts[1])
         return(RETURN_SUCCESS);
-    tmp_cp_env = utils->env;
-    while(tmp_cp_env[j])
+    tmp_cp_env = cpy_env(utils, tmp_cp_env, 0); //TODO PROTECT //nous avons bien copié l'env yeepee
+    while(tmp_cp_env[index_cp_env])
     {
-        while(node->cmd_parts[i])
+        ft_printfd("TEST\n");
+        pass_or_write = check_if_pass_or_write(node, utils, tmp_cp_env, index_cp_env);
+        if(pass_or_write == FALSE)
         {
-            //ft_printfd("TEST AVANT SEGFAULT\n");
-            if(!ft_strncmp(node->cmd_parts[i], tmp_cp_env[j], ft_strlen(node->cmd_parts[i]))) //attention cas test!=tests
-            {
-                condense_env(utils);//secure
-                l++;
-                break;
-            }
-            i++;
+            ft_printfd("TEST\n");
+            utils->env[index_overwrite] = tmp_cp_env[index_cp_env];
+            //ft_printfd("utils->env[%s]\n", index_overwrite, utils->env[index_overwrite]);
+            ft_printfd("tmp_cp_prout[%d] = %s\n", index_cp_env, tmp_cp_env[index_cp_env]);
+            index_overwrite++;
         }
-        //free(utils->env[k]);
-        ///utils->env[k] = NULL;
-        ft_printfd("k= %d \n l= %d \n", k, l);
-        //ft_printfd("env[k] = %s\n tmp_cp[l] = %s\n", utils->env[k], tmp_cp_env[l]);
-        if((size_t)l < utils->size_env)
-            utils->env[k] = tmp_cp_env[l];
-        k++;
-        l++;
-        j++;
-        i = 1;
+        index_cp_env++;
     }
-    while(tmp_cp_env[i+1])
-    {
-        ft_printfd("%s\n",tmp_cp_env[i]);
-        i++;
-    }
-    return(0);
-
+    return(0);    
 }
-
-// char **unset_builtin(t_command_exec *node, t_utils *utils)
-// {
-//     int i;
-// 	int j;
-// 	int count;
-//     char **new_env;
-//     char **tmp_cp_env;
-
-//     tmp_cp_env = utils->env;
-
-//     if(!node->cmd_parts[1])
-//         return(RETURN_SUCCESS);
-    
-//     if(!condense_env(utils))
-//         return(MALLOC_ERROR);
-//     new_env = malloc(sizeof(char *) * (utils->size_env + 1));
-//     if (!new_env)
-//         return (NULL);
-//     i = 0;
-//     j = 0;
-//     while(node->cmd_parts[i])
-//     {
-//         while (utils->env[i])
-//         {
-//             if (var_name_cmp(envp[i], name) != 0)
-//             {
-//                 new_env[j++] = ft_strdup(envp[i]);
-//             }
-//             i++;
-//         }
-//     }
-//     new_env[j] = NULL;
-//     return (new_env);
-// }
