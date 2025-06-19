@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/19 14:05:31 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/19 14:14:17 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 {
 	while (utils->env[i])
 	{
-		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name))&& (utils->env[i][ft_strlen(variable_name)] == '='))
+		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name))
+			&& (utils->env[i][ft_strlen(variable_name)] == '='))
 		{
 			if (is_equal)
 				free(variable_name);
@@ -55,26 +56,6 @@ static char	*assign_variable_name(char *cmd, char *variable_name, size_t i,
 	}
 	variable_name[j] = '\0';
 	return (variable_name);
-}
-// if no equal sign it mean that the cmd only hold the
-// variable's name
-// we check if the said env variable already exist
-// in the actual env, if it does we get out without doing anything
-// if it doesnt we expand env then we add the new variable to it.
-
-static int	no_equal_sign_case(t_utils *utils, char *cmd,
-		size_t existing_variable_emp)
-{
-	existing_variable_emp = is_variable_already_in_env(utils, cmd, 0, FALSE);
-	if (!existing_variable_emp)
-	{
-		if (expand_env(utils))
-			return (MALLOC_ERROR);
-		utils->env[utils->size_env - 1] = ft_strjoin(cmd, "=");
-		if (!utils->env[utils->size_env - 1])
-			return (MALLOC_ERROR);
-	}
-	return (RETURN_SUCCESS);
 }
 
 // if equal sign it mean what is at the right side
@@ -139,11 +120,6 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 		else if (ft_strchr(node->cmd_parts[i], '='))
 		{
 			if (equal_sign_case(utils, node->cmd_parts[i], NULL, 0))
-				return (MALLOC_ERROR);
-		}
-		else
-		{
-			if (no_equal_sign_case(utils, node->cmd_parts[i], 0))
 				return (MALLOC_ERROR);
 		}
 		i++;
