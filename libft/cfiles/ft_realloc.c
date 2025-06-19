@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:36:44 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/15 14:01:00 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/19 13:39:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
