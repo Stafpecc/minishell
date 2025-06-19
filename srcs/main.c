@@ -114,6 +114,7 @@ int	main(int ac, char **av, char **env)
 	set_signals();
 	while (1)
 	{
+		ft_printfd("LASTRETURN= %d\n",utils->last_return);
 		input = read_input_with_quotes();
 		if (!input)
 		{
@@ -151,7 +152,6 @@ int	main(int ac, char **av, char **env)
 				perror("EXEC ERROR\n");
 				exit(EXIT_FAILURE);
 			}
-
 		}
 		print_command_exec(command);
 		free(input); //TODO CLOSE les dups OLDSTDIN OLDSTDOUT DANS UTILS

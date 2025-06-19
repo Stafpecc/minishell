@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/12 14:05:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/19 15:06:38 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_command_exec	*parse_tokens(t_token *tokens, t_utils *utils)
 
 	if (parse_cmd(head, utils) == RETURN_FAILURE)
 	{
-		ft_printfd("TESTICI\n");
+		ft_printfd("TESTICI\n"); //TORM
 		return (NULL);
 	}
 	//print_commands(head);

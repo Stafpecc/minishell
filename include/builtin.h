@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/17 12:00:00 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/19 16:26:27 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include "parsing.h"
 #include "signal_handler.h"
 #include "exec.h"
+
+typedef enum e_error_msg {
+	ERR_CD_CHDIR,
+    ERR_CD_GETCWD,
+    ERR_CD_MALLOC,
+    ERR_CD_NOMSG,
+    
+} t_error_msg;
+
+//cd_utils.c
+int return_errors(int return_value, int message);
 
 //cd.c
 int cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement, int pwd_old_emplacement);

@@ -86,6 +86,7 @@ override EXECSRC := \
 SRC += $(addprefix $(BUILTINDIR), $(addsuffix .c, $(BUILTINSRC)))
 
 override BUILTINSRC := \
+	cd_utils \
 	cd \
 	echo \
 	env \

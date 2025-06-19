@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/15 11:55:18 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/19 16:46:21 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
-#include <limits.h> //TORM
 
 #define OLD 0 // TOMV in built.h
 #define NEW 1 // TOMV in built.h
@@ -49,13 +48,13 @@ static int	create_pwd_if_none(t_utils *utils, int *pwd_emplacement,
 	if (*pwd_old_emplacement == NONE)
 	{
 		if (expand_env(utils))
-			return (RETURN_FAILURE);
+			return (MALLOC_ERROR);
 		*pwd_old_emplacement = utils->size_env - 1;
 	}
 	if (*pwd_emplacement == NONE)
 	{
 		if (expand_env(utils))
-			return (RETURN_FAILURE);
+			return (MALLOC_ERROR);
 		*pwd_emplacement = utils->size_env - 1;
 	}
 	return (RETURN_SUCCESS);
@@ -64,7 +63,7 @@ static int	create_pwd_if_none(t_utils *utils, int *pwd_emplacement,
 // the emplacementof pwd in the env,
 // and the old pwd emplacement as well.
 // if pwd and/or old pwd doesnt exist we
-// create them in another function (WIP)
+// create them in another function
 // then we replace old pwd with the actual path we are in
 // by getting the actual cwd then join with OLDPWD:
 // if everything went well we return 0 (SUCCESS)
@@ -73,27 +72,24 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 {
 	*pwd_emplacement = cd_builtin_pwd_finder(utils, NEW, 0);
 	*pwd_old_emplacement = cd_builtin_pwd_finder(utils, OLD, 0);
+	char *tmp;
+	char *cwd;
+	
 	if (*pwd_emplacement == NONE || *pwd_old_emplacement == NONE)
 	{
 		if (create_pwd_if_none(utils, pwd_emplacement, pwd_old_emplacement))
-			return (RETURN_FAILURE);
+			return (return_errors(MALLOC_ERROR, ERR_CD_MALLOC));
 	}
-	utils->env[*pwd_old_emplacement] = getcwd(NULL, 0);
-	if (!utils->env[*pwd_old_emplacement])
-	{
-		perror("getcwd() error");
-		return (MALLOC_ERROR);
-	}
-	else if (utils->env[*pwd_old_emplacement])
-	{
-		utils->env[*pwd_old_emplacement] = ft_strjoin("OLDPWD=",
-				utils->env[*pwd_old_emplacement]);
-		if (!utils->env[*pwd_old_emplacement])
-		{
-			perror("Malloc error");
-			return (MALLOC_ERROR);
-		}
-	}
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return(return_errors(MALLOC_ERROR,ERR_CD_GETCWD));
+	tmp = ft_strjoin("OLDPWD=",
+			cwd);
+	free(cwd);
+	if (!tmp)
+		return(return_error(MALLOC_ERROR, ERR_CD_MALLOC));
+	free(utils->env[*pwd_old_emplacement]);
+	utils->env[*pwd_old_emplacement] = tmp;
 	return (RETURN_SUCCESS);
 }
 
@@ -104,14 +100,14 @@ static int	cd_error_checker(t_command_exec *node)
 	if (!node->cmd_parts || !node->cmd_parts[0] || !node->cmd_parts[1])
 	{
 		ft_printfd("minishell: cd: works with only a relative or absolute path\n");
-		return (EXIT_FAILURE);
+		return (RETURN_FAILURE);
 	}
 	if (node->cmd_parts[2])
 	{
 		ft_printfd("minishell: cd: too many arguments\n");
-		return (EXIT_FAILURE);
+		return (RETURN_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (RETURN_SUCCESS);
 }
 // we start by checking if the args are valids for our cd
 // then init what we need during CD
@@ -126,11 +122,7 @@ int	cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement,
 	if (cd_utils_initialization(utils, &pwd_emplacement, &pwd_old_emplacement))
 		return (MALLOC_ERROR);
 	if (chdir(node->cmd_parts[1]))
-	{
-		ft_printfd("minishell: cd: %s: ", node->cmd_parts[1]);
-		perror("");
-		return (RETURN_FAILURE);
-	}
+		return(return_errors(RETURN_FAILURE,ERR_CD_CHDIR));
 	utils->env[pwd_emplacement] = getcwd(NULL, 0);
 	if (utils->env[pwd_emplacement])
 	{
@@ -138,9 +130,6 @@ int	cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement,
 				utils->env[pwd_emplacement]);
 	}
 	if (!utils->env[pwd_emplacement])
-	{
-		perror("getcwd() error");
-		return (MALLOC_ERROR);
-	}
+		return (return_errors(MALLOC_ERROR, ERR_CD_GETCWD));
 	return (RETURN_SUCCESS);
 }
