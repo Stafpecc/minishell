@@ -65,6 +65,15 @@ int	expand_env(t_utils *utils)
 	return (RETURN_SUCCESS);
 }
 
+
+//we catch the actual len of env to store it in old_size
+//we also create new_env_size that is old_env_size - 1
+//bcs we plan to remove a line in env
+//we realloc the new size in new_env thanks to ft_realloc
+//then set the last slot at NULL remove 1 to the size_env
+//and we change the pointer of env to new env before returning success
+
+//TODO do Ineed to free utils->env before that?
 int condense_env(t_utils *utils)
 {
 	size_t	old_env_size;
