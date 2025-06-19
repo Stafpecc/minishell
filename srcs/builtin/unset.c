@@ -21,7 +21,8 @@ static int check_if_match(t_command_exec *node,t_utils *utils, char **tmp_cp_env
 
     while(node->cmd_parts[index_args_checker])
     {
-        if(!ft_strncmp(node->cmd_parts[index_args_checker], tmp_cp_env[index_cp_env], ft_strlen(node->cmd_parts[index_args_checker])))
+        if(!ft_strncmp(tmp_cp_env[index_cp_env],node->cmd_parts[index_args_checker], ft_strlen(node->cmd_parts[index_args_checker]))
+         && tmp_cp_env[index_cp_env][ft_strlen(node->cmd_parts[index_args_checker])] == '=')
         {
             if (condense_env(utils))
                 return(MALLOC_ERROR);
@@ -39,15 +40,8 @@ static void write_case(t_utils *utils, char **tmp_cp_env, size_t *index_overwrit
 
 static int free_exit(char **tmp_cp_env, int return_value)
 {
-    int index_to_clean;
-
-    index_to_clean = 0;
-    while(tmp_cp_env[index_to_clean])
-    {
-        free(tmp_cp_env[index_to_clean]);
-        //tmp_cp_env[index_to_clean] = NULL;
-        index_to_clean++;
-    }
+    if(tmp_cp_env)
+        free(tmp_cp_env);
     return(return_value);
 }
 
@@ -76,6 +70,5 @@ int unset_builtin(t_command_exec *node, t_utils *utils)
             write_case(utils, tmp_cp_env, &index_overwrite, index_cp_env);
         index_cp_env++;
     }
-    return(free_exit(tmp_cp_env, RETURN_SUCCESS)); //CAUSE LEAKS WHEN CALL ENV AGAIN CHECK WHY
-    //return(RETURN_SUCCESS);
+    return(free_exit(tmp_cp_env, RETURN_SUCCESS)); 
 }
