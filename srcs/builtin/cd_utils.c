@@ -6,13 +6,13 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 16:05:46 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/19 16:27:58 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/22 13:18:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
 
-int return_errors(int return_value, int message)
+int return_errors(int return_value, int message, t_command_exec *node)
 {
     if(message == ERR_CD_CHDIR)
     {
