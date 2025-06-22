@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 05:51:33 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/22 15:42:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/22 15:58:04 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,6 @@ void	free_str_array(char **arr, int size)
 		i++;
 	}
 	free(arr);
-}
-
-t_redirect	*dup_heredoc_from_arg(t_arg *src)
-{
-	t_redirect	*copy;
-
-	if (!src)
-		return (NULL);
-	copy = malloc(sizeof(t_redirect));
-	if (!copy)
-		return (NULL);
-	copy->arg = ft_strdup(src->arg);
-	if (!copy->arg)
-	{
-		free(copy);
-		return (NULL);
-	}
-	copy->fd = src->fd;
-	return (copy);
 }
 
 void	free_redirect_array(t_redirect **redirects)
