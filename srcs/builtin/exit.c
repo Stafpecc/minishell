@@ -13,9 +13,10 @@
 unsigned int exit_builtin(t_command_exec *node, t_utils *utils)
 {
     unsigned int return_value;
-    //Exit = dernier retour TODO en parler a theo
-    
+
     return_value = 0;
+
+    //check si argument is nbr
     if(!node->cmd_parts || !node->cmd_parts[0]) //may be useless
     {
         perror("ERROR\n");
