@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/12 13:56:34 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:22:18 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	parse_cmd(t_command *cmd, t_utils *utils)
 	while (curr)
 	{
 		if (parse_cmd_helper(prev, curr, utils) == RETURN_FAILURE)
-			return (RETURN_FAILURE);;
+			return (RETURN_FAILURE);
 		prev = curr;
 		curr = curr->next;
 	}
