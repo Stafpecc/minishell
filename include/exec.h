@@ -11,7 +11,7 @@
 #include  <sys/stat.h>
 #include  <fcntl.h>
 #include  <errno.h>
-//#include "builtin.h"
+#include "builtin.h"
 #include "minishell.h"
 #include "lexer.h"
 #include "parsing.h"

@@ -6,10 +6,12 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/22 13:18:15 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/22 14:26:35 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef BUILTIN_H
+# define BUILTIN_H
 #include "../libft/includes/libft.h"
 #include "minishell.h"
 #include "lexer.h"
@@ -56,3 +58,4 @@ int var_name_cmp(const char *env_var, const char *name);
 int unset_builtin(t_command_exec *node, t_utils *utils);
 
 
+#endif
