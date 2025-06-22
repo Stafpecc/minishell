@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/17 11:28:01 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/22 17:29:27 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 //to dup properly, if fail return 1 else 0
 static int single_built_in_redirections(t_command_exec *node)
 {
-
+	
 	if(node->redirect_in)
 	{
 		if(read_dup(node->redirect_in, 0, NONE))
 			return(RETURN_FAILURE);
 	}
+
 	if(node->redirect_out)
 	{
 		if(write_dup(node->redirect_out, 0))	
@@ -37,12 +38,12 @@ static int reinit_fd_return_main(t_command_exec *node, t_utils *utils)
 {
 	if(node->redirect_in)
 	{
-		if (dup2(utils->old_stdin, STDIN_FILENO))
+		if (dup2(utils->old_stdin, STDIN_FILENO) == -1)
 			return (MALLOC_ERROR);
 	}
 	if(node->redirect_out)
 	{
-		if (dup2(utils->old_stdout, STDOUT_FILENO))
+		if (dup2(utils->old_stdout, STDOUT_FILENO) == -1)
 			return (MALLOC_ERROR);
 	}
 	return(utils->last_return);

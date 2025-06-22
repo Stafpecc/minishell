@@ -36,8 +36,8 @@ static t_utils *init_utils_struct(char **envp)
 	utils->previous_pipes = -42;
 	utils->status = 0;
 	utils->type_of_first_arg = TOK_END;
-	utils->old_stdin = dup(STDIN_FILENO); //TODO PROTECT?
-	utils->old_stdout = dup(STDOUT_FILENO); //TODO PROTECT?
+	utils->old_stdin = dup(STDIN_FILENO); //TODO PROTECT
+	utils->old_stdout = dup(STDOUT_FILENO); //TODO PROTECT
 	utils->size_env = ft_env_len(utils->env);
 
 	return (utils);
@@ -145,6 +145,7 @@ int	main(int ac, char **av, char **env)
 			exit_proprely(2, input, token);
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
+		print_command_exec(command);
 		if (command)
 		{
 			if(exec(command, utils) == MALLOC_ERROR) //TODO different treatments depending of the error, there is two kind of errors possible the one that wont stop program the one that does.
@@ -153,7 +154,7 @@ int	main(int ac, char **av, char **env)
 				exit(EXIT_FAILURE);
 			}
 		}
-		print_command_exec(command);
+		
 		free(input); //TODO CLOSE les dups OLDSTDIN OLDSTDOUT DANS UTILS
 		free_tokens(token);
 		free_commands_exec(command);
