@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:24:41 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/22 16:46:06 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/22 17:00:22 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	fill_redirect(t_redir_params *params,
 	t_arg	**array;
 
 	array = *(params->redirect_array);
-	array[params->i] = malloc(sizeof(t_arg));
+	array[params->i] = malloc(sizeof(t_arg)); // <-- probleme ici
 	if (!array[params->i])
 		return (process_free_exit(ctx->head));
 	array[params->i + 1] = NULL;
