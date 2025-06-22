@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:37:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/22 16:14:54 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/22 16:47:50 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 	t_arg	**new_array;
 	char	*expanded;
 
-	new_part = malloc(sizeof(t_arg));
+	new_part = malloc(sizeof(t_arg)); //<-- PROBLEME
 	if (!new_part)
 		return (RETURN_FAILURE);
 	process_quotes(*tokens, new_part);
