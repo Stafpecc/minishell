@@ -6,19 +6,23 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:37:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/14 16:10:51 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/22 15:46:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-static void	free_redirect(t_redirect **arr, int last_index)
+static void	free_redirect(t_redirect **arr, int count)
 {
-	while (--last_index >= 0)
+	int	i;
+
+	i = 0;
+	while (i < count)
 	{
-		free(arr[last_index]->arg);
-		free(arr[last_index]);
+		free(arr[i]->arg);
+		free(arr[i]);
+		i++;
 	}
 	free(arr);
 }

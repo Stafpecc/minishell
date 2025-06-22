@@ -4,18 +4,23 @@
 
 #include <stdarg.h>
 
-static void exit_proprely(int count, ...)
-	{
+void	exit_proprely(int count, ...)
+{
 	va_list args;
+	void (*free_fn)(void *);
 	void *ptr;
+
 	rl_clear_history();
 	va_start(args, count);
-	while (count-- > 0) {
+	while (count-- > 0)
+	{
+		free_fn = va_arg(args, void (*)(void *));
 		ptr = va_arg(args, void *);
-		free(ptr);
+		if (ptr && free_fn)
+			free_fn(ptr);
 	}
 	va_end(args);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 static t_utils *init_utils_struct(char **envp)
@@ -118,7 +123,7 @@ int	main(int ac, char **av, char **env)
 		if (!input)
 		{
 			write(1, "exit\n", 5);
-			exit_proprely(0, NULL, NULL);
+			exit_proprely(0);
 		}
 		if (*input)
 			add_history(input);
@@ -141,7 +146,11 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		if (ft_strcmp(input, "exit") == 0)
-			exit_proprely(2, input, token);
+		{
+			exit_proprely(2,
+				(void (*)(void *))free, input,
+				(void (*)(void *))free_tokens, token);
+		}
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
 		if (command)

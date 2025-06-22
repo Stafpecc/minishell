@@ -6,23 +6,11 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:09:50 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/14 15:45:19 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/22 15:46:00 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-static void	free_command_exec_list(t_command_exec *node)
-{
-	t_command_exec	*tmp;
-
-	while (node)
-	{
-		tmp = node->next;
-		free_commands_exec(node);
-		node = tmp;
-	}
-}
 
 static void	free_tab(char **tab)
 {
@@ -50,7 +38,7 @@ static void	*ret_free_command_exec(t_command_exec *node)
 	return (NULL);
 }
 
-static t_command_exec	*struct_to_char_node(t_command *cmd)
+t_command_exec	*struct_to_char_node(t_command *cmd)
 {
 	t_command_exec	*new_node;
 
@@ -69,9 +57,6 @@ static t_command_exec	*struct_to_char_node(t_command *cmd)
 	new_node->redirect_out = dup_targ_to_tredirect_array(cmd->redirect_out);
 	if (cmd->redirect_out && !new_node->redirect_out)
 		return (ret_free_command_exec(new_node));
-	if (redirect_to_char(cmd, new_node) == RETURN_FAILURE)
-		return (ret_free_command_exec(new_node));
-	new_node->next = NULL;
 	return (new_node);
 }
 
@@ -98,7 +83,7 @@ t_command_exec	*struct_to_char(t_command *cmd)
 		new_node = struct_to_char_node(cmd);
 		if (!new_node)
 		{
-			free_command_exec_list(head);
+			free_commands_exec(head);
 			return (NULL);
 		}
 		if (!head)
