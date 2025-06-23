@@ -23,6 +23,32 @@ void	exit_proprely(int count, ...)
 	exit(EXIT_SUCCESS);
 }
 
+static char **add_var_to_env(char **env, const char *var)
+{
+	int		i = 0;
+	char	**new_env;
+
+	while (env && env[i])
+		i++;
+
+	new_env = malloc(sizeof(char *) * (i + 2));
+	if (!new_env)
+		return (NULL);
+
+	i = 0;
+	while (env && env[i])
+	{
+		new_env[i] = strdup(env[i]);
+		i++;
+	}
+	new_env[i] = strdup(var);
+	new_env[i + 1] = NULL;
+	//free env secure strdup and malloc
+	return (new_env);
+}
+
+
+
 static t_utils *init_utils_struct(char **envp)
 {
 	t_utils *utils = malloc(sizeof(t_utils));
@@ -31,6 +57,12 @@ static t_utils *init_utils_struct(char **envp)
 		return (NULL);
 
 	utils->env = copy_env(envp);
+	if (!utils->env)
+	{
+		free(utils);
+		return (NULL);
+	}
+	utils->env = add_var_to_env(utils->env, "MINISHELL_RUNNING=1");
 	if (!utils->env)
 	{
 		free(utils);
@@ -113,8 +145,22 @@ int	main(int ac, char **av, char **env)
 	t_utils			*utils;
 	t_command_exec	*command;
 
+	if (ac != 1)
+	{
+		ft_printfd(RED "Error: minishell does not take any arguments\n" RESET);
+		return (RETURN_FAILURE);
+	}
+	if (!isatty(STDIN_FILENO))
+	{
+		ft_printfd(RED "Error: minishell must be run in an interactive terminal\n" RESET);
+		return (RETURN_FAILURE);
+	}
+	if (getenv("MINISHELL_RUNNING") != NULL)
+	{
+		ft_printfd(RED "Error: minishell cannot be run recursively\n" RESET);
+		return (RETURN_FAILURE);
+	}
 	utils = init_utils_struct(env);
-	(void)ac;
 	(void)av;
 	set_signals();
 	while (1)
