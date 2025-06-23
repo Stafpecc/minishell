@@ -1,46 +1,52 @@
 #include "builtin.h"
 #include "minishell.h"
 
-
-    //check si argument is nbr si c'est pas nbr leave avec 255
-static void print_exit(long long code, char *arg)
+static int print_exit(long long code, char *arg, bool too_many_arguments)
 {
     ft_printf("exit\n");
-    if(code == 255)
-        ft_printfd("minishell: exit: %s: numeric argument required\n",arg);
-    exit(code);
-}
-
-static unsigned int cases_no_args_two_args(t_command_exec *node, t_utils *utils)
-{
-    if(!node->cmd_parts[1])
-        print_exit(utils->last_return, NULL);
-    else if (node->cmd_parts[2])
+    if(code == 2)
+        ft_printfd("minishell: exit: %s: numeric argument required\n", arg);
+    if(too_many_arguments)
     {
-        ft_printf("exit\n");
         ft_printfd("minishell: exit: too many arguments\n");
         return(RETURN_FAILURE);
     }
-    return(RETURN_SUCCESS);
+    exit(code);
 }
-//19 digits max value  9223372036854775807
-//20 min value -9223372036854775808
-//exit (-1) return 255
-static bool overflow_check(char *arg)
-{
-    int i;
 
-    i = 0;
-    while(arg[i])
-        i++;
+//19 digits max value  9223372036854775807
+//20 min value -9223372036854775808 exit
+//exit (-1) return 255
+static void overflow_check(char *arg)
+{
+    int counter_digits;
+
+    counter_digits = 0;
+    while(arg[counter_digits])
+        counter_digits++;
     if (arg[0] == '-')
-    {
-        if (i > 19)
-           return(TRUE);
+    {       
+        if (counter_digits > 19 ||(counter_digits == 19 && ft_atoi(arg) > 0))
+            print_exit(2, arg, FALSE);
     }
-    if (i > 18)
-        return(TRUE);
-    return (FALSE);
+    else if (counter_digits > 18 || (counter_digits == 18 && ft_atoi(arg) < 0))
+        print_exit(2, arg, FALSE);
+
+    // if (arg[0] == '-' \
+    //     && (counter_digits > 20 \
+    //     ||(counter_digits == 20 && ft_atoi(arg) > 0)))
+    // {
+    //     printf("1");
+    //     print_exit(2, arg, FALSE);
+    // }
+
+    // if (arg[0] != '-' \
+    //     && (counter_digits > 18 \
+    //     || (counter_digits == 18 && ft_atoi(arg) < 0)))
+    // {
+    //     printf("2");
+    //     print_exit(2, arg, FALSE);
+    // }
 }
 
 static void is_arg_digit_and_overflow(char *arg)
@@ -48,33 +54,40 @@ static void is_arg_digit_and_overflow(char *arg)
     int i;
 
     i = 0;
+    if(arg[0] == '-' || arg[0] == '+')
+        i++;
     while(arg[i])
     {
-        if(arg[0] == '-')
-            i++;
         if(!ft_isdigit(arg[i]))
-            print_exit(255, arg);
+            print_exit(2, arg, FALSE);
         i++;
     }
-    if(overflow_check(arg))
-        print_exit(255, arg);
+    overflow_check(arg);
 }
+
+//exit_builtin would check if we at least have an arg
+//if not like bash we exit with the last return
+//then we check if our first arg is a digit 
+//and if it does overflow
+//then we check if there is more than a single arg
+//if yes then return failure and get back to 
+//minishell prompt
+//we save the result of ft_atoi into exit_value
 
 unsigned int exit_builtin(t_command_exec *node, t_utils *utils)
 {
     long long return_value;
 
     return_value = 0;
-    if(!node->cmd_parts[1] || node->cmd_parts[2])
-        return(cases_no_args_two_args(node, utils));
-    if (node->cmd_parts[1] == 0)
-        print_exit(0, NULL);
+    if(!node->cmd_parts[1])
+        print_exit(utils->last_return, NULL, FALSE);
     is_arg_digit_and_overflow(node->cmd_parts[1]);
-    return_value = ft_atoi(node->cmd_parts[1]); //TODO ask theo about that way
-    ft_printfd("return_value = %d\n", return_value); 
-    if (return_value == 0)
-        print_exit(2, NULL);
+    if(node->cmd_parts[2])
+        return (print_exit(0, NULL, TRUE));
+    return_value = ft_atoi(node->cmd_parts[1]);
+    if (return_value < 0)
+        print_exit(return_value + 256, NULL, FALSE);
     else
-        print_exit(return_value, NULL);
-    return(RETURN_FAILURE);
+        print_exit(return_value - 256, NULL, FALSE);
+    return(RETURN_SUCCESS);
 }
