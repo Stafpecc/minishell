@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/22 14:26:35 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/24 10:31:59 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include "signal_handler.h"
 #include "exec.h"
 
+#define NOT_NUM_ARG 2
+
 typedef enum e_error_msg {
 	ERR_CD_CHDIR,
     ERR_CD_GETCWD,
@@ -26,6 +28,8 @@ typedef enum e_error_msg {
     ERR_CD_NOMSG,
     
 } t_error_msg;
+
+
 
 //cd_utils.c
 int return_errors(int return_value, int message, t_command_exec *node);
