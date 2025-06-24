@@ -23,6 +23,24 @@ void	exit_proprely(int count, ...)
 	exit(EXIT_SUCCESS);
 }
 
+static void free_env(char **env)
+{
+	int i = 0;
+	if (!env)
+		return;
+	while (env[i])
+		free(env[i++]);
+	free(env);
+}
+
+static void free_utils(t_utils *utils)
+{
+	free_env(utils->env);
+	close(utils->old_stdin);
+	close(utils->old_stdout);
+	free(utils);
+}
+
 static char **add_var_to_env(char **env, const char *var)
 {
 	int		i = 0;
@@ -38,20 +56,30 @@ static char **add_var_to_env(char **env, const char *var)
 	i = 0;
 	while (env && env[i])
 	{
-		new_env[i] = strdup(env[i]);
+		new_env[i] = ft_strdup(env[i]);
+		if (!new_env[i])
+		{
+			free_env(new_env);
+			return (NULL);
+		}
 		i++;
 	}
-	new_env[i] = strdup(var);
+	new_env[i] = ft_strdup(var);
+	if (!new_env[i])
+	{
+		free_env(new_env);
+		return (NULL);
+	}
 	new_env[i + 1] = NULL;
-	//free env secure strdup and malloc
+	free_env(env);
 	return (new_env);
 }
-
 
 
 static t_utils *init_utils_struct(char **envp)
 {
 	t_utils *utils = malloc(sizeof(t_utils));
+	char **tmp;
 
 	if (!utils)
 		return (NULL);
@@ -62,12 +90,14 @@ static t_utils *init_utils_struct(char **envp)
 		free(utils);
 		return (NULL);
 	}
-	utils->env = add_var_to_env(utils->env, "MINISHELL_RUNNING=1");
-	if (!utils->env)
+	tmp = add_var_to_env(utils->env, "MINISHELL_RUNNING=1");
+	if (!tmp)
 	{
+		free_env(utils->env);
 		free(utils);
 		return (NULL);
 	}
+	utils->env = tmp;
 	utils->last_return = 0;
 	utils->num_nodes = 0;
 	utils->previous_pipes = -42;
@@ -194,9 +224,10 @@ int	main(int ac, char **av, char **env)
 		}
 		if (ft_strcmp(input, "exit") == 0)
 		{
-			exit_proprely(2,
+			exit_proprely(3,
 				(void (*)(void *))free, input,
-				(void (*)(void *))free_tokens, token);
+				(void (*)(void *))free_tokens, token,
+				(void (*)(void *))free_utils, utils);
 		}
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
@@ -209,7 +240,12 @@ int	main(int ac, char **av, char **env)
 				exit(EXIT_FAILURE);
 			}
 		}
-		
+		else
+		{
+			free(input);
+			free_tokens(token);
+			continue;
+		}
 		free(input); //TODO CLOSE les dups OLDSTDIN OLDSTDOUT DANS UTILS
 		free_tokens(token);
 		free_commands_exec(command);

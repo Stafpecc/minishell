@@ -26,6 +26,7 @@ int		i;
 int		fd_test_perms;
 
 i = 0;
+
 while (split_args[i])
     i++;
 result = ft_split(split_args[i - 1], ' ');

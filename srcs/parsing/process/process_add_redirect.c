@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:24:41 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/23 12:20:29 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/24 13:51:14 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@ static t_arg	**resize_redirect_array(t_arg ***redirect_array,
 {
 	t_arg	**new_redirect;
 	size_t	new_size;
+	size_t	old_size;
 
 	*i = 0;
 	while (*redirect_array && (*redirect_array)[*i])
 		(*i)++;
+	
+	old_size = sizeof(t_arg *) * (*i);
 	new_size = sizeof(t_arg *) * (*i + 2);
-	new_redirect = realloc(*redirect_array, new_size);
+
+	new_redirect = ft_realloc(*redirect_array, old_size, new_size);
 	if (!new_redirect)
 		process_free_exit(ctx->head);
 	*redirect_array = new_redirect;
 	return (new_redirect);
 }
+
 
 static int	fill_redirect(t_redir_params *params,
 	t_token *token, t_context *ctx)
@@ -46,7 +51,7 @@ static int	fill_redirect(t_redir_params *params,
 	t_arg	**array;
 
 	array = *(params->redirect_array);
-	array[params->i] = malloc(sizeof(t_arg)); // <-- probleme ici
+	array[params->i] = malloc(sizeof(t_arg));
 	if (!array[params->i])
 		return (process_free_exit(ctx->head));
 	array[params->i + 1] = NULL;
