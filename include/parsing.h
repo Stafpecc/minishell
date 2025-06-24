@@ -1,7 +1,11 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+#include <signal.h>
+
 # include "lexer.h"
+
+extern volatile sig_atomic_t g_heredoc_interrupted;
 
 typedef enum e_last_return {
     CMD_SUCCESS,

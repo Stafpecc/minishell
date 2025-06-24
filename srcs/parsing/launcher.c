@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/14 15:18:26 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/23 13:03:59 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int	process_special_tokens(t_token **tokens, t_command **curr,
 	{
 		if (process_heredoc(tokens, *curr, head, utils) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
+		if (g_heredoc_interrupted)
+		{
+			g_heredoc_interrupted = 0;
+			return (RETURN_FAILURE);
+		}
 	}
 	else if ((*tokens)->type == TOK_PIPE)
 	{
