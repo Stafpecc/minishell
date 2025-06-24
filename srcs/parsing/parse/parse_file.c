@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:36 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 04:51:33 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/14 15:17:31 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 int	check_file(const char *path, t_utils *utils, t_file_mode mode)
 {
 	(void) mode;
-	if (utils) //TORM
-		ft_printfd("proutdansparse_file.c\n"); //TORM
 	if (!path)
 		return (RETURN_FAILURE);
 	if (access(path, F_OK) != 0)

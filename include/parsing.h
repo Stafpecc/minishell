@@ -12,6 +12,10 @@ typedef enum e_last_return {
     CMD_EXEC_FAILURE = 255
 } t_last_return;
 
+typedef struct s_redirect_flags {
+	bool	is_heredoc;
+	bool	is_append;
+}	t_redirect_flags;
 
 typedef struct s_arg {
 	char			*arg;
@@ -56,6 +60,18 @@ typedef struct s_utils {
 	enum e_token_type	type_of_first_arg;
 } t_utils;
 
+typedef struct s_context {
+	t_command *head;
+	t_utils *utils;
+}	t_context;
+
+typedef struct s_redir_params
+{
+	t_arg ***redirect_array;
+	int i;
+	t_redirect_flags flags;
+} t_redir_params;
+
 typedef enum e_file_mode {
 	FILE_READ,
 	FILE_WRITE,
@@ -86,7 +102,6 @@ int 			check_file(const char *path, t_utils *utils, t_file_mode mode);
 void			free_commands(t_command *cmd);
 void 			free_commands_exec(t_command_exec *cmd);
 t_command		*create_command();
-t_arg			**add_argument(t_arg **args, const char *value);
 t_command_exec	*struct_to_char(t_command *cmd);
 void			print_syntax_error(const char *token, t_utils *utils);
 int 			is_redirect_or_pipe(t_token *token);
@@ -94,7 +109,6 @@ int				get_size_of_redirect(t_arg **redirect);
 int				is_redirect(t_token *token);
 void			free_str_array(char **arr, int size);
 t_redirect		**dup_targ_to_tredirect_array(t_arg **arr);
-t_redirect		*dup_heredoc_from_arg(t_arg *src);
 int				cmd_part_to_char(t_command *cmd, t_command_exec *new_node);
 int				redirect_to_char(t_command *cmd, t_command_exec *new_node);
 void			free_redirect_array(t_redirect **redirects);
@@ -111,6 +125,12 @@ void			process_quotes(t_token *tokens, t_arg *arg);
 int				process_pipe(t_command **curr, t_command *head);
 int				process_heredoc(t_token **tokens, t_command *curr, t_command *head, t_utils *utils);
 int				process_free_exit(t_command *head);
+
+/******************************************************************************/
+/*                              ADD_REDIRECT                                  */
+/******************************************************************************/
+int add_redirect(t_token **tokens, t_arg ***redirect_array,
+						t_context *ctx, t_redirect_flags flags);
 
 /******************************************************************************/
 /*                                 EXPAND                                     */

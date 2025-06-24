@@ -6,34 +6,20 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:17:42 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/12 14:18:19 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:28:53 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "stdio.h"
 
-/*
- Fonction qui :
- - prend en argument une structure t_command représentant une 
- 	commande utilisateur ;
- - regarde s’il y a des redirections qui se superpose :
-     - un fichier redirigé avec "<" et un heredoc en même temps ;
-     - ou encore une sortie ">" suivie d’un ">>".
- - retourne true si conflit détecté, sinon false.
-*/
-bool	has_conflicting_redirections(t_command *cmd)
+static bool	has_conflicting_input(t_command *cmd)
 {
 	bool	has_in;
 	bool	has_heredoc;
-	bool	has_out;
-	bool	has_append;
 	int		i;
 
 	has_in = false;
 	has_heredoc = false;
-	has_out = false;
-	has_append = false;
 	i = 0;
 	while (cmd->redirect_in && cmd->redirect_in[i])
 	{
@@ -43,6 +29,17 @@ bool	has_conflicting_redirections(t_command *cmd)
 			has_in = true;
 		i++;
 	}
+	return (has_in && has_heredoc);
+}
+
+static bool	has_conflicting_output(t_command *cmd)
+{
+	bool	has_out;
+	bool	has_append;
+	int		i;
+
+	has_out = false;
+	has_append = false;
 	i = 0;
 	while (cmd->redirect_out && cmd->redirect_out[i])
 	{
@@ -52,9 +49,21 @@ bool	has_conflicting_redirections(t_command *cmd)
 			has_out = true;
 		i++;
 	}
-	if ((has_in && has_heredoc) || (has_out && has_append))
-		return (true);
-	return (false);
+	return (has_out && has_append);
+}
+
+/*
+ Fonction qui :
+ - prend en argument une structure t_command représentant une 
+ 	commande utilisateur ;
+ - regarde s’il y a des redirections qui se superposent :
+     - un fichier redirigé avec "<" et un heredoc ;
+     - ou une sortie ">" suivie d’un ">>".
+ - retourne true si conflit détecté, sinon false.
+*/
+bool	has_conflicting_redirections(t_command *cmd)
+{
+	return (has_conflicting_input(cmd) || has_conflicting_output(cmd));
 }
 
 /*

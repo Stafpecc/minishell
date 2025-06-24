@@ -6,22 +6,13 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/12 14:50:26 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/22 16:52:45 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "exec.h"
 #include "../../../libft/includes/libft.h"
-
-static int	handle_token_error(t_token **tokens, t_utils *utils,
-	t_command *head)
-{
-	if (*tokens && !is_redirect_or_pipe(*tokens))
-		print_syntax_error((*tokens)->value, utils);
-	else
-		print_syntax_error("newline", utils);
-	return (process_free_exit(head));
-}
 
 /*
 Fonction qui :
@@ -34,35 +25,17 @@ Fonction qui :
 - avance le token et incrémente location_of_the_table ;
 - retourne RETURN_SUCCESS ou libère et retourne une erreur en cas d’échec.
 */
-int	process_redirect_in(t_token **tokens, t_command *curr, t_command *head,
-	t_utils *utils)
+int	process_redirect_in(t_token **tokens, t_command *curr,
+	t_command *head, t_utils *utils)
 {
-	int		i;
-	size_t	new_size;
-	t_arg	**new_redirect_in;
+	t_context			ctx;
+	t_redirect_flags	flags;
 
-	i = 0;
-	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens))
-		return (handle_token_error(tokens, utils, head));
-	while (curr->redirect_in && curr->redirect_in[i])
-		i++;
-	new_size = sizeof(t_arg *) * (i + 2);
-	new_redirect_in = realloc(curr->redirect_in, new_size);
-	if (!new_redirect_in)
-		return (process_free_exit(head));
-	curr->redirect_in = new_redirect_in;
-	curr->redirect_in[i] = malloc(sizeof(t_arg));
-	if (!curr->redirect_in[i])
-		return (process_free_exit(head));
-	curr->redirect_in[i + 1] = NULL;
-	curr->redirect_in[i]->arg = ft_strdup((*tokens)->value);
-	curr->redirect_in[i]->heredoc = false;
-	curr->redirect_in[i]->append_redirect = false;
-	if (!curr->redirect_in[i]->arg)
-		return (process_free_exit(head));
-	process_quotes(*tokens, curr->redirect_in[i]);
-	return (RETURN_SUCCESS);
+	ctx.head = head;
+	ctx.utils = utils;
+	flags.is_heredoc = false;
+	flags.is_append = false;
+	return (add_redirect(tokens, &curr->redirect_in, &ctx, flags));
 }
 
 /*
@@ -76,35 +49,17 @@ Fonction qui :
 - incrémente location_of_the_table et retourne RETURN_SUCCESS ou erreur
 	en cas de problème.
 */
-int	process_redirect_out(t_token **tokens, t_command *curr, t_command *head,
-	t_utils *utils)
+int	process_redirect_out(t_token **tokens, t_command *curr,
+	t_command *head, t_utils *utils)
 {
-	int		i;
-	size_t	new_size;
-	t_arg	**new_redirect_out;
+	t_context			ctx;
+	t_redirect_flags	flags;
 
-	i = 0;
-	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens))
-		return (handle_token_error(tokens, utils, head));
-	while (curr->redirect_out && curr->redirect_out[i])
-		i++;
-	new_size = sizeof(t_arg *) * (i + 2);
-	new_redirect_out = realloc(curr->redirect_out, new_size);
-	if (!new_redirect_out)
-		return (process_free_exit(head));
-	curr->redirect_out = new_redirect_out;
-	curr->redirect_out[i] = malloc(sizeof(t_arg));
-	if (!curr->redirect_out[i])
-		return (process_free_exit(head));
-	curr->redirect_out[i + 1] = NULL;
-	curr->redirect_out[i]->arg = ft_strdup((*tokens)->value);
-	curr->redirect_out[i]->heredoc = false;
-	curr->redirect_out[i]->append_redirect = false;
-	if (!curr->redirect_out[i]->arg)
-		return (process_free_exit(head));
-	process_quotes(*tokens, curr->redirect_out[i]);
-	return (RETURN_SUCCESS);
+	ctx.head = head;
+	ctx.utils = utils;
+	flags.is_heredoc = false;
+	flags.is_append = false;
+	return (add_redirect(tokens, &curr->redirect_out, &ctx, flags));
 }
 
 /*
@@ -117,39 +72,57 @@ Fonction qui :
 - avance le token et retourne RETURN_SUCCESS ou une erreur si un problème
 	survient.
 */
-int	process_append_redirect(t_token **tokens, t_command *curr, t_command *head,
-	t_utils *utils)
+int	process_append_redirect(t_token **tokens, t_command *curr,
+	t_command *head, t_utils *utils)
 {
-	int		i;
-	size_t	new_size;
-	t_arg	**new_redirect_out;
+	t_context			ctx;
+	t_redirect_flags	flags;
 
-	(*tokens) = (*tokens)->next;
-	if (!(*tokens) || !is_word_like(*tokens))
-		return (handle_token_error(tokens, utils, head));
-	i = 0;
-	while (curr->redirect_out && curr->redirect_out[i])
-		i++;
-	new_size = sizeof(t_arg *) * (i + 2);
-	new_redirect_out = realloc(curr->redirect_out, new_size);
-	if (!new_redirect_out)
-		return (process_free_exit(head));
-	curr->redirect_out = new_redirect_out;
-	curr->redirect_out[i] = malloc(sizeof(t_arg));
-	if (!curr->redirect_out[i])
-		return (process_free_exit(head));
-	curr->redirect_out[i + 1] = NULL;
-	curr->redirect_out[i]->arg = ft_strdup((*tokens)->value);
-	if (!curr->redirect_out[i]->arg)
-		return (process_free_exit(head));
-	curr->redirect_out[i]->heredoc = false;
-	curr->redirect_out[i]->append_redirect = true;
-	process_quotes(*tokens, curr->redirect_out[i]);
-	return (RETURN_SUCCESS);
+	ctx.head = head;
+	ctx.utils = utils;
+	flags.is_heredoc = false;
+	flags.is_append = true;
+	return (add_redirect(tokens, &curr->redirect_out, &ctx, flags));
 }
 
-/*{a fix} : se renseigner sur la gestion des redirections append (>>) et
-	envisager 
-de stocker les append_redirections dans un tableau, comme redirect_in et
-	redirect_out, 
-pour uniformiser le traitement et permettre la gestion de plusieurs append.*/
+/*
+Fonction qui :
+- avance dans la liste de tokens pour traiter un heredoc après la redirection
+	<< ;
+- vérifie que le token suivant est valide (mot attendu) et gère les erreurs
+	de syntaxe ;
+- alloue et initialise la structure heredoc dans la commande courante avec
+	la valeur du token ;
+- traite les éventuelles quotes dans le token et ajoute l’argument à
+	la commande ;
+- marque le dernier argument comme finalisé et avance le token courant ;
+- retourne RETURN_SUCCESS si tout s’est bien passé, sinon libère la mémoire
+	et retourne une erreur.
+*/
+int	process_heredoc(t_token **tokens, t_command *curr,
+	t_command *head, t_utils *utils)
+{
+	t_context			ctx;
+	t_redirect_flags	flags;
+	int					i;
+	int					fd;
+
+	ctx.head = head;
+	ctx.utils = utils;
+	flags.is_heredoc = true;
+	flags.is_append = false;
+	i = 0;
+	while (curr->redirect_in && curr->redirect_in[i])
+		i++;
+	if (add_redirect(tokens, &curr->redirect_in, &ctx, flags) != RETURN_SUCCESS)
+		return (RETURN_FAILURE);
+	process_quotes(*tokens, curr->redirect_in[i]);
+	fd = here_doc(curr->redirect_in[i]->arg);
+	if (fd < 0)
+	{
+		utils->last_return = 1;
+		return (RETURN_FAILURE);
+	}
+	curr->redirect_in[i]->fd = fd;
+	return (RETURN_SUCCESS);
+}

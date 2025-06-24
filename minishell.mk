@@ -36,12 +36,12 @@ override PARSERSRC := \
 	utils/commands_gestionary \
 	utils/free_commands \
 	utils/struct_to_char \
-	utils/struct_to_char_redirect \
 	utils/struct_to_char_utils \
-	process/process_heredoc \
+	utils/dup_targ_to_tredirect_array \
 	process/process_pipe \
 	process/process_quotes \
 	process/process_redirect \
+	process/process_add_redirect \
 	process/process_word_string \
 	process/process_utils \
 

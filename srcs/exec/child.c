@@ -56,7 +56,9 @@ void child_redirect(t_command_exec *node, t_utils *utils)
     }
     else
     {
-        //printf("test");
+        execve(node->cmd_parts[0], node->cmd_parts, utils->env);
+        perror("execve");
+        exit(EXIT_FAILURE);
     }
  
 }

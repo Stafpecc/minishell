@@ -4,19 +4,50 @@
 
 #include <stdarg.h>
 
-static void exit_proprely(int count, ...)
-	{
+void	exit_proprely(int count, ...)
+{
 	va_list args;
+	void (*free_fn)(void *);
 	void *ptr;
+
 	rl_clear_history();
 	va_start(args, count);
-	while (count-- > 0) {
+	while (count-- > 0)
+	{
+		free_fn = va_arg(args, void (*)(void *));
 		ptr = va_arg(args, void *);
-		free(ptr);
+		if (ptr && free_fn)
+			free_fn(ptr);
 	}
 	va_end(args);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
+
+static char **add_var_to_env(char **env, const char *var)
+{
+	int		i = 0;
+	char	**new_env;
+
+	while (env && env[i])
+		i++;
+
+	new_env = malloc(sizeof(char *) * (i + 2));
+	if (!new_env)
+		return (NULL);
+
+	i = 0;
+	while (env && env[i])
+	{
+		new_env[i] = strdup(env[i]);
+		i++;
+	}
+	new_env[i] = strdup(var);
+	new_env[i + 1] = NULL;
+	//free env secure strdup and malloc
+	return (new_env);
+}
+
+
 
 static t_utils *init_utils_struct(char **envp)
 {
@@ -26,6 +57,12 @@ static t_utils *init_utils_struct(char **envp)
 		return (NULL);
 
 	utils->env = copy_env(envp);
+	if (!utils->env)
+	{
+		free(utils);
+		return (NULL);
+	}
+	utils->env = add_var_to_env(utils->env, "MINISHELL_RUNNING=1");
 	if (!utils->env)
 	{
 		free(utils);
@@ -108,8 +145,22 @@ int	main(int ac, char **av, char **env)
 	t_utils			*utils;
 	t_command_exec	*command;
 
+	if (ac != 1)
+	{
+		ft_printfd(RED "Error: minishell does not take any arguments\n" RESET);
+		return (RETURN_FAILURE);
+	}
+	if (!isatty(STDIN_FILENO))
+	{
+		ft_printfd(RED "Error: minishell must be run in an interactive terminal\n" RESET);
+		return (RETURN_FAILURE);
+	}
+	if (getenv("MINISHELL_RUNNING") != NULL)
+	{
+		ft_printfd(RED "Error: minishell cannot be run recursively\n" RESET);
+		return (RETURN_FAILURE);
+	}
 	utils = init_utils_struct(env);
-	(void)ac;
 	(void)av;
 	set_signals();
 	while (1)
@@ -119,7 +170,7 @@ int	main(int ac, char **av, char **env)
 		if (!input)
 		{
 			write(1, "exit\n", 5);
-			exit_proprely(0, NULL, NULL);
+			exit_proprely(0);
 		}
 		if (*input)
 			add_history(input);
@@ -142,7 +193,11 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		if (ft_strcmp(input, "exit") == 0)
-			exit_proprely(2, input, token);
+		{
+			exit_proprely(2,
+				(void (*)(void *))free, input,
+				(void (*)(void *))free_tokens, token);
+		}
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
 		print_command_exec(command);
