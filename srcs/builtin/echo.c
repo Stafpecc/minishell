@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 14:46:51 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/22 17:11:30 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/24 11:31:28 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	is_newline(t_command_exec *node, int *i, bool *newline)
 // if we do not need the whole struct
 int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
-
 	if (is_newline(node, &i, &newline) == 1)
 		return (1);
 	if (!node->cmd_parts[1])

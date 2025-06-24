@@ -6,22 +6,22 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 16:05:46 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/22 13:18:06 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/24 11:31:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
 
-int return_errors(int return_value, int message, t_command_exec *node)
+int	return_errors(int return_value, int message, t_command_exec *node)
 {
-    if(message == ERR_CD_CHDIR)
-    {
-        ft_printfd("minishell: cd: %s: ", node->cmd_parts[1]);
+	if (message == ERR_CD_CHDIR)
+	{
+		ft_printfd("minishell: cd: %s: ", node->cmd_parts[1]);
 		perror("");
-    }
-    else if(message == ERR_CD_GETCWD)
-        perror("getcwd() error");
-    else if(message == ERR_CD_MALLOC)
-        perror("Malloc error");
-    return(return_value);
+	}
+	else if (message == ERR_CD_GETCWD)
+		perror("getcwd() error");
+	else if (message == ERR_CD_MALLOC)
+		perror("Malloc error");
+	return (return_value);
 }
