@@ -2,12 +2,43 @@
 // #include "../include/exec.h"
 #include "../../include/exec.h"
 
+static int exit_child_builtin(t_command_exec *node, t_utils *utils)
+{
+    int i;
+    i = 0;
+    while(node->cmd_parts[i])
+    {
+        free(node->cmd_parts[i]);
+        node->cmd_parts[i] = NULL;
+    }
+    exit(utils->last_return);
+}
+
+static int built_in_child (t_command_exec *node, t_utils *utils)
+{
+	if (!ft_strcmp(node->cmd_parts[0], "cd"))
+		utils->last_return = (cd_builtin(node, utils, 0, 0));
+	else if (!ft_strcmp(node->cmd_parts[0], "echo"))
+		utils->last_return = (echo_builtin(node,TRUE, 0));
+	else if (!ft_strcmp(node->cmd_parts[0], "pwd"))
+		utils->last_return = (pwd_builtin(node, utils, 0, 4));
+	else if (!ft_strcmp(node->cmd_parts[0], "export"))
+		utils->last_return = (export_builtin(node, utils, 1));
+	else if (!ft_strcmp(node->cmd_parts[0], "unset"))
+		utils->last_return = (unset_builtin(node, utils));
+	else if (!ft_strcmp(node->cmd_parts[0], "env"))
+		utils->last_return = (env_builtin(node, utils, 0));
+	else if (!ft_strcmp(node->cmd_parts[0], "exit"))
+		utils->last_return = (exit_builtin(node, utils));
+	return(exit_child_builtin(node, utils));
+}
+
 void child_redirect(t_command_exec *node, t_utils *utils)
 {
 
     char    *path;
     if (built_in_checker(node->cmd_parts[0]))
-        ft_printfd("test");//TODO redirect to the right built_in followed by the right way to execute the child
+        built_in_child(node, utils);//ft_printfd("test");//TODO redirect to the right built_in followed by the right way to execute the child
     if(!ft_strchr(node->cmd_parts[0], '/'))
     {
         //ft_printfd("cmd_parts[0] = %s\n", node->cmd_parts[0]); //TORM

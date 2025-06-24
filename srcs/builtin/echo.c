@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/22 14:46:51 by ldevoude          #+#    #+#             */
+/*   Updated: 2025/06/24 11:31:28 by ldevoude         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/builtin.h"
 
 // to check if we got a right parameters
@@ -24,8 +36,8 @@ int	is_newline(t_command_exec *node, int *i, bool *newline)
 // flag to setup or bool newline and index i
 // then we print the whole content of our cmd
 
-//TODO change t_command *node into simple a char **cmd
-//if we do not need the whole struct
+// TODO change t_command *node into simple a char **cmd
+// if we do not need the whole struct
 int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
 	if (is_newline(node, &i, &newline) == 1)
