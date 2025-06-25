@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 09:21:43 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/25 16:17:05 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,24 @@ static int	built_in_child(t_command_exec *node, t_utils *utils)
 	return (exit_child_builtin(node, utils));
 }
 
+
 void	child_redirect(t_command_exec *node, t_utils *utils)
 {
 	char	*path;
+	//bool    cmd_not_found;
 
 	if (built_in_checker(node->cmd_parts[0]))
 		built_in_child(node, utils);
 	if (!ft_strchr(node->cmd_parts[0], '/'))
 	{
 		path = path_finder(utils->env, node->cmd_parts[0], NULL);
-		if (path == NULL)
-			child_error(-42, NULL, 1, node->cmd_parts[0]);
+		// if (path == NULL)
+		// 	path_finder_fail(node, utils, cmd_not_found);
 		execve(path, node->cmd_parts, utils->env);
 		perror("execve");
+		close(utils->old_stdin);
+     	close(utils->old_stdout);
+		
 		free(path);
 		exit(EXIT_FAILURE);
 	}

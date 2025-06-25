@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 11:32:29 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/25 16:16:26 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	*free_arrays(char **one, char **two, char *three, char *four)
 	return (NULL);
 }
 
-void	child_error(int infile, int *fd, int error, char *cmd)
+void	 child_error(int infile, int *fd, int error, char *cmd)
 {
 	if (error == 1)
 	{
@@ -128,7 +128,7 @@ void	child_error(int infile, int *fd, int error, char *cmd)
 		close(fd[1]);
 	if (fd[0])
 		close(fd[0]);
-	if (infile == MALLOC_ERROR)
+	if (infile == -42)
 	{
 		exit(0);
 	}
