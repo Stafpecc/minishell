@@ -10,7 +10,7 @@ static int gotnotnull(void)
 	return (1);
 }
 
-void	exit_proprely(int count, ...)
+static void	exit_proprely(int count, ...)
 {
 	va_list args;
 	void (*free_fn)(void *);
@@ -154,33 +154,34 @@ static char	*strjoin_free(char *s1, const char *s2)
 	return (joined);
 }
 
-char *read_input_with_quotes(void)
+static char *read_input_with_quotes(void)
 {
-    char *line;
-    char *tmp;
+    char *line = NULL;
+    char *tmp = NULL;
     char quote;
 
     g_interrupted = 0;
     signal(SIGINT, sigint_handler);
+
     line = readline("minishell> ");
     if (g_interrupted)
     {
-        if (line)
-            free(line);
-        return NULL;  // Lecture interrompue par Ctrl+C
+        g_interrupted = 0;
+        free(line);
+        return ft_strdup("");  // Retourner une ligne vide pour redonner la main
     }
-    if (!line)
+    if (!line) // Ctrl+D
         return NULL;
 
-    while ((quote = quote_not_closed(line)) && !g_interrupted)
+    while ((quote = quote_not_closed(line)))
     {
+        g_interrupted = 0;
         tmp = readline("> ");
         if (g_interrupted)
         {
-            if (tmp)
-                free(tmp);
+            free(tmp);
             free(line);
-            return NULL;
+            return ft_strdup("");  // Retourner une ligne vide pour revenir au prompt principal
         }
         if (!tmp)
         {
@@ -224,12 +225,17 @@ int	main(int ac, char **av, char **env)
 	set_signals();
 	while (1)
 	{
-		ft_printfd("LASTRETURN= %d\n",utils->last_return);
+		//ft_printfd("LASTRETURN= %d\n",utils->last_return);
 		input = read_input_with_quotes();
 		if (!input)
 		{
 			write(1, "exit\n", 5);
 			exit_proprely(0);
+		}
+		if (input[0] == '\0')
+		{
+			free(input);
+			continue;
 		}
 		if (*input)
 			add_history(input);
