@@ -5,7 +5,7 @@
 
 # include "lexer.h"
 
-extern volatile sig_atomic_t g_heredoc_interrupted;
+extern volatile sig_atomic_t g_interrupted;
 
 typedef enum e_last_return {
     CMD_SUCCESS,

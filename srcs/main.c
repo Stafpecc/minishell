@@ -1,8 +1,14 @@
 #include "minishell.h"
 #include "exec.h"
+#include "parsing.h"
 #include "../libft/includes/libft.h"
 
 #include <stdarg.h>
+
+static int gotnotnull(void)
+{
+	return (1);
+}
 
 void	exit_proprely(int count, ...)
 {
@@ -148,26 +154,46 @@ static char	*strjoin_free(char *s1, const char *s2)
 	return (joined);
 }
 
-static char	*read_input_with_quotes(void)
+char *read_input_with_quotes(void)
 {
-	char	*line;
-	char	*tmp;
-	char	quote;
+    char *line;
+    char *tmp;
+    char quote;
 
-	line = readline("minishell> ");
-	if (!line)
-		return (NULL);
-	while ((quote = quote_not_closed(line)))
-	{
-		tmp = readline("> ");
-		if (!tmp)
-			break;
-		line = strjoin_free(line, "\n");
-		line = strjoin_free(line, tmp);
-	}
-	return (line);
+    g_interrupted = 0;
+    signal(SIGINT, sigint_handler);
+    line = readline("minishell> ");
+    if (g_interrupted)
+    {
+        if (line)
+            free(line);
+        return NULL;  // Lecture interrompue par Ctrl+C
+    }
+    if (!line)
+        return NULL;
+
+    while ((quote = quote_not_closed(line)) && !g_interrupted)
+    {
+        tmp = readline("> ");
+        if (g_interrupted)
+        {
+            if (tmp)
+                free(tmp);
+            free(line);
+            return NULL;
+        }
+        if (!tmp)
+        {
+            ft_printfd("bash: unexpected EOF while looking for matching `%c'\n", quote);
+            ft_printfd("bash: syntax error: unexpected end of file\n");
+            free(line);
+            return NULL;
+        }
+        line = strjoin_free(line, "\n");
+        line = strjoin_free(line, tmp);
+    }
+    return line;
 }
-
 
 
 int	main(int ac, char **av, char **env)
@@ -192,6 +218,7 @@ int	main(int ac, char **av, char **env)
 		ft_printfd(RED "Error: minishell cannot be run recursively\n" RESET);
 		return (RETURN_FAILURE);
 	}
+	rl_event_hook = gotnotnull;
 	utils = init_utils_struct(env);
 	(void)av;
 	set_signals();
