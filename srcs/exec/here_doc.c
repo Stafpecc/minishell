@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:58:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/24 13:28:32 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/25 08:54:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <readline/readline.h>
 #include <unistd.h>
-
+#include <sys/ioctl.h>
 #include "../../include/exec.h"
 #include "../../libft/includes/libft.h"
 
@@ -28,10 +28,12 @@ volatile sig_atomic_t g_heredoc_interrupted = 0;
 
 void sigint_heredoc_handler(int sig)
 {
+    char c = '\n';
 	(void)sig;
 	g_heredoc_interrupted = 1;
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0); //works without it, I keep it here for tarini to check if we delete or not
 	rl_done = 1;
+    ioctl(STDIN_FILENO, TIOCSTI, &c);
 }
 
 int readline_heredoc(int fd, char *delimiter)
