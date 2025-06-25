@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:33:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 13:22:22 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/25 16:30:03 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	print_exit(long long code, char *arg, bool too_many_arguments)
 	exit(code);
 }
 
-long long static	ft_atol(const char *nptr)
+static long long	ft_atol(const char *nptr)
 {
 	int				i;
 	int				sign;
