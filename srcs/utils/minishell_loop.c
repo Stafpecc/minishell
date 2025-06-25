@@ -6,11 +6,11 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:29:16 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 18:30:43 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/25 18:47:56 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static int is_all_spaces(const char *str)
 {
@@ -41,6 +41,19 @@ static bool	handle_null_input(char *input)
 		return (false);
 	}
 	return (true);
+}
+
+static bool	handle_exit_builtin(char *input, t_token *token, t_utils *utils)
+{
+	if (ft_strcmp(input, "exit") == 0)
+	{
+		exit_proprely(3,
+			(void (*)(void *))free, input,
+			(void (*)(void *))free_tokens, token,
+			(void (*)(void *))free_utils, utils);
+		return (true);
+	}
+	return (false);
 }
 
 void	minishell_loop(t_utils *utils)

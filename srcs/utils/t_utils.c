@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:22:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 18:22:59 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/25 18:47:21 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char **add_var_to_env(char **env, const char *var)
 }
 
 
-static t_utils *init_utils_struct(char **envp)
+t_utils *init_utils_struct(char **envp)
 {
 	t_utils *utils = malloc(sizeof(t_utils));
 	char **tmp;

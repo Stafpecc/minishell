@@ -6,13 +6,15 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 18:19:34 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/25 18:57:59 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 #include <stdarg.h>
+#include <unistd.h>
+#include <readline/readline.h>
 
 void free_env(char **env)
 {
