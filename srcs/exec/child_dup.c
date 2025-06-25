@@ -21,7 +21,6 @@ int redirect_write_browser(t_redirect **redirect, int i)
 			}
 			if(close(redirect[i]->fd) == -1) //TORM IF WORKING
 				return(RETURN_FAILURE); 
-			ft_printfd("redirect[i] = %d",redirect[i]->fd);
 			i++;
 		}
 	return (RETURN_SUCCESS);
@@ -142,5 +141,4 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	if (pipe_fd[1] != NONE)
 		close(pipe_fd[1]);
 	child_redirect(node, utils);
-	exit(EXIT_FAILURE); // FAIL IF EXECVE DOESNT WORK
 }

@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/25 09:11:47 by ldevoude          #+#    #+#             */
+/*   Updated: 2025/06/25 09:12:50 by ldevoude         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/exec.h"
 
@@ -18,6 +28,7 @@ bool	built_in_checker(char *cmd)
 // To count how much commands has been sent
 // return the value of how much cmd
 // in the user's input
+
 int	count_commands(t_command_exec *cmds)
 {
 	int	counter_cmd;
@@ -31,6 +42,7 @@ int	count_commands(t_command_exec *cmds)
 	return (counter_cmd);
 }
 // return the total size of len
+
 size_t	ft_env_len(char **env)
 {
 	size_t	len;
@@ -46,6 +58,7 @@ size_t	ft_env_len(char **env)
 // we copy the content in ft_realloc then we assign the
 // NULL pointers for the new entry and its end
 // assign env then return success
+
 int	expand_env(t_utils *utils)
 {
 	size_t	old_env_size;
@@ -65,16 +78,16 @@ int	expand_env(t_utils *utils)
 	return (RETURN_SUCCESS);
 }
 
+// we catch the actual len of env to store it in old_size
+// we also create new_env_size that is old_env_size - 1
+// bcs we plan to remove a line in env
+// we realloc the new size in new_env thanks to ft_realloc
+// then set the last slot at NULL remove 1 to the size_env
+// and we change the pointer of env to new env before returning success
 
-//we catch the actual len of env to store it in old_size
-//we also create new_env_size that is old_env_size - 1
-//bcs we plan to remove a line in env
-//we realloc the new size in new_env thanks to ft_realloc
-//then set the last slot at NULL remove 1 to the size_env
-//and we change the pointer of env to new env before returning success
+// TODO do Ineed to free utils->env before that?
 
-//TODO do Ineed to free utils->env before that?
-int condense_env(t_utils *utils)
+int	condense_env(t_utils *utils)
 {
 	size_t	old_env_size;
 	size_t	new_env_size;
