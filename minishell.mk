@@ -7,6 +7,7 @@ override EXECDIR	:= exec/
 override BUILTINDIR := builtin/
 override ENVDIR 	:= env/
 override SIGNALDIR	:= signal/
+override UTILSDIR   := utils/
 
 SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
 
@@ -95,3 +96,14 @@ override BUILTINSRC := \
 	pwd \
 	unset \
 
+
+SRC += $(addprefix $(UTILSDIR), $(addsuffix .c, $(UTILSSRC)))
+
+override UTILSSRC := \
+	check_error \
+	execute \
+	free \
+	launch_lexer \
+	minishell_loop \
+	quotes \
+	t_utils \

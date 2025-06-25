@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:58:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 08:54:24 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/25 17:31:08 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 // if no we write the content of input with a \n free input set it to null
 // then we go back to the start of the loop UNTIL we find the EOF delimiter
 
-volatile sig_atomic_t g_heredoc_interrupted = 0;
+volatile sig_atomic_t g_interrupted = 0;
 
-void sigint_heredoc_handler(int sig)
+void sigint_handler(int sig)
 {
-    char c = '\n';
+    //char c = '\n';
 	(void)sig;
-	g_heredoc_interrupted = 1;
+	g_interrupted = 1;
 	//rl_replace_line("", 0); //works without it, I keep it here for tarini to check if we delete or not
 	rl_done = 1;
-    ioctl(STDIN_FILENO, TIOCSTI, &c);
+    //ioctl(STDIN_FILENO, TIOCSTI, &c);
 }
 
 int readline_heredoc(int fd, char *delimiter)
@@ -41,15 +41,15 @@ int readline_heredoc(int fd, char *delimiter)
     char *input;
     struct sigaction sa_new, sa_old;
 
-    g_heredoc_interrupted = 0;
-    sa_new.sa_handler = sigint_heredoc_handler;
+    g_interrupted = 0;
+    sa_new.sa_handler = sigint_handler;
     sigemptyset(&sa_new.sa_mask);
     sa_new.sa_flags = 0;
     sigaction(SIGINT, &sa_new, &sa_old);
     while (1)
     {
         input = readline("> ");
-        if (g_heredoc_interrupted)
+        if (g_interrupted)
         {
             free(input);
             sigaction(SIGINT, &sa_old, NULL);
