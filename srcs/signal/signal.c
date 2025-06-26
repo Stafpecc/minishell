@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/26 12:41:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:48:27 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	ctrl_c(void)
 {
+	g_interrupted = 1;
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
 	rl_on_new_line();

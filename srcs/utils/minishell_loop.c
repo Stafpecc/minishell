@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell_loop.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 18:29:16 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 16:15:43 by stafpec          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -51,6 +41,7 @@ void	minishell_loop(t_utils *utils)
 
 	while (1)
 	{
+    add_exit_builtin_on_ctrld
 		input = read_input_with_quotes();
 		if (!handle_null_input(input, utils))
 			exit_proprely(0);

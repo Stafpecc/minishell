@@ -45,7 +45,7 @@ void	exit_proprely(int count, ...);
 /******************************************************************************/
 /*                                QUOTES                                      */
 /******************************************************************************/
-char *read_input_with_quotes(void);
+char	*read_input_with_quotes(t_utils *utils);
 char	quote_not_closed(const char *str);
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:21:01 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 13:13:42 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:54:17 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ matching `%c'\n", quote);
 	return (ft_strdup(""));
 }
 
-static char	*read_first_line(void)
+static char	*read_first_line(t_utils *utils)
 {
 	char	*line;
 
@@ -42,6 +42,7 @@ static char	*read_first_line(void)
 	line = readline("minishell> ");
 	if (g_interrupted)
 	{
+		utils->last_return = 130;
 		g_interrupted = 0;
 		free(line);
 		return (ft_strdup(""));
@@ -75,12 +76,12 @@ static char	*read_until_quotes_closed(char *line, char quote)
 	return (line);
 }
 
-char	*read_input_with_quotes(void)
+char	*read_input_with_quotes(t_utils *utils)
 {
 	char	*line;
 	char	quote;
 
-	line = read_first_line();
+	line = read_first_line(utils);
 	if (!line)
 		return (NULL);
 	quote = quote_not_closed(line);

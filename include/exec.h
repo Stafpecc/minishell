@@ -22,7 +22,7 @@
 
 //child_dup.c
 int 	write_dup(t_redirect **redirect, int *pipe_fd);
-int	    read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe);
+int	    read_dup(t_redirect **redirect, /*int *pipe_fd,*/ int previous_pipe);
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils);
 void    only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 
@@ -62,7 +62,7 @@ int	child_maker(t_command_exec *node, t_utils *utils, int i);
 int	exec(t_command_exec *node, t_utils *utils);
 
 //here_doc.c
-int here_doc (char *delimiter);
+int here_doc (char *delimiter, t_utils *utils);
 void sigint_handler(int sig);
 //single_builtin.c
 int single_built_in(t_command_exec *node, t_utils *utils);
