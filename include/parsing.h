@@ -95,8 +95,6 @@ int				launch_commands(t_token **tokens, t_command **curr, t_command *head, t_ut
 bool			is_empty_command(t_command *cmd);
 int				return_failure(const char *token, t_utils *utils);
 void 			print_syntax_error(const char *token, t_utils *utils);
-int 			redirect_parsing(t_command *curr, t_utils *utils);
-bool 			has_conflicting_redirections(t_command *cmd);
 bool 			is_directory(const char *path);
 int 			check_file(const char *path, t_utils *utils, t_file_mode mode);
 
