@@ -26,6 +26,12 @@ int	    read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe);
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils);
 void    only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 
+//child_execute.c
+void path_finder_fail(t_command_exec *node, t_utils *utils);
+void close_free_utils(t_utils *utils, size_t i);
+void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
+    size_t i);
+
 //child_pathed.c
 void	childs_pathed_exec_failed(char **split_args, char **split_result,
     char *path, char **result);

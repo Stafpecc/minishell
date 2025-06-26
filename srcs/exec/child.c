@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 16:17:05 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 14:12:05 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 
 static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 {
-	int	i;
-
-	i = 0;
-	while (node->cmd_parts[i])
-	{
-		free(node->cmd_parts[i]);
-		node->cmd_parts[i] = NULL;
-	}
+	close_free_utils(utils, 0);
+	close_t_command_exec(node, NULL, 0);
 	exit(utils->last_return);
 }
 
@@ -41,34 +35,29 @@ static int	built_in_child(t_command_exec *node, t_utils *utils)
 		utils->last_return = (env_builtin(node, utils, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))
 		utils->last_return = (exit_builtin(node, utils));
-	return (exit_child_builtin(node, utils));
+	exit_child_builtin(node, utils);
+	return(0);
 }
-
 
 void	child_redirect(t_command_exec *node, t_utils *utils)
 {
 	char	*path;
-	//bool    cmd_not_found;
+	int		failure_case;
 
+	failure_case = MALLOC_ERROR;
 	if (built_in_checker(node->cmd_parts[0]))
 		built_in_child(node, utils);
-	if (!ft_strchr(node->cmd_parts[0], '/'))
+	else if (!ft_strchr(node->cmd_parts[0], '/'))
 	{
 		path = path_finder(utils->env, node->cmd_parts[0], NULL);
-		// if (path == NULL)
-		// 	path_finder_fail(node, utils, cmd_not_found);
+		if (path == NULL)
+		{
+			path_finder_fail(node, utils);
+		}
 		execve(path, node->cmd_parts, utils->env);
-		perror("execve");
-		close(utils->old_stdin);
-     	close(utils->old_stdout);
-		
 		free(path);
-		exit(EXIT_FAILURE);
 	}
 	else
-	{
 		execve(node->cmd_parts[0], node->cmd_parts, utils->env);
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
+	path_finder_fail(node, utils);
 }

@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 16:16:26 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 13:37:50 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 	int	i;
 
 	i = 0;
+
 	while (path_dirs[i])
 	{
 		path_prefix = ft_strjoin(path_dirs[i], "/");
