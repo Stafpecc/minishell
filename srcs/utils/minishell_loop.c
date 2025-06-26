@@ -27,7 +27,7 @@ static bool	handle_null_input(char *input, t_utils *utils)
 {
 	if (!input)
 	{
-		exit_builtin(NULL, utils);
+		utils->run = 0;
 		return (false);
 	}
 	return (true);
@@ -42,7 +42,7 @@ void	minishell_loop(t_utils *utils)
 	while (utils->run)
 	{
 		input = read_input_with_quotes(utils);
-		if (!handle_null_input(input))
+		if (!handle_null_input(input, utils))
 			break ;
 		if (skip_empty_or_spaces(input))
 			continue ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 12:41:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 12:42:11 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 17:12:44 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	main(int ac, char **av, char **env)
 	set_signals();
 	utils = init_utils_struct(env);
 	minishell_loop(utils);
-	return (0);
+	return (utils->last_return);
 }
