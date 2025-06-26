@@ -91,6 +91,7 @@ override BUILTINSRC := \
 	echo \
 	env \
 	exit \
+	exit_utils \
 	export \
 	pwd \
 	unset \

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:41:11 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 13:03:00 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 16:45:15 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,7 @@
 void	execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 	t_utils *utils)
 {
-	if (cmd)
-	{
-		if (exec(cmd, utils) == MALLOC_ERROR)
-		{
-			perror("EXEC ERROR\n");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
+	if (!cmd)
 	{
 		free(input);
 		free_tokens(token);
@@ -32,5 +24,11 @@ void	execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 	}
 	free(input);
 	free_tokens(token);
+	if (exec(cmd, utils) == MALLOC_ERROR)
+	{
+		free_commands_exec(cmd);
+		perror("EXEC ERROR");
+		exit(EXIT_FAILURE);
+	}
 	free_commands_exec(cmd);
 }

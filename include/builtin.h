@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 17:15:51 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/26 16:54:42 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ int	echo_builtin(t_command_exec *node, bool newline, int i);
 //env.c
 int env_builtin(t_command_exec *node, t_utils *utils, size_t i);
 
+//exit_utils.c
+void	is_arg_digit_and_overflow(char *arg, t_utils *utils);
+
 //exit.c
+int	print_exit(long long code, char *arg, bool too_many_arguments,
+	t_utils *utils);
 unsigned int exit_builtin(t_command_exec *node, t_utils *utils);
 
 //export.c

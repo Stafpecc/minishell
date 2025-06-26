@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 12:55:55 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 16:32:25 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,4 @@ void	free_utils(t_utils *utils)
 	close(utils->old_stdin);
 	close(utils->old_stdout);
 	free(utils);
-}
-
-void	exit_proprely(int count, ...)
-{
-	va_list		args;
-	void		(*free_fn)(void *);
-	void		*ptr;
-
-	rl_clear_history();
-	va_start(args, count);
-	while (count-- > 0)
-	{
-		free_fn = va_arg(args, void (*)(void *));
-		ptr = va_arg(args, void *);
-		if (ptr && free_fn)
-			free_fn(ptr);
-	}
-	va_end(args);
-	exit(EXIT_SUCCESS);
 }

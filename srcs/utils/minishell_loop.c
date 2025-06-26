@@ -39,12 +39,11 @@ void	minishell_loop(t_utils *utils)
 	t_token			*token;
 	t_command_exec	*command;
 
-	while (1)
+	while (utils->run)
 	{
-    add_exit_builtin_on_ctrld
-		input = read_input_with_quotes();
-		if (!handle_null_input(input, utils))
-			exit_proprely(0);
+		input = read_input_with_quotes(utils);
+		if (!handle_null_input(input))
+			break ;
 		if (skip_empty_or_spaces(input))
 			continue ;
 		if (*input)
