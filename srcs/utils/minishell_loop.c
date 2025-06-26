@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:29:16 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 15:49:50 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 16:34:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,17 @@ static bool	handle_null_input(char *input)
 	return (true);
 }
 
-static bool	handle_exit_builtin(char *input, t_token *token, t_utils *utils)
-{
-	if (ft_strcmp(input, "exit") == 0)
-	{
-		exit_proprely(3,
-			(void (*)(void *))free, input,
-			(void (*)(void *))free_tokens, token,
-			(void (*)(void *))free_utils, utils);
-		return (true);
-	}
-	return (false);
-}
-
 void	minishell_loop(t_utils *utils)
 {
 	char			*input;
 	t_token			*token;
 	t_command_exec	*command;
 
-	while (1)
+	while (utils->run)
 	{
 		input = read_input_with_quotes(utils);
 		if (!handle_null_input(input))
-			exit_proprely(0);
+			break ;
 		if (skip_empty_or_spaces(input))
 			continue ;
 		if (*input)
@@ -74,8 +61,6 @@ void	minishell_loop(t_utils *utils)
 		token = process_lexer(input, utils);
 		if (!token)
 			continue ;
-		if (handle_exit_builtin(input, token, utils))
-			return ;
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
 		execute_or_cleanup(command, token, input, utils);

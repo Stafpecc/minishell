@@ -67,4 +67,11 @@ void sigint_handler(int sig);
 //single_builtin.c
 int single_built_in(t_command_exec *node, t_utils *utils);
 
+//exit.c
+int	print_exit(long long code, char *arg, bool too_many_arguments,
+	t_utils *utils);
+
+//exit_utils.c
+void	is_arg_digit_and_overflow(char *arg, t_utils *utils);
+
 #endif
