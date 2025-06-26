@@ -6,14 +6,15 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:41:11 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 18:41:26 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 13:03:00 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "exec.h"
 
-void	execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input, t_utils *utils)
+void	execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
+	t_utils *utils)
 {
 	if (cmd)
 	{

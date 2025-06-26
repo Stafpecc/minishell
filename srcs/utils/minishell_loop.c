@@ -6,13 +6,13 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:29:16 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 18:47:56 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:53:46 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int is_all_spaces(const char *str)
+static int	is_all_spaces(const char *str)
 {
 	while (*str)
 	{
@@ -58,9 +58,9 @@ static bool	handle_exit_builtin(char *input, t_token *token, t_utils *utils)
 
 void	minishell_loop(t_utils *utils)
 {
-	char	*input;
-	t_token	*token;
-	t_command_exec *command;
+	char			*input;
+	t_token			*token;
+	t_command_exec	*command;
 
 	while (1)
 	{
@@ -68,11 +68,12 @@ void	minishell_loop(t_utils *utils)
 		if (!handle_null_input(input))
 			exit_proprely(0);
 		if (skip_empty_or_spaces(input))
-			continue;
+			continue ;
 		if (*input)
 			add_history(input);
-		if (!(token = process_lexer(input, utils)))
-			continue;
+		token = process_lexer(input, utils);
+		if (!token)
+			continue ;
 		if (handle_exit_builtin(input, token, utils))
 			return ;
 		utils->type_of_first_arg = token->type;
@@ -80,4 +81,3 @@ void	minishell_loop(t_utils *utils)
 		execute_or_cleanup(command, token, input, utils);
 	}
 }
-

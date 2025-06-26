@@ -6,14 +6,14 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/23 12:51:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:41:38 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signal_handler.h"
 #include "minishell.h"
 
-static void ctrl_c(void)
+static void	ctrl_c(void)
 {
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
@@ -21,12 +21,12 @@ static void ctrl_c(void)
 	rl_redisplay();
 }
 
-static void ctrl_backslash()
+static void	ctrl_backslash(void)
 {
 	(void)0;
 }
 
-void sig_handler(int sig)
+void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 		ctrl_c();
@@ -34,15 +34,13 @@ void sig_handler(int sig)
 		ctrl_backslash();
 }
 
-void set_signals(void)
+void	set_signals(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_handler = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
-
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 }
-

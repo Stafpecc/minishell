@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 18:57:59 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:55:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@
 #include <unistd.h>
 #include <readline/readline.h>
 
-void free_env(char **env)
+void	free_env(char **env)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (!env)
-		return;
+		return ;
 	while (env[i])
 		free(env[i++]);
 	free(env);
 }
 
-void free_utils(t_utils *utils)
+void	free_utils(t_utils *utils)
 {
 	free_env(utils->env);
 	close(utils->old_stdin);
@@ -36,9 +38,9 @@ void free_utils(t_utils *utils)
 
 void	exit_proprely(int count, ...)
 {
-	va_list args;
-	void (*free_fn)(void *);
-	void *ptr;
+	va_list		args;
+	void		(*free_fn)(void *);
+	void		*ptr;
 
 	rl_clear_history();
 	va_start(args, count);

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:24:41 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/24 13:51:14 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:40:37 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ static t_arg	**resize_redirect_array(t_arg ***redirect_array,
 	*i = 0;
 	while (*redirect_array && (*redirect_array)[*i])
 		(*i)++;
-	
 	old_size = sizeof(t_arg *) * (*i);
 	new_size = sizeof(t_arg *) * (*i + 2);
-
 	new_redirect = ft_realloc(*redirect_array, old_size, new_size);
 	if (!new_redirect)
 		process_free_exit(ctx->head);
 	*redirect_array = new_redirect;
 	return (new_redirect);
 }
-
 
 static int	fill_redirect(t_redir_params *params,
 	t_token *token, t_context *ctx)

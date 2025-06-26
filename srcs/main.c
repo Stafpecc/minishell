@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 12:41:58 by stafpec           #+#    #+#             */
+/*   Updated: 2025/06/26 12:42:11 by stafpec          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "exec.h"
 #include "parsing.h"
 #include "../libft/includes/libft.h"
 
-static int gotnotnull(void)
+static int	gotnotnull(void)
 {
 	return (1);
 }
