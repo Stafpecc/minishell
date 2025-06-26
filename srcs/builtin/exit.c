@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:33:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 16:30:03 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 16:17:11 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ unsigned int	exit_builtin(t_command_exec *node, t_utils *utils)
 	long long	return_value;
 
 	return_value = 0;
-	if (!node->cmd_parts[1])
+	if (!node || !node->cmd_parts[1])
 		print_exit(utils->last_return, NULL, FALSE);
 	is_arg_digit_and_overflow(node->cmd_parts[1], FALSE, 0, 0);
 	if (node->cmd_parts[2])
