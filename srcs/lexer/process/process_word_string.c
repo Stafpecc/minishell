@@ -6,98 +6,103 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:46:05 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/16 15:55:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:17:14 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "../../../libft/includes/libft.h"
 
-static int	ret_free(char *buffer, bool success)
-{
-	free(buffer);
-	if (success == true)
-		return (RETURN_SUCCESS);
-	return (RETURN_FAILURE);
-}
-
-static int	parse_normal_part(const char *input, size_t *i, char **buffer)
+static int	process_normal_word(const char *input, size_t *i, t_token **head)
 {
 	size_t	start;
-	char	*part;
-	char	*tmp;
+	char	*buffer;
 
 	start = *i;
-	while (input[*i] && !ft_isspace(input[*i])
-		&& input[*i] != '"' && input[*i] != '\''
-		&& input[*i] != '|' && input[*i] != '<' && input[*i] != '>')
+	while (input[*i] && !ft_isspace(input[*i]) && input[*i] != '|'
+		&& input[*i] != '<' && input[*i] != '>'
+		&& input[*i] != '\'' && input[*i] != '"')
 		(*i)++;
-	part = ft_substr(input, start, *i - start);
-	if (!part)
+	buffer = ft_substr(input, start, *i - start);
+	if (!buffer)
 		return (RETURN_FAILURE);
-	tmp = ft_strjoin(*buffer, part);
-	free(*buffer);
-	free(part);
-	if (!tmp)
+	if (add_token(head, TOK_WORD, buffer) == RETURN_FAILURE)
+	{
+		free(buffer);
 		return (RETURN_FAILURE);
-	*buffer = tmp;
+	}
+	free(buffer);
 	return (RETURN_SUCCESS);
 }
 
-static int	parse_quoted_part(const char *input, size_t *i, char **buffer)
+static int	process_double_quote(const char *input, size_t *i, t_token **head)
 {
 	size_t	start;
-	char	quote;
-	char	*part;
-	char	*tmp;
+	char	*buffer;
 
-	quote = input[*i];
 	(*i)++;
 	start = *i;
-	while (input[*i] && input[*i] != quote)
-	{
+	while (input[*i] && input[*i] != '"')
 		(*i)++;
+	if (input[*i] != '"')
+		return (RETURN_FAILURE);
+	buffer = ft_substr(input, start, *i - start);
+	if (!buffer)
+		return (RETURN_FAILURE);
+	if (add_token(head, TOK_DOUBLE_QUOTES, buffer) == RETURN_FAILURE)
+	{
+		free(buffer);
+		return (RETURN_FAILURE);
 	}
-	if (input[*i] != quote)
+	free(buffer);
+	(*i)++;
+	return (RETURN_SUCCESS);
+}
+
+static int	process_single_quote(const char *input, size_t *i, t_token **head)
+{
+	size_t	start;
+	char	*buffer;
+
+	(*i)++;
+	start = *i;
+	while (input[*i] && input[*i] != '\'')
+		(*i)++;
+	if (input[*i] != '\'')
 		return (RETURN_FAILURE);
-	part = ft_substr(input, start, *i - start);
-	if (!part)
+	buffer = ft_substr(input, start, *i - start);
+	if (!buffer)
 		return (RETURN_FAILURE);
-	tmp = ft_strjoin(*buffer, part);
-	free(*buffer);
-	free(part);
-	if (!tmp)
+	if (add_token(head, TOK_SINGLE_QUOTES, buffer) == RETURN_FAILURE)
+	{
+		free(buffer);
 		return (RETURN_FAILURE);
-	*buffer = tmp;
+	}
+	free(buffer);
 	(*i)++;
 	return (RETURN_SUCCESS);
 }
 
 int	process_combined_token(const char *input, size_t *i, t_token **head)
 {
-	char	*buffer;
-	int		status;
-
-	buffer = ft_strdup("");
-	if (!buffer)
-		return (RETURN_FAILURE);
 	while (input[*i] && !ft_isspace(input[*i]) && input[*i] != '|'
 		&& input[*i] != '<' && input[*i] != '>')
 	{
-		if (input[*i] == '"' || input[*i] == '\'')
+		if (input[*i] == '\'')
 		{
-			status = parse_quoted_part(input, i, &buffer);
-			if (status == RETURN_FAILURE)
-				return (ret_free(buffer, false));
+			if (process_single_quote(input, i, head) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		else if (input[*i] == '"')
+		{
+			if (process_double_quote(input, i, head) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
 		}
 		else
 		{
-			status = parse_normal_part(input, i, &buffer);
-			if (status == RETURN_FAILURE)
-				return (ret_free(buffer, false));
+			if (process_normal_word(input, i, head) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
 		}
 	}
-	if (add_token(head, TOK_WORD, buffer) == RETURN_FAILURE)
-		return (ret_free(buffer, false));
-	return (ret_free(buffer, true));
+	return (RETURN_SUCCESS);
 }
