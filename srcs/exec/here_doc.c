@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:58:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/25 17:31:08 by tarini           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:56:47 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void sigint_handler(int sig)
     //ioctl(STDIN_FILENO, TIOCSTI, &c);
 }
 
-int readline_heredoc(int fd, char *delimiter)
+int readline_heredoc(int fd, char *delimiter, t_utils *utils)
 {
     char *input;
     struct sigaction sa_new, sa_old;
@@ -51,6 +51,8 @@ int readline_heredoc(int fd, char *delimiter)
         input = readline("> ");
         if (g_interrupted)
         {
+            utils->last_return = 130;
+            g_interrupted = 0;
             free(input);
             sigaction(SIGINT, &sa_old, NULL);
             return (-1);
@@ -82,14 +84,14 @@ int readline_heredoc(int fd, char *delimiter)
 //if fail return -1, else unlink (fd would still work even with unlink)
 //to remove .heredoc.tmp from the directory then we return the FD that
 //should be used in dup to get the content as the read content!
-int here_doc(char *delimiter)
+int here_doc(char *delimiter, t_utils *utils)
 {
     int fd;
 
     fd = open(".heredoc.tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (fd < 0)
         return (-1);
-    if (readline_heredoc(fd, delimiter) == -1)
+    if (readline_heredoc(fd, delimiter, utils) == -1)
     {
         unlink(".heredoc.tmp");
         close(fd);

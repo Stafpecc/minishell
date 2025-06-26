@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:29:16 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 12:53:46 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/06/26 15:49:50 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	minishell_loop(t_utils *utils)
 
 	while (1)
 	{
-		input = read_input_with_quotes();
+		input = read_input_with_quotes(utils);
 		if (!handle_null_input(input))
 			exit_proprely(0);
 		if (skip_empty_or_spaces(input))
