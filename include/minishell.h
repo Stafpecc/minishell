@@ -32,7 +32,6 @@ const char *get_token_type_str(t_token_type type); //DEBUG
 void	minishell_loop(t_utils *utils);
 void	execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input, t_utils *utils);
 t_token	*process_lexer(char *input, t_utils *utils);
-void setup(void);
 t_utils *init_utils_struct(char **envp);
 
 /******************************************************************************/

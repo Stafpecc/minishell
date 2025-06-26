@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/26 14:12:05 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 14:44:54 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int	built_in_child(t_command_exec *node, t_utils *utils)
 void	child_redirect(t_command_exec *node, t_utils *utils)
 {
 	char	*path;
-	int		failure_case;
+	//int		failure_case;
 
-	failure_case = MALLOC_ERROR;
+	//failure_case = MALLOC_ERROR;
 	if (built_in_checker(node->cmd_parts[0]))
 		built_in_child(node, utils);
 	else if (!ft_strchr(node->cmd_parts[0], '/'))
