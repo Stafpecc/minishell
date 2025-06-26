@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/26 14:09:11 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 15:21:18 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,22 @@
 static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		int *pipe_fd, pid_t child)
 {
-	// if (utils->previous_pipes >= 0)
-	// {
-	// 	if (close(utils->previous_pipes) == -1)
-	// 		return (EXIT_FAILURE);
-	// }
-	// if (pipe_fd[1] != MALLOC_ERROR)
-	// {
-	// 	if (close(pipe_fd[1]) == -1)
-	// 		return (EXIT_FAILURE);
-	// }
-	// close(pipe_fd[0]);
-	while (waitpid(child, &status, 0) > 0)
+	int pid;
+
+	pid = -1;
+	while ((pid = wait(&status)) > 0)
 	{
-		if (WIFEXITED(status))
-			utils->last_return = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			utils->last_return = 128 + WTERMSIG(status);
+		if (pid == child)
+		{
+			if (WIFEXITED(status))
+				utils->last_return = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				utils->last_return = 128 + WTERMSIG(status);
+		}
 	}
 	close(pipe_fd[0]);
 	return (EXIT_SUCCESS);
+
 }
 // is previous pipe exist if yes is it not the last cmd?
 // if both yes we do a new pipe and secure it

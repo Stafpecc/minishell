@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   child_dup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
+/*   Updated: 2025/06/26 15:25:12 by ldevoude         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/exec.h"
 
 int redirect_write_browser(t_redirect **redirect, int i)
@@ -63,23 +75,23 @@ int	write_dup(t_redirect **redirect, int *pipe_fd)
 
 // dup the right fd for stdinput and return
 // an error code if it doesnt work properly
-int	read_dup(t_redirect **redirect, int *pipe_fd, int previous_pipe)
+int	read_dup(t_redirect **redirect, /*int *pipe_fd,*/ int previous_pipe)
 {
 	if(redirect)
 	{
 		if(redirect_read_browser(redirect, 0))
 			return (RETURN_FAILURE);
 	}	
-	if (previous_pipe != NONE && !redirect)
+	else if (previous_pipe != NONE)
 	{
-		if (dup2(previous_pipe, STDIN_FILENO))
+		if (dup2(previous_pipe, STDIN_FILENO) == -1)
 			return (RETURN_FAILURE);
 	}
-	else if (!redirect)
-	{
-		if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
-			return (RETURN_FAILURE);
-	}
+	// else if (previous_pipe == NONE)
+	// {
+	// 	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+	// 		return (RETURN_FAILURE);
+	// }
 	return (RETURN_SUCCESS);
 }
 
@@ -89,7 +101,7 @@ void only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 
 	if(node->redirect_in
-		&& read_dup(node->redirect_in, pipe_fd, utils->previous_pipes))
+		&& read_dup(node->redirect_in, /*pipe_fd,*/ utils->previous_pipes))
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
@@ -118,7 +130,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if(utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
-	if (read_dup(node->redirect_in, pipe_fd, utils->previous_pipes))
+	if (read_dup(node->redirect_in, /*pipe_fd,*/ utils->previous_pipes))
 	{
 		if (utils->previous_pipes != NONE)
 			close(utils->previous_pipes);

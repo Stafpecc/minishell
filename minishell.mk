@@ -81,7 +81,6 @@ override EXECSRC := \
 	exec_utils\
 	exec \
 	here_doc\
-	redirections \
 	single_builtin \
 
 
