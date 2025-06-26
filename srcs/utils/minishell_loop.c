@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell_loop.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 18:29:16 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 16:34:51 by stafpec          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -33,11 +23,11 @@ static bool	skip_empty_or_spaces(char *input)
 	return (false);
 }
 
-static bool	handle_null_input(char *input)
+static bool	handle_null_input(char *input, t_utils *utils)
 {
 	if (!input)
 	{
-		write(1, "exit\n", 5);
+		exit_builtin(NULL, utils);
 		return (false);
 	}
 	return (true);
