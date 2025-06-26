@@ -62,7 +62,7 @@ int	child_maker(t_command_exec *node, t_utils *utils, int i);
 int	exec(t_command_exec *node, t_utils *utils);
 
 //here_doc.c
-int here_doc (char *delimiter, t_utils *utils);
+int here_doc (char *delimiter);
 void sigint_handler(int sig);
 //single_builtin.c
 int single_built_in(t_command_exec *node, t_utils *utils);

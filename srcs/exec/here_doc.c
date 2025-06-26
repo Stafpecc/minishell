@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:58:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 15:56:47 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 17:40:51 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void sigint_handler(int sig)
     //ioctl(STDIN_FILENO, TIOCSTI, &c);
 }
 
-int readline_heredoc(int fd, char *delimiter, t_utils *utils)
+int readline_heredoc(int fd, char *delimiter)
 {
     char *input;
     struct sigaction sa_new, sa_old;
@@ -51,11 +51,10 @@ int readline_heredoc(int fd, char *delimiter, t_utils *utils)
         input = readline("> ");
         if (g_interrupted)
         {
-            utils->last_return = 130;
             g_interrupted = 0;
             free(input);
             sigaction(SIGINT, &sa_old, NULL);
-            return (-1);
+            return (-130);
         }
         if (!input)
         {
@@ -84,18 +83,20 @@ int readline_heredoc(int fd, char *delimiter, t_utils *utils)
 //if fail return -1, else unlink (fd would still work even with unlink)
 //to remove .heredoc.tmp from the directory then we return the FD that
 //should be used in dup to get the content as the read content!
-int here_doc(char *delimiter, t_utils *utils)
+int here_doc(char *delimiter)
 {
     int fd;
+    int return_value;
 
     fd = open(".heredoc.tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (fd < 0)
         return (-1);
-    if (readline_heredoc(fd, delimiter, utils) == -1)
+    return_value = readline_heredoc(fd,delimiter);
+    if (return_value == -1 || return_value == -130)
     {
         unlink(".heredoc.tmp");
         close(fd);
-        return (-1);
+        return (return_value);
     }
     close(fd);
     fd = open(".heredoc.tmp", O_RDONLY);

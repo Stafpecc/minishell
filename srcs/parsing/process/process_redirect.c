@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/26 15:58:43 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 17:43:57 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,10 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 	if (add_redirect(tokens, &curr->redirect_in, &ctx, flags) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
 	process_quotes(*tokens, curr->redirect_in[i]);
-	fd = here_doc(curr->redirect_in[i]->arg, utils);
+	fd = here_doc(curr->redirect_in[i]->arg);
 	if (fd < 0)
 	{
-		//if(utils->last_return != 130)
-		//utils->last_return = 1;
+		utils->last_return = fd * -1;
 		return (RETURN_FAILURE);
 	}
 	curr->redirect_in[i]->fd = fd;
