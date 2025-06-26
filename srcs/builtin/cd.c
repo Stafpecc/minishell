@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/22 13:26:08 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 13:42:43 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	cd_error_checker(t_command_exec *node)
 {
 	if (!node->cmd_parts || !node->cmd_parts[0] || !node->cmd_parts[1])
 	{
-		ft_printfd("minishell: cd: only works with a");
+		ft_printfd("minishell: cd: only works with a ");
 		ft_printfd("relative or absolute path\n");
 		return (RETURN_FAILURE);
 	}

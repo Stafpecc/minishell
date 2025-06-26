@@ -9,12 +9,11 @@ extern volatile sig_atomic_t g_interrupted;
 
 typedef enum e_last_return {
     CMD_SUCCESS,
-    CMD_NOT_FOUND,
+    CMD_NOT_FOUND = 127,
     CMD_INVALID_ARGUMENT,
     CMD_PERMISSION_DENIED = 126,
     CMD_NOT_FOUND_CHILD,
-    CMD_EXEC_FAILURE = 255,
-	CMD_COMMAND_NOT_FOUND = 127
+    CMD_EXEC_FAILURE = 255
 } t_last_return;
 
 typedef struct s_redirect_flags {
