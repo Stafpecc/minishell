@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:21:52 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/15 11:15:36 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/06/26 17:53:01 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ double			ft_atod(const char *str);
 int				ft_pass(int i, const char *str, int *s);
 double			ft_atof(const char *str);
 void			*ft_realloc(void *ptr,size_t old_size, size_t new_size);
+char			*ft_strncpy(char *dest, const char *src, size_t n);
+char			*ft_strncat(char *dest, const char *src, size_t n);
 
 #endif
