@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
+/*   Updated: 2025/07/01 15:48:42 by ldevoude         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/exec.h"
 #include "../../libft/includes/libft.h"
@@ -46,15 +56,14 @@ static int	readline_loop(int fd, char *delimiter, char *input)
 	}
 }
 
-
 int	get_available_heredoc_filename(char *buffer, size_t size)
 {
-	int		    i;
-	char        *index;
-	const char  *base = ".heredoc";
+	int			i;
+	char		*index;
+	const char	*base = ".heredoc";
 
-    i = 0;
-    while (i < MAX_HEREDOC_ATTEMPTS)
+	i = 0;
+	while (i < MAX_HEREDOC_ATTEMPTS)
 	{
 		if (i == 0)
 			ft_strncpy(buffer, ".heredoc.tmp", size);
@@ -70,43 +79,18 @@ int	get_available_heredoc_filename(char *buffer, size_t size)
 		}
 		if (access(buffer, F_OK) != 0)
 			return (0);
-        i++;
+		i++;
 	}
 	return (-1);
 }
 
-
-//I create .heredoc.tmp with open and associate its fd into fd, I secure it
-//we go to readline_heredoc that should return us 0 if everything went well
-//inside of it we gonna fill .heredoc.tmp with user's input(s)
-//once outside we close close fd and do a new open that is RDONLY this time
-//if fail return -1, else unlink (fd would still work even with unlink)
-//to remove .heredoc.tmp from the directory then we return the FD that
-//should be used in dup to get the content as the read content!
-int	here_doc(char *delimiter)
-{
-	int		fd;
-	int		return_value;
-	char	tmpfile[64];
-
-	if (get_available_heredoc_filename(tmpfile, sizeof(tmpfile)) == -1)
-		return (-1);
-	fd = open(tmpfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd < 0)
-		return (-1);
-	return_value = readline_heredoc(fd, delimiter);
-	if (return_value == -1 || return_value == -130)
-	{
-		unlink(tmpfile);
-		close(fd);
-		return (return_value);
-	}
-	close(fd);
-	fd = open(tmpfile, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-
-	unlink(tmpfile);
+// I create .heredoc.tmp with open and associate its fd into fd, I secure it
+// we go to readline_heredoc that should return us 0 if everything went well
+// inside of it we gonna fill .heredoc.tmp with user's input(s)
+// once outside we close close fd and do a new open that is RDONLY this time
+// if fail return -1, else unlink (fd would still work even with unlink)
+// to remove .heredoc.tmp from the directory then we return the FD that
+// should be used in dup to get the content as the read content!
 
 static int	readline_heredoc(int fd, char *delimiter)
 {
@@ -139,23 +123,26 @@ static int	readline_heredoc(int fd, char *delimiter)
 // TODO si quelqu'un fait .heredoc.tmp avant de lancer le programme
 int	here_doc(char *delimiter)
 {
-	int	fd;
-	int	return_value;
+	int		fd;
+	int		return_value;
+	char	tmpfile[64];
 
-	fd = open(".heredoc.tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (get_available_heredoc_filename(tmpfile, sizeof(tmpfile)) == -1)
+		return (-1);
+	fd = open(tmpfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (-1);
 	return_value = readline_heredoc(fd, delimiter);
 	if (return_value == -1 || return_value == -130)
 	{
-		unlink(".heredoc.tmp");
+		unlink(tmpfile);
 		close(fd);
 		return (return_value);
 	}
 	close(fd);
-	fd = open(".heredoc.tmp", O_RDONLY);
+	fd = open(tmpfile, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	unlink(".heredoc.tmp");
+	unlink(tmpfile);
 	return (fd);
 }
