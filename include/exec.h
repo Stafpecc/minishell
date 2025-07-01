@@ -19,11 +19,18 @@
 #include "signal_handler.h"
 #include "../libft/includes/libft.h"
 
+
 #define MAX_HEREDOC_ATTEMPTS 100
 
-//child_dup.c
+//child_dup_utils.c
 int 	write_dup(t_redirect **redirect, int *pipe_fd);
-int	    read_dup(t_redirect **redirect, /*int *pipe_fd,*/ int previous_pipe);
+int	    read_dup(t_redirect **redirect, int previous_pipe);
+int     redirect_write_browser(t_redirect **redirect, int i);
+int     redirect_read_browser(t_redirect **redirect, int i);
+
+
+
+//child_dup.c
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils);
 void    only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 

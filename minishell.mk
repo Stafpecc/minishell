@@ -71,6 +71,7 @@ override ENVSRC := \
 SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 
 override EXECSRC := \
+	child_dup_utils \
 	child_dup \
 	child_execute \
 	child_maker \

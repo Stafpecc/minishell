@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/26 16:49:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/01 13:26:31 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,27 @@
 static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		int *pipe_fd, pid_t child)
 {
-	int pid;
-	int sig;
+	int	pid;
+	int	sig;
 
-	pid = -1;
-	while ((pid = wait(&status)) > 0)
+	pid = wait(&status);
+	while (pid > 0)
 	{
 		if (pid == child)
 		{
 			if (WIFEXITED(status))
-				utils->last_return = WEXITSTATUS(status);
-				else if (WIFSIGNALED(status))
-				{
-					sig = WTERMSIG(status);
-					utils->last_return = 128 + sig;
-					if (sig == SIGQUIT)
-						write(STDERR_FILENO, "Quit (core dumped)\n", 19);
-					if (sig == SIGINT)
-						write(STDIN_FILENO, "\n", 1);
-				}
+				utils->last_return = (WEXITSTATUS(status));
+			else if (WIFSIGNALED(status))
+			{
+				sig = WTERMSIG(status);
+				utils->last_return = (128 + sig);
+				if (sig == SIGQUIT)
+					write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+				if (sig == SIGINT)
+					write(STDERR_FILENO, "\n", 1);
+			}
 		}
+		pid = wait(&status);
 	}
 	close(pipe_fd[0]);
 	return (EXIT_SUCCESS);
@@ -79,12 +80,11 @@ static pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 
 	child = fork();
 	if (child == 0)
-{
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-	child_init_pipes_dup(node, pipe_fd, utils);
-}
-		
+	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+		child_init_pipes_dup(node, pipe_fd, utils);
+	}
 	else if (child == -1)
 		return (-1);
 	return (child);
