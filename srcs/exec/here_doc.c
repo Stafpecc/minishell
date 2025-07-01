@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 12:58:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/01 15:16:50 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../../include/exec.h"
 #include "../../libft/includes/libft.h"
@@ -55,6 +45,68 @@ static int	readline_loop(int fd, char *delimiter, char *input)
 		free(input);
 	}
 }
+
+
+int	get_available_heredoc_filename(char *buffer, size_t size)
+{
+	int		    i;
+	char        *index;
+	const char  *base = ".heredoc";
+
+    i = 0;
+    while (i < MAX_HEREDOC_ATTEMPTS)
+	{
+		if (i == 0)
+			ft_strncpy(buffer, ".heredoc.tmp", size);
+		else
+		{
+			index = ft_itoa(i);
+			if (!index)
+				return (-1);
+			ft_strncpy(buffer, base, size);
+			ft_strncat(buffer, index, size - ft_strlen(buffer) - 1);
+			ft_strncat(buffer, ".tmp", size - ft_strlen(buffer) - 1);
+			free(index);
+		}
+		if (access(buffer, F_OK) != 0)
+			return (0);
+        i++;
+	}
+	return (-1);
+}
+
+
+//I create .heredoc.tmp with open and associate its fd into fd, I secure it
+//we go to readline_heredoc that should return us 0 if everything went well
+//inside of it we gonna fill .heredoc.tmp with user's input(s)
+//once outside we close close fd and do a new open that is RDONLY this time
+//if fail return -1, else unlink (fd would still work even with unlink)
+//to remove .heredoc.tmp from the directory then we return the FD that
+//should be used in dup to get the content as the read content!
+int	here_doc(char *delimiter)
+{
+	int		fd;
+	int		return_value;
+	char	tmpfile[64];
+
+	if (get_available_heredoc_filename(tmpfile, sizeof(tmpfile)) == -1)
+		return (-1);
+	fd = open(tmpfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd < 0)
+		return (-1);
+	return_value = readline_heredoc(fd, delimiter);
+	if (return_value == -1 || return_value == -130)
+	{
+		unlink(tmpfile);
+		close(fd);
+		return (return_value);
+	}
+	close(fd);
+	fd = open(tmpfile, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+
+	unlink(tmpfile);
 
 static int	readline_heredoc(int fd, char *delimiter)
 {
