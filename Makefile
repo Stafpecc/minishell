@@ -59,7 +59,7 @@ clean:
 fclean: clean
 	$(RM_DIR) $(EXEC_DIR)
 	$(MAKE) -C $(DIR_LIBFT) fclean
-	echo "$(RED)"
+	echo "$(GREEN)"
 	echo "┌──────────────────────────────────────────────────────────┐"
 	echo "│      Deletion finished successfully! ( ◔ ω ◔) ノシ       │"
 	echo "└──────────────────────────────────────────────────────────┘"
