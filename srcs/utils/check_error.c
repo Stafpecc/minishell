@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:23:38 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 14:48:57 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/01 16:41:10 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_error(int ac)
 	}
 	if (!isatty(STDIN_FILENO))
 	{
-		ft_printfd(RED "Error: minishell must be run in an interactive terminal\n" RESET);
+		ft_printfd(RED "Error: minishell must be run in an interactive\
+terminal\n" RESET);
 		return (RETURN_FAILURE);
 	}
 	if (!isatty(STDOUT_FILENO))

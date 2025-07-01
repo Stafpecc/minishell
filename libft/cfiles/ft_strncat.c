@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:51:23 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 17:51:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/01 15:58:21 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*ft_strncat(char *dest, const char *src, size_t n)
 	dest_len = 0;
 	while (dest[dest_len])
 		dest_len++;
-
 	i = 0;
 	while (i < n && src[i])
 	{

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printfd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 17:50:24 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/23 13:31:36 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/01 15:55:40 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../includes/libft.h"
-
 
 int	ft_printfd(const char *str, ...)
 {

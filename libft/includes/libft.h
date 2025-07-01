@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:21:52 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/26 17:53:01 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/01 16:00:29 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,22 @@ int				ft_putnbrbase(long n, const char *base, int signed_flag);
 int				handle_conversion(const char format, va_list args);
 
 // printfd ldev
-int	ft_printfd(const char *str, ...);
-int	ft_printfd_cases(va_list ptr, int i, const char *str, int *ptr_return_value);
-void	ft_printd_hex(va_list ptr, int i, const char *str,
-	int *ptr_return_value);
-void	ft_printfd_pointer(va_list ptr, int *ptr_return_value);
-void	ft_printfd_char(va_list ptr, int i, const char *str,
-	int *ptr_return_value);
-void	ft_printfd_num(va_list ptr, int i, const char *str,
-		int *ptr_return_value);
-char	*ft_utoa(unsigned int n);
-// static char	*count_for_malloc(long *integer, int *is_negative);
-// static char	*convert(long n, int i, char *result, char *buff);
-char	*ft_itoa_hexx(unsigned long nbr);
-char	*zero_case(void);
-unsigned long	calculate_length(unsigned long nbr);
-char	*ft_strtoupper(char *convert);
+int				ft_printfd(const char *str, ...);
+int				ft_printfd_cases(va_list ptr, int i, const char *str,
+					int *ptr_return_value);
+void			ft_printd_hex(va_list ptr, int i, const char *str,
+					int *ptr_return_value);
+void			ft_printfd_pointer(va_list ptr, int *ptr_return_value);
+void			ft_printfd_char(va_list ptr, int i, const char *str,
+					int *ptr_return_value);
+void			ft_printfd_num(va_list ptr, int i, const char *str,
+					int *ptr_return_value);
+char			*ft_utoa(unsigned int n);
 
+char			*ft_itoa_hexx(unsigned long nbr);
+char			*zero_case(void);
+unsigned long	calculate_length(unsigned long nbr);
+char			*ft_strtoupper(char *convert);
 
 // other function
 

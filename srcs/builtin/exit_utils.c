@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 16:49:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 16:54:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/01 16:40:33 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static long long	ft_atol(const char *nptr)
 // a negative number or a positive one then the overflow check
 // would be slighty different. if our arg pass that test it mean
 // it passed all the necessary test so we can continue in exit_built_in
-static void	overflow_check(char *arg, size_t counter_digits, bool negative_nbr, t_utils *utils)
+static void	overflow_check(char *arg, size_t counter_digits, bool negative_nbr,
+	t_utils *utils)
 {
 	if (negative_nbr == TRUE)
 	{
@@ -61,20 +62,19 @@ static void	overflow_check(char *arg, size_t counter_digits, bool negative_nbr, 
 static void	check_arg_format(char *arg, bool *negative_nbr,
 		size_t *counter_digits, t_utils *utils)
 {
-	size_t	index = 0;
+	size_t	index;
 
+	index = 0;
 	while (ft_isspace(arg[index]))
 		index++;
 	while (arg[index] == '0')
 		index++;
-
 	if (arg[index] == '-' || arg[index] == '+')
 	{
 		if (arg[index] == '-')
 			*negative_nbr = TRUE;
 		index++;
 	}
-
 	while (arg[index])
 	{
 		if (!ft_isdigit(arg[index]))
@@ -86,9 +86,11 @@ static void	check_arg_format(char *arg, bool *negative_nbr,
 
 void	is_arg_digit_and_overflow(char *arg, t_utils *utils)
 {
-	bool	negative_nbr = FALSE;
-	size_t	counter_digits = 0;
+	bool	negative_nbr;
+	size_t	counter_digits;
 
+	negative_nbr = FALSE;
+	counter_digits = 0;
 	check_arg_format(arg, &negative_nbr, &counter_digits, utils);
 	overflow_check(arg, counter_digits, negative_nbr, utils);
 }

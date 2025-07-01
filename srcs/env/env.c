@@ -6,7 +6,7 @@
 /*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:08:51 by tarini            #+#    #+#             */
-/*   Updated: 2025/05/27 15:42:12 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/01 16:41:00 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 #include "../../libft/includes/libft.h"
 
-char **copy_env(char **envp)
+char	**copy_env(char **envp)
 {
-	int		i, count;
+	int		i;
+	int		count;
 	char	**copy;
 
 	count = 0;
@@ -39,6 +40,5 @@ char **copy_env(char **envp)
 		i++;
 	}
 	copy[count] = NULL;
-
-	return copy;
+	return (copy);
 }
