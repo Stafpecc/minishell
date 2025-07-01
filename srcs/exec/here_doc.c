@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:58:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 17:40:51 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/01 14:32:13 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,14 @@ volatile sig_atomic_t g_interrupted = 0;
 
 void sigint_handler(int sig)
 {
-    //char c = '\n';
 	(void)sig;
 	g_interrupted = 1;
-	//rl_replace_line("", 0); //works without it, I keep it here for tarini to check if we delete or not
 	rl_done = 1;
-    //ioctl(STDIN_FILENO, TIOCSTI, &c);
 }
 
-int readline_heredoc(int fd, char *delimiter)
+static int readline_loop(int fd, char *delimiter, char *input);
 {
-    char *input;
-    struct sigaction sa_new, sa_old;
-
-    g_interrupted = 0;
-    sa_new.sa_handler = sigint_handler;
-    sigemptyset(&sa_new.sa_mask);
-    sa_new.sa_flags = 0;
-    sigaction(SIGINT, &sa_new, &sa_old);
-    while (1)
+     while (1)
     {
         input = readline("> ");
         if (g_interrupted)
@@ -71,6 +60,24 @@ int readline_heredoc(int fd, char *delimiter)
         write(fd, "\n", 1);
         free(input);
     }
+}
+
+static int readline_heredoc(int fd, char *delimiter)
+{
+    char *input;
+    struct sigaction sa_new;
+    struct sigaction sa_old;
+    int return_value;
+
+
+    return_value = 0;
+    input = NULL;
+    g_interrupted = 0;
+    sa_new.sa_handler = sigint_handler;
+    sigemptyset(&sa_new.sa_mask);
+    sa_new.sa_flags = 0;
+    sigaction(SIGINT, &sa_new, &sa_old);
+    readline_loop(fd, delimiter, input);
     sigaction(SIGINT, &sa_old, NULL);
     return (0);
 }

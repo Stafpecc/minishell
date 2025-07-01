@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:44:59 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/01 11:03:21 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/01 12:38:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 // return(RETURN_FAILURE);
 
 #include "../../include/exec.h"
+
+// while loop until we completed to browse the redirect
+// array (to create the right amount of open just like
+// bash does even if only the last one would be use for the write part
 
 int	redirect_write_browser(t_redirect **redirect, int i)
 {
@@ -41,6 +45,9 @@ int	redirect_write_browser(t_redirect **redirect, int i)
 	return (RETURN_SUCCESS);
 }
 
+// while loop until we completed to browse the redirect
+// array (to call the  right amount of open just like
+// bash does even if only the last one would be readed
 // if(close(redirect[i]->fd) == -1) //TORM IF WORKING
 // return(RETURN_FAILURE);
 
@@ -63,6 +70,9 @@ int	redirect_read_browser(t_redirect **redirect, int i)
 	}
 	return (RETURN_SUCCESS);
 }
+
+// dup the right fd for stdout and return
+// an error code if it doesnt work properly
 
 int	write_dup(t_redirect **redirect, int *pipe_fd)
 {

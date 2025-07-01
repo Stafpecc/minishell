@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/26 13:37:50 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/01 13:27:01 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 	int	i;
 
 	i = 0;
-
 	while (path_dirs[i])
 	{
 		path_prefix = ft_strjoin(path_dirs[i], "/");
@@ -72,24 +71,24 @@ char	*path_finder(char **env, char *cmd, char *path)
 
 	executable_in_paths = NULL;
 	i = 0;
-    if (env)
-    {
-	    while (env[i] && !path)
-	    {
-		    if (env[i] && (!ft_strncmp(env[i], "PATH=", 5)))
-		    {
-			    path = ft_strdup(env[i]);
-			    if (path == NULL)
-			    {
-				    return (NULL);
-			    }
-			    executable_in_paths = prepare_path_resolution(path, cmd);
-			    free(path);
-			    break ;
-		    }
-		    i++;
-	    }
-    }
+	if (env)
+	{
+		while (env[i] && !path)
+		{
+			if (env[i] && (!ft_strncmp(env[i], "PATH=", 5)))
+			{
+				path = ft_strdup(env[i]);
+				if (path == NULL)
+				{
+					return (NULL);
+				}
+				executable_in_paths = prepare_path_resolution(path, cmd);
+				free(path);
+				break ;
+			}
+			i++;
+		}
+	}
 	return (executable_in_paths);
 }
 
@@ -116,7 +115,7 @@ char	*free_arrays(char **one, char **two, char *three, char *four)
 	return (NULL);
 }
 
-void	 child_error(int infile, int *fd, int error, char *cmd)
+void	child_error(int infile, int *fd, int error, char *cmd)
 {
 	if (error == 1)
 	{
