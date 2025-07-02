@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   quotes.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 18:21:01 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/02 08:20:11 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "parsing.h"
 #include "exec.h"
@@ -38,8 +27,7 @@ static char	*read_first_line(t_utils *utils)
 	char	*line;
 
 	g_interrupted = 0;
-	signal(SIGINT, sigint_handler);
-	ft_printfd("LAST RETURN = %d \n", utils->last_return);
+	signal(SIGINT, sig_handler);
 	line = readline("minishell> ");
 	if (g_interrupted)
 	{

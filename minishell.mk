@@ -9,17 +9,10 @@ override ENVDIR 	:= env/
 override SIGNALDIR	:= signal/
 override UTILSDIR   := utils/
 
-SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
-
-# override DEBUG := \
-# 	debug \
-
-
 SRC += $(addprefix $(MAINDIR), $(addsuffix .c, $(MAIN)))
 
 override MAIN := \
 	main \
-
 
 SRC += $(addprefix $(PARSERDIR), $(addsuffix .c, $(PARSERSRC)))
 
