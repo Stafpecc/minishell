@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/19 14:14:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 10:42:35 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,11 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 	{
 		if (node->cmd_parts[i][0] == '=' || (!ft_isalpha(node->cmd_parts[i][0])
 				&& (node->cmd_parts[i][0] != '_')))
+		{
 			ft_printfd("minishell: export: '%s': not a valid identifier\n",
 				node->cmd_parts[i]);
+			return(RETURN_FAILURE);
+		}
 		else if (ft_strchr(node->cmd_parts[i], '='))
 		{
 			if (equal_sign_case(utils, node->cmd_parts[i], NULL, 0))
