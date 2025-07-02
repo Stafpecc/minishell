@@ -1,0 +1,23 @@
+{
+   ReadlineReachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:xmalloc
+   fun:add_history
+   obj:/usr/lib*/libreadline.so.*
+}
+
+{
+   TinfoReachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_nc_read_entry2
+   obj:/usr/lib*/libtinfo.so.*
+}
+
+{
+   ValgrindPreload
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   obj:*vgpreload_memcheck*.so
+}

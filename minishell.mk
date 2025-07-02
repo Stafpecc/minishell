@@ -11,8 +11,8 @@ override UTILSDIR   := utils/
 
 SRC += $(addprefix $(DEBUGDIR), $(addsuffix .c, $(DEBUG)))
 
-override DEBUG := \
-	debug \
+# override DEBUG := \
+# 	debug \
 
 
 SRC += $(addprefix $(MAINDIR), $(addsuffix .c, $(MAIN)))

@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:21:01 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 15:54:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 08:20:11 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	*read_first_line(t_utils *utils)
 
 	g_interrupted = 0;
 	signal(SIGINT, sigint_handler);
+	ft_printfd("LAST RETURN = %d \n", utils->last_return);
 	line = readline("minishell> ");
 	if (g_interrupted)
 	{
