@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:34:01 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/01 16:37:09 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/02 16:55:59 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int		exec(t_command_exec *node, t_utils *utils);
 
 //here_doc.c
 int		here_doc(char *delimiter);
-void	sigint_handler(int sig);
 //single_builtin.c
 int		single_built_in(t_command_exec *node, t_utils *utils);
 

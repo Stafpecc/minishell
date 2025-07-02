@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:21:01 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/26 15:54:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 16:54:52 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*read_first_line(t_utils *utils)
 	char	*line;
 
 	g_interrupted = 0;
-	signal(SIGINT, sigint_handler);
+	signal(SIGINT, sig_handler);
 	line = readline("minishell> ");
 	if (g_interrupted)
 	{
