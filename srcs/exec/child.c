@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 14:24:49 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 19:00:08 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	built_in_child(t_command_exec *node, t_utils *utils)
 	else if (!ft_strcmp(node->cmd_parts[0], "export"))
 		utils->last_return = ((export_builtin(node, utils, 1)));
 	else if (!ft_strcmp(node->cmd_parts[0], "unset"))
-		utils->last_return = ((unset_builtin(node, utils)));
+		utils->last_return = ((unset_builtin(node, utils, 0, 0)));
 	else if (!ft_strcmp(node->cmd_parts[0], "env"))
 		utils->last_return = ((env_builtin(node, utils, 0)));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))

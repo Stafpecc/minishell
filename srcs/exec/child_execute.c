@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 14:27:23 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 19:00:38 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	close_free_utils(t_utils *utils, size_t i)
 		{
 			while (utils->env[i])
 			{
-				free(utils->env[i]);
-				utils->env[i] = NULL;
+				if(utils->env[i])
+				{
+					free(utils->env[i]);
+					utils->env[i] = NULL;
+				}
 				i++;
 			}
 			free(utils->env);

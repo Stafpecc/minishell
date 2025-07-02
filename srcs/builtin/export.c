@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 13:51:22 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 19:34:56 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 	{
 		if (expand_env(utils))
 			return (MALLOC_ERROR);
-		if(utils->env[utils->size_env - 1])
+		if (utils->env[utils->size_env - 1])
 			free(utils->env[utils->size_env - 1]);
 		utils->env[utils->size_env - 1] = ft_strdup(cmd);
 		if (!utils->env[utils->size_env - 1])
@@ -121,7 +121,7 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 		{
 			ft_printfd("minishell: export: '%s': not a valid identifier\n",
 				node->cmd_parts[i]);
-			return(RETURN_FAILURE);
+			return (RETURN_FAILURE);
 		}
 		else if (ft_strchr(node->cmd_parts[i], '='))
 		{
