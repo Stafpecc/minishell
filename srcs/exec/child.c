@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/01 13:32:55 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 19:00:08 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 {
+	int tmp_last_return;
+
+	tmp_last_return = utils->last_return;
 	close_free_utils(utils, 0);
 	close_t_command_exec(node, NULL, 0);
-	exit(utils->last_return);
+	exit(tmp_last_return);
 }
 
 static int	built_in_child(t_command_exec *node, t_utils *utils)
@@ -30,7 +33,7 @@ static int	built_in_child(t_command_exec *node, t_utils *utils)
 	else if (!ft_strcmp(node->cmd_parts[0], "export"))
 		utils->last_return = ((export_builtin(node, utils, 1)));
 	else if (!ft_strcmp(node->cmd_parts[0], "unset"))
-		utils->last_return = ((unset_builtin(node, utils)));
+		utils->last_return = ((unset_builtin(node, utils, 0, 0)));
 	else if (!ft_strcmp(node->cmd_parts[0], "env"))
 		utils->last_return = ((env_builtin(node, utils, 0)));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))
@@ -52,13 +55,11 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 	{
 		path = path_finder(utils->env, node->cmd_parts[0], NULL);
 		if (path == NULL)
-		{
-			path_finder_fail(node, utils);
-		}
+			path_finder_fail(node, utils, 0, 0);
 		execve(path, node->cmd_parts, utils->env);
-		free(path);
+		//free(path);
 	}
 	else
 		execve(node->cmd_parts[0], node->cmd_parts, utils->env);
-	path_finder_fail(node, utils);
+	path_finder_fail(node, utils, 1, 0);
 }

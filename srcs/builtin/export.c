@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/19 14:14:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 19:34:56 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 			TRUE);
 	if (existing_variable_emp)
 	{
+		free(utils->env[existing_variable_emp]);
 		utils->env[existing_variable_emp] = ft_strdup(cmd);
 		if (!utils->env[existing_variable_emp])
 			return (MALLOC_ERROR);
@@ -85,6 +86,8 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 	{
 		if (expand_env(utils))
 			return (MALLOC_ERROR);
+		if (utils->env[utils->size_env - 1])
+			free(utils->env[utils->size_env - 1]);
 		utils->env[utils->size_env - 1] = ft_strdup(cmd);
 		if (!utils->env[utils->size_env - 1])
 			return (MALLOC_ERROR);
@@ -115,8 +118,11 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 	{
 		if (node->cmd_parts[i][0] == '=' || (!ft_isalpha(node->cmd_parts[i][0])
 				&& (node->cmd_parts[i][0] != '_')))
+		{
 			ft_printfd("minishell: export: '%s': not a valid identifier\n",
 				node->cmd_parts[i]);
+			return (RETURN_FAILURE);
+		}
 		else if (ft_strchr(node->cmd_parts[i], '='))
 		{
 			if (equal_sign_case(utils, node->cmd_parts[i], NULL, 0))

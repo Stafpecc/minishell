@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/01 13:33:33 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 19:00:14 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	single_built_in(t_command_exec *node, t_utils *utils)
 	else if (!ft_strcmp(node->cmd_parts[0], "export"))
 		utils->last_return = (export_builtin(node, utils, 1));
 	else if (!ft_strcmp(node->cmd_parts[0], "unset"))
-		utils->last_return = (unset_builtin(node, utils));
+		utils->last_return = (unset_builtin(node, utils, 0 , 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "env"))
 		utils->last_return = (env_builtin(node, utils, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))

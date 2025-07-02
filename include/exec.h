@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 16:34:01 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/02 16:55:59 by stafpec          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef EXEC_H
 # define EXEC_H
 # define MALLOC_ERROR -42
@@ -44,7 +32,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd,
 void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 
 //child_execute.c
-void	path_finder_fail(t_command_exec *node, t_utils *utils);
+void	path_finder_fail(t_command_exec *node, t_utils *utils, bool execve_failed, int return_value);
 void	close_free_utils(t_utils *utils, size_t i);
 void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
 			size_t i);

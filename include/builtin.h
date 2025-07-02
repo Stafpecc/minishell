@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/01 16:26:15 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/02 18:59:40 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int				pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j);
 
 //unset.c
 //static int env_len(char **env);
-int				unset_builtin(t_command_exec *node, t_utils *utils);
+int				unset_builtin(t_command_exec *node, t_utils *utils, size_t i, size_t j);
 
 #endif
