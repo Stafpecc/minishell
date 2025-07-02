@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/01 15:48:42 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 16:57:43 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@
 // then we go back to the start of the loop UNTIL we find the EOF delimiter
 
 volatile sig_atomic_t	g_interrupted = 0;
-
-void	sigint_handler(int sig)
-{
-	(void)sig;
-	g_interrupted = 1;
-	rl_done = 1;
-}
 
 static int	readline_loop(int fd, char *delimiter, char *input)
 {
@@ -92,22 +85,24 @@ int	get_available_heredoc_filename(char *buffer, size_t size)
 // to remove .heredoc.tmp from the directory then we return the FD that
 // should be used in dup to get the content as the read content!
 
-static int	readline_heredoc(int fd, char *delimiter)
+int readline_heredoc(int fd, char *delimiter)
 {
-	char				*input;
 	struct sigaction	sa_new;
 	struct sigaction	sa_old;
-	int					return_value;
+	char				*input = NULL;
+	int					return_value = 0;
 
-	return_value = 0;
-	input = NULL;
 	g_interrupted = 0;
-	sa_new.sa_handler = sigint_handler;
+	sa_new.sa_handler = sig_handler;
 	sigemptyset(&sa_new.sa_mask);
 	sa_new.sa_flags = 0;
 	sigaction(SIGINT, &sa_new, &sa_old);
+
 	return_value = readline_loop(fd, delimiter, input);
+
 	sigaction(SIGINT, &sa_old, NULL);
+	set_signals();
+
 	if (input)
 		free(input);
 	return (return_value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/26 15:48:27 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 16:58:49 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 static void	ctrl_c(void)
 {
 	g_interrupted = 1;
+
+	if (rl_readline_state & RL_STATE_COMPLETING)
+		rl_pending_input = 'n';
 	rl_replace_line("", 0);
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
+	rl_done = 1;
 }
 
 static void	ctrl_backslash(void)
@@ -44,4 +45,5 @@ void	set_signals(void)
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
+	rl_catch_signals = 0;
 }
