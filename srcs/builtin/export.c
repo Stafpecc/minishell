@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 10:42:35 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/02 13:51:22 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 			TRUE);
 	if (existing_variable_emp)
 	{
+		free(utils->env[existing_variable_emp]);
 		utils->env[existing_variable_emp] = ft_strdup(cmd);
 		if (!utils->env[existing_variable_emp])
 			return (MALLOC_ERROR);
@@ -85,6 +86,8 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 	{
 		if (expand_env(utils))
 			return (MALLOC_ERROR);
+		if(utils->env[utils->size_env - 1])
+			free(utils->env[utils->size_env - 1]);
 		utils->env[utils->size_env - 1] = ft_strdup(cmd);
 		if (!utils->env[utils->size_env - 1])
 			return (MALLOC_ERROR);
