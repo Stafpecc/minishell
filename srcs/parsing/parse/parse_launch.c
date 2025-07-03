@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/26 15:33:48 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/03 13:23:52 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	parse_directory(t_command *curr, t_utils *utils)
 	if (is_directory(arg))
 	{
 		ft_printfd("minishell: %s: Is a directory\n", arg);
-		utils->last_return = CMD_INVALID_ARGUMENT;
+		utils->last_return = CMD_PERMISSION_DENIED;
 		return (RETURN_FAILURE);
 	}
 	if (ft_strchr(arg, '/'))

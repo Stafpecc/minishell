@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/01 16:23:04 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/03 13:26:50 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ extern volatile sig_atomic_t	g_interrupted;
 typedef enum e_last_return
 {
 	CMD_SUCCESS,
+	CMD_SYNTAX = 2,
 	CMD_NOT_FOUND = 127,
 	CMD_INVALID_ARGUMENT,
 	CMD_PERMISSION_DENIED = 126,

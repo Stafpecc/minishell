@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/01 16:30:43 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/03 13:21:15 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	minishell_loop(t_utils *utils)
 
 	while (utils->run)
 	{
+		ft_printf("LAST RETURN =%d\n", utils->last_return);
 		input = read_input_with_quotes(utils);
 		if (!handle_null_input(input, utils))
 			break ;
