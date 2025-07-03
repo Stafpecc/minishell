@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 18:59:40 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/03 17:38:42 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				echo_builtin(t_command_exec *node, bool newline, int i);
 int				env_builtin(t_command_exec *node, t_utils *utils, size_t i);
 
 //exit_utils.c
-void			is_arg_digit_and_overflow(char *arg, t_utils *utils);
+int			is_arg_digit_and_overflow(char *arg, t_utils *utils);
 
 //exit.c
 int				print_exit(long long code, char *arg, bool too_many_arguments,

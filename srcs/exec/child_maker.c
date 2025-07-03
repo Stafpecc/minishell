@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 09:35:27 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/03 09:50:19 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 	child = fork();
 	if (child == 0)
 	{
+		close(utils->old_stdin);
+		close(utils->old_stdout);
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		child_init_pipes_dup(node, pipe_fd, utils);

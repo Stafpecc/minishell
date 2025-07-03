@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 16:49:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/01 16:40:33 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/03 18:35:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ static long long	ft_atol(const char *nptr)
 // a negative number or a positive one then the overflow check
 // would be slighty different. if our arg pass that test it mean
 // it passed all the necessary test so we can continue in exit_built_in
-static void	overflow_check(char *arg, size_t counter_digits, bool negative_nbr,
-	t_utils *utils)
+static int	overflow_check(char *arg, size_t counter_digits, bool negative_nbr,
+		t_utils *utils)
 {
 	if (negative_nbr == TRUE)
 	{
 		if (counter_digits > 19 || (counter_digits == 19 && ft_atol(arg) >= 0))
-			print_exit(NOT_NUM_ARG, arg, FALSE, utils);
+			return (print_exit(NOT_NUM_ARG, arg, FALSE, utils));
 	}
 	else if (counter_digits > 19 || (counter_digits == 19 && ft_atol(arg) < 0))
-		print_exit(NOT_NUM_ARG, arg, FALSE, utils);
+		return (print_exit(NOT_NUM_ARG, arg, FALSE, utils));
+	return (0);
 }
 
 // check for spaces char, then for 0 char
@@ -59,7 +60,7 @@ static void	overflow_check(char *arg, size_t counter_digits, bool negative_nbr,
 // string is a valid input if it is go to overflow
 // check for further processing
 
-static void	check_arg_format(char *arg, bool *negative_nbr,
+static int	check_arg_format(char *arg, bool *negative_nbr,
 		size_t *counter_digits, t_utils *utils)
 {
 	size_t	index;
@@ -78,19 +79,25 @@ static void	check_arg_format(char *arg, bool *negative_nbr,
 	while (arg[index])
 	{
 		if (!ft_isdigit(arg[index]))
-			print_exit(NOT_NUM_ARG, arg, FALSE, utils);
+			return (print_exit(NOT_NUM_ARG, arg, FALSE, utils));
 		index++;
 		(*counter_digits)++;
 	}
+	return (0);
 }
 
-void	is_arg_digit_and_overflow(char *arg, t_utils *utils)
+int	is_arg_digit_and_overflow(char *arg, t_utils *utils)
 {
 	bool	negative_nbr;
 	size_t	counter_digits;
+	int		return_value;
 
+	return_value = 0;
 	negative_nbr = FALSE;
 	counter_digits = 0;
-	check_arg_format(arg, &negative_nbr, &counter_digits, utils);
-	overflow_check(arg, counter_digits, negative_nbr, utils);
+	return_value = check_arg_format(arg, &negative_nbr, &counter_digits, utils);
+	if (return_value)
+		return (return_value);
+	return_value = overflow_check(arg, counter_digits, negative_nbr, utils);
+	return (return_value);
 }

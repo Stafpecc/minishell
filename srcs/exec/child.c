@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 19:00:08 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/03 16:39:34 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 		if (path == NULL)
 			path_finder_fail(node, utils, 0, 0);
 		execve(path, node->cmd_parts, utils->env);
-		//free(path);
 	}
 	else
 		execve(node->cmd_parts[0], node->cmd_parts, utils->env);

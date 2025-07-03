@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 17:34:04 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/03 17:03:43 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*path_finder(char **env, char *cmd, char *path)
 	int		i;
 	char	*executable_in_paths;
 
-	executable_in_paths = "TEST";
+	executable_in_paths = "DEFAULT";
 	i = 0;
 	if (env)
 	{
@@ -84,13 +84,11 @@ char	*path_finder(char **env, char *cmd, char *path)
 				}
 				executable_in_paths = prepare_path_resolution(path, cmd);
 				free(path);
-				ft_printfd("exec = %s\n", executable_in_paths);
 				return (executable_in_paths);
 			}
 			i++;
 		}
 	}
-	ft_printfd("exec = %s\n", executable_in_paths);
 	return (executable_in_paths);
 }
 

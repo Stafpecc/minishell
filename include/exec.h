@@ -76,6 +76,6 @@ int		print_exit(long long code, char *arg, bool too_many_arguments,
 			t_utils *utils);
 
 //exit_utils.c
-void	is_arg_digit_and_overflow(char *arg, t_utils *utils);
+int			is_arg_digit_and_overflow(char *arg, t_utils *utils);
 
 #endif
