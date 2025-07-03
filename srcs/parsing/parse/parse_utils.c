@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:34:09 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 05:11:56 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/03 13:26:54 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int	return_failure(const char *token, t_utils *utils)
 - sert à indiquer qu’un token inattendu a été trouvé pendant le parsing.*/
 void	print_syntax_error(const char *token, t_utils *utils)
 {
-	utils->last_return = CMD_INVALID_ARGUMENT;
+	utils->last_return = CMD_SYNTAX;
 	ft_printfd("minishell: syntax error near unexpected token `%s'\n", token);
 }
