@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 19:00:38 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/03 16:39:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	close_free_utils(t_utils *utils, size_t i)
 {
 	if (utils)
 	{
-		close(utils->old_stdin);
-		close(utils->old_stdout);
 		if (utils->env)
 		{
 			while (utils->env[i])
