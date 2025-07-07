@@ -21,3 +21,4 @@
    match-leak-kinds: reachable
    obj:*vgpreload_memcheck*.so
 }
+

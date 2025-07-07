@@ -66,7 +66,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	}
 	if (utils->previous_pipes != NONE)
 		close(utils->previous_pipes);
-	if (pipe_fd[0] != NONE)
+	if (pipe_fd[0] != NONE && utils->previous_pipes == NONE)
 		close(pipe_fd[0]);
 	if (pipe_fd[1] != NONE)
 		close(pipe_fd[1]);

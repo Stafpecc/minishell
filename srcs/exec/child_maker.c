@@ -43,7 +43,8 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		}
 		pid = wait(&status);
 	}
-	close(pipe_fd[0]);
+	pipe_fd[0] = 0;
+	//close(pipe_fd[0]);
 	return (EXIT_SUCCESS);
 }
 // is previous pipe exist if yes is it not the last cmd?
