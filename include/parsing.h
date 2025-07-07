@@ -15,6 +15,7 @@
 
 # include <signal.h>
 # include "lexer.h"
+# include <stdio.h>
 
 extern volatile sig_atomic_t	g_interrupted;
 
