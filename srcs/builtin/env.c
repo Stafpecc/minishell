@@ -12,6 +12,7 @@
 
 #include "../include/builtin.h"
 
+
 int	env_builtin(t_command_exec *node, t_utils *utils, size_t i)
 {
 	i = 0;

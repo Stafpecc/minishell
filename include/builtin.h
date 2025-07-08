@@ -41,7 +41,6 @@ int				cd_builtin(t_command_exec *node, t_utils *utils,
 int				pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j);
 
 //echo.c
-int				is_newline(t_command_exec *node, int *i, bool *newline);
 int				echo_builtin(t_command_exec *node, bool newline, int i);
 
 //env.c

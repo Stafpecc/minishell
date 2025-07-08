@@ -1,0 +1,2159 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_isdigit.o",
+      "cfiles/ft_isdigit.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_isdigit.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_isdigit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_isalpha.o",
+      "cfiles/ft_isalpha.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_isalpha.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_isalpha.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_isalnum.o",
+      "cfiles/ft_isalnum.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_isalnum.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_isalnum.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_isascii.o",
+      "cfiles/ft_isascii.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_isascii.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_isascii.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_isprint.o",
+      "cfiles/ft_isprint.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_isprint.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_isprint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strlen.o",
+      "cfiles/ft_strlen.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strlen.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strlen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_memset.o",
+      "cfiles/ft_memset.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_memset.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_memset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_bzero.o",
+      "cfiles/ft_bzero.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_bzero.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_bzero.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_memcpy.o",
+      "cfiles/ft_memcpy.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_memcpy.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_memcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_memmove.o",
+      "cfiles/ft_memmove.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_memmove.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_memmove.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strlcpy.o",
+      "cfiles/ft_strlcpy.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strlcpy.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strlcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strlcat.o",
+      "cfiles/ft_strlcat.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strlcat.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strlcat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_toupper.o",
+      "cfiles/ft_toupper.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_toupper.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_toupper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_tolower.o",
+      "cfiles/ft_tolower.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_tolower.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_tolower.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strchr.o",
+      "cfiles/ft_strchr.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strchr.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strrchr.o",
+      "cfiles/ft_strrchr.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strrchr.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strrchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strncmp.o",
+      "cfiles/ft_strncmp.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strncmp.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strncmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_memchr.o",
+      "cfiles/ft_memchr.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_memchr.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_memchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_memcmp.o",
+      "cfiles/ft_memcmp.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_memcmp.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_memcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strnstr.o",
+      "cfiles/ft_strnstr.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strnstr.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strnstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_atoi.o",
+      "cfiles/ft_atoi.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_atoi.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_atoi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strdup.o",
+      "cfiles/ft_strdup.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strdup.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_calloc.o",
+      "cfiles/ft_calloc.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_calloc.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_calloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_split.o",
+      "cfiles/ft_split.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_split.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_split.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_substr.o",
+      "cfiles/ft_substr.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_substr.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_substr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strjoin.o",
+      "cfiles/ft_strjoin.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strjoin.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strjoin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strtrim.o",
+      "cfiles/ft_strtrim.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strtrim.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strtrim.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_itoa.o",
+      "cfiles/ft_itoa.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_itoa.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_itoa.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putchar_fd.o",
+      "cfiles/ft_putchar_fd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putchar_fd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putchar_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putstr_fd.o",
+      "cfiles/ft_putstr_fd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putstr_fd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putstr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putendl_fd.o",
+      "cfiles/ft_putendl_fd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putendl_fd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putendl_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putnbr_fd.o",
+      "cfiles/ft_putnbr_fd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putnbr_fd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putnbr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strmapi.o",
+      "cfiles/ft_strmapi.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strmapi.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strmapi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_striteri.o",
+      "cfiles/ft_striteri.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_striteri.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_striteri.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_printf.o",
+      "cfiles/ft_printf.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_printf.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_printfd.o",
+      "cfiles/ft_printfd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_printfd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_printfd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_printfd_cases.o",
+      "cfiles/ft_printfd_cases.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_printfd_cases.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_printfd_cases.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_utoa.o",
+      "cfiles/ft_utoa.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_utoa.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_utoa.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_itoa_hexx.o",
+      "cfiles/ft_itoa_hexx.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_itoa_hexx.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_itoa_hexx.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strtoupper.o",
+      "cfiles/ft_strtoupper.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strtoupper.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strtoupper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putchar.o",
+      "cfiles/ft_putchar.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putchar.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putchar.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putstr.o",
+      "cfiles/ft_putstr.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putstr.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_putnbrbase.o",
+      "cfiles/ft_putnbrbase.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_putnbrbase.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_putnbrbase.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_handle.o",
+      "cfiles/ft_handle.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_handle.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_handle.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstnew_bonus.o",
+      "cfiles/ft_lstnew_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstnew_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstnew_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstadd_front_bonus.o",
+      "cfiles/ft_lstadd_front_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstadd_front_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstadd_front_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstsize_bonus.o",
+      "cfiles/ft_lstsize_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstsize_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstsize_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstlast_bonus.o",
+      "cfiles/ft_lstlast_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstlast_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstlast_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstadd_back_bonus.o",
+      "cfiles/ft_lstadd_back_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstadd_back_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstadd_back_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstdelone_bonus.o",
+      "cfiles/ft_lstdelone_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstdelone_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstdelone_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstclear_bonus.o",
+      "cfiles/ft_lstclear_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstclear_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstclear_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstiter_bonus.o",
+      "cfiles/ft_lstiter_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstiter_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstiter_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_lstmap_bonus.o",
+      "cfiles/ft_lstmap_bonus.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_lstmap_bonus.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_lstmap_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_atoi_only_num.o",
+      "cfiles/ft_atoi_only_num.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_atoi_only_num.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_atoi_only_num.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strcmp.o",
+      "cfiles/ft_strcmp.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strcmp.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_pass.o",
+      "cfiles/ft_pass.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_pass.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_pass.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_atof.o",
+      "cfiles/ft_atof.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_atof.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_atof.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_atod.o",
+      "cfiles/ft_atod.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_atod.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_atod.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_realloc.o",
+      "cfiles/ft_realloc.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_realloc.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_realloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strncpy.o",
+      "cfiles/ft_strncpy.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strncpy.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strncpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Werror",
+      "-Wextra",
+      "-Wall",
+      "-pg",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "OBJS/ft_strncat.o",
+      "cfiles/ft_strncat.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell/libft",
+    "file": "/home/ruban/projects/42/circle_4/minishell/libft/cfiles/ft_strncat.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/libft/OBJS/ft_strncat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/main.o",
+      "srcs/main.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/main.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/parser.o",
+      "srcs/parsing/parser.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/parser.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/parser.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/launcher.o",
+      "srcs/parsing/launcher.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/launcher.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/launcher.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/expand/expand.o",
+      "srcs/parsing/expand/expand.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/expand/expand.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/expand/expand.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/expand/expand_utils.o",
+      "srcs/parsing/expand/expand_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/expand/expand_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/expand/expand_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/expand/get_env_value.o",
+      "srcs/parsing/expand/get_env_value.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/expand/get_env_value.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/expand/get_env_value.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/parse/parse_launch.o",
+      "srcs/parsing/parse/parse_launch.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/parse/parse_launch.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/parse/parse_launch.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/parse/parse_dir.o",
+      "srcs/parsing/parse/parse_dir.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/parse/parse_dir.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/parse/parse_dir.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/parse/parse_file.o",
+      "srcs/parsing/parse/parse_file.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/parse/parse_file.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/parse/parse_file.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/parse/parse_utils.o",
+      "srcs/parsing/parse/parse_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/parse/parse_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/parse/parse_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/utils/commands_gestionary.o",
+      "srcs/parsing/utils/commands_gestionary.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/utils/commands_gestionary.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/utils/commands_gestionary.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/utils/free_commands.o",
+      "srcs/parsing/utils/free_commands.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/utils/free_commands.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/utils/free_commands.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/utils/struct_to_char.o",
+      "srcs/parsing/utils/struct_to_char.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/utils/struct_to_char.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/utils/struct_to_char.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/utils/struct_to_char_utils.o",
+      "srcs/parsing/utils/struct_to_char_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/utils/struct_to_char_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/utils/struct_to_char_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/utils/dup_targ_to_tredirect_array.o",
+      "srcs/parsing/utils/dup_targ_to_tredirect_array.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/utils/dup_targ_to_tredirect_array.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/utils/dup_targ_to_tredirect_array.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/process/process_pipe.o",
+      "srcs/parsing/process/process_pipe.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/process/process_pipe.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/process/process_pipe.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/process/process_quotes.o",
+      "srcs/parsing/process/process_quotes.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/process/process_quotes.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/process/process_quotes.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/process/process_redirect.o",
+      "srcs/parsing/process/process_redirect.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/process/process_redirect.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/process/process_redirect.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/process/process_add_redirect.o",
+      "srcs/parsing/process/process_add_redirect.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/process/process_add_redirect.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/process/process_add_redirect.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/process/process_word_string.o",
+      "srcs/parsing/process/process_word_string.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/process/process_word_string.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/process/process_word_string.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/parsing/process/process_utils.o",
+      "srcs/parsing/process/process_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/parsing/process/process_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/parsing/process/process_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/lexer/lexer.o",
+      "srcs/lexer/lexer.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/lexer/lexer.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/lexer/lexer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/lexer/launcher.o",
+      "srcs/lexer/launcher.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/lexer/launcher.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/lexer/launcher.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/lexer/utils/token_gestionary.o",
+      "srcs/lexer/utils/token_gestionary.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/lexer/utils/token_gestionary.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/lexer/utils/token_gestionary.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/lexer/utils/token_utils.o",
+      "srcs/lexer/utils/token_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/lexer/utils/token_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/lexer/utils/token_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/lexer/utils/free_token.o",
+      "srcs/lexer/utils/free_token.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/lexer/utils/free_token.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/lexer/utils/free_token.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/lexer/process/process_word_string.o",
+      "srcs/lexer/process/process_word_string.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/lexer/process/process_word_string.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/lexer/process/process_word_string.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/signal/signal.o",
+      "srcs/signal/signal.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/signal/signal.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/signal/signal.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/env/env.o",
+      "srcs/env/env.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/env/env.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/env/env.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child_dup_utils.o",
+      "srcs/exec/child_dup_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child_dup_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child_dup_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child_dup.o",
+      "srcs/exec/child_dup.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child_dup.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child_dup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child_execute.o",
+      "srcs/exec/child_execute.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child_execute.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child_execute.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child_maker.o",
+      "srcs/exec/child_maker.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child_maker.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child_maker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child_pathed.o",
+      "srcs/exec/child_pathed.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child_pathed.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child_pathed.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child_utils.o",
+      "srcs/exec/child_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/child.o",
+      "srcs/exec/child.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/child.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/child.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/exec_utils.o",
+      "srcs/exec/exec_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/exec_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/exec_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/exec.o",
+      "srcs/exec/exec.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/exec.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/exec.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/here_doc.o",
+      "srcs/exec/here_doc.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/here_doc.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/here_doc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/exec/single_builtin.o",
+      "srcs/exec/single_builtin.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/exec/single_builtin.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/exec/single_builtin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/cd_utils.o",
+      "srcs/builtin/cd_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/cd_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/cd_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/cd.o",
+      "srcs/builtin/cd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/cd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/cd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/echo.o",
+      "srcs/builtin/echo.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/echo.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/echo.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/env.o",
+      "srcs/builtin/env.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/env.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/env.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/exit.o",
+      "srcs/builtin/exit.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/exit.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/exit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/exit_utils.o",
+      "srcs/builtin/exit_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/exit_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/exit_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/export.o",
+      "srcs/builtin/export.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/export.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/export.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/pwd.o",
+      "srcs/builtin/pwd.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/pwd.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/pwd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/builtin/unset.o",
+      "srcs/builtin/unset.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/builtin/unset.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/builtin/unset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/check_error.o",
+      "srcs/utils/check_error.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/check_error.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/check_error.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/execute.o",
+      "srcs/utils/execute.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/execute.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/execute.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/free.o",
+      "srcs/utils/free.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/free.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/free.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/launch_lexer.o",
+      "srcs/utils/launch_lexer.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/launch_lexer.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/launch_lexer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/minishell_loop.o",
+      "srcs/utils/minishell_loop.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/minishell_loop.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/minishell_loop.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/quotes.o",
+      "srcs/utils/quotes.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/quotes.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/quotes.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-I",
+      "include/",
+      "-I",
+      "libft/include/",
+      "-c",
+      "-o",
+      ".objs/utils/t_utils.o",
+      "srcs/utils/t_utils.c"
+    ],
+    "directory": "/home/ruban/projects/42/circle_4/minishell",
+    "file": "/home/ruban/projects/42/circle_4/minishell/srcs/utils/t_utils.c",
+    "output": "/home/ruban/projects/42/circle_4/minishell/.objs/utils/t_utils.o"
+  }
+]

@@ -14,7 +14,7 @@
 
 // to check if we got a right parameters
 //+ if we need a new line or not
-int	is_newline(t_command_exec *node, int *i, bool *newline)
+static int	is_newline(t_command_exec *node, int *i, bool *newline)
 {
 	if (!node->cmd_parts || !node->cmd_parts[0])
 		return (1);
