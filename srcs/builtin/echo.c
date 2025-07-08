@@ -14,20 +14,30 @@
 
 // to check if we got a right parameters
 //+ if we need a new line or not
-static int	is_newline(t_command_exec *node, int *i, bool *newline)
+static int	is_newline(t_command_exec *node, int i, bool *newline, int *index_print)
 {
 	if (!node->cmd_parts || !node->cmd_parts[0])
 		return (1);
-	if (node->cmd_parts[1] && ft_strcmp(node->cmd_parts[1], "-n") == 0)
+	if (node->cmd_parts[1] && ft_strncmp(node->cmd_parts[1], "-n", 2) == 0 )
 	{
-		*newline = false;
-		*i = 2;
+		*newline = FALSE;
+		*index_print = 2;
+		while(node->cmd_parts[1][i])
+		{
+			printf("chier dans les lasagnes\n");
+			if(!node->cmd_parts[1][i])
+				break;
+			if (node->cmd_parts[1][i] == 'n')
+				i += 1;
+			else 
+			{
+				*index_print = 1;
+				*newline = TRUE;
+				break;
+			}
+		}
 	}
-	else
-	{
-		*newline = true;
-		*i = 1;
-	}
+	//TODO a checker to see if there is more tag -n after that one
 	return (0);
 }
 
@@ -40,7 +50,7 @@ static int	is_newline(t_command_exec *node, int *i, bool *newline)
 // if we do not need the whole struct
 int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
-	if (is_newline(node, &i, &newline) == 1)
+	if (is_newline(node, 2, &newline, &i) == 1)
 		return (1);
 	if (!node->cmd_parts[1])
 	{
@@ -59,7 +69,7 @@ int	echo_builtin(t_command_exec *node, bool newline, int i)
 				return (1);
 		}
 	}
-	if (newline == true)
+	if (newline == TRUE)
 	{
 		if (write(STDOUT_FILENO, "\n", 1) < 0)
 			return (1);
