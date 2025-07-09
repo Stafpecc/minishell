@@ -14,28 +14,6 @@
 #include "parsing.h"
 #include "return_error.h"
 
-// compare content of env to check if it hold
-// the same name as the concerned arg entered with export
-
-static int	is_variable_already_in_env(t_utils *utils, char *variable_name,
-		size_t i, bool is_equal)
-{
-	while (utils->env[i])
-	{
-		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name))
-			&& (utils->env[i][ft_strlen(variable_name)] == '='))
-		{
-			if (is_equal)
-				free(variable_name);
-			return (i);
-		}
-		else
-			i++;
-	}
-	if (is_equal)
-		free(variable_name);
-	return (FALSE);
-}
 // utils function that isolate the name of the variable
 // in case of a cmd with an = sign, for further processing
 // in equal_sign_case
@@ -99,7 +77,7 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 //if no args are provided then we print on the stdout
 //the env in the way that bash does
 //including the variables that doesnt have any values yet
-static void no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
+static int no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
 {
 	while (utils->env[i])
 	{
@@ -121,6 +99,23 @@ static void no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
 		j = 0;
 		i++;
 	}
+	return(RETURN_SUCCESS);
+}
+
+
+static int	no_equal_sign_case(t_utils *utils, char *cmd,
+		size_t existing_variable_emp)
+{
+	existing_variable_emp = is_variable_already_in_env(utils, cmd, 0, FALSE);
+	if (!existing_variable_emp)
+	{
+		if (expand_env(utils))
+			return (MALLOC_ERROR);
+		utils->env[utils->size_env - 1] = ft_strdup(cmd);
+		if (!utils->env[utils->size_env - 1])
+			return (MALLOC_ERROR);
+	}
+	return (RETURN_SUCCESS);
 }
 
 // here we gonna check if we do at least have an argument(WIP)
@@ -138,10 +133,7 @@ static void no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
 int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 {
 	if (!node->cmd_parts[1])
-	{
-		no_args_case(utils, 0, 0, TRUE);
-		return(RETURN_SUCCESS);
-	}
+		return(no_args_case(utils, 0, 0, TRUE));
 	while (node->cmd_parts[i])
 	{
 		if (node->cmd_parts[i][0] == '=' || (!ft_isalpha(node->cmd_parts[i][0])
@@ -154,6 +146,11 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 		else if (ft_strchr(node->cmd_parts[i], '='))
 		{
 			if (equal_sign_case(utils, node->cmd_parts[i], NULL, 0))
+				return (MALLOC_ERROR);
+		}
+		else 
+		{
+			if(no_equal_sign_case(utils, node->cmd_parts[i], 0))
 				return (MALLOC_ERROR);
 		}
 		i++;

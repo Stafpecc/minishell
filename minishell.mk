@@ -87,6 +87,7 @@ override BUILTINSRC := \
 	exit \
 	exit_utils \
 	export \
+	export_utils \
 	pwd \
 	unset \
 

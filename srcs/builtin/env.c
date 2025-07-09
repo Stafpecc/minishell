@@ -21,10 +21,14 @@ int	env_builtin(t_command_exec *node, t_utils *utils, size_t i)
 		ft_printfd("minishell: env: No arguments or options required\n");
 		return (EXIT_FAILURE);
 	}
-	while (i != utils->size_env)
+	if(utils->env)
 	{
-		ft_printf("%s\n", utils->env[i]);
-		i++;
+		while (utils->env[i])
+		{
+			if(ft_strchr(utils->env[i], '='))
+				ft_printf("%s\n", utils->env[i]);
+			i++;
+		}
 	}
 	return (EXIT_SUCCESS);
 }
