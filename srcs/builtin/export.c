@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
+#include "parsing.h"
+#include "return_error.h"
 
 // compare content of env to check if it hold
 // the same name as the concerned arg entered with export
@@ -94,6 +96,28 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 	}
 	return (RETURN_SUCCESS);
 }
+//if no args are provided then we print on the stdout
+//the env in the way that bash does
+//including the variables that doesnt have any values yet
+static void no_args_case(t_utils *utils, size_t i, size_t j)
+{
+	while (utils->env[i])
+	{
+		ft_printf("declare -x ");
+		while(utils->env[i][j])
+		{
+			ft_printf("%c", utils->env[i][j]);
+			if(utils->env[i][j] == '=' && utils->env[i][j+1])
+				ft_printf("\"");
+			j++;
+		}
+		if(utils->env[i][j-1] != '=')
+			ft_printf("\"");
+		ft_printf("\n");
+		j = 0;
+		i++;
+	}
+}
 
 // here we gonna check if we do at least have an argument(WIP)
 // then we check browse all the args until we reached the end
@@ -111,8 +135,8 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 {
 	if (!node->cmd_parts[1])
 	{
-		ft_printfd("minishell: export: require an argument: \n");
-		return (RETURN_FAILURE);
+		no_args_case(utils, 0, 0);
+		return(RETURN_SUCCESS);
 	}
 	while (node->cmd_parts[i])
 	{
