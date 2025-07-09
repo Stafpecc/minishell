@@ -99,7 +99,7 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 //if no args are provided then we print on the stdout
 //the env in the way that bash does
 //including the variables that doesnt have any values yet
-static void no_args_case(t_utils *utils, size_t i, size_t j)
+static void no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
 {
 	while (utils->env[i])
 	{
@@ -107,12 +107,16 @@ static void no_args_case(t_utils *utils, size_t i, size_t j)
 		while(utils->env[i][j])
 		{
 			ft_printf("%c", utils->env[i][j]);
-			if(utils->env[i][j] == '=' && utils->env[i][j+1])
+			if(utils->env[i][j] == '=')
+			{
 				ft_printf("\"");
+				empty_value = FALSE;
+			}
 			j++;
 		}
-		if(utils->env[i][j-1] != '=')
+		if(!empty_value)
 			ft_printf("\"");
+		empty_value = TRUE;
 		ft_printf("\n");
 		j = 0;
 		i++;
@@ -135,7 +139,7 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 {
 	if (!node->cmd_parts[1])
 	{
-		no_args_case(utils, 0, 0);
+		no_args_case(utils, 0, 0, TRUE);
 		return(RETURN_SUCCESS);
 	}
 	while (node->cmd_parts[i])
