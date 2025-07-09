@@ -14,29 +14,8 @@
 #include "parsing.h"
 #include "return_error.h"
 
-// utils function that isolate the name of the variable
-// in case of a cmd with an = sign, for further processing
-// in equal_sign_case
-// increment index until we get to the =sign, malloc
-// enough space to variable_name thanks to that index then fill
-// the same variable with the rightful characters then return the result
 
-static char	*assign_variable_name(char *cmd, char *variable_name, size_t i,
-		size_t j)
-{
-	while (cmd[i] != '=')
-		i++;
-	variable_name = malloc(i + 1 * sizeof(char));
-	if (!variable_name)
-		return (NULL);
-	while (j != i)
-	{
-		variable_name[j] = cmd[j];
-		j++;
-	}
-	variable_name[j] = '\0';
-	return (variable_name);
-}
+
 
 // if equal sign it mean what is at the right side
 // is the result of the said variable
@@ -130,18 +109,41 @@ static int	no_equal_sign_case(t_utils *utils, char *cmd,
 
 // TODO? if just export do like bash or follow manual? aka ask for arguments
 
+
+//chiffre lettre underscore
+static int error_checker(t_command_exec *node, size_t i)
+{
+	size_t j;
+
+	j = 0;
+	if (node->cmd_parts[i][0] == '=' || (!ft_isalpha(node->cmd_parts[i][0])
+			&& (node->cmd_parts[i][0] != '_')))
+	{
+		return (RETURN_FAILURE);
+	}
+	while((node->cmd_parts[i][j] != '=' && node->cmd_parts[i][j]))
+	{
+		if(!ft_isalnum(node->cmd_parts[i][j]) && node->cmd_parts[i][j] != '_')
+			return(RETURN_FAILURE);
+		j++;
+	}
+	return(RETURN_SUCCESS);
+}
+
 int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 {
+	int return_value;
+
+	return_value = RETURN_SUCCESS;
 	if (!node->cmd_parts[1])
 		return(no_args_case(utils, 0, 0, TRUE));
 	while (node->cmd_parts[i])
 	{
-		if (node->cmd_parts[i][0] == '=' || (!ft_isalpha(node->cmd_parts[i][0])
-				&& (node->cmd_parts[i][0] != '_')))
+		if(error_checker(node, i))
 		{
 			ft_printfd("minishell: export: '%s': not a valid identifier\n",
 				node->cmd_parts[i]);
-			return (RETURN_FAILURE);
+			return_value = RETURN_FAILURE;
 		}
 		else if (ft_strchr(node->cmd_parts[i], '='))
 		{
@@ -155,5 +157,5 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
 		}
 		i++;
 	}
-	return (RETURN_SUCCESS);
+	return (return_value);
 }

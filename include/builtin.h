@@ -57,6 +57,8 @@ int				export_builtin(t_command_exec *node, t_utils *utils, size_t i);
 //export_utils.c
 int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 	size_t i, bool is_equal);
+char	*assign_variable_name(char *cmd, char *variable_name, size_t i,
+		size_t j);
 
 //pwd.c
 int				pwd_builtin(t_command_exec *node);
