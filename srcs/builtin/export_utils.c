@@ -7,10 +7,13 @@
 int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 		size_t i, bool is_equal)
 {
+    int len;
+
+    len = ft_strlen(variable_name);
 	while (utils->env[i])
 	{
-		if (!ft_strncmp(variable_name, utils->env[i], ft_strlen(variable_name))
-			&& (utils->env[i][ft_strlen(variable_name)] == '='))
+        if (!ft_strncmp(variable_name, utils->env[i], len) &&
+			(utils->env[i][len] == '=' || utils->env[i][len] == '\0'))
 		{
 			if (is_equal)
 				free(variable_name);
