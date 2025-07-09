@@ -37,9 +37,6 @@ int				return_errors(int return_value, int message,
 int				cd_builtin(t_command_exec *node, t_utils *utils,
 					int pwd_emplacement, int pwd_old_emplacement);
 
-//pwd.c
-int				pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j);
-
 //echo.c
 int				echo_builtin(t_command_exec *node, bool newline, int i);
 
@@ -58,7 +55,7 @@ unsigned int	exit_builtin(t_command_exec *node, t_utils *utils);
 int				export_builtin(t_command_exec *node, t_utils *utils, size_t i);
 
 //pwd.c
-int				pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j);
+int				pwd_builtin(t_command_exec *node);
 
 //unset.c
 //static int env_len(char **env);

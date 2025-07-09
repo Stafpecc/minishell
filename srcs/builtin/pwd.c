@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "builtin.h"
-#include "minishell.h"
+#include "return_error.h"
 
 // Check if we are dealing with an option or an argument.
 static int	option_checker(char **cmd_parts)
@@ -32,29 +32,26 @@ static int	option_checker(char **cmd_parts)
 // content then return 0 else it would return 1
 // TODL KEEP IN MIND J = 4!!!!!!!!
 
-int	pwd_builtin(t_command_exec *node, t_utils *utils, int i, int j)
+int	pwd_builtin(t_command_exec *node)
 {
-	j = 4;
-	if (!node->cmd_parts || !node->cmd_parts[0])
-		return (EXIT_FAILURE);
+	char *cwd;
+
+	cwd = NULL;
 	if (node->cmd_parts[1])
 	{
 		if (option_checker(node->cmd_parts))
 			return (2);
 	}
-	while (utils->env[i])
+	cwd = getcwd(NULL, 0);
+	if(!cwd)
 	{
-		if (!ft_strncmp(utils->env[i], "PWD=", 4))
-		{
-			while (utils->env[i][j])
-			{
-				ft_printfd("%c", utils->env[i][j]);
-				j++;
-			}
-			ft_printf("\n");
-			return (EXIT_SUCCESS);
-		}
-		i++;
+		ft_printfd("minishell: pwd: error retrieving current directory");
+		ft_printfd(": getcwd: cannot access parent directories:");
+		ft_printfd(" No such file or directory\n");
+		return(RETURN_FAILURE);
 	}
-	return (EXIT_FAILURE);
+	ft_printf("%s\n", cwd);
+	free(cwd);
+	cwd = NULL;
+	return (EXIT_SUCCESS);
 }
