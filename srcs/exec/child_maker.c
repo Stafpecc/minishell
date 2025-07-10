@@ -43,6 +43,8 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		}
 		pid = wait(&status);
 	}
+	//	if(utils->num_nodes != 1)
+	//close(utils->previous_pipes);
 	if(utils->previous_pipes == -42)
 		close(pipe_fd[0]);
 	return (EXIT_SUCCESS);
