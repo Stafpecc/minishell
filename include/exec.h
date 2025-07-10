@@ -46,7 +46,7 @@ void	childs_pathed_exec(char *cmd, int *fd, char *path);
 //child_utils.c
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 			char *cmd_name, char *full_path);
-char	*prepare_path_resolution(char *path, char *cmd);
+//char	*prepare_path_resolution(char *path, char *cmd);
 char	*path_finder(char **env, char *cmd, char *path);
 char	*free_arrays(char **one, char **two, char *three, char *four);
 void	child_error(int infile, int *fd, int error, char *cmd);
