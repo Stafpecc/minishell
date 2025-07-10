@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include <stdlib.h>
 
 // once the childs are created the parent
 // is gonna close everything that need to be closed here
@@ -43,26 +44,8 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		}
 		pid = wait(&status);
 	}
-	//	if(utils->num_nodes != 1)
-	//close(utils->previous_pipes);
-	// if(utils->previous_pipes == -42)
-	// 	close(pipe_fd[0]);
-	printf("TORM%d\n",pipe_fd[0]);
-	if (utils->previous_pipes != NONE)
-	{
-        close(utils->previous_pipes);
-        utils->previous_pipes = NONE;  // Reset to avoid double close
-    }
-	if (pipe_fd[0] != NONE) 
-	{
-        close(pipe_fd[0]);
-        pipe_fd[0] = NONE;
-    }
-    if (pipe_fd[1] != NONE) 
-	{
-        close(pipe_fd[1]);
-        pipe_fd[1] = NONE;
-    }
+	if(close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
+		return(MALLOC_ERROR);
 	return (EXIT_SUCCESS);
 }
 // is previous pipe exist if yes is it not the last cmd?

@@ -37,14 +37,19 @@ void	close_free_utils(t_utils *utils, size_t i);
 void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
 			size_t i);
 
+//child_pathed.c
+void	childs_pathed_exec_failed(char **split_args, char **split_result,
+			char *path, char **result);
+void	childs_pathed_exec_final(char **split_args, char **split_result,
+			char *path, int *fd);
+void	childs_pathed_exec(char *cmd, int *fd, char *path);
 //child_utils.c
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 			char *cmd_name, char *full_path);
-//char	*prepare_path_resolution(char *path, char *cmd);
+char	*prepare_path_resolution(char *path, char *cmd);
 char	*path_finder(char **env, char *cmd, char *path);
 char	*free_arrays(char **one, char **two, char *three, char *four);
-void	child_error(int infile, int *fd, int error, char *cmd);
-
+int 	close_and_set_none(int previous_pipe, int *pipe_fd);
 //child.c
 void	child_redirect(t_command_exec *node, t_utils *utils);
 

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include "return_error.h"
+#include <stdlib.h>
 
 // Used if we do only have one cmd
 // TODO complete doc about that function
@@ -64,11 +66,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
-	if (utils->previous_pipes != NONE)
-		close(utils->previous_pipes);
-	if (pipe_fd[0] != NONE)
-		close(pipe_fd[0]);
-	if (pipe_fd[1] != NONE)
-		close(pipe_fd[1]);
+	if(close_and_set_none( utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
+		path_finder_fail(node, utils, 0, RETURN_FAILURE);
 	child_redirect(node, utils);
 }
