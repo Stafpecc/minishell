@@ -66,7 +66,7 @@ int	single_built_in(t_command_exec *node, t_utils *utils)
 	else if (!ft_strcmp(node->cmd_parts[0], "pwd"))
 		utils->last_return = (pwd_builtin(node));
 	else if (!ft_strcmp(node->cmd_parts[0], "export"))
-		utils->last_return = (export_builtin(node, utils, 1));
+		utils->last_return = (export_builtin(node, utils, 1, RETURN_SUCCESS));
 	else if (!ft_strcmp(node->cmd_parts[0], "unset"))
 		utils->last_return = (unset_builtin(node, utils, 0 , 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "env"))

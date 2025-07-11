@@ -30,7 +30,6 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 		int existing_variable_emp)
 {
 	variable_name = assign_variable_name(cmd, NULL, 0, 0);
-	ft_printfd("variable name = %s\n",variable_name); //TODL
 	if (!variable_name)
 		return (MALLOC_ERROR);
 	existing_variable_emp = is_variable_already_in_env(utils, variable_name, 0,
@@ -131,11 +130,8 @@ static int error_checker(t_command_exec *node, size_t i)
 	return(RETURN_SUCCESS);
 }
 
-int	export_builtin(t_command_exec *node, t_utils *utils, size_t i)
+int	export_builtin(t_command_exec *node, t_utils *utils, size_t i, int return_value)
 {
-	int return_value;
-
-	return_value = RETURN_SUCCESS;
 	if (!node->cmd_parts[1])
 		return(no_args_case(utils, 0, 0, TRUE));
 	while (node->cmd_parts[i])

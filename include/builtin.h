@@ -52,7 +52,7 @@ int				print_exit(long long code, char *arg, bool too_many_arguments,
 unsigned int	exit_builtin(t_command_exec *node, t_utils *utils);
 
 //export.c
-int				export_builtin(t_command_exec *node, t_utils *utils, size_t i);
+int				export_builtin(t_command_exec *node, t_utils *utils, size_t i, int return_value);
 
 //export_utils.c
 int	is_variable_already_in_env(t_utils *utils, char *variable_name,

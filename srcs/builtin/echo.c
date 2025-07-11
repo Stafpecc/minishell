@@ -24,7 +24,6 @@ static bool pass_n_flags(t_command_exec *node, int *index_print, int i)
 {
 	if (!node->cmd_parts[*index_print])
 		return(RETURN_SUCCESS);
-	
 	while (node->cmd_parts[*index_print] && ft_strncmp(node->cmd_parts[*index_print], "-n", 2) == 0 )
 		{
 			while(node->cmd_parts[*index_print][i])
@@ -33,9 +32,8 @@ static bool pass_n_flags(t_command_exec *node, int *index_print, int i)
 					i++;
 				else 
 				{
-					break;
+					break;//return(RETURN_SUCCESS);
 				}
-			
 			}
 			i = 2;
 			*index_print += 1;
@@ -96,7 +94,7 @@ int	echo_builtin(t_command_exec *node, bool newline, int i)
 		i++;
 		if (node->cmd_parts[i])
 		{
-			if (ft_printf("") < 0) //tocheck
+			if (ft_printf(" ") < 0)
 				return (1);
 		}
 	}
