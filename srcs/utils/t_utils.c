@@ -20,7 +20,11 @@ static t_utils	*ret_free_utils(int select, t_utils *utils)
 	free(utils);
 	return (NULL);
 }
-
+//utils struct would be used to hold the information
+//that would be necessary for our program
+//like to hold the last return value
+//or the env of our minishell or how
+//much nodes we have during the process of the user's prompt
 t_utils	*init_utils_struct(char **envp)
 {
 	t_utils	*utils;

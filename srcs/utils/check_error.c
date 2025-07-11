@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+//check if there is any arguments when the user launched the program
+//also check if the program was launched on a terminal
+//if all the checks are good return 0 else return 1
 
 int	check_error(int ac)
 {

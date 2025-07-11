@@ -17,8 +17,7 @@
 // then go to path A(single_built_in so no childs)
 // else go to path B child_maker to make right nbr of childs
 // one cmd = one child
-
-// TODO EXIT PROPERLY ASK THEO HOW TO DEAL WITH THAT
+// return the last status of the cmd
 
 int	exec(t_command_exec *node, t_utils *utils)
 {

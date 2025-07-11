@@ -42,7 +42,12 @@ static bool	handle_null_input(char *input, t_utils *utils)
 	}
 	return (true);
 }
-
+//that function is the loop that is waiting for
+//user to enter a cmd then we process that cmd
+//if there is nothing we get back to the begining 
+//of the loop to prompt the user again
+//we add to the history the prompted input
+//
 void	minishell_loop(t_utils *utils)
 {
 	char			*input;
@@ -51,7 +56,7 @@ void	minishell_loop(t_utils *utils)
 
 	while (utils->run)
 	{
-		ft_printf("LAST RETURN =%d\n", utils->last_return);
+		ft_printf("LAST RETURN =%d\n", utils->last_return); //TORM BEFORE FINAL RELEASE
 		input = read_input_with_quotes(utils);
 		if (!handle_null_input(input, utils))
 			break ;
