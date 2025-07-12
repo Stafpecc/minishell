@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:34 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/25 09:11:24 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/12 15:51:25 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 int	exec(t_command_exec *node, t_utils *utils)
 {
+	if (!node || !node->cmd_parts || !node->cmd_parts[0])
+		return (RETURN_FAILURE);
 	utils->num_nodes = count_commands(node);
 	if (utils->num_nodes == 1 && built_in_checker(node->cmd_parts[0]))
 	{

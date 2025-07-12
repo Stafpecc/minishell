@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:34:09 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/03 13:26:54 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/12 15:43:33 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,17 @@
 - retourne true si rien n’est exécutable, false sinon.*/
 bool	is_empty_command(t_command *cmd)
 {
-	return (!cmd || !cmd->cmd_parts || !cmd->cmd_parts[0]);
+	if (!cmd)
+		return (true);
+	if (!cmd->cmd_parts || !cmd->cmd_parts[0])
+	{
+		if (cmd->redirect_in || cmd->redirect_out)
+			return (false);
+		return (true);
+	}
+	return (false);
 }
+
 
 /*Fonction qui :
 - s’utilise quand une erreur de syntaxe est rencontrée dans les redirections
