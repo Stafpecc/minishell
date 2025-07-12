@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/03 16:39:34 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/12 16:34:04 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 {
 	char	*path;
 
+	if (!node->cmd_parts || !node->cmd_parts[0])
+		return ;
 	if (built_in_checker(node->cmd_parts[0]))
 		built_in_child(node, utils);
 	else if (!ft_strchr(node->cmd_parts[0], '/'))
