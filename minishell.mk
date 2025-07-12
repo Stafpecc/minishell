@@ -68,7 +68,6 @@ override EXECSRC := \
 	child_dup \
 	child_execute \
 	child_maker \
-	child_pathed \
 	child_utils \
 	child \
 	exec_utils\
@@ -87,6 +86,7 @@ override BUILTINSRC := \
 	exit \
 	exit_utils \
 	export \
+	export_utils \
 	pwd \
 	unset \
 

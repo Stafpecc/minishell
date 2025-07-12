@@ -81,7 +81,7 @@ int	write_dup(t_redirect **redirect, int *pipe_fd)
 		if (redirect_write_browser(redirect, 0))
 			return (RETURN_FAILURE);
 	}
-	else if (pipe_fd[1] != -42)
+	else if (pipe_fd[1] != NONE)
 	{
 		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
 			return (2);

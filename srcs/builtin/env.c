@@ -18,13 +18,17 @@ int	env_builtin(t_command_exec *node, t_utils *utils, size_t i)
 	i = 0;
 	if (node->cmd_parts[1])
 	{
-		ft_printfd("minishell: env: No arguments or options required\n");
+		ft_printfd("minishell: env: '%s': No arguments or options required\n", node->cmd_parts[1]);
 		return (EXIT_FAILURE);
 	}
-	while (i != utils->size_env)
+	if(utils->env)
 	{
-		ft_printf("%s\n", utils->env[i]);
-		i++;
+		while (utils->env[i])
+		{
+			if(ft_strchr(utils->env[i], '='))
+				ft_printf("%s\n", utils->env[i]);
+			i++;
+		}
 	}
 	return (EXIT_SUCCESS);
 }

@@ -49,8 +49,7 @@ char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 char	*prepare_path_resolution(char *path, char *cmd);
 char	*path_finder(char **env, char *cmd, char *path);
 char	*free_arrays(char **one, char **two, char *three, char *four);
-void	child_error(int infile, int *fd, int error, char *cmd);
-
+int 	close_and_set_none(int previous_pipe, int *pipe_fd);
 //child.c
 void	child_redirect(t_command_exec *node, t_utils *utils);
 

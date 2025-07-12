@@ -30,8 +30,7 @@ int	exec(t_command_exec *node, t_utils *utils)
 	}
 	else
 	{
-		if (child_maker(node, utils, 0))
-			return (RETURN_FAILURE);
+		return (child_maker(node, utils, 0));
 	}
 	return (RETURN_SUCCESS);
 }

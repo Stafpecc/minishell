@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include <stdlib.h>
 
 // once the childs are created the parent
 // is gonna close everything that need to be closed here
@@ -43,8 +44,8 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		}
 		pid = wait(&status);
 	}
-	pipe_fd[0] = 0;
-	//close(pipe_fd[0]);
+	if(close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
+		return(MALLOC_ERROR);
 	return (EXIT_SUCCESS);
 }
 // is previous pipe exist if yes is it not the last cmd?
@@ -57,12 +58,12 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 
 static int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 {
-	if (utils->previous_pipes != -42 && i < utils->num_nodes - 1)
+	if (utils->previous_pipes != NONE && i < utils->num_nodes - 1)
 	{
 		if (pipe(pipe_fd) == -1)
 			return (EXIT_FAILURE);
 	}
-	else if (i == utils->num_nodes - 1 && pipe_fd[1] != -42)
+	else if (i == utils->num_nodes - 1 && pipe_fd[1] != NONE)
 	{
 		if (close(pipe_fd[1]) == -1)
 			return (EXIT_FAILURE);
@@ -104,18 +105,28 @@ static pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 
 static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 {
-	if (i < utils->num_nodes - 1 && pipe_fd[1] != -42)
+	if (i < utils->num_nodes - 1 && pipe_fd[1] != NONE)
 	{
 		if (close(pipe_fd[1]) == -1)
 			return (EXIT_FAILURE);
-		pipe_fd[1] = -42;
+		pipe_fd[1] = NONE;
 	}
-	if (utils->previous_pipes != -42)
+	if (utils->previous_pipes != NONE)
 	{
 		if (close(utils->previous_pipes) == -1)
 			return (EXIT_FAILURE);
+		utils->previous_pipes = NONE;
 	}
+	if (i < utils->num_nodes - 1) 
+	{
 	utils->previous_pipes = pipe_fd[0];
+	pipe_fd[0] = NONE;
+	}
+	else if (pipe_fd[0] != NONE) 
+	{
+        close(pipe_fd[0]);
+        pipe_fd[0] = NONE;
+    }
 	return (EXIT_SUCCESS);
 }
 
@@ -128,7 +139,7 @@ int	child_maker(t_command_exec *node, t_utils *utils, int i)
 	int		pipe_fd[2];
 	pid_t	child;
 
-	utils->previous_pipes = -42;
+	utils->previous_pipes = NONE;
 	if (pipe(pipe_fd) == -1)
 		return (EXIT_FAILURE);
 	while (node)

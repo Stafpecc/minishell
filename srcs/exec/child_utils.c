@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include "return_error.h"
 
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 		char *cmd_name, char *full_path)
@@ -114,23 +115,26 @@ char	*free_arrays(char **one, char **two, char *three, char *four)
 	free(four);
 	return (NULL);
 }
-
-void	child_error(int infile, int *fd, int error, char *cmd)
+int close_and_set_none(int previous_pipe, int *pipe_fd)
 {
-	if (error == 1)
-	{
-		ft_printfd("minishell: %s: command not found\n", cmd);
-		exit(127);
-	}
-	if (infile >= 0)
-		close(infile);
-	if (fd[1])
-		close(fd[1]);
-	if (fd[0])
-		close(fd[0]);
-	if (infile == -42)
-	{
-		exit(0);
-	}
-	exit(-255);
+		if (previous_pipe != NONE)
+		{
+    		if (close(previous_pipe) == -1)
+				return(RETURN_FAILURE);
+			previous_pipe = NONE;
+		}
+		if (pipe_fd[0] != NONE)
+		{
+			if (close(pipe_fd[0]) == -1)
+				return(RETURN_FAILURE);
+			pipe_fd[0] = NONE;
+		}
+    		
+    	if (pipe_fd[1] != NONE)
+		{
+			if (close(pipe_fd[1]) == -1)
+				return(RETURN_FAILURE);
+			pipe_fd[1] = NONE;
+		}
+    return(RETURN_SUCCESS);	
 }

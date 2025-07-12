@@ -32,7 +32,7 @@ static bool pass_n_flags(t_command_exec *node, int *index_print, int i)
 					i++;
 				else 
 				{
-					return(RETURN_SUCCESS);
+					break;//return(RETURN_SUCCESS);
 				}
 			}
 			i = 2;

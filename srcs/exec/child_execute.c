@@ -64,22 +64,22 @@ void	path_finder_fail(t_command_exec *node, t_utils *utils, bool execve_failed, 
 {
 	if(execve_failed)
 	{
-		ft_printfd("minishell: %s: No such file or directory\n", node->cmd_parts[0]);
+		perror("minishell");
 		return_value = CMD_NOT_FOUND;
 	}
 	else if (errno == ENOENT)
 	{
-		ft_printfd("minishell: %s: command not found\n", node->cmd_parts[0]);
+		perror("minishell");
 		return_value = CMD_NOT_FOUND;
 	}
 	else if (errno == EACCES)
 	{
-		ft_printfd("minishell: permission denied: %s\n", node->cmd_parts[0]);
+		perror("minishell");
 		return_value = CMD_PERMISSION_DENIED;
 	}
 	else if (errno == ENOMEM)
 	{
-		ft_printfd("minishell: %s: malloc failed\n", node->cmd_parts[0]);
+		perror("minishell");
 		return_value = EXIT_FAILURE;
 	}
 	close_free_utils(utils, 0);
