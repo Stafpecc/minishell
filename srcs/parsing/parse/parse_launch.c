@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/03 13:23:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/12 16:17:24 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static int	parse_directory(t_command *curr, t_utils *utils)
 {
 	const char	*arg;
 
+	if (!curr || !curr->cmd_parts || !curr->cmd_parts[0])
+		return (RETURN_SUCCESS);
+
 	arg = curr->cmd_parts[0]->arg;
+
 	if (is_directory(arg))
 	{
 		ft_printfd("minishell: %s: Is a directory\n", arg);
@@ -32,8 +36,41 @@ static int	parse_directory(t_command *curr, t_utils *utils)
 	return (RETURN_SUCCESS);
 }
 
+static int check_redirect_in(char *filename, bool is_heredoc)
+{
+	if (is_heredoc)
+        return (RETURN_SUCCESS);
+	if (access(filename, F_OK) == -1)
+	{
+		ft_printfd("minisell: %s: No such file or directory\n", filename);
+		return (RETURN_FAILURE);
+	}
+	if (access(filename, R_OK) == -1)
+	{
+		ft_printfd("minishell: %s: Permission denied\n", filename);
+		return (RETURN_FAILURE);
+	}
+	return (RETURN_SUCCESS);
+}
+
 static int	parse_cmd_helper(t_command *prev, t_command *curr, t_utils *utils)
 {
+	int	i;
+
+	if (curr->redirect_in)
+	{
+		i = 0;
+		while (curr->redirect_in[i])
+		{
+			if (check_redirect_in(curr->redirect_in[i]->arg,
+				curr->redirect_in[i]->heredoc) == RETURN_FAILURE)
+			{
+				utils->last_return = 1;
+				return (RETURN_FAILURE);
+			}
+			i++;
+		}
+	}
 	if (is_empty_command(curr))
 		return (return_failure("|", utils));
 	if ((curr->redirect_in || curr->redirect_out)
