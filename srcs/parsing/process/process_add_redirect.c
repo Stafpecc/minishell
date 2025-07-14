@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:24:41 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/12 15:04:35 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/12 16:59:22 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ static int	fill_redirect(t_redir_params *params,
 	array[params->i + 1] = NULL;
 	array[params->i]->arg = ft_strdup(token->value);
 	if (!array[params->i]->arg)
+	{
+		free(array[params->i]);
 		return (process_free_exit(ctx->head));
+	}
 	array[params->i]->heredoc = params->flags.is_heredoc;
 	array[params->i]->append_redirect = params->flags.is_append;
 	process_quotes(token, array[params->i]);

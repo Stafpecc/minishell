@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/02 17:13:45 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/12 16:47:31 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ void	free_env(char **env)
 void	free_utils(t_utils *utils)
 {
 	free_env(utils->env);
-	close(utils->old_stdin);
-	close(utils->old_stdout);
+	if (utils->fd != -1)
+		close(utils->fd);
+	if (utils->old_stdin != -1)
+		close(utils->old_stdin);
+	if (utils->old_stdout != -1)
+		close(utils->old_stdout);
 	free(utils);
 }

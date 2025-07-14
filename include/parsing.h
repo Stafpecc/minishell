@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/12 15:34:46 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/12 16:37:45 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_utils
 {
 	char				**env;
 	int					last_return;
+	int					fd;
 	int					num_nodes;
 	int					previous_pipes;
 	int					status;

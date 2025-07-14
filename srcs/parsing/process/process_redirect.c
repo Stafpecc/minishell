@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/26 17:43:57 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/12 16:39:00 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 		return (RETURN_FAILURE);
 	process_quotes(*tokens, curr->redirect_in[i]);
 	fd = here_doc(curr->redirect_in[i]->arg);
+	utils->fd = fd;
 	if (fd < 0)
 	{
 		utils->last_return = fd * -1;
