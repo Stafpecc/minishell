@@ -6,14 +6,14 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 18:44:54 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:46:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signal_handler.h"
 #include "minishell.h"
 
-volatile sig_atomic_t g_interrupted = 0;
+volatile sig_atomic_t	g_interrupted = 0;
 
 static void	ctrl_c(void)
 {
