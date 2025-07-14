@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:22:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/12 18:15:05 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:45:34 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ t_utils	*init_utils_struct(char **envp)
 	utils->status = 0;
 	utils->type_of_first_arg = TOK_END;
 	utils->fd = -1;
-	utils->old_stdin = dup(STDIN_FILENO); //TODO PROTECT
-	utils->old_stdout = dup(STDOUT_FILENO); //TODO PROTECT
+	utils->old_stdin = dup(STDIN_FILENO);
+	if (utils->old_stdin == -1)
+		return (ret_free_utils(1, utils));
+	utils->old_stdout = dup(STDOUT_FILENO);
+	if (utils->old_stdout == -1)
+		return (ret_free_utils(1, utils));
 	utils->size_env = ft_env_len(utils->env);
 	utils->run = 1;
 	return (utils);

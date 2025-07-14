@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/03 17:48:14 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/14 15:09:20 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	single_built_in_redirections(t_command_exec *node)
 	}
 	return (RETURN_SUCCESS);
 }
+
 // reinitialize by default any change that was done to
 // the stdin(0) and (stdout) then return the last return
-
 static int	reinit_fd_return_main(t_command_exec *node, t_utils *utils)
 {
 	if (node->redirect_in)
@@ -51,7 +51,6 @@ static int	reinit_fd_return_main(t_command_exec *node, t_utils *utils)
 // function that will do the right redirect if needed
 // then determine which built-in we are dealing with
 // then return the return value of the built-in function
-
 int	single_built_in(t_command_exec *node, t_utils *utils)
 {
 	if (node->redirect_in || node->redirect_out)
@@ -68,7 +67,7 @@ int	single_built_in(t_command_exec *node, t_utils *utils)
 	else if (!ft_strcmp(node->cmd_parts[0], "export"))
 		utils->last_return = (export_builtin(node, utils, 1, RETURN_SUCCESS));
 	else if (!ft_strcmp(node->cmd_parts[0], "unset"))
-		utils->last_return = (unset_builtin(node, utils, 0 , 0));
+		utils->last_return = (unset_builtin(node, utils, 0, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "env"))
 		utils->last_return = (env_builtin(node, utils, 0));
 	else if (!ft_strcmp(node->cmd_parts[0], "exit"))

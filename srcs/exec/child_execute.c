@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/03 16:39:24 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/14 15:06:53 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	close_free_utils(t_utils *utils, size_t i)
 		{
 			while (utils->env[i])
 			{
-				if(utils->env[i])
+				if (utils->env[i])
 				{
 					free(utils->env[i]);
 					utils->env[i] = NULL;
@@ -60,9 +60,10 @@ void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
 // used, we close utils and exec and free everything we need
 // in utils before exit with the right associated code
 
-void	path_finder_fail(t_command_exec *node, t_utils *utils, bool execve_failed, int return_value)
+void	path_finder_fail(t_command_exec *node, t_utils *utils,
+	bool execve_failed, int return_value)
 {
-	if(execve_failed)
+	if (execve_failed)
 	{
 		perror("minishell");
 		return_value = CMD_NOT_FOUND;

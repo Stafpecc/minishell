@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/12 16:37:45 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:40:11 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int				return_failure(const char *token, t_utils *utils);
 void			print_syntax_error(const char *token, t_utils *utils);
 bool			is_directory(const char *path);
 int				check_file(const char *path, t_utils *utils, t_file_mode mode);
+int				parse_directory(t_command *curr, t_utils *utils);
 
 /******************************************************************************/
 /*                                 UTILS                                      */

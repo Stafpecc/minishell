@@ -6,20 +6,21 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:59 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 04:28:05 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:54:08 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../../../libft/includes/libft.h"
 
 #include <stdbool.h>
 #include <dirent.h>
 
 /*
-Fonction qui :
-- tente d’ouvrir le chemin donné en tant que répertoire ;
-- si l’ouverture réussit, ferme le répertoire et retourne true ;
-- sinon retourne false, indiquant que ce n’est pas un répertoire.
+Function that:
+- tries to open the given path as a directory;
+- if the opening succeeds, closes the directory and returns true;
+- otherwise returns false, indicating it is not a directory.
 */
 bool	is_directory(const char *path)
 {
@@ -32,4 +33,25 @@ bool	is_directory(const char *path)
 		return (true);
 	}
 	return (false);
+}
+
+int	parse_directory(t_command *curr, t_utils *utils)
+{
+	const char	*arg;
+
+	if (!curr || !curr->cmd_parts || !curr->cmd_parts[0])
+		return (RETURN_SUCCESS);
+	arg = curr->cmd_parts[0]->arg;
+	if (is_directory(arg))
+	{
+		ft_printfd("minishell: %s: Is a directory\n", arg);
+		utils->last_return = CMD_PERMISSION_DENIED;
+		return (RETURN_FAILURE);
+	}
+	if (ft_strchr(arg, '/'))
+	{
+		if (check_file(arg, utils, FILE_EXEC) == RETURN_FAILURE)
+			return (RETURN_FAILURE);
+	}
+	return (RETURN_SUCCESS);
 }

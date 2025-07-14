@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 19:34:56 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/14 15:00:45 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
 #include "parsing.h"
 #include "return_error.h"
-
-
-
 
 // if equal sign it mean what is at the right side
 // is the result of the said variable
@@ -53,34 +50,34 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 	}
 	return (RETURN_SUCCESS);
 }
+
 //if no args are provided then we print on the stdout
 //the env in the way that bash does
 //including the variables that doesnt have any values yet
-static int no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
+static int	no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
 {
 	while (utils->env[i])
 	{
 		ft_printf("declare -x ");
-		while(utils->env[i][j])
+		while (utils->env[i][j])
 		{
 			ft_printf("%c", utils->env[i][j]);
-			if(utils->env[i][j] == '=')
+			if (utils->env[i][j] == '=')
 			{
 				ft_printf("\"");
 				empty_value = FALSE;
 			}
 			j++;
 		}
-		if(!empty_value)
+		if (!empty_value)
 			ft_printf("\"");
 		empty_value = TRUE;
 		ft_printf("\n");
 		j = 0;
 		i++;
 	}
-	return(RETURN_SUCCESS);
+	return (RETURN_SUCCESS);
 }
-
 
 static int	no_equal_sign_case(t_utils *utils, char *cmd,
 		size_t existing_variable_emp)
@@ -106,14 +103,11 @@ static int	no_equal_sign_case(t_utils *utils, char *cmd,
 // and goes to the right function depending of if it hold
 // the said sign or not (because not same effect expected)
 // once we get out of the while loop we return_success
-
 // TODO? if just export do like bash or follow manual? aka ask for arguments
-
-
 //chiffre lettre underscore
-static int error_checker(t_command_exec *node, size_t i)
+static int	error_checker(t_command_exec *node, size_t i)
 {
-	size_t j;
+	size_t	j;
 
 	j = 0;
 	if (node->cmd_parts[i][0] == '=' || (!ft_isalpha(node->cmd_parts[i][0])
@@ -121,22 +115,23 @@ static int error_checker(t_command_exec *node, size_t i)
 	{
 		return (RETURN_FAILURE);
 	}
-	while((node->cmd_parts[i][j] != '=' && node->cmd_parts[i][j]))
+	while ((node->cmd_parts[i][j] != '=' && node->cmd_parts[i][j]))
 	{
-		if(!ft_isalnum(node->cmd_parts[i][j]) && node->cmd_parts[i][j] != '_')
-			return(RETURN_FAILURE);
+		if (!ft_isalnum(node->cmd_parts[i][j]) && node->cmd_parts[i][j] != '_')
+			return (RETURN_FAILURE);
 		j++;
 	}
-	return(RETURN_SUCCESS);
+	return (RETURN_SUCCESS);
 }
 
-int	export_builtin(t_command_exec *node, t_utils *utils, size_t i, int return_value)
+int	export_builtin(t_command_exec *node, t_utils *utils, size_t i,
+		int return_value)
 {
 	if (!node->cmd_parts[1])
-		return(no_args_case(utils, 0, 0, TRUE));
+		return (no_args_case(utils, 0, 0, TRUE));
 	while (node->cmd_parts[i])
 	{
-		if(error_checker(node, i))
+		if (error_checker(node, i))
 		{
 			ft_printfd("minishell: export: '%s': not a valid identifier\n",
 				node->cmd_parts[i]);
@@ -147,9 +142,9 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i, int return_va
 			if (equal_sign_case(utils, node->cmd_parts[i], NULL, 0))
 				return (MALLOC_ERROR);
 		}
-		else 
+		else
 		{
-			if(no_equal_sign_case(utils, node->cmd_parts[i], 0))
+			if (no_equal_sign_case(utils, node->cmd_parts[i], 0))
 				return (MALLOC_ERROR);
 		}
 		i++;

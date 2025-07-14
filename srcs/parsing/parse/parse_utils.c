@@ -6,18 +6,20 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:34:09 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/12 15:43:33 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:55:38 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-/*Fonction qui :
-- vérifie si une commande est vide ou invalide ;
-- regarde si la structure est nulle, si le tableau de parties est vide,
-  	ou si la première partie (la commande elle-même) est absente ;
-- retourne true si rien n’est exécutable, false sinon.*/
+/*
+Function that:
+- checks if a command is empty or invalid;
+- verifies if the structure is null, if the array of parts is empty,
+  or if the first part (the command itself) is missing;
+- returns true if nothing is executable, false otherwise.
+*/
 bool	is_empty_command(t_command *cmd)
 {
 	if (!cmd)
@@ -31,22 +33,24 @@ bool	is_empty_command(t_command *cmd)
 	return (false);
 }
 
-
-/*Fonction qui :
-- s’utilise quand une erreur de syntaxe est rencontrée dans les redirections
-ou les tokens ;
-- affiche un message d’erreur clair à l’utilisateur ;
-- retourne une valeur d’échec standard pour stopper ou ignorer la commande.*/
+/*
+Function that:
+- is used when a syntax error is encountered in redirections or tokens;
+- displays a clear error message to the user;
+- returns a standard failure value to stop or skip the command.
+*/
 int	return_failure(const char *token, t_utils *utils)
 {
 	print_syntax_error(token, utils);
 	return (RETURN_FAILURE);
 }
 
-/*Fonction qui :
-- affiche un message d’erreur avec le token problématique (>, <, etc.) ;
-- met à jour le code de retour global avec une erreur de syntaxe ;
-- sert à indiquer qu’un token inattendu a été trouvé pendant le parsing.*/
+/*
+Function that:
+- displays an error message with the problematic token (>, <, etc.);
+- updates the global return code with a syntax error;
+- is used to indicate that an unexpected token was found during parsing.
+*/
 void	print_syntax_error(const char *token, t_utils *utils)
 {
 	utils->last_return = CMD_SYNTAX;

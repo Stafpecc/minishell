@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:37:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/22 16:55:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:10:33 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,16 @@ static int	ret_free_new_part(t_arg *new_part, char *expanded)
 }
 
 /*
-fonction qui :
-- ajoute un nouveau token de type mot ou chaîne à la liste cmd_parts
-	d’une commande ;
-- alloue une nouvelle structure t_arg et y copie la valeur du token après
-	duplication ;
-- traite les quotes présentes dans le token pour marquer correctement la
-	nouvelle partie ;
-- crée un nouveau tableau t_arg* plus grand, copie l’ancien contenu, ajoute
-	la nouvelle partie, termine par NULL ;
-- libère l’ancien tableau cmd_parts et met à jour la commande avec le nouveau
-	tableau ;
-- retourne RETURN_SUCCESS si tout s’est bien passé, sinon RETURN_FAILURE en
-	cas d’erreur d’allocation.
+Function that:
+- adds a new token of type word or string to a command's cmd_parts list;
+- allocates a new t_arg structure and copies the token's value after
+duplication;
+- processes any quotes in the token to properly mark the new part;
+- creates a new, larger t_arg* array, copies the old contents, adds the new
+part, and terminates with NULL;
+- frees the old cmd_parts array and updates the command with the new array;
+- returns RETURN_SUCCESS if everything went well, otherwise RETURN_FAILURE 
+on allocation error.
 */
 int	process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 {

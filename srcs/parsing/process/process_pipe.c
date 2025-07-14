@@ -6,18 +6,18 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:35:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 05:18:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:55:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 /*
-Fonction qui :
-- crée une nouvelle commande et la lie à la commande courante via le champ next ;
-- met à jour le pointeur courant pour pointer sur cette nouvelle commande ;
-- retourne RETURN_SUCCESS si la création réussit, sinon libère la mémoire
-	et retourne une erreur.
+Function that:
+- creates a new command and links it to the current command via the 'next' field;
+- updates the current pointer to point to this new command;
+- returns RETURN_SUCCESS if the creation succeeds, otherwise frees the memory
+  and returns an error.
 */
 int	process_pipe(t_command **curr, t_command *head)
 {

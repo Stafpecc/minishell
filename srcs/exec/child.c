@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/12 16:34:04 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:04:17 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 {
-	int tmp_last_return;
+	int	tmp_last_return;
 
 	tmp_last_return = utils->last_return;
 	close_free_utils(utils, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:21:52 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/01 16:00:29 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/14 14:36:47 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_bool			ft_atoi_only_num(const char *str, int *result);
 double			ft_atod(const char *str);
 int				ft_pass(int i, const char *str, int *s);
 double			ft_atof(const char *str);
-void			*ft_realloc(void *ptr,size_t old_size, size_t new_size);
+void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char			*ft_strncpy(char *dest, const char *src, size_t n);
 char			*ft_strncat(char *dest, const char *src, size_t n);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:27:57 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/01 16:28:26 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/14 15:33:30 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_token_ctx
+{
+	const char	*input;
+	size_t		*i;
+	t_token		**head;
+	char		**buffer;
+}	t_token_ctx;
+
 /******************************************************************************/
 /*                                 LEXER                                      */
 /******************************************************************************/
@@ -60,5 +68,10 @@ int			add_token(t_token **head, t_token_type type, const char *value);
 /******************************************************************************/
 int			process_combined_token(const char *input, size_t *i,
 				t_token **head);
+int			process_quoted_token_separate(const char *input, size_t *i,
+				t_token **head, char quote);
+int			handle_quoted_token(t_token_ctx *ctx, char quote);
+char		*extract_quoted_part(const char *input, size_t *i, char quote);
+char		*concat_buffer_part(char *buffer, char *part);
 
 #endif

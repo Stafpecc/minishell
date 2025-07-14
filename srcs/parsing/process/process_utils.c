@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/12 15:03:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:10:56 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include "../../../libft/includes/libft.h"
 
 /*
-fonction qui :
-- libère toute la liste de commandes passée en argument ;
-- retourne toujours RETURN_FAILURE pour indiquer une erreur ou un arrêt.
+Function that:
+- frees the entire list of commands passed as an argument;
+- always returns RETURN_FAILURE to indicate an error or termination.
 */
 int	process_free_exit(t_command *head)
 {
@@ -27,11 +27,10 @@ int	process_free_exit(t_command *head)
 }
 
 /*
-fonction qui :
-- vérifie si un token est considéré comme un mot ou une chaîne valide
-	dans le parsing ;
-- retourne true si le type du token est un mot simple ou une chaîne
-	entre quotes, false sinon.
+Function that:
+- checks if a token is considered a valid word or string during parsing;
+- returns true if the token type is a simple word or a quoted string,
+false otherwise.
 */
 bool	is_word_like(t_token *token)
 {
@@ -42,10 +41,10 @@ bool	is_word_like(t_token *token)
 }
 
 /*
-fonction qui :
-- vérifie si un token correspond à une redirection (<<, >>, <, >)
-	ou à un pipe (|) ;
-- retourne RETURN_SUCCESS si c’est le cas, sinon RETURN_FAILURE.
+Function that:
+- checks if a token corresponds to a redirection (<<, >>, <, >)
+  or a pipe (|);
+- returns RETURN_SUCCESS if it does, otherwise RETURN_FAILURE.
 */
 int	is_redirect_or_pipe(t_token *token)
 {

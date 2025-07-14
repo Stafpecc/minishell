@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:35:24 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/05/30 13:35:18 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/14 15:02:34 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	option_checker(char **cmd_parts)
 
 int	pwd_builtin(t_command_exec *node)
 {
-	char *cwd;
+	char	*cwd;
 
 	cwd = NULL;
 	if (node->cmd_parts[1])
@@ -43,12 +43,12 @@ int	pwd_builtin(t_command_exec *node)
 			return (2);
 	}
 	cwd = getcwd(NULL, 0);
-	if(!cwd)
+	if (!cwd)
 	{
 		ft_printfd("minishell: pwd: error retrieving current directory");
 		ft_printfd(": getcwd: cannot access parent directories:");
 		ft_printfd(" No such file or directory\n");
-		return(RETURN_FAILURE);
+		return (RETURN_FAILURE);
 	}
 	ft_printf("%s\n", cwd);
 	free(cwd);

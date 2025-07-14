@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/03 17:03:43 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/14 15:10:24 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,26 +115,26 @@ char	*free_arrays(char **one, char **two, char *three, char *four)
 	free(four);
 	return (NULL);
 }
-int close_and_set_none(int previous_pipe, int *pipe_fd)
+
+int	close_and_set_none(int previous_pipe, int *pipe_fd)
 {
-		if (previous_pipe != NONE)
-		{
-    		if (close(previous_pipe) == -1)
-				return(RETURN_FAILURE);
-			previous_pipe = NONE;
-		}
-		if (pipe_fd[0] != NONE)
-		{
-			if (close(pipe_fd[0]) == -1)
-				return(RETURN_FAILURE);
-			pipe_fd[0] = NONE;
-		}
-    		
-    	if (pipe_fd[1] != NONE)
-		{
-			if (close(pipe_fd[1]) == -1)
-				return(RETURN_FAILURE);
-			pipe_fd[1] = NONE;
-		}
-    return(RETURN_SUCCESS);	
+	if (previous_pipe != NONE)
+	{
+		if (close(previous_pipe) == -1)
+			return (RETURN_FAILURE);
+		previous_pipe = NONE;
+	}
+	if (pipe_fd[0] != NONE)
+	{
+		if (close(pipe_fd[0]) == -1)
+			return (RETURN_FAILURE);
+		pipe_fd[0] = NONE;
+	}
+	if (pipe_fd[1] != NONE)
+	{
+		if (close(pipe_fd[1]) == -1)
+			return (RETURN_FAILURE);
+		pipe_fd[1] = NONE;
+	}
+	return (RETURN_SUCCESS);
 }
