@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:46:05 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/03 15:58:31 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/12 14:40:32 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,12 @@ int process_combined_token(const char *input, size_t *i, t_token **head)
 			}
 		}
 	}
-	int status = add_token(head, TOK_WORD, buffer);
+	if (buffer[0] != '\0')
+	{
+		int status = add_token(head, TOK_WORD, buffer);
+		free(buffer);
+		return status;
+	}
 	free(buffer);
-	return status;
+	return RETURN_SUCCESS;
 }
