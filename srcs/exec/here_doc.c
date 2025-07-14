@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/02 16:57:43 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:29:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@
 
 volatile sig_atomic_t	g_interrupted = 0;
 
-static int	readline_loop(int fd, char *delimiter, char *input)
+static int	readline_loop(int fd, char *delimiter)
 {
+	char *input;
+
 	while (1)
 	{
 		input = readline("> ");
 		if (g_interrupted)
 		{
 			g_interrupted = 0;
+			free(input);
 			return (-130);
 		}
 		if (!input)
@@ -42,7 +45,10 @@ static int	readline_loop(int fd, char *delimiter, char *input)
 			return (-1);
 		}
 		if (ft_strcmp(input, delimiter) == 0)
+		{
+			free(input);
 			return (RETURN_SUCCESS);
+		}
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
 		free(input);
@@ -89,24 +95,25 @@ int readline_heredoc(int fd, char *delimiter)
 {
 	struct sigaction	sa_new;
 	struct sigaction	sa_old;
-	char				*input = NULL;
-	int					return_value = 0;
+	int					return_value;
 
 	g_interrupted = 0;
+
 	sa_new.sa_handler = sig_handler;
 	sigemptyset(&sa_new.sa_mask);
 	sa_new.sa_flags = 0;
 	sigaction(SIGINT, &sa_new, &sa_old);
 
-	return_value = readline_loop(fd, delimiter, input);
+	// Lance la boucle readline
+	return_value = readline_loop(fd, delimiter);
 
+	// Restaure les signaux
 	sigaction(SIGINT, &sa_old, NULL);
 	set_signals();
 
-	if (input)
-		free(input);
 	return (return_value);
 }
+
 
 // I create .heredoc.tmp with open and associate its fd into fd, I secure it
 // we go to readline_heredoc that should return us 0 if everything went well
