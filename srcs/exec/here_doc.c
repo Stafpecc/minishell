@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 14:29:55 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:32:33 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,7 @@ int readline_heredoc(int fd, char *delimiter)
 	sigemptyset(&sa_new.sa_mask);
 	sa_new.sa_flags = 0;
 	sigaction(SIGINT, &sa_new, &sa_old);
-
-	// Lance la boucle readline
 	return_value = readline_loop(fd, delimiter);
-
-	// Restaure les signaux
 	sigaction(SIGINT, &sa_old, NULL);
 	set_signals();
 
