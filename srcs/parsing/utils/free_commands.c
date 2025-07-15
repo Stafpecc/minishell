@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/22 15:42:29 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:35:31 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	free_arg_table(t_arg **args)
 	i = 0;
 	while (args[i])
 	{
-		free(args[i]->arg);
+		if (args[i]->arg)
+			free(args[i]->arg);
 		free(args[i]);
 		i++;
 	}

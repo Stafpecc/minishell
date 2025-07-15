@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 14:40:11 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:45:38 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,9 @@ int				process_redirect_out(t_token **tokens, t_command *curr,
 int				process_append_redirect(t_token **tokens, t_command *curr,
 					t_command *head, t_utils *utils);
 void			process_quotes(t_token *tokens, t_arg *arg);
-int				process_pipe(t_command **curr, t_command *head);
+int				process_pipe(t_command **curr);
 int				process_heredoc(t_token **tokens, t_command *curr,
 					t_command *head, t_utils *utils);
-int				process_free_exit(t_command *head);
 
 /******************************************************************************/
 /*                              ADD_REDIRECT                                  */

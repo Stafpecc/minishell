@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 18:10:56 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:45:23 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
-
-/*
-Function that:
-- frees the entire list of commands passed as an argument;
-- always returns RETURN_FAILURE to indicate an error or termination.
-*/
-int	process_free_exit(t_command *head)
-{
-	free_commands(head);
-	return (RETURN_FAILURE);
-}
 
 /*
 Function that:

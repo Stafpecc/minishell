@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 18:08:53 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:50:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	process_special_tokens(t_token **tokens, t_command **curr,
 	}
 	else if ((*tokens)->type == TOK_PIPE)
 	{
-		if (process_pipe(curr, head) == RETURN_FAILURE)
+		if (process_pipe(curr) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	return (RETURN_SUCCESS);

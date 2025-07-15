@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:35:37 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 15:55:55 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:45:30 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ Function that:
 - returns RETURN_SUCCESS if the creation succeeds, otherwise frees the memory
   and returns an error.
 */
-int	process_pipe(t_command **curr, t_command *head)
+int	process_pipe(t_command **curr)
 {
 	(*curr)->next = create_command();
 	if (!(*curr)->next)
-		return (process_free_exit(head));
+		return (RETURN_FAILURE);
 	(*curr) = (*curr)->next;
 	return (RETURN_SUCCESS);
 }
