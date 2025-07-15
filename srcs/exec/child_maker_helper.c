@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:56:13 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/15 15:03:43 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:09:42 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd, int i)
 
 void	close_heredoc_fds(t_command_exec *head)
 {
-	int j;
+	int	j;
 
 	while (head)
 	{

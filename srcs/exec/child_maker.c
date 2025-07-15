@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/15 15:01:16 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:10:15 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,11 @@ int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 int	child_maker(t_command_exec *node, t_utils *utils, int i)
 {
 	int				pipe_fd[2];
-	pid_t			child = -1;
-	t_command_exec	*head = node;
+	pid_t			child;
+	t_command_exec	*head;
 
+	child = -1;
+	head = node;
 	if (initialize_child_maker(node, utils, pipe_fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (fork_all_children(node, utils, pipe_fd, i) == EXIT_FAILURE)
