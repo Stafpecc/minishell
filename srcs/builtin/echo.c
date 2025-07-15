@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/22 14:46:51 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/12 14:40:33 by stafpec          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/builtin.h"
 #include "parsing.h"
@@ -20,25 +9,24 @@
 //the first one that has been validated in is_newline
 //it updated index_print if it found a new valid -n 
 //array of chars
-static bool pass_n_flags(t_command_exec *node, int *index_print, int i)
+static bool	pass_n_flags(t_command_exec *node, int *index_print, int i)
 {
 	if (!node->cmd_parts[*index_print])
-		return(RETURN_SUCCESS);
-	while (node->cmd_parts[*index_print] && ft_strncmp(node->cmd_parts[*index_print], "-n", 2) == 0 )
+		return (RETURN_SUCCESS);
+	while (node->cmd_parts[*index_print]
+		&& ft_strncmp(node->cmd_parts[*index_print], "-n", 2) == 0)
+	{
+		while (node->cmd_parts[*index_print][i])
 		{
-			while(node->cmd_parts[*index_print][i])
-			{
-				if (node->cmd_parts[1][i] == 'n')
-					i++;
-				else 
-				{
-					break;//return(RETURN_SUCCESS);
-				}
-			}
-			i = 2;
-			*index_print += 1;
+			if (node->cmd_parts[1][i] == 'n')
+				i++;
+			else
+				break ;
 		}
-	return(RETURN_SUCCESS);
+		i = 2;
+		*index_print += 1;
+	}
+	return (RETURN_SUCCESS);
 }
 
 // to check if we got a right parameters
@@ -46,28 +34,29 @@ static bool pass_n_flags(t_command_exec *node, int *index_print, int i)
 // and index_print depending of the situation
 // if there was a valid n parameter then we also
 // return pass_n_flag to ignore all n flags that follow up
-static bool	is_newline(t_command_exec *node, int i, bool *newline, int *index_print)
+static bool	is_newline(t_command_exec *node, int i, bool *newline,
+	int *index_print)
 {
-	
 	if (!node->cmd_parts || !node->cmd_parts[0])
 		return (RETURN_FAILURE);
-	if (node->cmd_parts[1] && ft_strncmp(node->cmd_parts[1], "-n", 2) == 0 )
+	if (node->cmd_parts[1] && ft_strncmp(node->cmd_parts[1], "-n", 2)
+		== 0)
 	{
 		*newline = FALSE;
 		*index_print = 2;
-		while(node->cmd_parts[1][i])
-		{		
+		while (node->cmd_parts[1][i])
+		{
 			if (node->cmd_parts[1][i] == 'n')
 				i += 1;
-			else 
+			else
 			{
 				*index_print = 1;
 				*newline = TRUE;
-				return(RETURN_SUCCESS);
+				return (RETURN_SUCCESS);
 			}
 		}
 	}
-	return(pass_n_flags(node, index_print, 2));
+	return (pass_n_flags(node, index_print, 2));
 }
 
 // check if we received the right cmd and

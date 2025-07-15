@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/25 17:00:03 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/14 18:08:53 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h" // DEBUG
+#include "minishell.h"
 #include "parsing.h"
 #include "return_error.h"
 #include "../../libft/includes/libft.h"

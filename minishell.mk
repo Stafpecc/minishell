@@ -48,6 +48,7 @@ override LEXERSRC := \
 	utils/token_utils \
 	utils/free_token \
 	process/process_word_string \
+	process/process_quotes \
 
 
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))

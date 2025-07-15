@@ -1,19 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/14 15:01:04 by stafpec           #+#    #+#             */
+/*   Updated: 2025/07/14 15:01:56 by stafpec          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/builtin.h"
 #include "parsing.h"
 
 // compare content of env to check if it hold
 // the same name as the concerned arg entered with export
-
 int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 		size_t i, bool is_equal)
 {
-    int len;
+	int	len;
 
-    len = ft_strlen(variable_name);
+	len = ft_strlen(variable_name);
 	while (utils->env[i])
 	{
-        if (!ft_strncmp(variable_name, utils->env[i], len) &&
-			(utils->env[i][len] == '=' || utils->env[i][len] == '\0'))
+		if (!ft_strncmp(variable_name, utils->env[i], len)
+			&& (utils->env[i][len] == '=' || utils->env[i][len] == '\0'))
 		{
 			if (is_equal)
 				free(variable_name);
@@ -33,7 +44,6 @@ int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 // increment index until we get to the =sign, malloc
 // enough space to variable_name thanks to that index then fill
 // the same variable with the rightful characters then return the result
-
 char	*assign_variable_name(char *cmd, char *variable_name, size_t i,
 		size_t j)
 {

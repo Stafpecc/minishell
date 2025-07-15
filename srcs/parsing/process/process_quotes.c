@@ -6,18 +6,18 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:36:53 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/08 05:19:10 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:56:10 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 /*
-Fonction qui :
-- analyse le type de quotes du token donné ;
-- met à jour les drapeaux dans cmd_part pour indiquer si le contenu est
-	entre simples ou doubles quotes ;
-- si aucune quote n’est présente, réinitialise les drapeaux à false.
+Function that:
+- analyzes the type of quotes in the given token;
+- updates the flags in cmd_part to indicate if the content is
+  enclosed in single or double quotes;
+- if no quotes are present, resets the flags to false.
 */
 void	process_quotes(t_token *token, t_arg *cmd_part)
 {

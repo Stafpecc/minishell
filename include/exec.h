@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/14 14:34:52 by stafpec           #+#    #+#             */
+/*   Updated: 2025/07/14 14:35:51 by stafpec          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
 # define EXEC_H
 # define MALLOC_ERROR -42
@@ -32,7 +44,8 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd,
 void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
 
 //child_execute.c
-void	path_finder_fail(t_command_exec *node, t_utils *utils, bool execve_failed, int return_value);
+void	path_finder_fail(t_command_exec *node, t_utils *utils,
+			bool execve_failed, int return_value);
 void	close_free_utils(t_utils *utils, size_t i);
 void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
 			size_t i);
@@ -49,7 +62,7 @@ char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 char	*prepare_path_resolution(char *path, char *cmd);
 char	*path_finder(char **env, char *cmd, char *path);
 char	*free_arrays(char **one, char **two, char *three, char *four);
-int 	close_and_set_none(int previous_pipe, int *pipe_fd);
+int		close_and_set_none(int previous_pipe, int *pipe_fd);
 //child.c
 void	child_redirect(t_command_exec *node, t_utils *utils);
 
@@ -75,6 +88,6 @@ int		print_exit(long long code, char *arg, bool too_many_arguments,
 			t_utils *utils);
 
 //exit_utils.c
-int			is_arg_digit_and_overflow(char *arg, t_utils *utils);
+int		is_arg_digit_and_overflow(char *arg, t_utils *utils);
 
 #endif

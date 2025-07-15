@@ -6,12 +6,14 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 14:32:33 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:43:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 #include "../../libft/includes/libft.h"
+#include "parsing.h"
+
 #include <readline/readline.h>
 #include <signal.h>
 #include <sys/ioctl.h>
@@ -24,35 +26,45 @@
 // if no we write the content of input with a \n free input set it to null
 // then we go back to the start of the loop UNTIL we find the EOF delimiter
 
-volatile sig_atomic_t	g_interrupted = 0;
+static int	return_free(char *input, bool *run, int flag)
+{
+	free(input);
+	*run = false;
+	if (flag == 1)
+	{
+		g_interrupted = 0;
+		return (-130);
+	}
+	else if (flag == 2)
+	{
+		write(2, "\n", 1);
+		return (-1);
+	}
+	else if (flag == 3)
+		return (RETURN_SUCCESS);
+	return (RETURN_FAILURE);
+}
 
 static int	readline_loop(int fd, char *delimiter)
 {
-	char *input;
+	char	*input;
+	bool	run;
 
-	while (1)
+	run = true;
+	while (run)
 	{
 		input = readline("> ");
 		if (g_interrupted)
-		{
-			g_interrupted = 0;
-			free(input);
-			return (-130);
-		}
+			return (return_free(input, &run, 1));
 		if (!input)
-		{
-			write(2, "\n", 1);
-			return (-1);
-		}
+			return (return_free(input, &run, 2));
 		if (ft_strcmp(input, delimiter) == 0)
-		{
-			free(input);
-			return (RETURN_SUCCESS);
-		}
+			return (return_free(input, &run, 3));
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
 		free(input);
 	}
+	return (RETURN_SUCCESS);
 }
 
 int	get_available_heredoc_filename(char *buffer, size_t size)
@@ -91,14 +103,13 @@ int	get_available_heredoc_filename(char *buffer, size_t size)
 // to remove .heredoc.tmp from the directory then we return the FD that
 // should be used in dup to get the content as the read content!
 
-int readline_heredoc(int fd, char *delimiter)
+int	readline_heredoc(int fd, char *delimiter)
 {
 	struct sigaction	sa_new;
 	struct sigaction	sa_old;
 	int					return_value;
 
 	g_interrupted = 0;
-
 	sa_new.sa_handler = sig_handler;
 	sigemptyset(&sa_new.sa_mask);
 	sa_new.sa_flags = 0;
@@ -106,10 +117,8 @@ int readline_heredoc(int fd, char *delimiter)
 	return_value = readline_loop(fd, delimiter);
 	sigaction(SIGINT, &sa_old, NULL);
 	set_signals();
-
 	return (return_value);
 }
-
 
 // I create .heredoc.tmp with open and associate its fd into fd, I secure it
 // we go to readline_heredoc that should return us 0 if everything went well

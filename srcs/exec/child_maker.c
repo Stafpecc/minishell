@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_maker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/03 09:50:19 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/14 15:08:02 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		}
 		pid = wait(&status);
 	}
-	if(close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
-		return(MALLOC_ERROR);
+	if (close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
+		return (MALLOC_ERROR);
 	return (EXIT_SUCCESS);
 }
 // is previous pipe exist if yes is it not the last cmd?
@@ -117,16 +117,16 @@ static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 			return (EXIT_FAILURE);
 		utils->previous_pipes = NONE;
 	}
-	if (i < utils->num_nodes - 1) 
+	if (i < utils->num_nodes - 1)
 	{
-	utils->previous_pipes = pipe_fd[0];
-	pipe_fd[0] = NONE;
+		utils->previous_pipes = pipe_fd[0];
+		pipe_fd[0] = NONE;
 	}
-	else if (pipe_fd[0] != NONE) 
+	else if (pipe_fd[0] != NONE)
 	{
-        close(pipe_fd[0]);
-        pipe_fd[0] = NONE;
-    }
+		close(pipe_fd[0]);
+		pipe_fd[0] = NONE;
+	}
 	return (EXIT_SUCCESS);
 }
 

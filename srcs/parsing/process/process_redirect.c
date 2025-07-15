@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/12 16:39:00 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:10:48 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include "../../../libft/includes/libft.h"
 
 /*
-Fonction qui :
-- avance au token suivant après une redirection d’entrée (<) ;
-- vérifie que ce token est un mot valide, sinon affiche une erreur de syntaxe ;
-- alloue ou utilise le tableau redirect_in pour stocker l’argument de la
-	redirection à la position statique location_of_the_table ;
-- copie l’argument, traite les quotes, ajoute l’argument à cmd_parts, marque
-	le dernier argument comme final ;
-- avance le token et incrémente location_of_the_table ;
-- retourne RETURN_SUCCESS ou libère et retourne une erreur en cas d’échec.
+Function that:
+- moves to the next token after an input redirection (<);
+- checks that the token is a valid word, otherwise displays a syntax error;
+- allocates or uses the redirect_in array to store the redirection argument
+  at the static position location_of_the_table;
+- copies the argument, processes quotes, adds the argument to cmd_parts,
+  and marks the last argument as final;
+- advances the token and increments location_of_the_table;
+- returns RETURN_SUCCESS or frees memory and returns an error in case of failure.
 */
 int	process_redirect_in(t_token **tokens, t_command *curr,
 	t_command *head, t_utils *utils)
@@ -39,15 +39,15 @@ int	process_redirect_in(t_token **tokens, t_command *curr,
 }
 
 /*
-Fonction qui :
-- avance au token suivant après une redirection de sortie (>) ;
-- vérifie la validité du token, affiche une erreur si nécessaire ;
-- alloue ou utilise le tableau redirect_out avec un index statique
-	location_of_the_table pour stocker l’argument ;
-- copie l’argument, traite les quotes, ajoute à cmd_parts, marque le
-	dernier argument comme final ;
-- incrémente location_of_the_table et retourne RETURN_SUCCESS ou erreur
-	en cas de problème.
+Function that:
+- moves to the next token after an output redirection (>);
+- checks the validity of the token, displays an error if needed;
+- allocates or uses the redirect_out array with a static index
+  location_of_the_table to store the argument;
+- copies the argument, processes quotes, adds it to cmd_parts, and marks the
+  last argument as final;
+- increments location_of_the_table and returns RETURN_SUCCESS or an error
+  if a problem occurs.
 */
 int	process_redirect_out(t_token **tokens, t_command *curr,
 	t_command *head, t_utils *utils)
@@ -63,14 +63,13 @@ int	process_redirect_out(t_token **tokens, t_command *curr,
 }
 
 /*
-Fonction qui :
-- avance au token suivant après une redirection append (>>) ;
-- vérifie que le token suivant est valide, sinon affiche une erreur ;
-- alloue append_redirections si besoin, copie l’argument et traite
-	les quotes ;
-- ajoute l’argument à cmd_parts, marque le dernier argument comme final ;
-- avance le token et retourne RETURN_SUCCESS ou une erreur si un problème
-	survient.
+Function that:
+- moves to the next token after an append redirection (>>);
+- checks that the following token is valid, otherwise displays an error;
+- allocates append_redirections if needed, copies the argument, and processes
+  any quotes;
+- adds the argument to cmd_parts, marks the last argument as final;
+- advances the token and returns RETURN_SUCCESS or an error if a problem occurs.
 */
 int	process_append_redirect(t_token **tokens, t_command *curr,
 	t_command *head, t_utils *utils)
@@ -86,18 +85,15 @@ int	process_append_redirect(t_token **tokens, t_command *curr,
 }
 
 /*
-Fonction qui :
-- avance dans la liste de tokens pour traiter un heredoc après la redirection
-	<< ;
-- vérifie que le token suivant est valide (mot attendu) et gère les erreurs
-	de syntaxe ;
-- alloue et initialise la structure heredoc dans la commande courante avec
-	la valeur du token ;
-- traite les éventuelles quotes dans le token et ajoute l’argument à
-	la commande ;
-- marque le dernier argument comme finalisé et avance le token courant ;
-- retourne RETURN_SUCCESS si tout s’est bien passé, sinon libère la mémoire
-	et retourne une erreur.
+Function that:
+- advances through the token list to handle a heredoc after the << redirection;
+- checks that the next token is valid (expected word) and manages syntax errors;
+- allocates and initializes the heredoc structure in the current command with
+the token value;
+- processes any quotes in the token and adds the argument to the command;
+- marks the last argument as finalized and advances the current token;
+- returns RETURN_SUCCESS if everything went well, otherwise frees memory and
+returns an error.
 */
 int	process_heredoc(t_token **tokens, t_command *curr,
 	t_command *head, t_utils *utils)
