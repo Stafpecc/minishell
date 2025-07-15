@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 15:08:02 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:49:26 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,15 +130,23 @@ static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 	return (EXIT_SUCCESS);
 }
 
+#include <stdio.h>
+
 // everything related to the creation of the right childs
 // is done here thanks to a loop that wont stop
 // until we checked all nodes bcs one node
 // mean one cmd
 int	child_maker(t_command_exec *node, t_utils *utils, int i)
 {
-	int		pipe_fd[2];
-	pid_t	child;
+	int				pipe_fd[2];
+	pid_t			child;
+	t_command_exec	*tmp;
+	t_command_exec	*head;
+	int				j;
 
+	if (!node || !utils)
+		return (EXIT_FAILURE);
+	head = node;
 	utils->previous_pipes = NONE;
 	if (pipe(pipe_fd) == -1)
 		return (EXIT_FAILURE);
@@ -151,8 +159,26 @@ int	child_maker(t_command_exec *node, t_utils *utils, int i)
 			return (EXIT_FAILURE);
 		if (setup_next_child(utils, pipe_fd, i))
 			return (EXIT_FAILURE);
+
 		node = node->next;
 		i++;
+	}
+	tmp = head;
+	while (tmp)
+	{
+		ft_printfd("TEST\n");
+		j = 0;
+		if (tmp->redirect_out)
+		{
+			ft_printfd("TEST2\n");
+			while (tmp->redirect_out[j])
+			{
+				if (tmp->redirect_out[j]->heredoc)
+					close(tmp->redirect_out[j]->fd);
+				j++;
+			}
+		}
+		tmp = tmp->next;
 	}
 	return (wait_for_children_and_cleanup(utils, 0, pipe_fd, child));
 }
