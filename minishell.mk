@@ -69,6 +69,7 @@ override EXECSRC := \
 	child_dup \
 	child_execute \
 	child_maker \
+	child_maker_helper \
 	child_utils \
 	child \
 	exec_utils\

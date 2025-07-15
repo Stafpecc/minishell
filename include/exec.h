@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:34:52 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 14:35:51 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:00:45 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,18 @@ int		print_exit(long long code, char *arg, bool too_many_arguments,
 
 //exit_utils.c
 int		is_arg_digit_and_overflow(char *arg, t_utils *utils);
+
+// child_maker.c
+int		wait_for_children_and_cleanup(t_utils *utils, int status,
+			int *pipe_fd, pid_t child);
+int		setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i);
+pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
+			int *pipe_fd);
+int		setup_next_child(t_utils *utils, int *pipe_fd, int i);
+
+//child_maker_helper.c
+int		initialize_child_maker(t_command_exec *node, t_utils *utils, int *pipe_fd);
+int		fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd, int i);
+void	close_heredoc_fds(t_command_exec *head);
 
 #endif

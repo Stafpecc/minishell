@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/15 14:49:26 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:01:16 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // to hold the last return value of the last child
 // then return 0 on success
 
-static int	wait_for_children_and_cleanup(t_utils *utils, int status,
+int	wait_for_children_and_cleanup(t_utils *utils, int status,
 		int *pipe_fd, pid_t child)
 {
 	int	pid;
@@ -56,7 +56,7 @@ static int	wait_for_children_and_cleanup(t_utils *utils, int status,
 // IF BETTER WAY TO HANDLE THAT CASE)
 // then return 0 if successful run
 
-static int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
+int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 {
 	if (utils->previous_pipes != NONE && i < utils->num_nodes - 1)
 	{
@@ -75,7 +75,7 @@ static int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 // child_init_pipes_dup, if failed
 // exit_failure else parent get out with return 0
 
-static pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
+pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 		int *pipe_fd)
 {
 	pid_t	child;
@@ -103,7 +103,7 @@ static pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 // then give to previous pipe the value of the old READ end
 // because the old READ become the new WRITE to complete the pipe
 
-static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
+int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 {
 	if (i < utils->num_nodes - 1 && pipe_fd[1] != NONE)
 	{
@@ -130,8 +130,6 @@ static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 	return (EXIT_SUCCESS);
 }
 
-#include <stdio.h>
-
 // everything related to the creation of the right childs
 // is done here thanks to a loop that wont stop
 // until we checked all nodes bcs one node
@@ -139,46 +137,13 @@ static int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 int	child_maker(t_command_exec *node, t_utils *utils, int i)
 {
 	int				pipe_fd[2];
-	pid_t			child;
-	t_command_exec	*tmp;
-	t_command_exec	*head;
-	int				j;
+	pid_t			child = -1;
+	t_command_exec	*head = node;
 
-	if (!node || !utils)
+	if (initialize_child_maker(node, utils, pipe_fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	head = node;
-	utils->previous_pipes = NONE;
-	if (pipe(pipe_fd) == -1)
+	if (fork_all_children(node, utils, pipe_fd, i) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	while (node)
-	{
-		if (setup_coming_child_pipes(utils, pipe_fd, i))
-			return (EXIT_FAILURE);
-		child = child_secure_fork(node, utils, pipe_fd);
-		if (child == -1)
-			return (EXIT_FAILURE);
-		if (setup_next_child(utils, pipe_fd, i))
-			return (EXIT_FAILURE);
-
-		node = node->next;
-		i++;
-	}
-	tmp = head;
-	while (tmp)
-	{
-		ft_printfd("TEST\n");
-		j = 0;
-		if (tmp->redirect_out)
-		{
-			ft_printfd("TEST2\n");
-			while (tmp->redirect_out[j])
-			{
-				if (tmp->redirect_out[j]->heredoc)
-					close(tmp->redirect_out[j]->fd);
-				j++;
-			}
-		}
-		tmp = tmp->next;
-	}
+	close_heredoc_fds(head);
 	return (wait_for_children_and_cleanup(utils, 0, pipe_fd, child));
 }
