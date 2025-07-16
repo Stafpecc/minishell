@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:35:24 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 10:23:16 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 15:16:56 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	option_checker(char **cmd_parts)
 	{
 		if (join_err_msg_and_write("minishell: pwd: ", cmd_parts[1],
 				": invalid option\n"))
-			;
-		return (MALLOC_ERROR);
+			return (MALLOC_ERROR);
 		return (2);
 	}
 	return (0);
