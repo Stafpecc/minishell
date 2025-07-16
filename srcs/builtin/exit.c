@@ -6,16 +6,12 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:39:12 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/16 08:33:13 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 10:28:28 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
-
-
-
-
 
 // print exit like bash does then print the right message if needed
 // then we exit with the right code!
@@ -23,19 +19,21 @@
 int	print_exit(long long code, char *arg, bool too_many_arguments,
 		t_utils *utils)
 {
-	if(utils->num_nodes == 1)
+	if (utils->num_nodes == 1)
 		ft_printfd("exit\n");
 	if (code == NOT_NUM_ARG)
 	{
 		utils->run = 0;
-		if(join_err_msg_and_write("minishell: exit: ", arg, " numeric argument required\n"))
-			return(MALLOC_ERROR);
+		if (join_err_msg_and_write("minishell: exit: ", arg,
+				" numeric argument required\n"))
+			return (MALLOC_ERROR);
 		return (NOT_NUM_ARG);
 	}
 	if (too_many_arguments)
 	{
-		if(join_err_msg_and_write("minishell:", "exit", " too many arguments\n"))
-			return(MALLOC_ERROR);
+		if (join_err_msg_and_write("minishell:", "exit",
+				" too many arguments\n"))
+			return (MALLOC_ERROR);
 		return (RETURN_FAILURE);
 	}
 	utils->run = 0;

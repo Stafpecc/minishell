@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 15:00:45 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 10:28:12 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	equal_sign_case(t_utils *utils, char *cmd, char *variable_name,
 	return (RETURN_SUCCESS);
 }
 
-//if no args are provided then we print on the stdout
-//the env in the way that bash does
-//including the variables that doesnt have any values yet
+// if no args are provided then we print on the stdout
+// the env in the way that bash does
+// including the variables that doesnt have any values yet
 static int	no_args_case(t_utils *utils, size_t i, size_t j, bool empty_value)
 {
 	while (utils->env[i])
@@ -104,7 +104,7 @@ static int	no_equal_sign_case(t_utils *utils, char *cmd,
 // the said sign or not (because not same effect expected)
 // once we get out of the while loop we return_success
 // TODO? if just export do like bash or follow manual? aka ask for arguments
-//chiffre lettre underscore
+// chiffre lettre underscore
 static int	error_checker(t_command_exec *node, size_t i)
 {
 	size_t	j;
@@ -133,8 +133,9 @@ int	export_builtin(t_command_exec *node, t_utils *utils, size_t i,
 	{
 		if (error_checker(node, i))
 		{
-			ft_printfd("minishell: export: '%s': not a valid identifier\n",
-				node->cmd_parts[i]);
+			if (join_err_msg_and_write("minishell: export: '",
+					node->cmd_parts[i], "': not a valid identifier\n"))
+				return (MALLOC_ERROR);
 			return_value = RETURN_FAILURE;
 		}
 		else if (ft_strchr(node->cmd_parts[i], '='))

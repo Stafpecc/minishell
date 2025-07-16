@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 16:05:46 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/06/24 11:31:20 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 10:30:36 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ int	return_errors(int return_value, int message, t_command_exec *node)
 {
 	if (message == ERR_CD_CHDIR)
 	{
-		ft_printfd("minishell: cd: %s: ", node->cmd_parts[1]);
-		perror("");
+		if (join_err_msg_and_write("minishell: cd: ", node->cmd_parts[1],
+				": No such file or directory\n"))
+			return (MALLOC_ERROR);
 	}
 	else if (message == ERR_CD_GETCWD)
-		perror("getcwd() error");
+	{
+		if (join_err_msg_and_write("error retrieving current directory: ",
+				"getcwd: cannot access parent directories: ",
+				"No such file or directory\n"))
+			return (MALLOC_ERROR);
+	}
 	else if (message == ERR_CD_MALLOC)
-		perror("Malloc error");
+		write(2, "bash: cd: cannot allocate memory\n", 34);
 	return (return_value);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:35:24 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 15:02:34 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 10:23:16 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static int	option_checker(char **cmd_parts)
 {
 	if (!ft_strncmp(cmd_parts[1], "-", 1) && cmd_parts[1][1])
 	{
-		ft_printfd("minishell: pwd: %c%c: invalid option\n", cmd_parts[1][0],
-			cmd_parts[1][1]);
+		if (join_err_msg_and_write("minishell: pwd: ", cmd_parts[1],
+				": invalid option\n"))
+			;
+		return (MALLOC_ERROR);
 		return (2);
 	}
 	return (0);
@@ -45,9 +47,10 @@ int	pwd_builtin(t_command_exec *node)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		ft_printfd("minishell: pwd: error retrieving current directory");
-		ft_printfd(": getcwd: cannot access parent directories:");
-		ft_printfd(" No such file or directory\n");
+		if (join_err_msg_and_write("minishell: pwd:",
+				" errror retrieving current directory: getcwd: cannot access ",
+				"parent directories: No such file or directory\n"))
+			return (MALLOC_ERROR);
 		return (RETURN_FAILURE);
 	}
 	ft_printf("%s\n", cwd);
