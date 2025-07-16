@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:34:52 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/16 15:51:44 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:24:41 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		expand_env(t_utils *utils);
 int		condense_env(t_utils *utils);
 
 // exec.c
-int		child_maker(t_command_exec *node, t_utils *utils, int i);
+int		child_maker(t_command_exec *node, t_utils *utils);
 int		exec(t_command_exec *node, t_utils *utils);
 
 // here_doc.c
@@ -99,13 +99,14 @@ int		wait_for_children_and_cleanup(t_utils *utils, int status, int *pipe_fd,
 			pid_t child);
 int		setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i);
 pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
-		int *pipe_fd, pid_t *child);
+			int *pipe_fd, pid_t *child);
 int		setup_next_child(t_utils *utils, int *pipe_fd, int i);
 
 // child_maker_helper.c
 int		initialize_child_maker(t_command_exec *node, t_utils *utils,
 			int *pipe_fd);
-int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd, pid_t *child);
+int		fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd,
+			pid_t *child);
 void	close_heredoc_fds(t_command_exec *head);
 
 #endif

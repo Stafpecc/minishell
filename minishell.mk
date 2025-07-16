@@ -72,6 +72,7 @@ override EXECSRC := \
 	child_maker \
 	child_maker_helper \
 	child_utils \
+	child_wait \
 	child \
 	exec_utils\
 	exec \

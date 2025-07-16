@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_dup_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:44:59 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 14:23:59 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:39:37 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ int	redirect_read_browser(t_redirect **redirect, int i)
 	while (redirect[i])
 	{
 		if (redirect[i]->heredoc == FALSE)
-		{
 			redirect[i]->fd = open(redirect[i]->arg, O_RDONLY);
-		}
-			
 		if (redirect[i]->fd < 0)
 			return (RETURN_FAILURE);
 		if (dup2(redirect[i]->fd, STDIN_FILENO) < 0)
