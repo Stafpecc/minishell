@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:34:52 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/15 15:10:44 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 08:34:53 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int		redirect_read_browser(t_redirect **redirect, int i);
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd,
 			t_utils *utils);
 void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils);
+
+//child_err_msg.c
+bool join_err_msg_and_write(char *part_one_msg,  char *part_two_msg, char *part_three_msg);
 
 //child_execute.c
 void	path_finder_fail(t_command_exec *node, t_utils *utils,

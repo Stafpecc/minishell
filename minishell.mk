@@ -67,6 +67,7 @@ SRC += $(addprefix $(EXECDIR), $(addsuffix .c, $(EXECSRC)))
 override EXECSRC := \
 	child_dup_utils \
 	child_dup \
+	child_err_msg \
 	child_execute \
 	child_maker \
 	child_maker_helper \
