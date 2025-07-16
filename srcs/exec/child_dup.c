@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 14:37:32 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:14:23 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	exit(EXIT_FAILURE);
 }
 
-// void test_close(t_redirect **redirect)
-// {
-// 	int i;
-	
-// 	i = 0;
-// 	close(redirect[i]->fd);
-// }
-
 // It does redirect to the functions that
 // would dup2 the right fdsexec went well
 // it will close our fds then we go to the
@@ -80,8 +72,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
-	// if(utils->previous_pipes != NONE)
-	// 	test_close(node->redirect_in);
+	//test_close(node->redirect_in);
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
 		path_finder_fail(node, utils, 0, RETURN_FAILURE);
 	

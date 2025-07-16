@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:00:06 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:17:35 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,23 @@ int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 	}
 	return (EXIT_SUCCESS);
 }
+
+
+void test_close(t_redirect **redirect)
+{
+	int i;
+	
+	i = 0;
+	if(redirect)
+	{
+		while(redirect[i] && redirect[i]->fd)
+		{
+			if (redirect[i]->heredoc)
+				close(redirect[i]->fd);
+			i++;
+		}
+	}
+}
 // we fork the child, then child go to
 // child_init_pipes_dup, if failed
 // exit_failure else parent get out with return 0
@@ -95,7 +112,7 @@ pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 	}
 	else if (*child == -1)
 		return (-1);
-	
+	test_close(node->redirect_in);
 	return (*child);
 }
 
