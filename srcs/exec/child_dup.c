@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_dup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:14:23 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:39:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if (node->redirect_out && write_dup(node->redirect_out, pipe_fd))
 	{
-		
-		if(pipe_fd[0] != NONE)
+		if (pipe_fd[0] != NONE)
 			close(pipe_fd[0]);
-		if(pipe_fd[1] != NONE)
+		if (pipe_fd[1] != NONE)
 			close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
 	if (node->redirect_in && read_dup(node->redirect_in, utils->previous_pipes))
 	{
 		ft_printfd("ICI\n");
-		if(pipe_fd[0] != NONE) //TODO error msg
+		if (pipe_fd[0] != NONE)
 			close(pipe_fd[0]);
-		if(pipe_fd[1] != NONE)
+		if (pipe_fd[1] != NONE)
 			close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
@@ -72,9 +71,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
-	//test_close(node->redirect_in);
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
 		path_finder_fail(node, utils, 0, RETURN_FAILURE);
-	
 	child_redirect(node, utils);
 }

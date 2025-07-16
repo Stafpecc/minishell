@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_maker_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:56:13 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/16 17:01:52 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:40:27 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	initialize_child_maker(t_command_exec *node, t_utils *utils, int *pipe_fd)
 	return (EXIT_SUCCESS);
 }
 
-int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd, pid_t *child)
+int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd,
+	pid_t *child)
 {
 	int	i;
-	
+
 	i = 0;
 	while (node)
 	{
 		if (setup_coming_child_pipes(utils, pipe_fd, i))
 			return (EXIT_FAILURE);
 		child_secure_fork(node, utils, pipe_fd, child);
-		
 		if (*child == -1)
 			return (EXIT_FAILURE);
 		if (setup_next_child(utils, pipe_fd, i))

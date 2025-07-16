@@ -3,55 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   child_maker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:17:35 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:44:41 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 #include <stdlib.h>
 
-// once the childs are created the parent
-// is gonna close everything that need to be closed here
-// then it will wait at waitpid and also update last_return
-// to hold the last return value of the last child
-// then return 0 on success
-
-int	wait_for_children_and_cleanup(t_utils *utils, int status,
-		int *pipe_fd, pid_t child)
-{
-	int	pid;
-	int	sig;
-
-	pid = wait(&status);
-	while (pid > 0)
-	{
-		ft_printfd("je passe ici?\n");
-		printf("child = %d\n", child);
-		printf("pid = %d\n", pid);
-		if (pid == child)
-		{
-			if (WIFEXITED(status))
-				utils->last_return = (WEXITSTATUS(status));
-			else if (WIFSIGNALED(status))
-			{
-				sig = WTERMSIG(status);
-				utils->last_return = (128 + sig);
-				if (sig == SIGQUIT)
-					write(STDERR_FILENO, "Quit (core dumped)\n", 19);
-				if (sig == SIGINT)
-					write(STDERR_FILENO, "\n", 1);
-			}
-		}
-		pid = wait(&status);
-	}
-	if (close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
-		return (MALLOC_ERROR);
-	ft_printfd("last_return = %d\n", utils->last_return);
-	return (EXIT_SUCCESS);
-}
 // is previous pipe exist if yes is it not the last cmd?
 // if both yes we do a new pipe and secure it
 // else if we are at the very last cmd we close
@@ -76,15 +37,14 @@ int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 	return (EXIT_SUCCESS);
 }
 
-
-void test_close(t_redirect **redirect)
+static void	close_heredoc(t_redirect **redirect)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	if(redirect)
+	if (redirect)
 	{
-		while(redirect[i] && redirect[i]->fd)
+		while (redirect[i] && redirect[i]->fd)
 		{
 			if (redirect[i]->heredoc)
 				close(redirect[i]->fd);
@@ -92,15 +52,13 @@ void test_close(t_redirect **redirect)
 		}
 	}
 }
+
 // we fork the child, then child go to
 // child_init_pipes_dup, if failed
 // exit_failure else parent get out with return 0
-
 pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 		int *pipe_fd, pid_t *child)
 {
-	//pid_t	child;
-
 	*child = fork();
 	if (*child == 0)
 	{
@@ -112,7 +70,7 @@ pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 	}
 	else if (*child == -1)
 		return (-1);
-	test_close(node->redirect_in);
+	close_heredoc(node->redirect_in);
 	return (*child);
 }
 
@@ -156,13 +114,12 @@ int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 // is done here thanks to a loop that wont stop
 // until we checked all nodes bcs one node
 // mean one cmd
-int	child_maker(t_command_exec *node, t_utils *utils, int i)
+int	child_maker(t_command_exec *node, t_utils *utils)
 {
 	int				pipe_fd[2];
 	pid_t			child;
 	t_command_exec	*head;
 
-	i = 0; //TORM
 	child = -1;
 	head = node;
 	if (initialize_child_maker(node, utils, pipe_fd) == EXIT_FAILURE)

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:34 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/12 16:13:23 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 17:23:13 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	exec(t_command_exec *node, t_utils *utils)
 	}
 	else
 	{
-		return (child_maker(node, utils, 0));
+		return (child_maker(node, utils));
 	}
 	return (RETURN_SUCCESS);
 }
