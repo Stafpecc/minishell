@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_maker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/15 15:10:15 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:05:26 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	wait_for_children_and_cleanup(t_utils *utils, int status,
 	{
 		if (pid == child)
 		{
+			ft_printfd("je passe ici?\n");
 			if (WIFEXITED(status))
 				utils->last_return = (WEXITSTATUS(status));
 			else if (WIFSIGNALED(status))
@@ -46,6 +47,7 @@ int	wait_for_children_and_cleanup(t_utils *utils, int status,
 	}
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
 		return (MALLOC_ERROR);
+	ft_printfd("last_return = %d\n", utils->last_return);
 	return (EXIT_SUCCESS);
 }
 // is previous pipe exist if yes is it not the last cmd?
