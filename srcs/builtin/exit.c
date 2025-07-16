@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:39:12 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/03 18:35:09 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 07:00:33 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 int	print_exit(long long code, char *arg, bool too_many_arguments,
 		t_utils *utils)
 {
-	ft_printfd("exit\n");
+	if(utils->num_nodes == 1)
+		ft_printfd("exit\n");
 	if (code == NOT_NUM_ARG)
 	{
 		utils->run = 0;
