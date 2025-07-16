@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:39:12 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/16 10:28:28 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 10:36:17 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	print_exit(long long code, char *arg, bool too_many_arguments,
 	}
 	if (too_many_arguments)
 	{
-		if (join_err_msg_and_write("minishell:", "exit",
-				" too many arguments\n"))
+		if (join_err_msg_and_write("minishell:", " exit: ",
+				"too many arguments\n"))
 			return (MALLOC_ERROR);
 		return (RETURN_FAILURE);
 	}
