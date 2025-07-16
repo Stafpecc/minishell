@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 18:43:19 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 16:32:55 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	return_free(char *input, bool *run, int flag)
 	if (flag == 1)
 	{
 		g_interrupted = 0;
-		return (-130);
+		return (130);
 	}
 	else if (flag == 2)
 	{
@@ -140,7 +140,7 @@ int	here_doc(char *delimiter)
 	if (fd < 0)
 		return (-1);
 	return_value = readline_heredoc(fd, delimiter);
-	if (return_value == -1 || return_value == -130)
+	if (return_value == -1 || return_value == 130)
 	{
 		unlink(tmpfile);
 		close(fd);
