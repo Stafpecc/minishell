@@ -3,52 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_launch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/16 14:55:24 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 15:18:30 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
-
-static int	check_redirect_in(char *filename, bool is_heredoc)
-{
-	if (is_heredoc)
-		return (RETURN_SUCCESS);
-	if (access(filename, F_OK) == -1) //TODO bug here, check redirection page at Notion.so
-	{
-		ft_printfd("minisell: %s: No such file or directory\n", filename); 
-		return (RETURN_FAILURE);
-	}
-	if (access(filename, R_OK) == -1)
-	{
-		ft_printfd("minishell: %s: Permission denied\n", filename);
-		return (RETURN_FAILURE);
-	}
-	return (RETURN_SUCCESS);
-}
-
-static int	handle_redirect_in(t_command *curr, t_utils *utils)
-{
-	int	i;
-
-	if (!curr->redirect_in)
-		return (RETURN_SUCCESS);
-	i = 0;
-	while (curr->redirect_in[i])
-	{
-		if (check_redirect_in(curr->redirect_in[i]->arg,
-				curr->redirect_in[i]->heredoc) == RETURN_FAILURE)
-		{
-			utils->last_return = 1;
-			return (RETURN_FAILURE);
-		}
-		i++;
-	}
-	return (RETURN_SUCCESS);
-}
 
 static int	validate_command(t_command *prev, t_command *curr, t_utils *utils)
 {
@@ -69,8 +32,6 @@ static int	validate_command(t_command *prev, t_command *curr, t_utils *utils)
 
 static int	parse_cmd_helper(t_command *prev, t_command *curr, t_utils *utils)
 {
-	if (handle_redirect_in(curr, utils) == RETURN_FAILURE)
-		return (RETURN_FAILURE);
 	return (validate_command(prev, curr, utils));
 }
 
