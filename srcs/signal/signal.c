@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/15 15:18:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 16:06:48 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ static void	ctrl_backslash(void)
 void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
-	{
-		ft_printfd("^C");
 		ctrl_c();
-	}
 	if (sig == SIGQUIT)
 		ctrl_backslash();
 }
@@ -50,5 +47,4 @@ void	set_signals(void)
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
-	rl_catch_signals = 0;
 }
