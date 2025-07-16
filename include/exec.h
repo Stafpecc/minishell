@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:34:52 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/16 10:26:19 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 15:51:44 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int		is_arg_digit_and_overflow(char *arg, t_utils *utils);
 int		wait_for_children_and_cleanup(t_utils *utils, int status, int *pipe_fd,
 			pid_t child);
 int		setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i);
-pid_t	child_secure_fork(t_command_exec *node, t_utils *utils, int *pipe_fd);
+pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
+		int *pipe_fd, pid_t *child);
 int		setup_next_child(t_utils *utils, int *pipe_fd, int i);
 
 // child_maker_helper.c
 int		initialize_child_maker(t_command_exec *node, t_utils *utils,
 			int *pipe_fd);
-int		fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd,
-			int i);
+int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd, pid_t *child);
 void	close_heredoc_fds(t_command_exec *head);
 
 #endif

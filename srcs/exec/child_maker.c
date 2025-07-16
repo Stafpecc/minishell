@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 15:05:26 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 17:00:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	wait_for_children_and_cleanup(t_utils *utils, int status,
 	pid = wait(&status);
 	while (pid > 0)
 	{
+		ft_printfd("je passe ici?\n");
+		printf("child = %d\n", child);
+		printf("pid = %d\n", pid);
 		if (pid == child)
 		{
-			ft_printfd("je passe ici?\n");
 			if (WIFEXITED(status))
 				utils->last_return = (WEXITSTATUS(status));
 			else if (WIFSIGNALED(status))
@@ -78,12 +80,12 @@ int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
 // exit_failure else parent get out with return 0
 
 pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
-		int *pipe_fd)
+		int *pipe_fd, pid_t *child)
 {
-	pid_t	child;
+	//pid_t	child;
 
-	child = fork();
-	if (child == 0)
+	*child = fork();
+	if (*child == 0)
 	{
 		close(utils->old_stdin);
 		close(utils->old_stdout);
@@ -91,9 +93,10 @@ pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 		signal(SIGQUIT, SIG_DFL);
 		child_init_pipes_dup(node, pipe_fd, utils);
 	}
-	else if (child == -1)
+	else if (*child == -1)
 		return (-1);
-	return (child);
+	
+	return (*child);
 }
 
 // if we are not dealing with the last cmd
@@ -142,11 +145,12 @@ int	child_maker(t_command_exec *node, t_utils *utils, int i)
 	pid_t			child;
 	t_command_exec	*head;
 
+	i = 0; //TORM
 	child = -1;
 	head = node;
 	if (initialize_child_maker(node, utils, pipe_fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (fork_all_children(node, utils, pipe_fd, i) == EXIT_FAILURE)
+	if (fork_all_children(node, utils, pipe_fd, &child) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	close_heredoc_fds(head);
 	return (wait_for_children_and_cleanup(utils, 0, pipe_fd, child));
