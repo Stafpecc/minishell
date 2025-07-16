@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_launch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 18:11:25 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 14:55:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	check_redirect_in(char *filename, bool is_heredoc)
 {
 	if (is_heredoc)
 		return (RETURN_SUCCESS);
-	if (access(filename, F_OK) == -1)
+	if (access(filename, F_OK) == -1) //TODO bug here, check redirection page at Notion.so
 	{
-		ft_printfd("minisell: %s: No such file or directory\n", filename);
+		ft_printfd("minisell: %s: No such file or directory\n", filename); 
 		return (RETURN_FAILURE);
 	}
 	if (access(filename, R_OK) == -1)

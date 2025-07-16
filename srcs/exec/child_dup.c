@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_dup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 15:04:07 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/16 14:37:32 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,22 @@
 // TORM read up same as child_init
 void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-	if (node->redirect_in && read_dup(node->redirect_in, utils->previous_pipes))
-	{
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		exit(EXIT_FAILURE);
-	}
 	if (node->redirect_out && write_dup(node->redirect_out, pipe_fd))
 	{
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
+		
+		if(pipe_fd[0] != NONE)
+			close(pipe_fd[0]);
+		if(pipe_fd[1] != NONE)
+			close(pipe_fd[1]);
+		exit(EXIT_FAILURE);
+	}
+	if (node->redirect_in && read_dup(node->redirect_in, utils->previous_pipes))
+	{
+		ft_printfd("ICI\n");
+		if(pipe_fd[0] != NONE) //TODO error msg
+			close(pipe_fd[0]);
+		if(pipe_fd[1] != NONE)
+			close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
 	if (pipe_fd[0] != NONE)
@@ -38,6 +44,14 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	child_redirect(node, utils);
 	exit(EXIT_FAILURE);
 }
+
+// void test_close(t_redirect **redirect)
+// {
+// 	int i;
+	
+// 	i = 0;
+// 	close(redirect[i]->fd);
+// }
 
 // It does redirect to the functions that
 // would dup2 the right fdsexec went well
@@ -66,7 +80,10 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
+	// if(utils->previous_pipes != NONE)
+	// 	test_close(node->redirect_in);
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
 		path_finder_fail(node, utils, 0, RETURN_FAILURE);
+	
 	child_redirect(node, utils);
 }
