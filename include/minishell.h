@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:19:49 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:20:08 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 
 # define RED "\033[0;31m"
 # define RESET "\033[0m"
+# define MAG "\e[0;35m"
+# define YEL "\e[0;33m"
+# define CYN "\e[0;36m"
 
 /******************************************************************************/
 /*                                MINISHELL                                   */
@@ -50,5 +53,13 @@ void		free_utils(t_utils *utils);
 /******************************************************************************/
 char		*read_input_with_quotes(t_utils *utils);
 char		quote_not_closed(const char *str);
+
+/******************************************************************************/
+/*                                ASCII                                       */
+/******************************************************************************/
+
+void ascii_minishell(char *line);
+void ascii_tarini(char *line);
+void ascii_ldevoude(char *line);
 
 #endif
