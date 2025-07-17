@@ -14,7 +14,7 @@
 # define LEXER_H
 
 # include <stdlib.h>
-# include <stdbool.h>
+//# include <stdbool.h>
 
 # include "return_error.h"
 

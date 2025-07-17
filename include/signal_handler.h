@@ -13,8 +13,8 @@
 #ifndef SIGNAL_HANDLER_H
 # define SIGNAL_HANDLER_H
 
-# include <signal.h>
-# include <unistd.h>
+//# include <signal.h>
+//# include <unistd.h>
 
 void	sig_handler(int sig);
 void	set_signals(void);

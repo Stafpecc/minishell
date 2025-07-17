@@ -14,21 +14,21 @@
 # define EXEC_H
 # define MALLOC_ERROR -42
 # define NONE -42
-# include "../libft/includes/libft.h"
+//# include "../libft/includes/libft.h"
 # include "builtin.h"
-# include "lexer.h"
-# include "minishell.h"
-# include "parsing.h"
-# include "return_error.h"
-# include "signal_handler.h"
+//# include "lexer.h"
+//# include "minishell.h"
+//# include "parsing.h"
+//# include "return_error.h"
+//# include "signal_handler.h"
 # include <errno.h>
 # include <fcntl.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/types.h>
+//# include <stdbool.h>
+//# include <stdlib.h>
+//# include <sys/stat.h>
+//# include <sys/types.h>
 # include <sys/wait.h>
-# include <unistd.h>
+//# include <unistd.h>
 
 # define MAX_HEREDOC_ATTEMPTS 100
 

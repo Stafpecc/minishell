@@ -12,12 +12,7 @@
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
-# include "../libft/includes/libft.h"
 # include "minishell.h"
-# include "lexer.h"
-# include "parsing.h"
-# include "signal_handler.h"
-# include "exec.h"
 
 # define NOT_NUM_ARG 2
 
