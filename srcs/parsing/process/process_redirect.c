@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 18:10:48 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 10:41:07 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,10 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 	process_quotes(*tokens, curr->redirect_in[i]);
 	fd = here_doc(curr->redirect_in[i]->arg);
 	utils->fd = fd;
-	if (fd < 0)
+	if (fd < 0 || fd == 130)
 	{
-		utils->last_return = fd * -1;
+		if (fd < 0)
+			utils->last_return = fd * -1;
 		return (RETURN_FAILURE);
 	}
 	curr->redirect_in[i]->fd = fd;
