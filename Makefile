@@ -72,3 +72,5 @@ fclean: clean
 re: fclean all
 
 FORCE:
+
+-include $(DEPS)
