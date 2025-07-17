@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:40:38 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:59:23 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ static bool	handle_null_input(char *input, t_utils *utils)
 	return (true);
 }
 
+static void	free_all(char *input, t_token *token)
+{
+	free(input);
+	free_tokens(token);
+}
+
 void	minishell_loop(t_utils *utils)
 {
 	char			*input;
@@ -63,7 +69,11 @@ void	minishell_loop(t_utils *utils)
 			continue ;
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
+		if (!command)
+		{
+			free_all(input, token);
+			continue ;
+		}
 		execute_or_cleanup(command, token, input, utils);
-		set_signals();
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:41:11 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:39:38 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:59:16 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 		exit(EXIT_FAILURE);
 	}
 	free_commands_exec(cmd);
+	set_signals();
 }

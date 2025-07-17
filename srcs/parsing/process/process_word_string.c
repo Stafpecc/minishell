@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_word_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:46:38 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:36:00 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:59:39 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_add_redirect.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:24:41 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:34:05 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:53:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
