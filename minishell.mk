@@ -98,6 +98,7 @@ override BUILTINSRC := \
 SRC += $(addprefix $(UTILSDIR), $(addsuffix .c, $(UTILSSRC)))
 
 override UTILSSRC := \
+	ascii_art \
 	check_error \
 	execute \
 	free \

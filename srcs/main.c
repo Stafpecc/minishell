@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:42:30 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:09:00 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 //#include "exec.h"
 //#include "parsing.h"
 //#include "../libft/includes/libft.h"
+
+static void ascii_art(void)
+{
+	char *line;
+
+	line = NULL;
+	ascii_minishell(line);
+	ascii_tarini(line);
+	ascii_ldevoude(line);
+}
 
 static int	gotnotnull(void)
 {
@@ -26,6 +36,7 @@ int	main(int ac, char **av, char **env)
 	int		last_return;
 
 	(void)av;
+	ascii_art();
 	if (check_error(ac) == RETURN_FAILURE)
 		return (RETURN_FAILURE);
 	rl_event_hook = gotnotnull;
