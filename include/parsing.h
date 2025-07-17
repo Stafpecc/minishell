@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/15 13:45:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:09:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
+//# include <stdbool.h>
 # include <signal.h>
 # include "lexer.h"
-# include <stdio.h>
+//# include <stdio.h>
 
 extern volatile sig_atomic_t	g_interrupted;
 

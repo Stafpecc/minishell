@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/01 16:37:48 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/17 13:12:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
+//# include <stdio.h>
 //# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h> 
@@ -43,7 +43,7 @@ t_utils		*init_utils_struct(char **envp);
 int			check_error(int ac);
 void		free_env(char **env);
 void		free_utils(t_utils *utils);
-void		exit_proprely(int count, ...);
+//void		exit_proprely(int count, ...);
 
 /******************************************************************************/
 /*                                QUOTES                                      */

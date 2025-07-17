@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 14:34:35 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:10:15 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char			*assign_variable_name(char *cmd, char *variable_name, size_t i,
 int				pwd_builtin(t_command_exec *node);
 
 //unset.c
-//static int env_len(char **env);
 int				unset_builtin(t_command_exec *node, t_utils *utils, size_t i,
 					size_t j);
 
