@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 15:36:11 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:37:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int ac, char **av, char **env)
 	rl_event_hook = gotnotnull;
 	set_signals();
 	utils = init_utils_struct(env);
+	if (!utils)
+		return (RETURN_FAILURE);
 	minishell_loop(utils);
 	last_return = utils->last_return;
 	free_utils(utils);

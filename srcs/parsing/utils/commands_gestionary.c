@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:34:35 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/22 16:14:07 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:46:05 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_command	*create_command(void)
 {
 	t_command	*cmd;
 
-	cmd = malloc(sizeof(t_command));
+	cmd = malloc(sizeof(t_command)); // <-- lui il casse
 	if (!cmd)
 		return (NULL);
 	cmd->cmd_parts = NULL;

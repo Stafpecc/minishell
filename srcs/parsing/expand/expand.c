@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/22 17:06:39 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:35:40 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static char	*append_env_var(char *result, char *input, int *i, char **env)
 	while (ft_isalnum(input[*i]) || input[*i] == '_')
 		(*i)++;
 	var_name = ft_strndup(&input[start], *i - start);
+	if (!var_name)
+		return (NULL);
 	value = get_env_value(env, var_name);
 	free(var_name);
 	tmp = strjoin_and_free(result, value);
@@ -87,6 +89,8 @@ char	*expand_variables(char *input, t_utils *utils)
 
 	i = 0;
 	result = ft_strdup("");
+	if (!result)
+		return (result);
 	result = expand_variables_utils(i, result, utils, input);
 	return (result);
 }

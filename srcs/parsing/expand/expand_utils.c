@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:08:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/22 17:01:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:43:40 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*strjoin_and_free(char *s1, char *s2)
 		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	joined = malloc(len1 + len2 + 1);
+	joined = malloc(len1 + len2 + 1); // <-- lui il casse
 	if (!joined)
 	{
 		free(s1);

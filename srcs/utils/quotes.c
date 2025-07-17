@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:46:11 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 14:46:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:39:33 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ static char	*read_until_quotes_closed(char *line, char quote)
 		if (!tmp)
 			return (handle_unexpected_eof(line, quote));
 		line = strjoin_free(line, "\n");
+		if (!line)
+			return (NULL);
 		line = strjoin_free(line, tmp);
+		if (!line)
+			return (NULL);
 		quote = quote_not_closed(line);
 	}
 	return (line);

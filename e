@@ -1,9 +1,0 @@
-config.mk
-e
-exec
-include
-libft
-Makefile
-minishell.mk
-readline.supp
-srcs

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:01:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 15:01:56 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:29:47 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 char	*assign_variable_name(char *cmd, char *variable_name, size_t i,
 		size_t j)
 {
-	while (cmd[i] != '=')
+	while (cmd[i] && cmd[i] != '=')
 		i++;
+	if (!cmd[i])
+		return (NULL);
 	variable_name = malloc(i + 1 * sizeof(char));
 	if (!variable_name)
 		return (NULL);

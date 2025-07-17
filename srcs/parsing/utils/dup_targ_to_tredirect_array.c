@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:37:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/22 16:11:03 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:47:32 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ t_redirect	**dup_targ_to_tredirect_array(t_arg **arr)
 	if (!arr)
 		return (NULL);
 	count = count_targ(arr);
-	new_arr = malloc(sizeof(t_redirect *) * (count + 1));
+	new_arr = malloc(sizeof(t_redirect *) * (count + 1)); // <-- lui il casse
 	if (!new_arr)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
-		new_arr[i] = malloc(sizeof(t_redirect));
+		new_arr[i] = malloc(sizeof(t_redirect)); // <-- lui il casse
 		if (!new_arr[i])
 			return (free_redirect(new_arr, i), NULL);
-		new_arr[i]->arg = ft_strdup(arr[i]->arg);
+		new_arr[i]->arg = ft_strdup(arr[i]->arg); // <-- lui il casse
 		if (!new_arr[i]->arg)
 			return (free_redirect(new_arr, i), NULL);
 		new_arr[i]->fd = arr[i]->fd;

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 05:51:33 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/15 21:18:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:47:16 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int	cmd_part_to_char(t_command *cmd, t_command_exec *new_node)
 	count = 0;
 	while (cmd->cmd_parts && cmd->cmd_parts[count])
 		count++;
-	new_node->cmd_parts = malloc(sizeof(char *) * (count + 1));
+	new_node->cmd_parts = malloc(sizeof(char *) * (count + 1)); // <-- lui il casse
 	if (!new_node->cmd_parts)
 		return (RETURN_FAILURE);
 	i = 0;
 	while (i < count)
 	{
-		new_node->cmd_parts[i] = ft_strdup(cmd->cmd_parts[i]->arg);
+		new_node->cmd_parts[i] = ft_strdup(cmd->cmd_parts[i]->arg); // <-- lui il casse
 		if (!new_node->cmd_parts[i])
 		{
 			while (--i >= 0)

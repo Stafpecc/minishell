@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 08:00:25 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:40:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	minishell_loop(t_utils *utils)
 	while (utils->run)
 	{
 		input = read_input_with_quotes(utils);
+		if (!input)
+			break ;
 		if (!handle_null_input(input, utils))
 			break ;
 		if (skip_empty_or_spaces(input))
@@ -60,9 +62,11 @@ void	minishell_loop(t_utils *utils)
 			add_history(input);
 		token = process_lexer(input, utils);
 		if (!token)
-			continue ;
+			break ;
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
+		if (!command)
+			break ;
 		execute_or_cleanup(command, token, input, utils);
 		set_signals();
 	}

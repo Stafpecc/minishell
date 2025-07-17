@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_word_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:46:38 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/15 12:47:04 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:45:43 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_arg	**extend_cmd_parts(t_arg **old_array, int old_size,
 	t_arg	**new_array;
 	int		j;
 
-	new_array = malloc(sizeof(t_arg *) * (old_size + 2));
+	new_array = malloc(sizeof(t_arg *) * (old_size + 2)); // <-- lui il casse
 	if (!new_array)
 		return (NULL);
 	j = 0;
@@ -72,7 +72,7 @@ int	process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 	t_arg	**new_array;
 	char	*expanded;
 
-	new_part = malloc(sizeof(t_arg));
+	new_part = malloc(sizeof(t_arg)); // <-- lui il casse
 	if (!new_part)
 		return (RETURN_FAILURE);
 	process_quotes(*tokens, new_part);
