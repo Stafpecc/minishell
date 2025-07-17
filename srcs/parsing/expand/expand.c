@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:30:49 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:00:36 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
 
 static char	*append_exit_code(char *result, t_utils *utils)
 {
