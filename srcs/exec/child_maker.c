@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 16:15:35 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:36:53 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	close_heredoc(t_redirect **redirect)
 	i = 0;
 	if (redirect)
 	{
-		while (redirect[i] && redirect[i]->fd)
+		while (redirect[i])
 		{
 			if (redirect[i]->heredoc)
 				close(redirect[i]->fd);
@@ -57,8 +57,8 @@ static void	close_heredoc(t_redirect **redirect)
 // set the signal accordingly
 // child_init_pipes_dup, if failed
 // exit_failure else parent get out with return 0
-pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
-		int *pipe_fd, pid_t *child)
+pid_t	child_secure_fork(t_command_exec *node, t_utils *utils, int *pipe_fd,
+		pid_t *child)
 {
 	*child = fork();
 	if (*child == 0)
@@ -111,8 +111,8 @@ int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 
 // everything related to the creation of the right childs
 // is done here thanks to a loop that wont stop
-// until we checked all nodes bcs 
-// node = cmd 
+// until we checked all nodes bcs
+// node = cmd
 int	child_maker(t_command_exec *node, t_utils *utils)
 {
 	int				pipe_fd[2];

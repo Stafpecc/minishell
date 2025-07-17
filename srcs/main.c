@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 16:19:55 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:41:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(int ac, char **av, char **env)
 	rl_event_hook = gotnotnull;
 	set_signals();
 	utils = init_utils_struct(env);
+	if (!utils)
+		return (RETURN_FAILURE);
 	minishell_loop(utils);
 	last_return = utils->last_return;
 	free_utils(utils);
