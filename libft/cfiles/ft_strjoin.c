@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:07:44 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:49:26 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:02:48 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	result = malloc(sizeof(char) * (len1 + len2 + 1)); // <-- lui il casse
+	result = malloc(sizeof(char) * (len1 + len2 + 1));
 	if (!result)
 		return (NULL);
 	i = -1;

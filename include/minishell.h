@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 11:38:33 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:09:44 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 				t_utils *utils);
 t_token		*process_lexer(char *input, t_utils *utils);
 t_utils		*init_utils_struct(char **envp);
+bool		skip_empty_or_spaces(char *input);
+bool		handle_null_input(char *input, t_utils *utils);
 
 /******************************************************************************/
 /*                                SECURE                                      */

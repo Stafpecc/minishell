@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 19:57:24 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 14:43:53 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	path_finder_fail(t_command_exec *node, t_utils *utils,
 		return_value = EXIT_FAILURE;
 	}
 	free_utils(utils);
-	free_commands_exec(node);
+	if (node)
+	{
+		free_commands_exec(node);
+		node = NULL;
+	}
 	exit(return_value);
 }

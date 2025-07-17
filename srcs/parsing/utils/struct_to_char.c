@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:09:50 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:47:45 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:00:29 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_command_exec	*struct_to_char_node(t_command *cmd)
 {
 	t_command_exec	*new_node;
 
-	new_node = malloc(sizeof(t_command_exec)); // <-- lui il casse
+	new_node = malloc(sizeof(t_command_exec));
 	if (!new_node)
 		return (NULL);
 	new_node->cmd_parts = NULL;
@@ -84,6 +84,7 @@ t_command_exec	*struct_to_char(t_command *cmd)
 		if (!new_node)
 		{
 			free_commands_exec(head);
+			head = NULL;
 			return (NULL);
 		}
 		if (!head)

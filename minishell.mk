@@ -103,5 +103,6 @@ override UTILSSRC := \
 	free \
 	launch_lexer \
 	minishell_loop \
+	loop_helper \
 	quotes \
 	t_utils \

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:35:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:18:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static char	*append_char(char *result, char c)
 	return (tmp);
 }
 
-static char	*expand_variables_utils(int i, char *result, t_utils *utils,
-	char *input)
+static char	*expand_variables_utils(int i, char *result,
+	t_utils *utils, char *input)
 {
 	while (input[i])
 	{
@@ -63,21 +63,20 @@ static char	*expand_variables_utils(int i, char *result, t_utils *utils,
 		{
 			i++;
 			if (input[i] == '?')
-			{
-				i++;
-				result = append_exit_code(result, utils);
-			}
+				result = handle_exit_code(result, &i, utils, input);
 			else if (ft_isalnum(input[i]) || input[i] == '_')
-				result = append_env_var(result, input, &i, utils->env);
+				result = handle_env_var(result, &i, input, utils->env);
 			else
-			{
-				result = append_char(result, '$');
-				if (input[i])
-					result = append_char(result, input[i++]);
-			}
+				result = handle_other_cases(result, &i, input);
+			if (!result)
+				return (NULL);
 		}
 		else
+		{
 			result = append_char(result, input[i++]);
+			if (!result)
+				return (NULL);
+		}
 	}
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:40:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:42:15 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 14:57:03 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strndup(const char *s, size_t n)
 		return (NULL);
 	while (s[len] && len < n)
 		len++;
-	dup = malloc(len + 1); // <-- lui il casse
+	dup = malloc(len + 1);
 	if (!dup)
 		return (NULL);
 	while (i < len)

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:20:26 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:23:09 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:02:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ static int	handle_simple_token(const char *input, size_t *i, char **buffer)
 		return (RETURN_FAILURE);
 	new_buffer = concat_buffer_part(*buffer, part);
 	if (!new_buffer)
+	{
+		free(part);
 		return (RETURN_FAILURE);
+	}
 	*buffer = new_buffer;
 	return (RETURN_SUCCESS);
 }

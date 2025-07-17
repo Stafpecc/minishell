@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_dup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 09:20:41 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 15:19:40 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-
 	if (utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
 	if (read_dup(node->redirect_in, utils->previous_pipes))
@@ -78,6 +77,6 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
 		path_finder_fail(node, utils, 0, RETURN_FAILURE);
 	if (!node->cmd_parts[0])
-		exit(EXIT_SUCCESS);	
+		exit(EXIT_SUCCESS);
 	child_redirect(node, utils);
 }

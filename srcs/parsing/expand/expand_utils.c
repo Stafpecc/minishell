@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:08:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:43:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:18:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*strjoin_and_free(char *s1, char *s2)
 		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	joined = malloc(len1 + len2 + 1); // <-- lui il casse
+	joined = malloc(len1 + len2 + 1);
 	if (!joined)
 	{
 		free(s1);
@@ -52,4 +52,35 @@ char	*strjoin_and_free(char *s1, char *s2)
 	copy_strings_into(joined, s1, s2);
 	free(s1);
 	return (joined);
+}
+
+char	*handle_exit_code(char *result, int *i, t_utils *utils, char *input)
+{
+	(*i)++;
+	result = append_exit_code(result, utils);
+	if (!result)
+		return (NULL);
+	return (result);
+}
+
+char	*handle_env_var(char *result, int *i, char *input, char **env)
+{
+	result = append_env_var(result, input, i, env);
+	if (!result)
+		return (NULL);
+	return (result);
+}
+
+char	*handle_other_cases(char *result, int *i, char *input)
+{
+	result = append_char(result, '$');
+	if (!result)
+		return (NULL);
+	if (input[*i])
+	{
+		result = append_char(result, input[(*i)++]);
+		if (!result)
+			return (NULL);
+	}
+	return (result);
 }
