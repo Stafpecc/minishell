@@ -6,13 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:44:53 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:14:27 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
-//#include "parsing.h"
-//#include "return_error.h"
 
 // if equal sign it mean what is at the right side
 // is the result of the said variable

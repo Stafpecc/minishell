@@ -6,18 +6,16 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:31:29 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:13:51 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-//# include <stdbool.h>
 # include <signal.h>
 # include "lexer.h"
 # include "../libft/includes/libft.h"
-//# include <stdio.h>
 
 extern volatile sig_atomic_t	g_interrupted;
 

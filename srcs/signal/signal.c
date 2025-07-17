@@ -6,13 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 18:21:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:38:49 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:19:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "signal_handler.h"
 #include "minishell.h"
-//#include "../../libft/includes/libft.h"
 
 volatile sig_atomic_t	g_interrupted = 0;
 

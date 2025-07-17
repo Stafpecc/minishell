@@ -6,14 +6,12 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:59 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:32:41 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:17:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-//#include "../../../libft/includes/libft.h"
 
-//#include <stdbool.h>
 #include <dirent.h>
 
 /*

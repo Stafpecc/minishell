@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:08:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:31:44 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:17:15 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-//#include "../../../libft/includes/libft.h"
 
 static void	copy_strings_into(char *dest, char *s1, char *s2)
 {

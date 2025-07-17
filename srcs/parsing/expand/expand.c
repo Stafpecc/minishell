@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:00:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:18:58 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*expand_variables(char *input, t_utils *utils)
 
 	i = 0;
 	result = ft_strdup("");
-	result = expand_variables_utils(i, result, utils, input);
+	if (result)
+		result = expand_variables_utils(i, result, utils, input);
 	return (result);
 }

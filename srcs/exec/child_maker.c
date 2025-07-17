@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:26:05 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:15:35 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-//#include <stdlib.h>
 
 // is previous pipe exist if yes is it not the last cmd?
 // if both yes we do a new pipe and secure it

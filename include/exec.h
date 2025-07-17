@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:34:52 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:11:11 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:12:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,10 @@
 # define EXEC_H
 # define MALLOC_ERROR -42
 # define NONE -42
-//# include "../libft/includes/libft.h"
 # include "builtin.h"
-//# include "lexer.h"
-//# include "minishell.h"
-//# include "parsing.h"
-//# include "return_error.h"
-//# include "signal_handler.h"
 # include <errno.h>
 # include <fcntl.h>
-//# include <stdbool.h>
-//# include <stdlib.h>
-//# include <sys/stat.h>
-//# include <sys/types.h>
 # include <sys/wait.h>
-//# include <unistd.h>
 
 # define MAX_HEREDOC_ATTEMPTS 100
 
@@ -50,9 +39,6 @@ bool	join_err_msg_and_write(char *part_one_msg, char *part_two_msg,
 // child_execute.c
 void	path_finder_fail(t_command_exec *node, t_utils *utils,
 			bool execve_failed, int return_value);
-//void	close_free_utils(t_utils *utils, size_t i);
-//void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
-			//size_t i);
 
 // child_utils.c
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,

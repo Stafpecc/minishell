@@ -6,19 +6,16 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 15:20:08 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:13:45 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//# include <stdio.h>
-//# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h> 
 
-//# include "lexer.h"
 # include "parsing.h"
 # include "exec.h"
 # include "env.h"
@@ -46,7 +43,6 @@ t_utils		*init_utils_struct(char **envp);
 int			check_error(int ac);
 void		free_env(char **env);
 void		free_utils(t_utils *utils);
-//void		exit_proprely(int count, ...);
 
 /******************************************************************************/
 /*                                QUOTES                                      */
@@ -58,8 +54,8 @@ char		quote_not_closed(const char *str);
 /*                                ASCII                                       */
 /******************************************************************************/
 
-void ascii_minishell(char *line);
-void ascii_tarini(char *line);
-void ascii_ldevoude(char *line);
+void		ascii_minishell(char *line);
+void		ascii_tarini(char *line);
+void		ascii_ldevoude(char *line);
 
 #endif

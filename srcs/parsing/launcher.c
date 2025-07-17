@@ -6,14 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:10:48 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:37:48 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:19:14 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
 #include "parsing.h"
-//#include "return_error.h"
-//#include "../../libft/includes/libft.h"
 
 int	process_word_token(t_token **tokens, t_command *curr, t_utils *utils)
 {

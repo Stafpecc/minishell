@@ -6,11 +6,10 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:22:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:41:51 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:19:50 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "parsing.h"
 #include "exec.h"
 
 static t_utils	*ret_free_utils(int select, t_utils *utils)

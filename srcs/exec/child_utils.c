@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:26:24 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:15:44 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-//#include "return_error.h"
 
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 		char *cmd_name, char *full_path)

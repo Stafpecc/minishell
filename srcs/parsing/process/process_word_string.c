@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_word_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:46:38 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 15:59:39 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:18:19 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-//#include "../../../libft/includes/libft.h"
 
 static int	get_cmd_parts_count(t_command *curr)
 {

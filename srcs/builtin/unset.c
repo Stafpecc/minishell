@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:03:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:24:12 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:14:44 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
-//#include "minishell.h"
 
 static void	free_array(char **array)
 {

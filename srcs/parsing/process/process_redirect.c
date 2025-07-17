@@ -6,13 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:35:05 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:18:03 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "parsing.h"
 #include "exec.h"
-//#include "../../../libft/includes/libft.h"
 
 /*
 Function that:

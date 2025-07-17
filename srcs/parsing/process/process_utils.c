@@ -6,14 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:58:07 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:35:39 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:18:15 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdbool.h>
-
 #include "parsing.h"
-//#include "../../../libft/includes/libft.h"
 
 /*
 Function that:

@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:40:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:29:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:16:49 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-//#include "return_error.h"
 
 int	has_only_one_redirection(t_token *head)
 {

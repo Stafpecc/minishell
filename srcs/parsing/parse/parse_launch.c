@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:33:08 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:33:29 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:17:34 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-//#include "../../../libft/includes/libft.h"
 
 static int	validate_command(t_command *prev, t_command *curr, t_utils *utils)
 {

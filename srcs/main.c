@@ -6,18 +6,15 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 15:09:00 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:19:55 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-//#include "exec.h"
-//#include "parsing.h"
-//#include "../libft/includes/libft.h"
 
-static void ascii_art(void)
+static void	ascii_art(void)
 {
-	char *line;
+	char	*line;
 
 	line = NULL;
 	ascii_minishell(line);

@@ -6,11 +6,9 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:29:52 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 16:17:07 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
 
 #include "lexer.h"
 
