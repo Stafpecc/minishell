@@ -6,11 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 17:43:54 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 08:35:20 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:26:43 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../include/exec.h"
 
 static void	child_signal(int status, t_utils *utils)
 {
@@ -29,13 +29,14 @@ static void	child_signal(int status, t_utils *utils)
 	}
 }
 
-// once the childs are created the parent
-// is gonna close everything that need to be closed here
-// then it will wait at waitpid and also update last_return
+// main process wait once last child
+// or sigint sent update the last return
+// set back signals, close what need to be closed
+// and EXIT_SUCCESS
 // to hold the last return value of the last child
 // then return 0 on success
-int	wait_for_children_and_cleanup(t_utils *utils, int status,
-		int *pipe_fd, pid_t child)
+int	wait_for_children_and_cleanup(t_utils *utils, int status, int *pipe_fd,
+		pid_t child)
 {
 	int	pid;
 

@@ -6,18 +6,18 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 16:32:55 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:27:31 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-#include "../../libft/includes/libft.h"
-#include "parsing.h"
+// #include "../../libft/includes/libft.h"
+// #include "parsing.h"
 
-#include <readline/readline.h>
-#include <signal.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
+// #include <readline/readline.h>
+// #include <signal.h>
+// #include <sys/ioctl.h>
+// #include <unistd.h>
 
 // we init input to NULL, then we get into an infinite while loop
 //(can do a bool if norme require it) then we write inside of input
@@ -127,7 +127,7 @@ int	readline_heredoc(int fd, char *delimiter)
 // if fail return -1, else unlink (fd would still work even with unlink)
 // to remove .heredoc.tmp from the directory then we return the FD that
 // should be used in dup to get the content as the read content!
-// TODO si quelqu'un fait .heredoc.tmp avant de lancer le programme
+
 int	here_doc(char *delimiter)
 {
 	int		fd;

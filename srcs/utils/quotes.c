@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:46:11 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 14:46:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:41:10 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+//#include "parsing.h"
 #include "exec.h"
 
 static char	*strjoin_free(char *s1, const char *s2)

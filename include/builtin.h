@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 14:34:35 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:21:03 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
-# include "../libft/includes/libft.h"
 # include "minishell.h"
-# include "lexer.h"
-# include "parsing.h"
-# include "signal_handler.h"
-# include "exec.h"
 
 # define NOT_NUM_ARG 2
+# define OLD 0
+# define NEW 1
 
 typedef enum e_error_msg
 {
@@ -65,7 +62,6 @@ char			*assign_variable_name(char *cmd, char *variable_name, size_t i,
 int				pwd_builtin(t_command_exec *node);
 
 //unset.c
-//static int env_len(char **env);
 int				unset_builtin(t_command_exec *node, t_utils *utils, size_t i,
 					size_t j);
 

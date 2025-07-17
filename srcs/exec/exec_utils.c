@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:11:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/12 15:49:04 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:43:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 
-// Just check if the cmd we are dealing with are a built-in cmd or not
+// Just check if the cmd we are dealing with are 
+// a built-in cmd or not
 // if yes return TRUE if no return FALSE
 
 bool	built_in_checker(char *cmd)
 {
 	if (!cmd || !cmd[0])
-		return (false);
+		return (FALSE);
 	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd,
 			"export") || !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "env")
 		|| !ft_strcmp(cmd, "exit") || !ft_strcmp(cmd, "echo"))
-		return (true);
+		return (TRUE);
 	else
-		return (false);
+		return (FALSE);
 }
 
 // To count how much commands has been sent
@@ -86,8 +87,6 @@ int	expand_env(t_utils *utils)
 // we realloc the new size in new_env thanks to ft_realloc
 // then set the last slot at NULL remove 1 to the size_env
 // and we change the pointer of env to new env before returning success
-
-// TODO do Ineed to free utils->env before that?
 
 int	condense_env(t_utils *utils)
 {

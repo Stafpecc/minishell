@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   dup_targ_to_tredirect_array.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:37:58 by stafpec           #+#    #+#             */
-/*   Updated: 2025/06/22 16:11:03 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:36:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../../libft/includes/libft.h"
+//#include "../../../libft/includes/libft.h"
 
 static void	free_redirect(t_redirect **arr, int count)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 19:57:50 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:43:36 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ static int	built_in_child(t_command_exec *node, t_utils *utils)
 	return (0);
 }
 
-// int		failure_case;
-// failure_case = MALLOC_ERROR;
-
 void	child_redirect(t_command_exec *node, t_utils *utils)
 {
 	char	*path;
@@ -64,5 +61,3 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 		execve(node->cmd_parts[0], node->cmd_parts, utils->env);
 	path_finder_fail(node, utils, 1, 0);
 }
-	// if(utils->previous_pipes != NONE)
-	//  	test_close(node->redirect_in);

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/12 16:47:31 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:40:07 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <readline/readline.h>
+//#include <stdarg.h>
+//#include <unistd.h>
+//#include <readline/readline.h>
 
 void	free_env(char **env)
 {

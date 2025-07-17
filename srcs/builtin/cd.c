@@ -6,18 +6,16 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 10:26:30 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:45:27 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
 
-#define OLD 0 // TOMV in built.h
-#define NEW 1 // TOMV in built.h
-
 // function that depending of its parameters will find
 // or the line of PWD or OLD_PWD depending of the
 // old_or_new parameter
+
 static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
 {
 	if (old_or_new == NEW)

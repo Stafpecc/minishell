@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:30 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/14 15:09:20 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:01:45 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 // if redirection will redirect
 // to dup properly, if fail return 1 else 0
-static int	single_built_in_redirections(t_command_exec *node)
+static int	single_built_in_redirections(t_command_exec *node, t_utils *utils)
 {
-	if (node->redirect_in)
-	{
-		if (read_dup(node->redirect_in, NONE))
-			return (RETURN_FAILURE);
-	}
 	if (node->redirect_out)
 	{
 		if (write_dup(node->redirect_out, 0))
 		{
+			return (RETURN_FAILURE);
+		}
+	}
+	if (node->redirect_in)
+	{
+		if (read_dup(node->redirect_in, NONE))
+		{
+			if (node->redirect_out)
+				dup2(utils->old_stdout, STDOUT_FILENO);
 			return (RETURN_FAILURE);
 		}
 	}
@@ -55,7 +59,7 @@ int	single_built_in(t_command_exec *node, t_utils *utils)
 {
 	if (node->redirect_in || node->redirect_out)
 	{
-		if (single_built_in_redirections(node))
+		if (single_built_in_redirections(node, utils))
 			return (MALLOC_ERROR);
 	}
 	if (!ft_strcmp(node->cmd_parts[0], "cd"))

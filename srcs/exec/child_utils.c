@@ -6,12 +6,12 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:23:39 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 14:58:20 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:26:24 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-#include "return_error.h"
+//#include "return_error.h"
 
 char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 		char *cmd_name, char *full_path)
@@ -39,10 +39,6 @@ char	*search_executable_in_paths(char **path_dirs, char *path_prefix,
 	free_arrays(path_dirs, NULL, cmd_name, NULL);
 	return (NULL);
 }
-
-// TODO check about the pertinence of cmd_parts = ft_split
-//+ line 59 +line 61 considering the quality of theo's parsing/tokens
-//
 
 char	*prepare_path_resolution(char *path, char *cmd)
 {
@@ -115,6 +111,8 @@ char	*free_arrays(char **one, char **two, char *three, char *four)
 	free(four);
 	return (NULL);
 }
+// close what is not set to NONE
+// and also set them to NONE
 
 int	close_and_set_none(int previous_pipe, int *pipe_fd)
 {

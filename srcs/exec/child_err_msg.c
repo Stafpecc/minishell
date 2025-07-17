@@ -6,11 +6,17 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:33:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 10:27:58 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 11:06:40 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+
+//	join three part of a msg
+//	(usually the program and cmd + arg + reason of failure)
+//	to write it directly in the FD2, the purpose here
+//	is to not let multiple child overwrite eachothers
+//	if write is used multiple time basicaly.
 
 bool	join_err_msg_and_write(char *part_one_msg, char *part_two_msg,
 		char *part_three_msg)

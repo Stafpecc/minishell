@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   child_maker_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:56:13 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/16 17:40:27 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:25:52 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../include/exec.h"
+
+// init the right variables and the first pipe
+// before getting into the child loop.
+// also check as a security before getting into it
 
 int	initialize_child_maker(t_command_exec *node, t_utils *utils, int *pipe_fd)
 {
@@ -22,8 +26,14 @@ int	initialize_child_maker(t_command_exec *node, t_utils *utils, int *pipe_fd)
 	return (EXIT_SUCCESS);
 }
 
+// here we get into the loop
+// that will create new process
+// each time needed, at first it setup
+// then create the process prepare for the next iteration
+// go to the next node, then once done return success
+
 int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd,
-	pid_t *child)
+		pid_t *child)
 {
 	int	i;
 
@@ -42,6 +52,8 @@ int	fork_all_children(t_command_exec *node, t_utils *utils, int *pipe_fd,
 	}
 	return (EXIT_SUCCESS);
 }
+// close everything once the parent stopped to create
+// new childs
 
 void	close_heredoc_fds(t_command_exec *head)
 {

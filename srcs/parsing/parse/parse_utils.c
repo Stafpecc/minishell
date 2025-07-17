@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:34:09 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/14 15:55:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:33:43 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../../libft/includes/libft.h"
+//#include "../../../libft/includes/libft.h"
 
 /*
 Function that:

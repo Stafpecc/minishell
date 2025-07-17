@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:04:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/15 13:35:31 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:36:45 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-#include <unistd.h>
+//#include <unistd.h>
 
 static void	free_arg_table(t_arg **args)
 {

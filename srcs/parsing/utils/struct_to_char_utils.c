@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   struct_to_char_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 05:51:33 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/15 21:18:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:37:04 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../../libft/includes/libft.h"
+//#include "../../../libft/includes/libft.h"
 
 void	free_str_array(char **arr, int size)
 {

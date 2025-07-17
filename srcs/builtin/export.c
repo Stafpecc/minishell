@@ -6,13 +6,13 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:01:21 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 10:28:12 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:44:53 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
-#include "parsing.h"
-#include "return_error.h"
+//#include "parsing.h"
+//#include "return_error.h"
 
 // if equal sign it mean what is at the right side
 // is the result of the said variable
@@ -103,8 +103,7 @@ static int	no_equal_sign_case(t_utils *utils, char *cmd,
 // and goes to the right function depending of if it hold
 // the said sign or not (because not same effect expected)
 // once we get out of the while loop we return_success
-// TODO? if just export do like bash or follow manual? aka ask for arguments
-// chiffre lettre underscore
+
 static int	error_checker(t_command_exec *node, size_t i)
 {
 	size_t	j;

@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/15 13:45:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:31:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
+//# include <stdbool.h>
 # include <signal.h>
 # include "lexer.h"
-# include <stdio.h>
+# include "../libft/includes/libft.h"
+//# include <stdio.h>
 
 extern volatile sig_atomic_t	g_interrupted;
 
 typedef enum e_last_return
 {
 	CMD_SUCCESS,
+	CMD_FAIL = 1,
 	CMD_SYNTAX = 2,
 	CMD_NOT_FOUND = 127,
 	CMD_INVALID_ARGUMENT,

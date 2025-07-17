@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:44:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/15 21:21:43 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:45:21 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
-#include "parsing.h"
-#include "return_error.h"
 
-#define NO_FLAG_N 1
-#define FLAG_N 0
 //here we check if there is any -n flag that follow
 //the first one that has been validated in is_newline
 //it updated index_print if it found a new valid -n 
 //array of chars
+
 static bool	pass_n_flags(t_command_exec *node, int *index_print, int i)
 {
 	if (!node->cmd_parts[*index_print])
@@ -45,6 +42,7 @@ static bool	pass_n_flags(t_command_exec *node, int *index_print, int i)
 // and index_print depending of the situation
 // if there was a valid n parameter then we also
 // return pass_n_flag to ignore all n flags that follow up
+
 static bool	is_newline(t_command_exec *node, int i, bool *newline,
 	int *index_print)
 {
@@ -75,8 +73,6 @@ static bool	is_newline(t_command_exec *node, int i, bool *newline,
 // flag to setup or bool newline and index i
 // then we print the whole content of our cmd
 
-// TODO change t_command *node into simple a char **cmd
-// if we do not need the whole struct
 int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
 	if (is_newline(node, 2, &newline, &i) == 1)

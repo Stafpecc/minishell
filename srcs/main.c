@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 15:36:11 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:42:30 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "exec.h"
-#include "parsing.h"
-#include "../libft/includes/libft.h"
+//#include "exec.h"
+//#include "parsing.h"
+//#include "../libft/includes/libft.h"
 
 static int	gotnotnull(void)
 {

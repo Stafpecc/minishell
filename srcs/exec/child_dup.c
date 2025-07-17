@@ -6,17 +6,18 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 09:20:41 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:25:28 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-#include "return_error.h"
-#include <stdlib.h>
+//#include "return_error.h"
+//#include <stdlib.h>
 
 // Used if we do only have one cmd
-// TODO complete doc about that function
-// TORM read up same as child_init
+// do the same as child_init_pipes_dup
+// just the logic here is slighty different since
+// since we only get one child
 void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if (node->redirect_out && write_dup(node->redirect_out, pipe_fd))
@@ -49,35 +50,45 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 // would dup2 the right fdsexec went well
 // it will close our fds then we go to the
 // next part of the process
-// TORM line 134 = if (read_dup(node->redirect_in
-//, pipe_fd, utils->previous_pipes)) if no work
 
-void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
+void	multiple_childs(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
-
-	if (utils->num_nodes == 1)
-		only_child(node, pipe_fd, utils);
-	if (read_dup(node->redirect_in, utils->previous_pipes))
-	{
-		perror("");
-		if (utils->previous_pipes != NONE)
-			close(utils->previous_pipes);
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		exit(EXIT_FAILURE);
-	}
 	if (write_dup(node->redirect_out, pipe_fd))
 	{
 		perror("");
 		if (utils->previous_pipes != NONE)
 			close(utils->previous_pipes);
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
+		if (pipe_fd[0] != NONE)
+			close(pipe_fd[0]);
+		if (pipe_fd[1] != NONE)
+			close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
+	if (read_dup(node->redirect_in, utils->previous_pipes))
+	{
+		perror("");
+		if (utils->previous_pipes != NONE)
+			close(utils->previous_pipes);
+		if (pipe_fd[0] != NONE)
+			close(pipe_fd[0]);
+		if (pipe_fd[1] != NONE)
+			close(pipe_fd[1]);
+		exit(EXIT_FAILURE);
+	}
+}
+// go to only_child  if just one node
+// else multiple childs dup
+// then we close and set to none
+
+void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
+{
+	if (utils->num_nodes == 1)
+		only_child(node, pipe_fd, utils);
+	else
+		multiple_childs(node, pipe_fd, utils);
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
 		path_finder_fail(node, utils, 0, RETURN_FAILURE);
 	if (!node->cmd_parts[0])
-		exit(EXIT_SUCCESS);	
+		exit(EXIT_SUCCESS);
 	child_redirect(node, utils);
 }
