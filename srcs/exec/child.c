@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:07:32 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 19:57:50 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 	int	tmp_last_return;
 
 	tmp_last_return = utils->last_return;
-	close_free_utils(utils, 0);
-	close_t_command_exec(node, NULL, 0);
+	free_utils(utils);
+	free_commands_exec(node);
 	ft_printfd("tmp_last_return = %d\n", tmp_last_return);
 	exit(tmp_last_return);
 }

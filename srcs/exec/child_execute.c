@@ -3,59 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   child_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 14:39:15 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/16 19:57:24 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-
-// close old stdin and out and free the env before free utils
-void	close_free_utils(t_utils *utils, size_t i)
-{
-	if (utils)
-	{
-		if (utils->env)
-		{
-			while (utils->env[i])
-			{
-				if (utils->env[i])
-				{
-					free(utils->env[i]);
-					utils->env[i] = NULL;
-				}
-				i++;
-			}
-			free(utils->env);
-		}
-	}
-	free(utils);
-}
-
-// close cmd_parts in each node and the nodes
-void	close_t_command_exec(t_command_exec *node, t_command_exec *tmp,
-		size_t i)
-{
-	if (node)
-	{
-		while (node)
-		{
-			i = 0;
-			while (node->cmd_parts[i])
-			{
-				free(node->cmd_parts[i]);
-				node->cmd_parts[i] = NULL;
-				i++;
-			}
-			free(node->cmd_parts);
-			tmp = node;
-			node = node->next;
-			free(tmp);
-		}
-	}
-}
 
 static int	enoent_cases(t_command_exec *node, bool execve_failed)
 {
@@ -93,7 +48,7 @@ void	path_finder_fail(t_command_exec *node, t_utils *utils,
 			": Malloc failed\n");
 		return_value = EXIT_FAILURE;
 	}
-	close_free_utils(utils, 0);
-	close_t_command_exec(node, NULL, 0);
+	free_utils(utils);
+	free_commands_exec(node);
 	exit(return_value);
 }
