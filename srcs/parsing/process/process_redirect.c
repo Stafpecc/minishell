@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 10:41:07 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:35:05 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+//#include "parsing.h"
 #include "exec.h"
-#include "../../../libft/includes/libft.h"
+//#include "../../../libft/includes/libft.h"
 
 /*
 Function that:

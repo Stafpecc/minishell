@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   process_add_redirect.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 14:24:41 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/15 13:48:02 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:34:05 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "../../../libft/includes/libft.h"
+//#include "../../../libft/includes/libft.h"
 
 static int	handle_token_error(t_token **tokens, t_utils *utils)
 {

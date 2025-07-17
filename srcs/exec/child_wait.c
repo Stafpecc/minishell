@@ -6,11 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 17:43:54 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 10:59:09 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:26:43 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../include/exec.h"
 
 static void	child_signal(int status, t_utils *utils)
 {

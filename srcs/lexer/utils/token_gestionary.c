@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_gestionary.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:18:32 by tarini            #+#    #+#             */
-/*   Updated: 2025/06/22 17:09:30 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:29:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "return_error.h"
+//#include "return_error.h"
 #include "../../../libft/includes/libft.h"
 
 t_token	*create_token(t_token_type type, const char *value)

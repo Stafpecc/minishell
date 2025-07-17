@@ -6,12 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 16:49:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/03 18:35:24 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:45:09 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "minishell.h"
+#include "../include/builtin.h"
 
 static long long	ft_atol(const char *nptr)
 {
@@ -41,6 +40,7 @@ static long long	ft_atol(const char *nptr)
 // a negative number or a positive one then the overflow check
 // would be slighty different. if our arg pass that test it mean
 // it passed all the necessary test so we can continue in exit_built_in
+
 static int	overflow_check(char *arg, size_t counter_digits, bool negative_nbr,
 		t_utils *utils)
 {

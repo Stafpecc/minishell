@@ -6,13 +6,13 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 11:31:09 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:25:28 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-#include "return_error.h"
-#include <stdlib.h>
+//#include "return_error.h"
+//#include <stdlib.h>
 
 // Used if we do only have one cmd
 // do the same as child_init_pipes_dup

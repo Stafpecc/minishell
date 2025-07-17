@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:55:15 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:10:15 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:21:03 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "minishell.h"
 
 # define NOT_NUM_ARG 2
+# define OLD 0
+# define NEW 1
 
 typedef enum e_error_msg
 {

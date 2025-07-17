@@ -6,14 +6,14 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:31:36 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/16 14:58:35 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:33:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
+//#include "parsing.h"
 
-#include <errno.h>
+//#include <errno.h>
 
 /*
 	Checks the existence and access rights of a file 

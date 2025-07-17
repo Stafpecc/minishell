@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 11:22:51 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:43:36 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,3 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 		execve(node->cmd_parts[0], node->cmd_parts, utils->env);
 	path_finder_fail(node, utils, 1, 0);
 }
-	// if(utils->previous_pipes != NONE)
-	//  	test_close(node->redirect_in);

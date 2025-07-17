@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 17:37:08 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/16 17:37:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:24:02 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "return_error.h"
+#include "../include/builtin.h"
+//#include "return_error.h"
 
 // Check if we are dealing with an option or an argument.
 static int	option_checker(char **cmd_parts)

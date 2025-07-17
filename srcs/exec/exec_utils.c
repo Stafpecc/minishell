@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:11:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 10:32:45 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:43:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ int	expand_env(t_utils *utils)
 // we realloc the new size in new_env thanks to ft_realloc
 // then set the last slot at NULL remove 1 to the size_env
 // and we change the pointer of env to new env before returning success
-
-// TODO do Ineed to free utils->env before that?
 
 int	condense_env(t_utils *utils)
 {

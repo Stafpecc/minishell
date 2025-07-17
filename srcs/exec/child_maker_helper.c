@@ -6,11 +6,11 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:56:13 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 11:21:46 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 13:25:52 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../include/exec.h"
 
 // init the right variables and the first pipe
 // before getting into the child loop.

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:14:45 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/15 13:45:18 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 13:38:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "lexer.h"
-#include "return_error.h"
+//#include "parsing.h"
+//#include "lexer.h"
+//#include "return_error.h"
 #include "minishell.h"
 
-#include "../../libft/includes/libft.h"
+//#include "../../libft/includes/libft.h"
 
 t_command_exec	*parse_tokens(t_token *tokens, t_utils *utils)
 {
