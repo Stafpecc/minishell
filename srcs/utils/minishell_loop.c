@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/15 21:20:28 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 08:00:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	minishell_loop(t_utils *utils)
 		utils->type_of_first_arg = token->type;
 		command = parse_tokens(token, utils);
 		execute_or_cleanup(command, token, input, utils);
+		set_signals();
 	}
 }

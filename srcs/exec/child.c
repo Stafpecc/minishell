@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:07:32 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 08:34:52 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 	tmp_last_return = utils->last_return;
 	close_free_utils(utils, 0);
 	close_t_command_exec(node, NULL, 0);
-	ft_printfd("tmp_last_return = %d\n", tmp_last_return);
 	exit(tmp_last_return);
 }
 
