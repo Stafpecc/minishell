@@ -6,14 +6,14 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 15:18:55 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:25:43 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
-static char	*append_exit_code(char *result, t_utils *utils)
+char	*append_exit_code(char *result, t_utils *utils)
 {
 	char	*exit_code;
 	char	*tmp;
@@ -24,7 +24,7 @@ static char	*append_exit_code(char *result, t_utils *utils)
 	return (tmp);
 }
 
-static char	*append_env_var(char *result, char *input, int *i, char **env)
+char	*append_env_var(char *result, char *input, int *i, char **env)
 {
 	int		start;
 	char	*var_name;
@@ -43,7 +43,7 @@ static char	*append_env_var(char *result, char *input, int *i, char **env)
 	return (tmp);
 }
 
-static char	*append_char(char *result, char c)
+char	*append_char(char *result, char c)
 {
 	char	buf[2];
 	char	*tmp;

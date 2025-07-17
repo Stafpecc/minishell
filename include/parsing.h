@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 15:20:01 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:26:08 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,11 @@ int				add_redirect(t_token **tokens, t_arg ***redirect_array,
 char			*expand_variables(char *input, t_utils *utils);
 char			*get_env_value(char **env, const char *var_name);
 char			*strjoin_and_free(char *s1, char *s2);
-char			*handle_exit_code(char *result, int *i, t_utils *utils,
-					char *input);
+char			*handle_exit_code(char *result, int *i, t_utils *utils);
 char			*handle_env_var(char *result, int *i, char *input, char **env);
 char			*handle_other_cases(char *result, int *i, char *input);
+char			*append_exit_code(char *result, t_utils *utils);
+char			*append_env_var(char *result, char *input, int *i, char **env);
+char			*append_char(char *result, char c);
 
 #endif

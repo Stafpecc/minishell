@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:08:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 15:18:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:25:55 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*strjoin_and_free(char *s1, char *s2)
 	return (joined);
 }
 
-char	*handle_exit_code(char *result, int *i, t_utils *utils, char *input)
+char	*handle_exit_code(char *result, int *i, t_utils *utils)
 {
 	(*i)++;
 	result = append_exit_code(result, utils);
