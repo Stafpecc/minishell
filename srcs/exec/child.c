@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:43:36 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 23:24:59 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
+#include "../../libft/includes/libft.h"
 
 static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 {
@@ -48,6 +49,12 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 
 	if (!node->cmd_parts || !node->cmd_parts[0])
 		return ;
+	if (ft_strchr(node->cmd_parts[0], ' ') || ft_strchr(node->cmd_parts[0], '|'))
+	{
+		ft_printfd("minishell: %s: command not found\n", node->cmd_parts[0]);
+		utils->last_return = 127;
+		return ;
+	}
 	if (built_in_checker(node->cmd_parts[0]))
 		built_in_child(node, utils);
 	else if (!ft_strchr(node->cmd_parts[0], '/'))
