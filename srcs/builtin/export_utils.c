@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:01:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/14 15:01:56 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:30:15 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 // compare content of env to check if it hold
 // the same name as the concerned arg entered with export
+
 int	is_variable_already_in_env(t_utils *utils, char *variable_name,
 		size_t i, bool is_equal)
 {

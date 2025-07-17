@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 07:51:58 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 08:34:18 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 10:55:48 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // if both yes we do a new pipe and secure it
 // else if we are at the very last cmd we close
 // pipe_fd[1](WRITE END) in a secured way and
-// it get value -42 for later comparisons (TODO CHECK
-// IF BETTER WAY TO HANDLE THAT CASE)
+// it get value NONE for later comparisons
+// to avoid double close
 // then return 0 if successful run
 
 int	setup_coming_child_pipes(t_utils *utils, int *pipe_fd, int i)
@@ -54,6 +54,8 @@ static void	close_heredoc(t_redirect **redirect)
 }
 
 // we fork the child, then child go to
+// close unecessary open fds
+// set the signal accordingly
 // child_init_pipes_dup, if failed
 // exit_failure else parent get out with return 0
 pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
@@ -68,8 +70,6 @@ pid_t	child_secure_fork(t_command_exec *node, t_utils *utils,
 		signal(SIGQUIT, SIG_DFL);
 		child_init_pipes_dup(node, pipe_fd, utils);
 	}
-	else if (*child == -1)
-		return (-1);
 	close_heredoc(node->redirect_in);
 	return (*child);
 }
@@ -112,8 +112,8 @@ int	setup_next_child(t_utils *utils, int *pipe_fd, int i)
 
 // everything related to the creation of the right childs
 // is done here thanks to a loop that wont stop
-// until we checked all nodes bcs one node
-// mean one cmd
+// until we checked all nodes bcs 
+// node = cmd 
 int	child_maker(t_command_exec *node, t_utils *utils)
 {
 	int				pipe_fd[2];

@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:39:12 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/16 10:36:17 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 11:30:02 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // print exit like bash does then print the right message if needed
 // then we exit with the right code!
-// TODO do not exit yet free what need to be freed THEN exit
+
 int	print_exit(long long code, char *arg, bool too_many_arguments,
 		t_utils *utils)
 {

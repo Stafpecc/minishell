@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   child_dup_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:44:59 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:39:37 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:09:06 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-// if(close(redirect[i]->fd) == -1) //TORM IF WORKING
-// return(RETURN_FAILURE);
 
 #include "../../include/exec.h"
 
@@ -48,8 +45,6 @@ int	redirect_write_browser(t_redirect **redirect, int i)
 // while loop until we completed to browse the redirect
 // array (to call the  right amount of open just like
 // bash does even if only the last one would be readed
-// if(close(redirect[i]->fd) == -1) //TORM IF WORKING
-// return(RETURN_FAILURE);
 
 int	redirect_read_browser(t_redirect **redirect, int i)
 {
@@ -91,12 +86,7 @@ int	write_dup(t_redirect **redirect, int *pipe_fd)
 
 // dup the right fd for stdinput and return
 // an error code if it doesnt work properly
-// TORM read_dup same as bellow
-// else if (previous_pipe == NONE)
-// {
-// if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
-// return (RETURN_FAILURE);
-// }
+
 int	read_dup(t_redirect **redirect, int previous_pipe)
 {
 	if (redirect)

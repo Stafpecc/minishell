@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   child_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:09 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 19:57:24 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:07:58 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 
+//	Function to separate properly
+//	two case of ENOENT error to send the
+//	right msg to the user
 static int	enoent_cases(t_command_exec *node, bool execve_failed)
 {
 	if (errno == ENOENT && !execve_failed)

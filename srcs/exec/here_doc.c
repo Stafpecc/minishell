@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 16:32:55 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 11:29:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	readline_heredoc(int fd, char *delimiter)
 // if fail return -1, else unlink (fd would still work even with unlink)
 // to remove .heredoc.tmp from the directory then we return the FD that
 // should be used in dup to get the content as the read content!
-// TODO si quelqu'un fait .heredoc.tmp avant de lancer le programme
+
 int	here_doc(char *delimiter)
 {
 	int		fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:44:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/15 21:21:43 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 11:29:40 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ static bool	is_newline(t_command_exec *node, int i, bool *newline,
 // flag to setup or bool newline and index i
 // then we print the whole content of our cmd
 
-// TODO change t_command *node into simple a char **cmd
-// if we do not need the whole struct
 int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
 	if (is_newline(node, 2, &newline, &i) == 1)
