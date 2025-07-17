@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:34 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:23:13 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 08:00:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	exec(t_command_exec *node, t_utils *utils)
 	}
 	else
 	{
+		signal(SIGINT, SIG_IGN);
 		return (child_maker(node, utils));
 	}
 	return (RETURN_SUCCESS);

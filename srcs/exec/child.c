@@ -19,7 +19,6 @@ static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 	tmp_last_return = utils->last_return;
 	free_utils(utils);
 	free_commands_exec(node);
-	ft_printfd("tmp_last_return = %d\n", tmp_last_return);
 	exit(tmp_last_return);
 }
 

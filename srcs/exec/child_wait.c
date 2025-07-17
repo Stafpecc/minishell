@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_wait.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 17:43:54 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/16 17:51:02 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 08:35:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,11 @@ int	wait_for_children_and_cleanup(t_utils *utils, int status,
 	pid = wait(&status);
 	while (pid > 0)
 	{
-		ft_printfd("je passe ici?\n");
-		printf("child = %d\n", child);
-		printf("pid = %d\n", pid);
 		if (pid == child)
 			child_signal(status, utils);
 		pid = wait(&status);
 	}
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == -1)
 		return (MALLOC_ERROR);
-	ft_printfd("last_return = %d\n", utils->last_return);
 	return (EXIT_SUCCESS);
 }

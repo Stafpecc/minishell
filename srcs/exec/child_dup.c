@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_dup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 17:39:19 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/17 09:20:41 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
 	if (node->redirect_out && write_dup(node->redirect_out, pipe_fd))
 	{
+		perror("");
 		if (pipe_fd[0] != NONE)
 			close(pipe_fd[0]);
 		if (pipe_fd[1] != NONE)
@@ -29,7 +30,7 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	}
 	if (node->redirect_in && read_dup(node->redirect_in, utils->previous_pipes))
 	{
-		ft_printfd("ICI\n");
+		perror("");
 		if (pipe_fd[0] != NONE)
 			close(pipe_fd[0]);
 		if (pipe_fd[1] != NONE)
@@ -53,10 +54,12 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 
 void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 {
+
 	if (utils->num_nodes == 1)
 		only_child(node, pipe_fd, utils);
 	if (read_dup(node->redirect_in, utils->previous_pipes))
 	{
+		perror("");
 		if (utils->previous_pipes != NONE)
 			close(utils->previous_pipes);
 		close(pipe_fd[0]);
@@ -65,6 +68,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	}
 	if (write_dup(node->redirect_out, pipe_fd))
 	{
+		perror("");
 		if (utils->previous_pipes != NONE)
 			close(utils->previous_pipes);
 		close(pipe_fd[0]);
@@ -73,5 +77,7 @@ void	child_init_pipes_dup(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	}
 	if (close_and_set_none(utils->previous_pipes, pipe_fd) == RETURN_FAILURE)
 		path_finder_fail(node, utils, 0, RETURN_FAILURE);
+	if (!node->cmd_parts[0])
+		exit(EXIT_SUCCESS);	
 	child_redirect(node, utils);
 }
