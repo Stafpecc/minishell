@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:13:51 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/18 14:05:47 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int				add_redirect(t_token **tokens, t_arg ***redirect_array,
 /******************************************************************************/
 /*                                 EXPAND                                     */
 /******************************************************************************/
-char			*expand_variables(char *input, t_utils *utils);
+char			*expand_variables(char *input, t_utils *utils, bool *was_expanded);
 char			*get_env_value(char **env, const char *var_name);
 char			*strjoin_and_free(char *s1, char *s2);
 

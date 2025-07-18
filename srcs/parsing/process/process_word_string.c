@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_word_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:46:38 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 16:48:55 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/18 14:11:21 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,59 @@ static int	ret_free_new_part(t_arg *new_part, char *expanded)
 	return (RETURN_FAILURE);
 }
 
+void ft_free_split(char **array)
+{
+	int i = 0;
+	if (!array)
+		return;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
+
+int reparse_expanded_string(char *expanded, t_command *curr)
+{
+	char	**words;
+	int		i, count;
+	t_arg	*new_part;
+	t_arg	**new_array;
+
+	words = ft_split(expanded, ' ');
+	if (!words)
+		return (RETURN_FAILURE);
+	i = 0;
+	while (words[i])
+	{
+		new_part = malloc(sizeof(t_arg));
+		if (!new_part)
+		{
+			ft_free_split(words);
+			return (RETURN_FAILURE);
+		}
+		ft_bzero(new_part, sizeof(t_arg));
+		new_part->arg = ft_strdup(words[i]);
+		if (!new_part->arg)
+		{
+			free(new_part);
+			ft_free_split(words);
+			return (RETURN_FAILURE);
+		}
+		count = get_cmd_parts_count(curr);
+		new_array = extend_cmd_parts(curr->cmd_parts, count, new_part);
+		if (!new_array)
+		{
+			free(new_part->arg);
+			free(new_part);
+			ft_free_split(words);
+			return (RETURN_FAILURE);
+		}
+		curr->cmd_parts = new_array;
+		i++;
+	}
+	ft_free_split(words);
+	return (RETURN_SUCCESS);
+}
+
 /*
 Function that:
 - adds a new token of type word or string to a command's cmd_parts list;
@@ -64,12 +117,13 @@ part, and terminates with NULL;
 - returns RETURN_SUCCESS if everything went well, otherwise RETURN_FAILURE 
 on allocation error.
 */
-int	process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
+int process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 {
 	int		count;
 	t_arg	*new_part;
 	t_arg	**new_array;
 	char	*expanded;
+	bool	was_expanded = false;
 
 	new_part = malloc(sizeof(t_arg));
 	if (!new_part)
@@ -78,14 +132,25 @@ int	process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 	if (new_part->in_simple_quote)
 		expanded = ft_strdup((*tokens)->value);
 	else
-		expanded = expand_variables((*tokens)->value, utils);
+		expanded = expand_variables((*tokens)->value, utils, &was_expanded);
 	if (!expanded)
 		return (ret_free_new_part(new_part, expanded));
-	new_part->arg = expanded;
-	count = get_cmd_parts_count(curr);
-	new_array = extend_cmd_parts(curr->cmd_parts, count, new_part);
-	if (!new_array)
-		return (ret_free_new_part(new_part, expanded));
-	curr->cmd_parts = new_array;
+	if (was_expanded && !new_part->in_simple_quote && !new_part->in_double_quote)
+	{
+		free(new_part);
+		int ret = reparse_expanded_string(expanded, curr);
+		free(expanded);
+		return (ret);
+	}
+	else
+	{
+		new_part->arg = expanded;
+		count = get_cmd_parts_count(curr);
+		new_array = extend_cmd_parts(curr->cmd_parts, count, new_part);
+		if (!new_array)
+			return (ret_free_new_part(new_part, expanded));
+		curr->cmd_parts = new_array;
+	}
 	return (RETURN_SUCCESS);
 }
+

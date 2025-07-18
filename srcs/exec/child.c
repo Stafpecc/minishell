@@ -6,12 +6,11 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 23:24:59 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/18 01:02:07 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-#include "../../libft/includes/libft.h"
 
 static int	exit_child_builtin(t_command_exec *node, t_utils *utils)
 {
