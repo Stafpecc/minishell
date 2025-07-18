@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:18:58 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/18 14:06:52 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static char	*append_char(char *result, char c)
 	buf[1] = '\0';
 	tmp = strjoin_and_free(result, buf);
 	return (tmp);
-}
+} 
 
 static char	*expand_variables_utils(int i, char *result, t_utils *utils,
-	char *input)
+	char *input, bool *was_expanded)
 {
 	while (input[i])
 	{
@@ -63,9 +63,13 @@ static char	*expand_variables_utils(int i, char *result, t_utils *utils,
 			{
 				i++;
 				result = append_exit_code(result, utils);
+				*was_expanded = true;
 			}
 			else if (ft_isalnum(input[i]) || input[i] == '_')
+			{
 				result = append_env_var(result, input, &i, utils->env);
+				*was_expanded = true;
+			}
 			else
 			{
 				result = append_char(result, '$');
@@ -79,7 +83,7 @@ static char	*expand_variables_utils(int i, char *result, t_utils *utils,
 	return (result);
 }
 
-char	*expand_variables(char *input, t_utils *utils)
+char	*expand_variables(char *input, t_utils *utils, bool *was_expanded)
 {
 	int		i;
 	char	*result;
@@ -87,6 +91,6 @@ char	*expand_variables(char *input, t_utils *utils)
 	i = 0;
 	result = ft_strdup("");
 	if (result)
-		result = expand_variables_utils(i, result, utils, input);
+		result = expand_variables_utils(i, result, utils, input, was_expanded);
 	return (result);
 }

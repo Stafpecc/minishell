@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 16:16:11 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/17 23:07:36 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ static int	return_free(char *input, bool *run, int flag)
 		return (130);
 	}
 	else if (flag == 2)
-	{
-		write(2, "\n", 1);
-		return (-1);
-	}
-	else if (flag == 3)
 		return (RETURN_SUCCESS);
 	return (RETURN_FAILURE);
 }
@@ -51,9 +46,13 @@ static int	readline_loop(int fd, char *delimiter)
 		if (g_interrupted)
 			return (return_free(input, &run, 1));
 		if (!input)
+		{
+			ft_printfd("minishell: warning: here-document delimited\
+by end-of-file (wanted `%s')\n", delimiter);
 			return (return_free(input, &run, 2));
+		}
 		if (ft_strcmp(input, delimiter) == 0)
-			return (return_free(input, &run, 3));
+			return (return_free(input, &run, 2));
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
 		free(input);

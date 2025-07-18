@@ -10,9 +10,10 @@ RM              := rm -f
 RM_DIR          := rm -rf
 
 RLFLAGS         := -lreadline
-CFLAGS          := -Wall -Wextra -Werror -g3
+CFLAGS          := -Wall -Wextra -Werror
 CPPFLAGS		:= -MMD -MP -I include/ -I libft/include/
 INC             := -I./include
+INCLUDE         := include/
 
 PURPLE          := \033[1;35m
 GREEN           := \033[1;32m
