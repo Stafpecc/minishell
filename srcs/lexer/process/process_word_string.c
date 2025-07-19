@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:20:26 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/19 18:15:57 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 18:36:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	return_free(char *str)
 	return (RETURN_FAILURE);
 }
 
-int	process_combined_token(const char *input, size_t *i, t_token **head)
+int	process_combined_token(const char *input, size_t *i, t_token **head, t_utils *utils)
 {
 	char		*buffer;
 	int			status;
@@ -88,7 +88,7 @@ int	process_combined_token(const char *input, size_t *i, t_token **head)
 		&& input[*i] != '<' && input[*i] != '>')
 	{
 		if (input[*i] == '"' || input[*i] == '\'')
-			status = handle_quoted_token(&ctx, input[*i]);
+			status = handle_quoted_token(&ctx, input[*i], utils);
 		else
 			status = handle_simple_token(input, i, &buffer);
 		if (status == RETURN_FAILURE)

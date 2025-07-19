@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:26:34 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:17:07 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/19 18:39:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	remove_empty_tokens(t_token **head)
 	}
 }
 
-t_token	*lexer(const char *input)
+t_token	*lexer(const char *input, t_utils *utils)
 {
 	t_token	*head;
 	size_t	i;
@@ -64,7 +64,7 @@ t_token	*lexer(const char *input)
 	head = NULL;
 	while (input[i])
 	{
-		if (launch_tokens(input, &i, &head) == RETURN_FAILURE)
+		if (launch_tokens(input, &i, &head, utils) == RETURN_FAILURE)
 			return (NULL);
 	}
 	remove_empty_tokens(&head);
