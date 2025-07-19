@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 15:56:21 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 13:29:34 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/19 18:39:19 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	launch_redirect_in(const char *input, size_t *i, t_token **head)
 	return (RETURN_SUCCESS);
 }
 
-int	launch_tokens(const char *input, size_t *i, t_token **head)
+int	launch_tokens(const char *input, size_t *i, t_token **head, t_utils *utils)
 {
 	if (ft_isspace(input[*i]))
 		(*i)++;
@@ -68,7 +68,7 @@ int	launch_tokens(const char *input, size_t *i, t_token **head)
 	}
 	else
 	{
-		if (process_combined_token(input, i, head) == RETURN_FAILURE)
+		if (process_combined_token(input, i, head, utils) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	return (RETURN_SUCCESS);

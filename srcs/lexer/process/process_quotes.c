@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   process_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:11:56 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 16:16:35 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/19 18:52:41 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "parsing.h"
 #include "../../../libft/includes/libft.h"
 
 int	process_quoted_token_separate(const char *input, size_t *i,
@@ -77,19 +78,85 @@ static int	append_quoted_to_buffer(const char *input, size_t *i,
 	return (RETURN_SUCCESS);
 }
 
-int	handle_quoted_token(t_token_ctx *ctx, char quote)
+int handle_single_quotes(t_token_ctx *ctx)
+{
+	const char *input = ctx->input;
+	size_t *i = ctx->i;
+	char **buffer = ctx->buffer;
+	size_t start;
+
+	if (input[*i] != '\'')
+		return (RETURN_FAILURE);
+	(*i)++;
+	start = *i;
+	while (input[*i] && input[*i] != '\'')
+		(*i)++;
+	if (input[*i] != '\'')
+		return (RETURN_FAILURE);
+	char *raw = ft_strndup(&input[start], *i - start);
+	if (!raw)
+		return (RETURN_FAILURE);
+	char *tmp = strjoin_and_free(*buffer, raw);
+	free(raw);
+	if (!tmp)
+		return (RETURN_FAILURE);
+	*buffer = tmp;
+	(*i)++;
+	return (RETURN_SUCCESS);
+}
+
+int handle_double_quotes_with_expansion(t_token_ctx *ctx, t_utils *utils)
+{
+	const char *input = ctx->input;
+	size_t *i = ctx->i;
+	char **buffer = ctx->buffer;
+	size_t start = *i + 1;
+	(*i)++;
+	while (input[*i] && input[*i] != '"')
+		(*i)++;
+	if (input[*i] != '"')
+		return (RETURN_FAILURE);
+	char *raw = ft_strndup(&input[start], *i - start);
+	if (!raw)
+		return (RETURN_FAILURE);
+	bool was_expanded = false;
+	char *expanded = expand_variables(raw, utils, &was_expanded);
+	free(raw);
+	if (!expanded)
+		return (RETURN_FAILURE);
+	char *tmp = strjoin_and_free(*buffer, expanded);
+	free(expanded);
+	if (!tmp)
+		return (RETURN_FAILURE);
+	*buffer = tmp;
+	(*i)++;
+	return (RETURN_SUCCESS);
+}
+
+int	handle_quoted_token(t_token_ctx *ctx, char quote, t_utils *utils)
 {
 	if (is_separate_quoted(ctx->input, *(ctx->i), quote, *(ctx->buffer)))
 	{
-		if (process_quoted_token_separate(ctx->input, ctx->i, ctx->head, quote)
-			== RETURN_FAILURE)
+		if (process_quoted_token_separate(ctx->input, ctx->i, ctx->head, quote) == RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	else
 	{
-		if (append_quoted_to_buffer(ctx->input, ctx->i, quote, ctx->buffer)
-			== RETURN_FAILURE)
-			return (RETURN_FAILURE);
+		if (quote == '\'')
+		{
+			if (handle_single_quotes(ctx) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		else if (quote == '"')
+		{
+			if (handle_double_quotes_with_expansion(ctx, utils) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
+		else
+		{
+			if (append_quoted_to_buffer(ctx->input, ctx->i, quote, ctx->buffer) == RETURN_FAILURE)
+				return (RETURN_FAILURE);
+		}
 	}
 	return (RETURN_SUCCESS);
 }
