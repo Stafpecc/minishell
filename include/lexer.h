@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:27:57 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 18:45:17 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 21:01:25 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include "return_error.h"
 
-typedef struct s_utils t_utils;
+typedef struct s_utils	t_utils;
 
 typedef enum e_token_type
 {
@@ -52,7 +52,8 @@ typedef struct s_token_ctx
 /******************************************************************************/
 /*                                 LEXER                                      */
 /******************************************************************************/
-int			launch_tokens(const char *input, size_t *i, t_token **head, t_utils *utils);
+int			launch_tokens(const char *input, size_t *i, t_token **head,
+				t_utils *utils);
 t_token		*lexer(const char *input, t_utils *utils);
 
 /******************************************************************************/
@@ -75,5 +76,13 @@ int			process_quoted_token_separate(const char *input, size_t *i,
 int			handle_quoted_token(t_token_ctx *ctx, char quote, t_utils *utils);
 char		*extract_quoted_part(const char *input, size_t *i, char quote);
 char		*concat_buffer_part(char *buffer, char *part);
+int			handle_double_quotes_with_expansion(t_token_ctx *ctx,
+				t_utils *utils);
+int			handle_single_quotes(t_token_ctx *ctx);
+bool		is_separator(char c);
+bool		is_separate_quoted(const char *input, size_t i, char quote,
+				char *buffer);
+int			append_quoted_to_buffer(const char *input, size_t *i,
+				char quote, char **buffer);
 
 #endif

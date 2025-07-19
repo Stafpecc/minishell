@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 18:02:13 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 20:59:27 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,35 +49,7 @@ static void	free_all(char *input, t_token *token)
 	free_tokens(token);
 }
 
-static t_token *find_syntax_error(t_token *tokens)
-{
-	if (!tokens)
-		return NULL;
-
-	if (tokens->type == TOK_PIPE
-		|| tokens->type == TOK_REDIRECT_IN
-		|| tokens->type == TOK_REDIRECT_OUT
-		|| tokens->type == TOK_APPEND_REDIRECT
-		|| tokens->type == TOK_HEREDOC)
-		return tokens;
-	t_token *curr = tokens;
-	while (curr && curr->next)
-	{
-		if (curr->type == TOK_PIPE && curr->next->type == TOK_PIPE)
-			return curr->next;
-		if ((curr->type == TOK_REDIRECT_IN || curr->type == TOK_REDIRECT_OUT
-			 || curr->type == TOK_APPEND_REDIRECT || curr->type == TOK_HEREDOC))
-		{
-			if (curr->next->type != TOK_WORD && curr->next->type != TOK_STRING
-				&& curr->next->type != TOK_SINGLE_QUOTES && curr->next->type != TOK_DOUBLE_QUOTES)
-				return curr->next;
-		}
-		curr = curr->next;
-	}
-	return (NULL);
-}
-
-void minishell_loop(t_utils *utils)
+void	minishell_loop(t_utils *utils)
 {
 	char			*input;
 	t_token			*token;

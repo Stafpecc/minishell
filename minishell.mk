@@ -37,6 +37,7 @@ override PARSERSRC := \
 	process/process_add_redirect \
 	process/process_word_string \
 	process/process_utils \
+	process/process_expand \
 
 
 SRC += $(addprefix $(LEXERDIR), $(addsuffix .c, $(LEXERSRC)))
@@ -49,6 +50,7 @@ override LEXERSRC := \
 	utils/free_token \
 	process/process_word_string \
 	process/process_quotes \
+	process/process_expand \
 
 
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
@@ -105,4 +107,5 @@ override UTILSSRC := \
 	launch_lexer \
 	minishell_loop \
 	quotes \
+	syntax \
 	t_utils \

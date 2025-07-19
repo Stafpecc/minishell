@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:13:45 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/19 20:58:16 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 				t_utils *utils);
 t_token		*process_lexer(char *input, t_utils *utils);
 t_utils		*init_utils_struct(char **envp);
+t_token		*find_syntax_error(t_token *tokens);
 
 /******************************************************************************/
 /*                                SECURE                                      */
@@ -53,7 +54,6 @@ char		quote_not_closed(const char *str);
 /******************************************************************************/
 /*                                ASCII                                       */
 /******************************************************************************/
-
 void		ascii_minishell(char *line);
 void		ascii_tarini(char *line);
 void		ascii_ldevoude(char *line);

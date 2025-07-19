@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:11:56 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/19 18:52:41 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 20:51:50 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	process_quoted_token_separate(const char *input, size_t *i,
 	return (RETURN_SUCCESS);
 }
 
-static bool	is_separator(char c)
+bool	is_separator(char c)
 {
 	return (c == '\0' || ft_isspace(c) || c == '|' || c == '<' || c == '>');
 }
 
-static bool	is_separate_quoted(const char *input, size_t i, char quote,
+bool	is_separate_quoted(const char *input, size_t i, char quote,
 	char *buffer)
 {
 	size_t	temp_i;
@@ -62,7 +62,7 @@ static bool	is_separate_quoted(const char *input, size_t i, char quote,
 	return (buffer[0] == '\0' && is_separator(input[temp_i + 1]));
 }
 
-static int	append_quoted_to_buffer(const char *input, size_t *i,
+int	append_quoted_to_buffer(const char *input, size_t *i,
 	char quote, char **buffer)
 {
 	char	*part;
@@ -78,66 +78,12 @@ static int	append_quoted_to_buffer(const char *input, size_t *i,
 	return (RETURN_SUCCESS);
 }
 
-int handle_single_quotes(t_token_ctx *ctx)
-{
-	const char *input = ctx->input;
-	size_t *i = ctx->i;
-	char **buffer = ctx->buffer;
-	size_t start;
-
-	if (input[*i] != '\'')
-		return (RETURN_FAILURE);
-	(*i)++;
-	start = *i;
-	while (input[*i] && input[*i] != '\'')
-		(*i)++;
-	if (input[*i] != '\'')
-		return (RETURN_FAILURE);
-	char *raw = ft_strndup(&input[start], *i - start);
-	if (!raw)
-		return (RETURN_FAILURE);
-	char *tmp = strjoin_and_free(*buffer, raw);
-	free(raw);
-	if (!tmp)
-		return (RETURN_FAILURE);
-	*buffer = tmp;
-	(*i)++;
-	return (RETURN_SUCCESS);
-}
-
-int handle_double_quotes_with_expansion(t_token_ctx *ctx, t_utils *utils)
-{
-	const char *input = ctx->input;
-	size_t *i = ctx->i;
-	char **buffer = ctx->buffer;
-	size_t start = *i + 1;
-	(*i)++;
-	while (input[*i] && input[*i] != '"')
-		(*i)++;
-	if (input[*i] != '"')
-		return (RETURN_FAILURE);
-	char *raw = ft_strndup(&input[start], *i - start);
-	if (!raw)
-		return (RETURN_FAILURE);
-	bool was_expanded = false;
-	char *expanded = expand_variables(raw, utils, &was_expanded);
-	free(raw);
-	if (!expanded)
-		return (RETURN_FAILURE);
-	char *tmp = strjoin_and_free(*buffer, expanded);
-	free(expanded);
-	if (!tmp)
-		return (RETURN_FAILURE);
-	*buffer = tmp;
-	(*i)++;
-	return (RETURN_SUCCESS);
-}
-
 int	handle_quoted_token(t_token_ctx *ctx, char quote, t_utils *utils)
 {
 	if (is_separate_quoted(ctx->input, *(ctx->i), quote, *(ctx->buffer)))
 	{
-		if (process_quoted_token_separate(ctx->input, ctx->i, ctx->head, quote) == RETURN_FAILURE)
+		if (process_quoted_token_separate(ctx->input, ctx->i, ctx->head, quote)
+			== RETURN_FAILURE)
 			return (RETURN_FAILURE);
 	}
 	else
@@ -149,12 +95,14 @@ int	handle_quoted_token(t_token_ctx *ctx, char quote, t_utils *utils)
 		}
 		else if (quote == '"')
 		{
-			if (handle_double_quotes_with_expansion(ctx, utils) == RETURN_FAILURE)
+			if (handle_double_quotes_with_expansion(ctx, utils)
+				== RETURN_FAILURE)
 				return (RETURN_FAILURE);
 		}
 		else
 		{
-			if (append_quoted_to_buffer(ctx->input, ctx->i, quote, ctx->buffer) == RETURN_FAILURE)
+			if (append_quoted_to_buffer(ctx->input, ctx->i, quote, ctx->buffer)
+				== RETURN_FAILURE)
 				return (RETURN_FAILURE);
 		}
 	}

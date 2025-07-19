@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:08:51 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:14:49 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/19 20:33:10 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../libft/includes/libft.h"
 

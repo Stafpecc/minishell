@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 17:17:57 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 21:02:31 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ static char	*append_env_var(char *result, char *input, int *i, char **env)
 	var_name = ft_strndup(&input[start], *i - start);
 	value = get_env_value(env, var_name);
 	free(var_name);
-
 	if (!value)
 		tmp = strjoin_and_free(result, "");
 	else
 		tmp = strjoin_and_free(result, value);
-
 	return (tmp);
 }
 
@@ -54,7 +52,7 @@ static char	*append_char(char *result, char c)
 	buf[1] = '\0';
 	tmp = strjoin_and_free(result, buf);
 	return (tmp);
-} 
+}
 
 static char	*expand_variables_utils(int i, char *result, t_utils *utils,
 	char *input, bool *was_expanded)
@@ -88,7 +86,7 @@ static char	*expand_variables_utils(int i, char *result, t_utils *utils,
 	return (result);
 }
 
-char *expand_variables(char *input, t_utils *utils, bool *was_expanded)
+char	*expand_variables(char *input, t_utils *utils, bool *was_expanded)
 {
 	int		i;
 	char	*result;

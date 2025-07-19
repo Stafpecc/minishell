@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_word_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:20:26 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/19 18:36:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 20:41:51 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	return_free(char *str)
 	return (RETURN_FAILURE);
 }
 
-int	process_combined_token(const char *input, size_t *i, t_token **head, t_utils *utils)
+int	process_combined_token(const char *input, size_t *i, t_token **head,
+	t_utils *utils)
 {
 	char		*buffer;
 	int			status;

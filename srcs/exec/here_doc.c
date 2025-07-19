@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 23:07:36 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 20:33:34 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
-
 
 // we init input to NULL, then we get into an infinite while loop
 //(can do a bool if norme require it) then we write inside of input
