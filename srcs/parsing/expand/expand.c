@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/18 14:06:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 17:17:57 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ static char	*append_env_var(char *result, char *input, int *i, char **env)
 	var_name = ft_strndup(&input[start], *i - start);
 	value = get_env_value(env, var_name);
 	free(var_name);
-	tmp = strjoin_and_free(result, value);
+
+	if (!value)
+		tmp = strjoin_and_free(result, "");
+	else
+		tmp = strjoin_and_free(result, value);
+
 	return (tmp);
 }
 
@@ -83,14 +88,22 @@ static char	*expand_variables_utils(int i, char *result, t_utils *utils,
 	return (result);
 }
 
-char	*expand_variables(char *input, t_utils *utils, bool *was_expanded)
+char *expand_variables(char *input, t_utils *utils, bool *was_expanded)
 {
 	int		i;
 	char	*result;
 
 	i = 0;
 	result = ft_strdup("");
-	if (result)
-		result = expand_variables_utils(i, result, utils, input, was_expanded);
+	if (!result)
+		return (NULL);
+	result = expand_variables_utils(i, result, utils, input, was_expanded);
+	if (!result)
+		return (NULL);
+	if (result[0] == '\0')
+	{
+		free(result);
+		return (ft_strdup(""));
+	}
 	return (result);
 }

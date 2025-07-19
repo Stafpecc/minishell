@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/18 14:05:47 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 15:39:25 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_arg
 	char			*arg;
 	int				fd;
 	bool			heredoc;
+	bool			was_expanded;
 	bool			append_redirect;
 	bool			in_simple_quote;
 	bool			in_double_quote;
