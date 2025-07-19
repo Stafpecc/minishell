@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:46:38 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/19 15:39:53 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 18:16:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ part, and terminates with NULL;
 - returns RETURN_SUCCESS if everything went well, otherwise RETURN_FAILURE 
 on allocation error.
 */
-#include <stdio.h>
-
 int process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 {
 	int		count;
