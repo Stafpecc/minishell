@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:44:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:45:21 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/19 13:03:29 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 static bool	pass_n_flags(t_command_exec *node, int *index_print, int i)
 {
+	bool	get_out;
+
+	get_out = FALSE;
 	if (!node->cmd_parts[*index_print])
 		return (RETURN_SUCCESS);
 	while (node->cmd_parts[*index_print]
@@ -26,11 +29,16 @@ static bool	pass_n_flags(t_command_exec *node, int *index_print, int i)
 	{
 		while (node->cmd_parts[*index_print][i])
 		{
-			if (node->cmd_parts[1][i] == 'n')
+			if (node->cmd_parts[*index_print][i] == 'n')
 				i++;
 			else
+			{
+				get_out = TRUE;
 				break ;
+			}
 		}
+		if (get_out == TRUE)
+			break ;
 		i = 2;
 		*index_print += 1;
 	}
@@ -75,14 +83,14 @@ static bool	is_newline(t_command_exec *node, int i, bool *newline,
 
 int	echo_builtin(t_command_exec *node, bool newline, int i)
 {
-	if (is_newline(node, 2, &newline, &i) == 1)
-		return (1);
 	if (!node->cmd_parts[1])
 	{
 		if (write(STDOUT_FILENO, "\n", 1) < 0)
 			return (1);
 		return (0);
 	}
+	if (is_newline(node, 2, &newline, &i) == 1)
+		return (1);
 	while (node->cmd_parts[i])
 	{
 		if (ft_printf("%s", node->cmd_parts[i]) < 0)
