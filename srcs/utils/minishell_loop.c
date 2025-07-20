@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 18:02:13 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 12:45:14 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static bool	handle_null_input(char *input, t_utils *utils)
 {
 	if (!input)
 	{
+		ft_printfd("exit\n");
 		utils->run = 0;
 		return (false);
 	}

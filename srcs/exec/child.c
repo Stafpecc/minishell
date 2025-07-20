@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:21:37 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/18 01:02:07 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 12:32:48 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	child_redirect(t_command_exec *node, t_utils *utils)
 	char	*path;
 
 	if (!node->cmd_parts || !node->cmd_parts[0])
-		return ;
+		return;
 	if (ft_strchr(node->cmd_parts[0], ' ') || ft_strchr(node->cmd_parts[0], '|'))
 	{
 		ft_printfd("minishell: %s: command not found\n", node->cmd_parts[0]);

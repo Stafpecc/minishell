@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:55:02 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 16:15:01 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/20 12:35:04 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	only_child(t_command_exec *node, int *pipe_fd, t_utils *utils)
 	if (pipe_fd[1] != NONE)
 		close(pipe_fd[1]);
 	child_redirect(node, utils);
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }
 
 // It does redirect to the functions that
