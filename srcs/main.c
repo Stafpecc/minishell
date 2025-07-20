@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:10 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 16:41:06 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/20 18:03:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int ac, char **av, char **env)
 	int		last_return;
 
 	(void)av;
-	ascii_art();
 	if (check_error(ac) == RETURN_FAILURE)
 		return (RETURN_FAILURE);
+	ascii_art();
 	rl_event_hook = gotnotnull;
 	set_signals();
 	utils = init_utils_struct(env);
