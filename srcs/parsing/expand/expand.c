@@ -6,13 +6,13 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 17:17:57 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 16:11:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char	*append_exit_code(char *result, t_utils *utils)
+char	*append_exit_code(char *result, t_utils *utils)
 {
 	char	*exit_code;
 	char	*tmp;
@@ -23,7 +23,7 @@ static char	*append_exit_code(char *result, t_utils *utils)
 	return (tmp);
 }
 
-static char	*append_env_var(char *result, char *input, int *i, char **env)
+char	*append_env_var(char *result, char *input, int *i, char **env)
 {
 	int		start;
 	char	*var_name;
@@ -36,16 +36,14 @@ static char	*append_env_var(char *result, char *input, int *i, char **env)
 	var_name = ft_strndup(&input[start], *i - start);
 	value = get_env_value(env, var_name);
 	free(var_name);
-
 	if (!value)
 		tmp = strjoin_and_free(result, "");
 	else
 		tmp = strjoin_and_free(result, value);
-
 	return (tmp);
 }
 
-static char	*append_char(char *result, char c)
+char	*append_char(char *result, char c)
 {
 	char	buf[2];
 	char	*tmp;
@@ -54,56 +52,27 @@ static char	*append_char(char *result, char c)
 	buf[1] = '\0';
 	tmp = strjoin_and_free(result, buf);
 	return (tmp);
-} 
-
-static char	*expand_variables_utils(int i, char *result, t_utils *utils,
-	char *input, bool *was_expanded)
-{
-	while (input[i])
-	{
-		if (input[i] == '$')
-		{
-			i++;
-			if (input[i] == '?')
-			{
-				i++;
-				result = append_exit_code(result, utils);
-				*was_expanded = true;
-			}
-			else if (ft_isalnum(input[i]) || input[i] == '_')
-			{
-				result = append_env_var(result, input, &i, utils->env);
-				*was_expanded = true;
-			}
-			else
-			{
-				result = append_char(result, '$');
-				if (input[i])
-					result = append_char(result, input[i++]);
-			}
-		}
-		else
-			result = append_char(result, input[i++]);
-	}
-	return (result);
 }
 
-char *expand_variables(char *input, t_utils *utils, bool *was_expanded)
+char	*expand_variables(char *input, t_utils *utils, bool *was_expanded)
 {
-	int		i;
-	char	*result;
+	t_expand_ctx	ctx;
 
-	i = 0;
-	result = ft_strdup("");
-	if (!result)
+	ctx.input = input;
+	ctx.utils = utils;
+	ctx.was_expanded = was_expanded;
+	ctx.i = 0;
+	ctx.result = ft_strdup("");
+	if (!ctx.result)
 		return (NULL);
-	result = expand_variables_utils(i, result, utils, input, was_expanded);
-	if (!result)
+	ctx.result = expand_variables_utils(&ctx);
+	if (!ctx.result)
 		return (NULL);
-	if (result[0] == '\0')
+	was_expanded = ctx.was_expanded;
+	if (ctx.result[0] == '\0')
 	{
-		free(result);
+		free(ctx.result);
 		return (ft_strdup(""));
 	}
-	return (result);
+	return (ctx.result);
 }

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 18:44:37 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 16:12:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,16 @@ int				add_redirect(t_token **tokens, t_arg ***redirect_array,
 /******************************************************************************/
 /*                                 EXPAND                                     */
 /******************************************************************************/
-char			*expand_variables(char *input, t_utils *utils, bool *was_expanded);
+char			*expand_variables(char *input, t_utils *utils,
+					bool *was_expanded);
 char			*get_env_value(char **env, const char *var_name);
 char			*strjoin_and_free(char *s1, char *s2);
+int				reparse_expanded_string(char *expanded, t_command *curr,
+					bool was_expanded);
+t_arg			**extend_cmd_parts(t_arg **old_array, int old_size,
+					t_arg *new_part);
+int				get_cmd_parts_count(t_command *curr);
+void			ft_free_split(char **array);
+char			*expand_variables_utils(t_expand_ctx *ctx);
 
 #endif
