@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:27:57 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 17:03:53 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 18:17:30 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ char		*append_env_var(char *result, char *input, int *i, char **env);
 char		*append_char(char *result, char c);
 int			handle_simple_token(t_token_ctx *ctx, t_utils *utils);
 size_t		find_simple_token_end(const char *input, size_t start);
+size_t		find_closing_quote(const char *input, size_t start,
+				char quote_char);
 
 #endif
