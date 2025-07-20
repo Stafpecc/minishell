@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:15:52 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/20 17:36:43 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 17:54:51 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	handle_null_input(char *input, t_utils *utils)
 {
 	if (!input)
 	{
+		ft_printfd("exit\n");
 		utils->run = 0;
 		return (false);
 	}
