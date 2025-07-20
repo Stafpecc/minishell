@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:30:12 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/20 16:45:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 17:50:41 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ static char	*process_quoted_content(char *raw, char quote_char,
 	if (quote_char == '\'')
 		result = raw;
 	else
-	{
 		result = expand_variables(raw, utils, was_expanded);
-		free(raw);
-	}
 	return (result);
 }
 
@@ -84,10 +81,17 @@ int	handle_quoted_token(t_token_ctx *ctx, char quote_char, t_utils *utils)
 	was_expanded = false;
 	to_append = process_quoted_content(raw, quote_char, utils, &was_expanded);
 	if (!to_append)
+	{
+		free(raw);
 		return (RETURN_FAILURE);
-	if (append_to_buffer(ctx->buffer, to_append, quote_char, raw)
-		== RETURN_FAILURE)
+	}
+	if (append_to_buffer(ctx->buffer, to_append, quote_char, raw) == RETURN_FAILURE)
+	{
+		free(raw);
+		free(to_append);
 		return (RETURN_FAILURE);
+	}
 	*ctx->i = end + 1;
+	free(raw);
 	return (RETURN_SUCCESS);
 }

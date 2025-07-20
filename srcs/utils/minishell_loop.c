@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:30:41 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:18:49 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 17:37:06 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static char	*get_user_input(t_utils *utils)
 		return (NULL);
 	}
 	if (skip_empty_or_spaces(input))
-	{
-		free(input);
-		return (NULL);
-	}
+		return (ft_strdup(""));
 	if (*input)
 		add_history(input);
 	return (input);
