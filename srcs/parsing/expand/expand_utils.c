@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:08:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:49:58 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/20 16:11:00 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,41 @@ char	*strjoin_and_free(char *s1, char *s2)
 	copy_strings_into(joined, s1, s2);
 	free(s1);
 	return (joined);
+}
+
+static void	process_dollar_sequence(t_expand_ctx *ctx)
+{
+	if (ctx->input[ctx->i] == '?')
+	{
+		ctx->i++;
+		ctx->result = append_exit_code(ctx->result, ctx->utils);
+		*(ctx->was_expanded) = true;
+	}
+	else if (ft_isalnum(ctx->input[ctx->i]) || ctx->input[ctx->i] == '_')
+	{
+		ctx->result = append_env_var(ctx->result,
+				ctx->input, &ctx->i, ctx->utils->env);
+		*(ctx->was_expanded) = true;
+	}
+	else
+	{
+		ctx->result = append_char(ctx->result, '$');
+		if (ctx->input[ctx->i])
+			ctx->result = append_char(ctx->result, ctx->input[ctx->i++]);
+	}
+}
+
+char	*expand_variables_utils(t_expand_ctx *ctx)
+{
+	while (ctx->input[ctx->i])
+	{
+		if (ctx->input[ctx->i] == '$')
+		{
+			ctx->i++;
+			process_dollar_sequence(ctx);
+		}
+		else
+			ctx->result = append_char(ctx->result, ctx->input[ctx->i++]);
+	}
+	return (ctx->result);
 }

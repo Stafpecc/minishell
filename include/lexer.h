@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:27:57 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 21:01:25 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/20 17:03:53 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,24 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_expand_ctx
+{
+	char		*result;
+	char		*input;
+	int			i;
+	t_utils		*utils;
+	bool		*was_expanded;
+}	t_expand_ctx;
+
 typedef struct s_token_ctx
 {
 	const char	*input;
 	size_t		*i;
 	t_token		**head;
 	char		**buffer;
+	bool		in_single_quote;
+	bool		in_double_quote;
+	bool		was_expanded;
 }	t_token_ctx;
 
 /******************************************************************************/
@@ -84,5 +96,10 @@ bool		is_separate_quoted(const char *input, size_t i, char quote,
 				char *buffer);
 int			append_quoted_to_buffer(const char *input, size_t *i,
 				char quote, char **buffer);
+char		*append_exit_code(char *result, t_utils *utils);
+char		*append_env_var(char *result, char *input, int *i, char **env);
+char		*append_char(char *result, char c);
+int			handle_simple_token(t_token_ctx *ctx, t_utils *utils);
+size_t		find_simple_token_end(const char *input, size_t start);
 
 #endif

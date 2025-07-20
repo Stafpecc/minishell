@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 20:58:16 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/20 16:16:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void		execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 t_token		*process_lexer(char *input, t_utils *utils);
 t_utils		*init_utils_struct(char **envp);
 t_token		*find_syntax_error(t_token *tokens);
+bool		skip_empty_or_spaces(char *input);
+bool		handle_null_input(char *input, t_utils *utils);
+void		free_all(char *input, t_token *token);
 
 /******************************************************************************/
 /*                                SECURE                                      */

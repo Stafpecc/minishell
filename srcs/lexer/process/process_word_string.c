@@ -3,97 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   process_word_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:20:26 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/19 20:41:51 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/20 16:40:39 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "../../../libft/includes/libft.h"
+#include "parsing.h"
 
-char	*extract_quoted_part(const char *input, size_t *i, char quote)
+static char	*init_buffer(void)
 {
-	size_t	start;
-	size_t	j;
-	char	*part;
+	char	*buffer;
 
-	start = *i + 1;
-	j = start;
-	while (input[j] && input[j] != quote)
-		j++;
-	if (input[j] != quote)
-		return (NULL);
-	part = ft_substr(input, start, j - start);
-	if (!part)
-		return (NULL);
-	*i = j + 1;
-	return (part);
+	buffer = ft_strdup("");
+	return (buffer);
 }
 
-char	*concat_buffer_part(char *buffer, char *part)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(buffer, part);
-	free(buffer);
-	free(part);
-	if (!tmp)
-		return (NULL);
-	return (tmp);
-}
-
-static int	handle_simple_token(const char *input, size_t *i, char **buffer)
-{
-	size_t	start;
-	char	*part;
-	char	*new_buffer;
-
-	start = *i;
-	while (input[*i] && !ft_isspace(input[*i]) && input[*i] != '|' && input[*i]
-		!= '<' && input[*i] != '>'
-		&& input[*i] != '\'' && input[*i] != '"')
-		(*i)++;
-	part = ft_substr(input, start, *i - start);
-	if (!part)
-		return (RETURN_FAILURE);
-	new_buffer = concat_buffer_part(*buffer, part);
-	if (!new_buffer)
-		return (RETURN_FAILURE);
-	*buffer = new_buffer;
-	return (RETURN_SUCCESS);
-}
-
-static int	return_free(char *str)
-{
-	free(str);
-	return (RETURN_FAILURE);
-}
-
-int	process_combined_token(const char *input, size_t *i, t_token **head,
+static int	process_token_chars(const char *input, t_token_ctx *ctx,
 	t_utils *utils)
+{
+	int	status;
+
+	status = RETURN_SUCCESS;
+	while (input[*ctx->i] && !ft_isspace(input[*ctx->i])
+		&& input[*ctx->i] != '|' && input[*ctx->i] != '<'
+		&& input[*ctx->i] != '>')
+	{
+		if (input[*ctx->i] == '"' || input[*ctx->i] == '\'')
+			status = handle_quoted_token(ctx, input[*ctx->i], utils);
+		else
+			status = handle_simple_token(ctx, utils);
+		if (status == RETURN_FAILURE)
+			break ;
+	}
+	return (status);
+}
+
+int	process_combined_token(const char *input, size_t *i,
+	t_token **head, t_utils *utils)
 {
 	char		*buffer;
 	int			status;
 	t_token_ctx	ctx;
 
-	buffer = ft_strdup("");
+	buffer = init_buffer();
 	if (!buffer)
 		return (RETURN_FAILURE);
 	ctx.input = input;
 	ctx.i = i;
 	ctx.head = head;
 	ctx.buffer = &buffer;
-	while (input[*i] && !ft_isspace(input[*i]) && input[*i] != '|'
-		&& input[*i] != '<' && input[*i] != '>')
+	ctx.in_single_quote = false;
+	ctx.in_double_quote = false;
+	ctx.was_expanded = false;
+	status = process_token_chars(input, &ctx, utils);
+	if (status == RETURN_FAILURE)
 	{
-		if (input[*i] == '"' || input[*i] == '\'')
-			status = handle_quoted_token(&ctx, input[*i], utils);
-		else
-			status = handle_simple_token(input, i, &buffer);
-		if (status == RETURN_FAILURE)
-			return (return_free(buffer));
+		free(buffer);
+		return (RETURN_FAILURE);
 	}
 	status = add_token(head, TOK_WORD, buffer);
 	free(buffer);

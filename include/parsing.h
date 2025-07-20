@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/19 21:08:11 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/20 16:12:51 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,5 +176,7 @@ int				reparse_expanded_string(char *expanded, t_command *curr,
 t_arg			**extend_cmd_parts(t_arg **old_array, int old_size,
 					t_arg *new_part);
 int				get_cmd_parts_count(t_command *curr);
+void			ft_free_split(char **array);
+char			*expand_variables_utils(t_expand_ctx *ctx);
 
 #endif

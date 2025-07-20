@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:11:56 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/19 20:51:50 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/20 16:30:36 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,36 +75,5 @@ int	append_quoted_to_buffer(const char *input, size_t *i,
 	if (!new_buffer)
 		return (RETURN_FAILURE);
 	*buffer = new_buffer;
-	return (RETURN_SUCCESS);
-}
-
-int	handle_quoted_token(t_token_ctx *ctx, char quote, t_utils *utils)
-{
-	if (is_separate_quoted(ctx->input, *(ctx->i), quote, *(ctx->buffer)))
-	{
-		if (process_quoted_token_separate(ctx->input, ctx->i, ctx->head, quote)
-			== RETURN_FAILURE)
-			return (RETURN_FAILURE);
-	}
-	else
-	{
-		if (quote == '\'')
-		{
-			if (handle_single_quotes(ctx) == RETURN_FAILURE)
-				return (RETURN_FAILURE);
-		}
-		else if (quote == '"')
-		{
-			if (handle_double_quotes_with_expansion(ctx, utils)
-				== RETURN_FAILURE)
-				return (RETURN_FAILURE);
-		}
-		else
-		{
-			if (append_quoted_to_buffer(ctx->input, ctx->i, quote, ctx->buffer)
-				== RETURN_FAILURE)
-				return (RETURN_FAILURE);
-		}
-	}
 	return (RETURN_SUCCESS);
 }

@@ -50,7 +50,12 @@ override LEXERSRC := \
 	utils/free_token \
 	process/process_word_string \
 	process/process_quotes \
+	process/process_handle_quotes \
+	process/process_handle_dquotes \
+	process/process_handle_single \
 	process/process_expand \
+	process/process_handle_simple \
+	process/process_utils \
 
 
 SRC += $(addprefix $(SIGNALDIR), $(addsuffix .c, $(SIGNALSRC)))
@@ -78,7 +83,7 @@ override EXECSRC := \
 	child \
 	exec_utils\
 	exec \
-	here_doc\
+	here_doc \
 	single_builtin \
 
 
@@ -109,3 +114,4 @@ override UTILSSRC := \
 	quotes \
 	syntax \
 	t_utils \
+	utils \
