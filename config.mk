@@ -10,7 +10,7 @@ RM              := rm -f
 RM_DIR          := rm -rf
 
 RLFLAGS         := -lreadline
-CFLAGS          := -Wall -Wextra -Werror
+CFLAGS          := -Wall -Wextra -Werror -g3
 CPPFLAGS		:= -MMD -MP -I include/ -I libft/include/
 INC             := -I./include
 INCLUDE         := include/

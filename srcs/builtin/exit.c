@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:39:12 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/17 16:14:22 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/20 11:38:05 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ unsigned int	exit_builtin(t_command_exec *node, t_utils *utils)
 
 	return_value = 0;
 	if (!node->cmd_parts[1])
-		return (print_exit(utils->last_return, NULL, FALSE, utils));
+	{
+		ft_printfd("exit\n");
+		utils->run = 0;
+		return (utils->last_return);
+	}
 	return_value = is_arg_digit_and_overflow(node->cmd_parts[1], utils);
 	if (return_value)
 		return (return_value);
