@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:46:38 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/18 14:11:21 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/19 18:16:12 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void ft_free_split(char **array)
 	free(array);
 }
 
-int reparse_expanded_string(char *expanded, t_command *curr)
+int reparse_expanded_string(char *expanded, t_command *curr, bool was_expanded)
 {
 	char	**words;
 	int		i, count;
@@ -99,6 +99,7 @@ int reparse_expanded_string(char *expanded, t_command *curr)
 			return (RETURN_FAILURE);
 		}
 		curr->cmd_parts = new_array;
+		curr->cmd_parts[i]->was_expanded = was_expanded;
 		i++;
 	}
 	ft_free_split(words);
@@ -130,7 +131,11 @@ int process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 		return (RETURN_FAILURE);
 	process_quotes(*tokens, new_part);
 	if (new_part->in_simple_quote)
+	{
 		expanded = ft_strdup((*tokens)->value);
+		if (!expanded)
+			return (RETURN_FAILURE);
+	}
 	else
 		expanded = expand_variables((*tokens)->value, utils, &was_expanded);
 	if (!expanded)
@@ -138,7 +143,7 @@ int process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 	if (was_expanded && !new_part->in_simple_quote && !new_part->in_double_quote)
 	{
 		free(new_part);
-		int ret = reparse_expanded_string(expanded, curr);
+		int ret = reparse_expanded_string(expanded, curr, was_expanded);
 		free(expanded);
 		return (ret);
 	}
@@ -150,6 +155,8 @@ int process_word_string(t_token **tokens, t_command *curr, t_utils *utils)
 		if (!new_array)
 			return (ret_free_new_part(new_part, expanded));
 		curr->cmd_parts = new_array;
+		curr->cmd_parts[0]->was_expanded = was_expanded;
+
 	}
 	return (RETURN_SUCCESS);
 }
