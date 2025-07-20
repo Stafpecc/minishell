@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:30:12 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/20 18:19:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/20 18:29:06 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*get_quoted_content(t_token_ctx *ctx, char quote_char,
 	bool	was_expanded;
 
 	start = ++(*ctx->i);
-	end == find_closing_quote(ctx->input, start, quote_char);
+	end = find_closing_quote(ctx->input, start, quote_char);
 	if (ctx->input[end] != quote_char)
 		return (NULL);
 	raw = extract_quoted_substring(ctx->input, start, end);
