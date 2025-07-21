@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:28:38 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:16:58 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:45:52 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		minishell_loop(t_utils *utils);
 void		execute_or_cleanup(t_command_exec *cmd, t_token *token, char *input,
 				t_utils *utils);
 t_token		*process_lexer(char *input, t_utils *utils);
-t_utils		*init_utils_struct(char **envp);
+int			init_utils_struct(t_utils **utils, char **envp, char **av);
 t_token		*find_syntax_error(t_token *tokens);
 bool		skip_empty_or_spaces(char *input);
 bool		handle_null_input(char *input, t_utils *utils);
@@ -47,6 +47,7 @@ void		free_all(char *input, t_token *token);
 int			check_error(int ac);
 void		free_env(char **env);
 void		free_utils(t_utils *utils);
+void		free_av(char **arr);
 
 /******************************************************************************/
 /*                                QUOTES                                      */

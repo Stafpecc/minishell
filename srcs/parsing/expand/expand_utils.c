@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:08:58 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:11:00 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:50:07 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	copy_strings_into(char *dest, char *s1, char *s2)
 	dest[i + j] = '\0';
 }
 
-char	*strjoin_and_free(char *s1, char *s2)
+char	*strjoin_and_free(char *s1, char *s2, bool free_s2)
 {
 	char	*joined;
 	size_t	len1;
@@ -46,10 +46,14 @@ char	*strjoin_and_free(char *s1, char *s2)
 	if (!joined)
 	{
 		free(s1);
+		if (free_s2)
+			free(s2);
 		return (NULL);
 	}
 	copy_strings_into(joined, s1, s2);
 	free(s1);
+	if (free_s2)
+		free(s2);
 	return (joined);
 }
 
@@ -77,15 +81,46 @@ static void	process_dollar_sequence(t_expand_ctx *ctx)
 
 char	*expand_variables_utils(t_expand_ctx *ctx)
 {
+	bool	first_time = true;
+	char	c;
+	int		index;
+
+	if (!ctx->result)
+		ctx->result = ft_strdup("");
 	while (ctx->input[ctx->i])
 	{
 		if (ctx->input[ctx->i] == '$')
 		{
+			if (first_time && ctx->input[ctx->i + 1])
+			{
+				c = ctx->input[ctx->i + 1];
+				if (c >= '0' && c <= '9')
+				{
+					index = c - '0';
+					ctx->i += 2;
+					if (c == '0' && ctx->utils->av[index] != NULL)
+					{
+						ctx->result = strjoin_and_free(ctx->result,
+							ft_strdup(ctx->utils->av[index]), true);
+					}
+					else
+					{
+						ctx->result = strjoin_and_free(ctx->result,
+							ft_strdup(""), true);
+					}
+					first_time = false;
+					continue;
+				}
+			}
+			first_time = false;
 			ctx->i++;
 			process_dollar_sequence(ctx);
 		}
 		else
-			ctx->result = append_char(ctx->result, ctx->input[ctx->i++]);
+		{
+			ctx->result = append_char(ctx->result, ctx->input[ctx->i]);
+			ctx->i++;
+		}
 	}
 	return (ctx->result);
 }

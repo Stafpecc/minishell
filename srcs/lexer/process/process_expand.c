@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:42:26 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:46:07 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:51:00 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	append_to_buffer(char **buffer, char *str)
 {
 	char	*tmp;
 
-	tmp = strjoin_and_free(*buffer, str);
+	tmp = strjoin_and_free(*buffer, str, false);
 	free(str);
 	if (!tmp)
 		return (RETURN_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:50:14 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/20 17:00:38 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:51:06 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	append_expanded_to_buffer(char **buffer, char *expanded)
 {
 	char	*new_buffer;
 
-	new_buffer = strjoin_and_free(*buffer, expanded);
+	new_buffer = strjoin_and_free(*buffer, expanded, false);
 	if (!new_buffer)
 	{
 		free(expanded);

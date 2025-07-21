@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:30:12 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/20 18:29:06 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:50:46 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	append_to_buffer(char **buffer, char *to_append,
 {
 	char	*new_buffer;
 
-	new_buffer = strjoin_and_free(*buffer, to_append);
+	new_buffer = strjoin_and_free(*buffer, to_append, false);
 	if (!new_buffer)
 	{
 		if (quote_char != '\'')

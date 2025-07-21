@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 16:19:42 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 09:46:33 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ void	free_env(char **env)
 	free(env);
 }
 
+void	free_av(char **arr)
+{
+	int i = 0;
+	if (!arr)
+		return;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
 void	free_utils(t_utils *utils)
 {
 	free_env(utils->env);
@@ -33,5 +43,6 @@ void	free_utils(t_utils *utils)
 		close(utils->old_stdin);
 	if (utils->old_stdout != -1)
 		close(utils->old_stdout);
+	free_av(utils->av);
 	free(utils);
 }
