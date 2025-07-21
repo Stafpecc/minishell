@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:30:12 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/21 09:50:46 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 10:40:00 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*process_quoted_content(char *raw, char quote_char,
 	char	*result;
 
 	if (quote_char == '\'')
-		result = raw;
+		result = ft_strdup(raw);
 	else
 		result = expand_variables(raw, utils, was_expanded);
 	return (result);
@@ -37,7 +37,7 @@ static int	append_to_buffer(char **buffer, char *to_append,
 {
 	char	*new_buffer;
 
-	new_buffer = strjoin_and_free(*buffer, to_append, false);
+	new_buffer = strjoin_and_free(*buffer, to_append, true);
 	if (!new_buffer)
 	{
 		if (quote_char != '\'')
@@ -47,13 +47,16 @@ static int	append_to_buffer(char **buffer, char *to_append,
 		return (RETURN_FAILURE);
 	}
 	*buffer = new_buffer;
-	if (quote_char != '\'')
-		free(to_append);
 	return (RETURN_SUCCESS);
 }
 
-static char	*get_quoted_content(t_token_ctx *ctx, char quote_char,
-	t_utils *utils)
+static int	return_free_raw(char *raw)
+{
+	free(raw);
+	return (RETURN_FAILURE);
+}
+
+int	handle_quoted_token(t_token_ctx *ctx, char quote_char, t_utils *utils)
 {
 	size_t	start;
 	size_t	end;
@@ -64,30 +67,18 @@ static char	*get_quoted_content(t_token_ctx *ctx, char quote_char,
 	start = ++(*ctx->i);
 	end = find_closing_quote(ctx->input, start, quote_char);
 	if (ctx->input[end] != quote_char)
-		return (NULL);
+		return (RETURN_FAILURE);
 	raw = extract_quoted_substring(ctx->input, start, end);
 	if (!raw)
-		return (NULL);
+		return (RETURN_FAILURE);
 	was_expanded = false;
 	to_append = process_quoted_content(raw, quote_char, utils, &was_expanded);
-	free(raw);
-	return (to_append);
-}
-
-int	handle_quoted_token(t_token_ctx *ctx, char quote_char, t_utils *utils)
-{
-	char	*to_append;
-
-	to_append = get_quoted_content(ctx, quote_char, utils);
 	if (!to_append)
-		return (RETURN_FAILURE);
-	if (append_to_buffer(ctx->buffer, to_append, quote_char, NULL)
+		return (return_free_raw(raw));
+	if (append_to_buffer(ctx->buffer, to_append, quote_char, raw)
 		== RETURN_FAILURE)
-	{
-		free(to_append);
-		return (RETURN_FAILURE);
-	}
-	*ctx->i += ft_strlen(to_append) + 2;
-	free(to_append);
+		return (return_free_raw(raw));
+	free(raw);
+	*ctx->i = end + 1;
 	return (RETURN_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:22:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/21 09:46:40 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 10:40:20 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ret_free_utils(int select, t_utils *utils)
 	return (RETURN_FAILURE);
 }
 
-static char **copy_av(char **av)
+static char	**copy_av(char **av)
 {
 	int		i;
 	int		j;

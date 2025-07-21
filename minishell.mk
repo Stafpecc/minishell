@@ -22,6 +22,7 @@ override PARSERSRC := \
 	expand/expand \
 	expand/expand_utils \
 	expand/get_env_value \
+	expand/strjoin_free \
 	parse/parse_launch \
 	parse/parse_dir \
 	parse/parse_file \
