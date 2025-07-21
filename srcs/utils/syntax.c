@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:57:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:14:51 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 11:13:58 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static bool	is_operator_token(t_token *token)
-{
-	return (token->type == TOK_PIPE
-		|| token->type == TOK_REDIRECT_IN
-		|| token->type == TOK_REDIRECT_OUT
-		|| token->type == TOK_APPEND_REDIRECT
-		|| token->type == TOK_HEREDOC);
-}
 
 static bool	is_valid_word_token(t_token *token)
 {
@@ -31,7 +22,7 @@ static bool	is_valid_word_token(t_token *token)
 
 static t_token	*check_start_token(t_token *token)
 {
-	if (is_operator_token(token))
+	if (token->type == TOK_PIPE)
 		return (token);
 	return (NULL);
 }

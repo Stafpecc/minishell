@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ascii_art.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:09:08 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 16:08:30 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 10:54:42 by tarini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	write_and_free(char *line)
 {
-	write(1, line, strlen(line));
+	write(1, line, ft_strlen(line));
 	free(line);
 }
 
