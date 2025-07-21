@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 18:13:04 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/21 09:46:33 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:55:10 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	free_env(char **env)
 
 void	free_av(char **arr)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (!arr)
-		return;
+		return ;
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
