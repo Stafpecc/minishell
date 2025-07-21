@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/17 13:45:27 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 09:25:54 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // or the line of PWD or OLD_PWD depending of the
 // old_or_new parameter
 
-static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
+static int	cd_pwd_finder(t_utils *utils, bool old_or_new, int result)
 {
 	if (old_or_new == NEW)
 	{
@@ -38,7 +38,7 @@ static int	cd_builtin_pwd_finder(t_utils *utils, bool old_or_new, int result)
 	}
 	return (NONE);
 }
-// create space for PWD_OLD and NEW and assign it
+// expend env's space for PWD_OLD and NEW and assign it
 // to pwd_emplacement and old emplacement
 
 static int	create_pwd_if_none(t_utils *utils, int *pwd_emplacement,
@@ -59,13 +59,13 @@ static int	create_pwd_if_none(t_utils *utils, int *pwd_emplacement,
 	return (RETURN_SUCCESS);
 }
 // we init what would be usefull to us during cd as
-// the emplacementof pwd in the env,
+// the emplacement of pwd in the env,
 // and the old pwd emplacement as well.
 // if pwd and/or old pwd doesnt exist we
-// create them in another function
+// create and fill them during cd
 // then we replace old pwd with the actual path we are in
 // by getting the actual cwd then join with OLDPWD:
-// if everything went well we return 0 (SUCCESS)
+// if everything goes well we return 0 (SUCCESS)
 
 static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 		int *pwd_old_emplacement)
@@ -73,8 +73,8 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 	char	*tmp;
 	char	*cwd;
 
-	*pwd_emplacement = cd_builtin_pwd_finder(utils, NEW, 0);
-	*pwd_old_emplacement = cd_builtin_pwd_finder(utils, OLD, 0);
+	*pwd_emplacement = cd_pwd_finder(utils, NEW, 0);
+	*pwd_old_emplacement = cd_pwd_finder(utils, OLD, 0);
 	if (*pwd_emplacement == NONE || *pwd_old_emplacement == NONE)
 	{
 		if (create_pwd_if_none(utils, pwd_emplacement, pwd_old_emplacement))
@@ -94,6 +94,8 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 
 // Check if we got at least one argument
 // check if didnt get more than one argument
+// if those check pass the cd function can continue
+// to run properly
 static int	cd_error_checker(t_command_exec *node)
 {
 	if (!node->cmd_parts || !node->cmd_parts[0] || !node->cmd_parts[1])
@@ -110,11 +112,14 @@ static int	cd_error_checker(t_command_exec *node)
 	}
 	return (RETURN_SUCCESS);
 }
-// we start by checking if the args are valids for our cd
-// then init what we need during CD
-// then we search if the dir does indeed exist and
-// change our emplacement
+// we start by checking if the arg are valids for our cd
+// (so basicaly only one arg is valid here)
+// then init the right data we require for a successful
+// run of the built-in.
+// then we search if the dir sent as arg does indeed exist and
+// change our emplacement according to if it exist or not
 // if it does we update pwd emplacement into the new emplacement path
+// and old pwd into the old emplacement path
 
 int	cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement,
 		int pwd_old_emplacement)
