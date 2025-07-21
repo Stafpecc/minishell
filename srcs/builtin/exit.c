@@ -6,14 +6,15 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:39:12 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 11:38:05 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 09:34:50 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // print exit like bash does then print the right message if needed
-// then we exit with the right code!
+// then we setup utils-> run with 0 to to tell the program to exit whenever
+//	it is possible
 
 int	print_exit(long long code, char *arg, bool too_many_arguments,
 		t_utils *utils)

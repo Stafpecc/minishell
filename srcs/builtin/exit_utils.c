@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 16:49:43 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/17 13:45:09 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 09:35:44 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ static int	check_arg_format(char *arg, bool *negative_nbr,
 	}
 	return (0);
 }
+
+// check if the format is correct, and for any overflow
+// it also setup all the values we need for those checkers
 
 int	is_arg_digit_and_overflow(char *arg, t_utils *utils)
 {

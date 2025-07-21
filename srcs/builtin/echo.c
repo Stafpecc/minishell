@@ -6,16 +6,16 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:44:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/19 13:03:29 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 09:33:19 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
 
-//here we check if there is any -n flag that follow
-//the first one that has been validated in is_newline
-//it updated index_print if it found a new valid -n 
-//array of chars
+// here we check if there is any -n flag that follow
+// the first one that has been validated in is_newline
+// it update index_print if it find a new valid -n 
+// array of chars until it doesnt anymore
 
 static bool	pass_n_flags(t_command_exec *node, int *index_print, int i)
 {
@@ -76,9 +76,9 @@ static bool	is_newline(t_command_exec *node, int i, bool *newline,
 	return (pass_n_flags(node, index_print, 2));
 }
 
-// check if we received the right cmd and
+// check if we received the right cmd +
 // if it is valid + if we received the -n
-// flag to setup or bool newline and index i
+// flag to setup our bool newline and index i
 // then we print the whole content of our cmd
 
 int	echo_builtin(t_command_exec *node, bool newline, int i)
