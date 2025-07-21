@@ -6,11 +6,15 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 16:05:46 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/16 10:30:36 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/21 09:16:25 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtin.h"
+
+//    function's goal is to treat errors correctly
+//    depending of the received error to send the right
+//    msg to the user
 
 int	return_errors(int return_value, int message, t_command_exec *node)
 {
