@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 static char	*get_user_input(t_utils *utils)
@@ -12,10 +11,7 @@ static char	*get_user_input(t_utils *utils)
 		return (NULL);
 	}
 	if (skip_empty_or_spaces(input))
-	{
-		free(input);
-		return (NULL);
-	}
+		return (ft_strdup(""));
 	if (*input)
 		add_history(input);
 	return (input);

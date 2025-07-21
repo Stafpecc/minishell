@@ -6,24 +6,13 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:30:12 by stafpec           #+#    #+#             */
-/*   Updated: 2025/07/20 16:45:52 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:50:46 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "parsing.h"
 #include "../../../libft/includes/libft.h"
-
-static size_t	find_closing_quote(const char *input, size_t start,
-	char quote_char)
-{
-	size_t	end;
-
-	end = start;
-	while (input[end] && input[end] != quote_char)
-		end++;
-	return (end);
-}
 
 static char	*extract_quoted_substring(const char *input, size_t start,
 	size_t end)
@@ -39,10 +28,7 @@ static char	*process_quoted_content(char *raw, char quote_char,
 	if (quote_char == '\'')
 		result = raw;
 	else
-	{
 		result = expand_variables(raw, utils, was_expanded);
-		free(raw);
-	}
 	return (result);
 }
 
@@ -51,7 +37,7 @@ static int	append_to_buffer(char **buffer, char *to_append,
 {
 	char	*new_buffer;
 
-	new_buffer = strjoin_and_free(*buffer, to_append);
+	new_buffer = strjoin_and_free(*buffer, to_append, false);
 	if (!new_buffer)
 	{
 		if (quote_char != '\'')
@@ -66,7 +52,8 @@ static int	append_to_buffer(char **buffer, char *to_append,
 	return (RETURN_SUCCESS);
 }
 
-int	handle_quoted_token(t_token_ctx *ctx, char quote_char, t_utils *utils)
+static char	*get_quoted_content(t_token_ctx *ctx, char quote_char,
+	t_utils *utils)
 {
 	size_t	start;
 	size_t	end;
@@ -77,17 +64,30 @@ int	handle_quoted_token(t_token_ctx *ctx, char quote_char, t_utils *utils)
 	start = ++(*ctx->i);
 	end = find_closing_quote(ctx->input, start, quote_char);
 	if (ctx->input[end] != quote_char)
-		return (RETURN_FAILURE);
+		return (NULL);
 	raw = extract_quoted_substring(ctx->input, start, end);
 	if (!raw)
-		return (RETURN_FAILURE);
+		return (NULL);
 	was_expanded = false;
 	to_append = process_quoted_content(raw, quote_char, utils, &was_expanded);
+	free(raw);
+	return (to_append);
+}
+
+int	handle_quoted_token(t_token_ctx *ctx, char quote_char, t_utils *utils)
+{
+	char	*to_append;
+
+	to_append = get_quoted_content(ctx, quote_char, utils);
 	if (!to_append)
 		return (RETURN_FAILURE);
-	if (append_to_buffer(ctx->buffer, to_append, quote_char, raw)
+	if (append_to_buffer(ctx->buffer, to_append, quote_char, NULL)
 		== RETURN_FAILURE)
+	{
+		free(to_append);
 		return (RETURN_FAILURE);
-	*ctx->i = end + 1;
+	}
+	*ctx->i += ft_strlen(to_append) + 2;
+	free(to_append);
 	return (RETURN_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:01:18 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:12:51 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:49:47 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_command_exec
 typedef struct s_utils
 {
 	char				**env;
+	char				**av;
 	int					last_return;
 	int					fd;
 	int					num_nodes;
@@ -170,7 +171,7 @@ int				add_redirect(t_token **tokens, t_arg ***redirect_array,
 char			*expand_variables(char *input, t_utils *utils,
 					bool *was_expanded);
 char			*get_env_value(char **env, const char *var_name);
-char			*strjoin_and_free(char *s1, char *s2);
+char			*strjoin_and_free(char *s1, char *s2, bool free_s2);
 int				reparse_expanded_string(char *expanded, t_command *curr,
 					bool was_expanded);
 t_arg			**extend_cmd_parts(t_arg **old_array, int old_size,

@@ -6,7 +6,7 @@
 /*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:58:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/20 16:11:12 by stafpec          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:50:36 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*append_exit_code(char *result, t_utils *utils)
 	char	*tmp;
 
 	exit_code = ft_itoa(utils->last_return);
-	tmp = strjoin_and_free(result, exit_code);
+	tmp = strjoin_and_free(result, exit_code, false);
 	free(exit_code);
 	return (tmp);
 }
@@ -37,9 +37,9 @@ char	*append_env_var(char *result, char *input, int *i, char **env)
 	value = get_env_value(env, var_name);
 	free(var_name);
 	if (!value)
-		tmp = strjoin_and_free(result, "");
+		tmp = strjoin_and_free(result, "", false);
 	else
-		tmp = strjoin_and_free(result, value);
+		tmp = strjoin_and_free(result, value, false);
 	return (tmp);
 }
 
@@ -50,7 +50,7 @@ char	*append_char(char *result, char c)
 
 	buf[0] = c;
 	buf[1] = '\0';
-	tmp = strjoin_and_free(result, buf);
+	tmp = strjoin_and_free(result, buf, false);
 	return (tmp);
 }
 
