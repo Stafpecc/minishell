@@ -102,12 +102,11 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 	process_quotes(*tokens, curr->redirect_in[i]);
 	fd = here_doc(curr->redirect_in[i]->arg);
 	utils->fd = fd;
-	utils->last_return = fd;
 	if (fd < 0 || fd == 130)
 	{
 		if (fd < 0)
 			utils->last_return = fd * -1;
-		else if (fd == 130)
+		else
 			utils->last_return = fd;
 		return (RETURN_FAILURE);
 	}
