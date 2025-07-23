@@ -6,7 +6,7 @@
 /*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 13:52:47 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/21 09:25:54 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/23 11:01:20 by ldevoude         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	cd_pwd_finder(t_utils *utils, bool old_or_new, int result)
 	{
 		while (utils->env[result])
 		{
-			if (!ft_strncmp(utils->env[result], "PWD=", 4))
+			if (!ft_strncmp(utils->env[result], "PWD", 3))
 				return (result);
 			result++;
 		}
@@ -31,7 +31,7 @@ static int	cd_pwd_finder(t_utils *utils, bool old_or_new, int result)
 	{
 		while (utils->env[result])
 		{
-			if (!ft_strncmp(utils->env[result], "OLDPWD=", 7))
+			if (!ft_strncmp(utils->env[result], "OLDPWD", 6))
 				return (result);
 			result++;
 		}
@@ -81,10 +81,13 @@ static int	cd_utils_initialization(t_utils *utils, int *pwd_emplacement,
 			return (return_errors(MALLOC_ERROR, ERR_CD_MALLOC, NULL));
 	}
 	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (return_errors(MALLOC_ERROR, ERR_CD_GETCWD, NULL));
-	tmp = ft_strjoin("OLDPWD=", cwd);
-	free(cwd);
+	if (cwd)
+	{
+		tmp = ft_strjoin("OLDPWD=", cwd);
+		free(cwd);
+	}
+	else
+		tmp = ft_strdup("OLDPWD");
 	if (!tmp)
 		return (return_errors(MALLOC_ERROR, ERR_CD_MALLOC, NULL));
 	free(utils->env[*pwd_old_emplacement]);
@@ -136,8 +139,11 @@ int	cd_builtin(t_command_exec *node, t_utils *utils, int pwd_emplacement,
 	if (chdir(node->cmd_parts[1]))
 		return (return_errors(RETURN_FAILURE, ERR_CD_CHDIR, node));
 	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (return_errors(MALLOC_ERROR, ERR_CD_GETCWD, node));
+	while (!cwd)
+	{
+		chdir("../");
+		cwd = getcwd(NULL, 0);
+	}
 	tmp = ft_strjoin("PWD=", cwd);
 	free(cwd);
 	if (!tmp)

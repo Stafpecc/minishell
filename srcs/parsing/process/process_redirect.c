@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   process_redirect.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/22 01:08:42 by stafpec          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "exec.h"
 
@@ -118,6 +107,8 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 	{
 		if (fd < 0)
 			utils->last_return = fd * -1;
+		else if (fd == 130)
+			utils->last_return = fd;
 		return (RETURN_FAILURE);
 	}
 	curr->redirect_in[i]->fd = fd;
