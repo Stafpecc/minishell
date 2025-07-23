@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   syntax.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 20:57:15 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/21 11:13:58 by tarini           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -20,11 +9,11 @@ static bool	is_valid_word_token(t_token *token)
 		|| token->type == TOK_DOUBLE_QUOTES);
 }
 
-static t_token	*check_start_token(t_token *token)
+static t_token *check_start_token(t_token *token)
 {
-	if (token->type == TOK_PIPE)
-		return (token);
-	return (NULL);
+    if (token->type == TOK_PIPE)
+        return (token);
+    return (NULL);
 }
 
 static t_token	*check_token_pair(t_token *curr)

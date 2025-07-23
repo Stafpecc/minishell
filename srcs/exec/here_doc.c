@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tarini <tarini@student.42.fr>              +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:48:14 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/19 20:33:34 by tarini           ###   ########.fr       */
+/*   Updated: 2025/07/22 01:48:24 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	readline_loop(int fd, char *delimiter)
 			return (return_free(input, &run, 1));
 		if (!input)
 		{
-			ft_printfd("minishell: warning: here-document delimited\
+			ft_printfd("minishell: warning: here-document delimited \
 by end-of-file (wanted `%s')\n", delimiter);
 			return (return_free(input, &run, 2));
 		}
@@ -63,19 +63,19 @@ int	get_available_heredoc_filename(char *buffer, size_t size)
 {
 	int			i;
 	char		*index;
-	const char	*base = ".heredoc";
+	const char	*base_dir = "/tmp/.heredoc";
 
 	i = 0;
 	while (i < MAX_HEREDOC_ATTEMPTS)
 	{
 		if (i == 0)
-			ft_strncpy(buffer, ".heredoc.tmp", size);
+			ft_strncpy(buffer, "/tmp/.heredoc.tmp", size);
 		else
 		{
 			index = ft_itoa(i);
 			if (!index)
 				return (-1);
-			ft_strncpy(buffer, base, size);
+			ft_strncpy(buffer, base_dir, size);
 			ft_strncat(buffer, index, size - ft_strlen(buffer) - 1);
 			ft_strncat(buffer, ".tmp", size - ft_strlen(buffer) - 1);
 			free(index);

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   process_redirect.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 15:34:25 by tarini            #+#    #+#             */
-/*   Updated: 2025/07/22 15:00:38 by ldevoude         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "exec.h"
 
@@ -113,6 +102,7 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 	process_quotes(*tokens, curr->redirect_in[i]);
 	fd = here_doc(curr->redirect_in[i]->arg);
 	utils->fd = fd;
+	utils->last_return = fd;
 	if (fd < 0 || fd == 130)
 	{
 		if (fd < 0)
