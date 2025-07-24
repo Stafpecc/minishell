@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: stafpec <stafpec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:58:29 by ldevoude          #+#    #+#             */
-/*   Updated: 2025/07/24 10:58:31 by ldevoude         ###   ########lyon.fr   */
+/*   Updated: 2025/07/24 14:22:58 by stafpec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,26 @@ int	process_append_redirect(t_token **tokens, t_command *curr,
 	return (add_redirect(tokens, &curr->redirect_out, &ctx, flags));
 }
 
+static int	handle_heredoc_fd(t_command *curr, t_utils *utils, int i,
+	t_token **tokens)
+{
+	int	fd;
+
+	process_quotes(*tokens, curr->redirect_in[i]);
+	fd = here_doc(curr->redirect_in[i]->arg);
+	utils->fd = fd;
+	if (fd < 0 || fd == 130)
+	{
+		if (fd < 0)
+			utils->last_return = fd * -1;
+		else
+			utils->last_return = fd;
+		return (RETURN_FAILURE);
+	}
+	curr->redirect_in[i]->fd = fd;
+	return (RETURN_SUCCESS);
+}
+
 /*
 Function that:
 - advances through the token list to handle a heredoc after the << redirection;
@@ -99,7 +119,6 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 	t_context			ctx;
 	t_redirect_flags	flags;
 	int					i;
-	int					fd;
 
 	ctx.head = head;
 	ctx.utils = utils;
@@ -110,17 +129,5 @@ int	process_heredoc(t_token **tokens, t_command *curr,
 		i++;
 	if (add_redirect(tokens, &curr->redirect_in, &ctx, flags) != RETURN_SUCCESS)
 		return (RETURN_FAILURE);
-	process_quotes(*tokens, curr->redirect_in[i]);
-	fd = here_doc(curr->redirect_in[i]->arg);
-	utils->fd = fd;
-	if (fd < 0 || fd == 130)
-	{
-		if (fd < 0)
-			utils->last_return = fd * -1;
-		else
-			utils->last_return = fd;
-		return (RETURN_FAILURE);
-	}
-	curr->redirect_in[i]->fd = fd;
-	return (RETURN_SUCCESS);
+	return (handle_heredoc_fd(curr, utils, i, tokens));
 }
