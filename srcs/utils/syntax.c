@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldevoude <ldevoude@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/24 10:56:06 by ldevoude          #+#    #+#             */
+/*   Updated: 2025/07/24 10:57:43 by ldevoude         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -9,11 +20,11 @@ static bool	is_valid_word_token(t_token *token)
 		|| token->type == TOK_DOUBLE_QUOTES);
 }
 
-static t_token *check_start_token(t_token *token)
+static t_token	*check_start_token(t_token *token)
 {
-    if (token->type == TOK_PIPE)
-        return (token);
-    return (NULL);
+	if (token->type == TOK_PIPE)
+		return (token);
+	return (NULL);
 }
 
 static t_token	*check_token_pair(t_token *curr)
